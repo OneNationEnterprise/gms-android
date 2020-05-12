@@ -17,7 +17,6 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -25,6 +24,15 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            applicationIdSuffix ".develop"
+            debuggable true
+            buildConfigField("String", "BASE_SERVER_URL", "http://ad82ca9ee5fa74f8b8bf78963b2c735d-586376887.eu-west-1.elb.amazonaws.com/graphql")
+        }
+        staging {
+            initWith debug
+            applicationIdSuffix ".staging"
         }
     }
     compileOptions {
@@ -62,13 +70,9 @@ dependencies {
     )
     // Koin
     implementation(
-            // Koin for Android
             "org.koin:koin-android:$koin_version",
-            // Koin AndroidX Scope features
             "org.koin:koin-androidx-scope:$koin_version",
-            // Koin AndroidX ViewModel features
             "org.koin:koin-androidx-viewmodel:$koin_version",
-            // Koin AndroidX Fragment features
             "org.koin:koin-androidx-fragment:$koin_version"
     )
     // Firebase
@@ -76,7 +80,6 @@ dependencies {
          "com.google.firebase:firebase-analytics:$firebase_analytics_version",
          "com.google.firebase:firebase-auth:$firebase_auth_version"
     )
-
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
