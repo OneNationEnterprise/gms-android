@@ -1,11 +1,10 @@
 package com.gymapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.gymapp.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
     }
 }
