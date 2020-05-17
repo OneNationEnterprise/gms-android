@@ -43,7 +43,7 @@
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
         android:textColor="@android:color/white"
-        android:text="@string/new_account_creation_phone"
+        android:text="asdasdasd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

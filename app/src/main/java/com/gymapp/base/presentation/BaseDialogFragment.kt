@@ -1,4 +1,4 @@
-package com.gymapp.base
+package com.gymapp.base.presentation
 
 import android.app.Dialog
 import android.content.Context

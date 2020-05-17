@@ -1,7 +1,6 @@
 package com.gymapp.main
 
-import android.app.Application
-import com.gymapp.base.BaseApplication
+import com.gymapp.base.domain.BaseApplication
 
 class GymApplication : BaseApplication() {
 

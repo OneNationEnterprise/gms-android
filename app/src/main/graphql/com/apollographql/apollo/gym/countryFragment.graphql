@@ -1,0 +1,7 @@
+fragment CountryFields on Country{
+    id
+    isoCode
+    dialCode
+    name
+    flagPhoto
+}

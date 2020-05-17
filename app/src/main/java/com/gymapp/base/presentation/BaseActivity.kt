@@ -1,4 +1,4 @@
-package com.gymapp.base
+package com.gymapp.base.presentation
 
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.gymapp.base
+package com.gymapp.base.domain
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
