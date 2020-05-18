@@ -6,20 +6,14 @@ import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.gym.CountriesQuery
 import com.apollographql.apollo.gym.fragment.CountryFields
 import com.gymapp.BuildConfig
+import com.gymapp.base.data.BaseApiManager
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 
-class ApiManagerImpl(var okHttpClient: OkHttpClient) : ApiManagerInterface {
-
-    private val graphQlClient: ApolloClient by lazy {
-        ApolloClient.builder()
-            .okHttpClient(okHttpClient)
-            .serverUrl("${BuildConfig.BASE_SERVER_URL}")
-            .build()
-    }
+class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
+    ApiManagerInterface {
 
     override suspend fun getCountriesAsync(): Deferred<Response<CountriesQuery.Data>> {
         return graphQlClient.query(CountriesQuery()).toDeferred()
     }
-
 }

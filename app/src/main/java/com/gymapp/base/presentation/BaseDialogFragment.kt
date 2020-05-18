@@ -18,7 +18,7 @@ import com.gymapp.R
 
 abstract class BaseDialogFragment(@LayoutRes val layoutResourceId: Int) : DialogFragment() {
 
-    lateinit var baseActivity: BaseActivity
+    private lateinit var baseActivity: BaseActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

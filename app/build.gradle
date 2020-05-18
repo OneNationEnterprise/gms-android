@@ -24,18 +24,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [appName:"GYM App"]
+            manifestPlaceholders = [appName: "GYM App"]
         }
         debug {
             applicationIdSuffix ".develop"
-            manifestPlaceholders = [appName:"GYM Staging"]
+            manifestPlaceholders = [appName: "GYM Staging"]
             debuggable true
             buildConfigField("String", "BASE_SERVER_URL", "http://ad82ca9ee5fa74f8b8bf78963b2c735d-586376887.eu-west-1.elb.amazonaws.com/graphql")
         }
         staging {
             initWith debug
             applicationIdSuffix ".staging"
-            manifestPlaceholders = [appName:"GYM Develop"]
+            manifestPlaceholders = [appName: "GYM Develop"]
         }
     }
     compileOptions {
@@ -80,9 +80,13 @@ dependencies {
     )
     // Firebase
     implementation(
-         "com.google.firebase:firebase-analytics:$firebase_analytics_version",
-         "com.google.firebase:firebase-auth:$firebase_auth_version"
+            "com.google.firebase:firebase-analytics:$firebase_analytics_version",
+            "com.google.firebase:firebase-auth:$firebase_auth_version"
     )
+
+    //Chuck - network interceptor
+    debugCompile 'com.readystatesoftware.chuck:library:1.1.0'
+    releaseCompile 'com.readystatesoftware.chuck:library-no-op:1.1.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'

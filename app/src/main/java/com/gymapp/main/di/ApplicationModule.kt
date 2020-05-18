@@ -1,36 +1,65 @@
 package com.gymapp.main.di
 
+import androidx.room.Room
+import com.gymapp.main.data.db.GymDatabase
+import com.gymapp.main.launcher.data.LauncherRepository
+import com.gymapp.main.launcher.data.LauncherRepositoryInterface
+import com.gymapp.main.launcher.domain.LauncherViewModel
 import com.gymapp.main.network.ApiManagerImpl
 import com.gymapp.main.network.ApiManagerInterface
+import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import java.util.concurrent.TimeUnit
 
 object ApplicationModule {
-    val modules = listOf(
+    val networkModule =
         module {
-
             single {
                 OkHttpClient.Builder()
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .readTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(30, TimeUnit.SECONDS)
-                    //TODO add before production push
-//                    .certificatePinner(
-//                        CertificatePinner.Builder()
-//                            .add(
-//                                "DOMAIN",
-//                                "SHA256"
-//                            )
-//                            .build()
-//                    )
+                    .addInterceptor(ChuckInterceptor(androidContext()))
                     .build()
             }
 
             single<ApiManagerInterface> { ApiManagerImpl(get()) }
+        }
 
-        })
+    val databaseModule = module {
+        single {
+            Room.databaseBuilder(
+                androidContext(),
+                GymDatabase::class.java,
+                GymDatabase.DATABASE_NAME
+            ).build()
+        }
+
+        single { get<GymDatabase>().gymDao() }
+    }
+
+    val dataModule = module {
+        factory<LauncherRepositoryInterface> {
+            LauncherRepository(
+                get(),
+                get()
+            )
+        }
+    }
+
+
+    val viewModelModule = module {
+
+        viewModel {
+            LauncherViewModel(get())
+        }
+    }
+
+
 }
 
 
