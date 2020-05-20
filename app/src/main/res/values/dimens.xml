@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Otp View-->
+    <dimen name="otp_view_item_size">48dp</dimen>
+    <dimen name="otp_view_item_radius">5dp</dimen>
+    <dimen name="otp_view_item_spacing">5dp</dimen>
+    <dimen name="otp_view_item_line_width">2dp</dimen>
+    <dimen name="otp_view_cursor_width">2dp</dimen>
+
+    <!--Phone Input Edit Text-->
+    <dimen name="phone_input_edit_text_padding_right">12dp</dimen>
+    <dimen name="phone_input_edit_text_padding">12dp</dimen>
+    <dimen name="phone_input_edit_text_padding_topbottom">16dp</dimen>
+    <dimen name="phone_input_edit_text_padding_left">24dp</dimen>
+    <dimen name="phone_input_prefix_paddingStart">8dp</dimen>
+
+    <!--Edit Text-->
+    <dimen name="edit_text_height">56dp</dimen>
+
+</resources>

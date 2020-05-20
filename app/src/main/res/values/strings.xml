@@ -1,2 +1,4 @@
 <resources>
+    <!--General-->
+    <string name="continue_text">Continue</string>
 </resources>

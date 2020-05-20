@@ -6,7 +6,6 @@ import com.gymapp.main.data.db.GymDao
 import com.gymapp.main.data.model.country.Country
 import com.gymapp.main.data.model.country.CountryMapper
 import com.gymapp.main.network.ApiManagerInterface
-import java.lang.Exception
 
 open class BaseRepository(
     private val apiManager: ApiManagerInterface,
@@ -15,19 +14,11 @@ open class BaseRepository(
 
     private val countryMapper = CountryMapper()
 
-    override suspend fun getCountries(): LiveData<List<Country>>? {
-
-        val countries = gymDao.getCountriesList()
-
-        if (!countries.value.isNullOrEmpty()) {
-            return countries
-        }
-
-        saveCountries()
-
+    override fun getCountries(): LiveData<List<Country>>? {
         return gymDao.getCountriesList()
     }
 
+    @Suppress("UNCHECKED_CAST")
     override suspend fun saveCountries() {
 
         val countryQueryResponse = apiManager.getCountriesAsync().await()

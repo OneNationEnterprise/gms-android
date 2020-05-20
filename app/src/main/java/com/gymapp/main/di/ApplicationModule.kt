@@ -1,6 +1,9 @@
 package com.gymapp.main.di
 
 import androidx.room.Room
+import com.gymapp.features.onboarding.auth.data.AuthRepository
+import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
+import com.gymapp.features.onboarding.auth.domain.AuthViewModel
 import com.gymapp.main.data.db.GymDatabase
 import com.gymapp.main.launcher.data.LauncherRepository
 import com.gymapp.main.launcher.data.LauncherRepositoryInterface
@@ -49,6 +52,14 @@ object ApplicationModule {
                 get()
             )
         }
+
+        factory<AuthRepositoryInterface> {
+            AuthRepository(
+                get(),
+                get()
+            )
+        }
+
     }
 
 
@@ -56,6 +67,10 @@ object ApplicationModule {
 
         viewModel {
             LauncherViewModel(get())
+        }
+
+        viewModel {
+            AuthViewModel(get())
         }
     }
 

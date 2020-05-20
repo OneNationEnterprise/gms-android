@@ -10,7 +10,7 @@ import com.gymapp.main.data.model.country.Country
 @Dao
 interface GymDao  {
 
-    @Query("SELECT * from Country")
+    @Query("SELECT * from country_table")
     fun getCountriesList(): LiveData<List<Country>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

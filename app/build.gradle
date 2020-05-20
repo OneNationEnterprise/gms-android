@@ -31,11 +31,14 @@ android {
             manifestPlaceholders = [appName: "GYM Staging"]
             debuggable true
             buildConfigField("String", "BASE_SERVER_URL", "http://ad82ca9ee5fa74f8b8bf78963b2c735d-586376887.eu-west-1.elb.amazonaws.com/graphql")
+            resValue("string", "DB_PASSWORD_app_db", "gymapp")
         }
+
         staging {
             initWith debug
             applicationIdSuffix ".staging"
             manifestPlaceholders = [appName: "GYM Develop"]
+            resValue("string", "DB_PASSWORD_app_db", "gymapp")
         }
     }
     compileOptions {
@@ -55,22 +58,28 @@ dependencies {
     def room_version = "2.2.5"
     def firebase_analytics_version = "17.4.1"
     def firebase_auth_version = "19.3.1"
+    def chuck_version = "1.1.0"
+    def glide_version = "4.11.0"
 
     // Apollo
     implementation(
             "com.apollographql.apollo:apollo-runtime:$apollo_version",
             "com.apollographql.apollo:apollo-coroutines-support:$apollo_version"
     )
+
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
     // Room
     kapt "androidx.room:room-compiler:$room_version"
     implementation(
             "androidx.room:room-runtime:$room_version",
             "androidx.room:room-ktx:$room_version"
     )
+
     // Koin
     implementation(
             "org.koin:koin-android:$koin_version",
@@ -78,15 +87,31 @@ dependencies {
             "org.koin:koin-androidx-viewmodel:$koin_version",
             "org.koin:koin-androidx-fragment:$koin_version"
     )
+
     // Firebase
     implementation(
             "com.google.firebase:firebase-analytics:$firebase_analytics_version",
             "com.google.firebase:firebase-auth:$firebase_auth_version"
     )
 
-    //Chuck - network interceptor
-    debugCompile 'com.readystatesoftware.chuck:library:1.1.0'
-    releaseCompile 'com.readystatesoftware.chuck:library-no-op:1.1.0'
+    // Chuck - network interceptor
+    debugApi "com.readystatesoftware.chuck:library:$chuck_version"
+    releaseApi "com.readystatesoftware.chuck:library-no-op:$chuck_version"
+
+    // Glide - image loader
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+
+    // Render view animations
+    implementation 'com.github.gayanvoice:android-animations-kotlin:1.0.1'
+
+    // Otp View
+    implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx'
+
+    // Debug database
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+    debugImplementation 'com.amitshekhar.android:debug-db-encrypt:1.0.6'
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'

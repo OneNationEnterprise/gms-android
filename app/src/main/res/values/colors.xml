@@ -2,7 +2,12 @@
 <resources>
 
     <!-- Colors -->
+    <!--red-->
     <color name="red001">#F95365</color>
+    <!--blue-->
+    <color name="blue001">#AAB9DC</color>
+    <!--gray-->
+    <color name="gray001">#979797</color>
 
     <!--Translucent -->
     <color name="translucent_blue_overlay">#C9040915</color>

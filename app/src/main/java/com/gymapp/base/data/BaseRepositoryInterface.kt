@@ -8,7 +8,7 @@ interface BaseRepositoryInterface {
     /**
      * return available countries list from db or remote
      */
-    suspend fun getCountries(): LiveData<List<Country>>?
+    fun getCountries(): LiveData<List<Country>>?
 
     /**
      * save available countries list into db

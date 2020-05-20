@@ -2,7 +2,6 @@ package com.gymapp.main.launcher.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.onboarding.OnBoardingActivity
@@ -11,16 +10,15 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
 
-
-    lateinit var launcherViewModel : LauncherViewModel
+    private lateinit var launcherViewModel: LauncherViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       launcherViewModel =  getViewModel()
+        launcherViewModel = getViewModel()
 
         launcherViewModel.fetchData()
 
-//        startActivity(Intent(this, OnBoardingActivity::class.java))
+        startActivity(Intent(this, OnBoardingActivity::class.java))
     }
 }
