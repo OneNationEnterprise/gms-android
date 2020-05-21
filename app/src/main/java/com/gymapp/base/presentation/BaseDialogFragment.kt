@@ -18,7 +18,7 @@ import com.gymapp.R
 
 abstract class BaseDialogFragment(@LayoutRes val layoutResourceId: Int) : DialogFragment() {
 
-    private lateinit var baseActivity: BaseActivity
+    lateinit var baseActivity: BaseActivity
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,9 +31,10 @@ abstract class BaseDialogFragment(@LayoutRes val layoutResourceId: Int) : Dialog
     }
 
 
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(layoutResourceId, container, false)
     }

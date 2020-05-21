@@ -15,10 +15,11 @@ class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        launcherViewModel = getViewModel()
-
-        launcherViewModel.fetchData()
-
         startActivity(Intent(this, OnBoardingActivity::class.java))
+    }
+
+    override fun setupViewModel() {
+        launcherViewModel = getViewModel()
+        launcherViewModel.fetchData()
     }
 }

@@ -24,12 +24,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:inputType="phone"
-            tools:hint="ceva text"
             android:paddingStart="@dimen/phone_input_edit_text_padding_left"
             android:textAlignment="viewStart"
             android:textColor="@android:color/white"
             android:textColorHint="@color/blue001"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            tools:hint="ceva text" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
@@ -40,8 +40,8 @@
         android:clickable="true"
         android:layoutDirection="ltr"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/inputPhoneNumberLayout"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/inputPhoneNumberLayout">
 
         <ImageView
@@ -62,5 +62,19 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="+123" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/errorInputPhoneTv"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/phone_input_edit_text_padding_left"
+        android:text="error_phone_wrong_validation"
+        android:textColor="@color/red001"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/inputPhoneNumberLayout"
+        app:layout_constraintStart_toStartOf="@+id/inputPhoneNumberLayout"
+        app:layout_constraintTop_toBottomOf="@+id/inputPhoneNumberLayout"
+        tools:visibility="visible"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

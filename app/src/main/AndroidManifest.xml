@@ -28,6 +28,10 @@
             android:name=".features.onboarding.OnBoardingActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".features.homepage.HomepageActivity"
+            android:screenOrientation="portrait" />
+
 
     </application>
 

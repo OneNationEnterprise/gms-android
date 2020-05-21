@@ -16,4 +16,6 @@ class OnBoardingActivity : BaseActivity(R.layout.activity_onboarding) {
                 .show(supportFragmentManager, AuthRegisterDialogFragment.TAG)
         }
     }
+
+    override fun setupViewModel() {}
 }

@@ -1,6 +1,16 @@
 package com.gymapp.base.presentation
 
+import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 
-open class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId)
+abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
+
+    abstract fun setupViewModel()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setupViewModel()
+    }
+
+}

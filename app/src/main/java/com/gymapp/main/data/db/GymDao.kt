@@ -6,14 +6,18 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.gymapp.main.data.model.country.Country
+import com.gymapp.main.data.model.user.User
 
 @Dao
-interface GymDao  {
+interface GymDao {
 
     @Query("SELECT * from country_table")
     fun getCountriesList(): LiveData<List<Country>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCountries(country: List<Country>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUser(user: User)
 
 }

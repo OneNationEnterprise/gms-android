@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.view_phone_input.view.*
 
 class PhoneInputView(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-     var viewContext: Context
+    private var viewContext: Context
 
     init {
         inflate(context, R.layout.view_phone_input, this)
@@ -35,6 +35,14 @@ class PhoneInputView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
         }
     }
 
+
+    fun setError(visibility: Int, message: String= "") {
+        if (message.isNotEmpty()) {
+            errorInputPhoneTv.text = message
+        }
+        errorInputPhoneTv.visibility = visibility
+    }
+
     fun getPhoneNumber(): String {
         return inputPhoneNumberEditText.text.toString()
     }
@@ -50,10 +58,14 @@ class PhoneInputView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
         }
 
         phonePrefixHolder.doOnPreDraw {
-            inputPhoneNumberEditText.setPadding((it.width.toPx() / resources.displayMetrics.density).toInt() + (2 * resources.getDimension(R.dimen.phone_input_prefix_paddingStart).toInt()),
+            inputPhoneNumberEditText.setPadding(
+                (it.width.toPx() / resources.displayMetrics.density).toInt() + (2 * resources.getDimension(
+                    R.dimen.phone_input_prefix_paddingStart
+                ).toInt()),
                 resources.getDimension(R.dimen.phone_input_edit_text_padding).toInt(),
                 resources.getDimension(R.dimen.phone_input_edit_text_padding).toInt(),
-                resources.getDimension(R.dimen.phone_input_edit_text_padding).toInt())
+                resources.getDimension(R.dimen.phone_input_edit_text_padding).toInt()
+            )
         }
     }
 

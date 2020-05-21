@@ -1,0 +1,13 @@
+mutation registerUser($input: RegisterCustomerInput!){
+    registerCustomer(input: $input){
+        customer{
+            id
+            fullName
+            email
+            contactNumber
+            countryId
+            photo
+        }
+        errorMessage
+    }
+}

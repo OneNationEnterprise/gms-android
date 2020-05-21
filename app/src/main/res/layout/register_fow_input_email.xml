@@ -35,28 +35,6 @@
             android:textAlignment="viewStart" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputLastName"
-        style="@style/EditText.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
-        app:boxStrokeColor="@color/blue001"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputFirstName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextLastName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:hint="edt_hint_last_name"
-            android:inputType="textEmailAddress"
-            android:textAlignment="viewStart" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputEmail"
@@ -67,7 +45,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         app:boxStrokeColor="@color/blue001"
-        app:layout_constraintTop_toBottomOf="@+id/inputLastName">
+        app:layout_constraintTop_toBottomOf="@+id/inputFirstName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEmail"
@@ -103,25 +81,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <CheckBox
-        android:id="@+id/termsSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
-
-
     <TextView
         android:id="@+id/termsAgree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="new_account_creation_register_agree"
-        app:layout_constraintBottom_toBottomOf="@+id/termsSwitch"
-        app:layout_constraintStart_toEndOf="@+id/termsSwitch"
-        app:layout_constraintTop_toTopOf="@+id/termsSwitch" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
 
     <TextView
         android:id="@+id/termsLink"
@@ -130,18 +98,22 @@
         android:paddingStart="4dp"
         android:text="new_account_creation_register_terms"
         android:textColor="@color/blue001"
-        app:layout_constraintBottom_toBottomOf="@+id/termsSwitch"
-        app:layout_constraintStart_toEndOf="@+id/termsAgree"
-        app:layout_constraintTop_toTopOf="@+id/termsSwitch" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termsAgree" />
 
-    <TextView
-        android:id="@+id/continueRegisterBtn"
+    <Button
+        android:id="@+id/registerUserBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="new_account_creation_continue"
+        android:layout_height="@dimen/edit_text_height"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="@string/continue_text"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/termsLink" />
 
 

@@ -9,7 +9,6 @@ class LauncherViewModel(private val repository: LauncherRepositoryInterface) :
     BaseViewModel() {
 
     fun fetchData() {
-
         viewModelScope.launch {
             repository.saveCountries()
         }

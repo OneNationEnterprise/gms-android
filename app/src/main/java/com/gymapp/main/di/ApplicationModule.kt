@@ -3,7 +3,10 @@ package com.gymapp.main.di
 import androidx.room.Room
 import com.gymapp.features.onboarding.auth.data.AuthRepository
 import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
+import com.gymapp.features.onboarding.auth.domain.AuthInteractor
+import com.gymapp.features.onboarding.auth.domain.AuthInteractorInterface
 import com.gymapp.features.onboarding.auth.domain.AuthViewModel
+import com.gymapp.main.GymApplication
 import com.gymapp.main.data.db.GymDatabase
 import com.gymapp.main.launcher.data.LauncherRepository
 import com.gymapp.main.launcher.data.LauncherRepositoryInterface
@@ -13,6 +16,7 @@ import com.gymapp.main.network.ApiManagerInterface
 import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -60,8 +64,10 @@ object ApplicationModule {
             )
         }
 
+        factory<AuthInteractorInterface> {
+            AuthInteractor()
+        }
     }
-
 
     val viewModelModule = module {
 
@@ -70,10 +76,9 @@ object ApplicationModule {
         }
 
         viewModel {
-            AuthViewModel(get())
+            AuthViewModel(get(), get())
         }
     }
-
 
 }
 
