@@ -1,0 +1,6 @@
+query customerByEmail($email: String!){
+    customerByEmail(email: $email){
+        ...customerFields
+    }
+
+}

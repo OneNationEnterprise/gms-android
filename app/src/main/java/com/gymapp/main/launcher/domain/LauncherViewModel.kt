@@ -8,10 +8,7 @@ import kotlinx.coroutines.launch
 class LauncherViewModel(private val repository: LauncherRepositoryInterface) :
     BaseViewModel() {
 
-    fun fetchData() {
-        viewModelScope.launch {
+    suspend fun fetchData() {
             repository.saveCountries()
-        }
     }
-
 }

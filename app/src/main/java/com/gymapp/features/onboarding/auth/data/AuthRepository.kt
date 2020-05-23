@@ -1,11 +1,8 @@
 package com.gymapp.features.onboarding.auth.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.gym.type.RegisterCustomerInput
 import com.gymapp.base.data.BaseRepository
 import com.gymapp.main.data.db.GymDao
-import com.gymapp.main.data.model.user.User
 import com.gymapp.main.data.model.user.UserRegistrationMapper
 import com.gymapp.main.network.ApiManagerInterface
 
@@ -33,5 +30,7 @@ class AuthRepository(private val apiManager: ApiManagerInterface, private val gy
 
         return null
     }
+
+
 }
 

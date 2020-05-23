@@ -13,6 +13,7 @@ import com.gymapp.main.launcher.data.LauncherRepositoryInterface
 import com.gymapp.main.launcher.domain.LauncherViewModel
 import com.gymapp.main.network.ApiManagerImpl
 import com.gymapp.main.network.ApiManagerInterface
+import com.gymapp.main.network.interceptors.AuthHeaderTokenInterceptor
 import com.readystatesoftware.chuck.ChuckInterceptor
 import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
@@ -31,6 +32,7 @@ object ApplicationModule {
                     .readTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(30, TimeUnit.SECONDS)
                     .addInterceptor(ChuckInterceptor(androidContext()))
+                    .addInterceptor(AuthHeaderTokenInterceptor())
                     .build()
             }
 

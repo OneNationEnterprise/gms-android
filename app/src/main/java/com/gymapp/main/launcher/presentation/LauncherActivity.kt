@@ -1,11 +1,15 @@
 package com.gymapp.main.launcher.presentation
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.onboarding.OnBoardingActivity
 import com.gymapp.main.launcher.domain.LauncherViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
@@ -20,6 +24,8 @@ class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
 
     override fun setupViewModel() {
         launcherViewModel = getViewModel()
-        launcherViewModel.fetchData()
+        GlobalScope.launch {
+            launcherViewModel.fetchData()
+        }
     }
 }

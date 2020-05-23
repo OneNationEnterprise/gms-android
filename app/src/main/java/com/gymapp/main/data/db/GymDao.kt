@@ -20,4 +20,7 @@ interface GymDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUser(user: User)
 
+    @Query("SELECT * from user_table")
+    fun getCurrentUser(): LiveData<User>
+
 }

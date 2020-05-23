@@ -1,6 +1,7 @@
 package com.gymapp.main.data.model.country
 
 import com.apollographql.apollo.gym.CountriesQuery
+import com.apollographql.apollo.gym.CustomerByEmailQuery
 import com.gymapp.base.data.BaseDataMapperInterface
 
 class CountryMapper : BaseDataMapperInterface<CountriesQuery.List, Country> {

@@ -1,0 +1,8 @@
+fragment customerFields on Customer{
+    id
+    fullName
+    email
+    contactNumber
+    countryId
+    photo
+}

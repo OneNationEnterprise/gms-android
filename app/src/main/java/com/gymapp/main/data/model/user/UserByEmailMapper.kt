@@ -1,13 +1,12 @@
 package com.gymapp.main.data.model.user
 
 import com.apollographql.apollo.gym.CustomerByEmailQuery
-import com.apollographql.apollo.gym.RegisterUserMutation
 import com.gymapp.base.data.BaseDataMapperInterface
 
-class UserRegistrationMapper :
-    BaseDataMapperInterface<RegisterUserMutation.Customer, User> {
+class UserByEmailMapper :
+    BaseDataMapperInterface<CustomerByEmailQuery.CustomerByEmail, User> {
 
-    override fun mapToDto(customer: RegisterUserMutation.Customer): User {
+    override fun mapToDto(customer: CustomerByEmailQuery.CustomerByEmail): User {
         return User(
             customer.fragments.customerFields.id,
             customer.fragments.customerFields.fullName,
@@ -19,7 +18,7 @@ class UserRegistrationMapper :
 
     }
 
-    override fun mapToDtoList(input: List<RegisterUserMutation.Customer>): List<User> {
+    override fun mapToDtoList(input: List<CustomerByEmailQuery.CustomerByEmail>): List<User> {
         return input.map {
             mapToDto(it)
         }

@@ -5,6 +5,8 @@ import com.apollographql.apollo.gym.CountriesQuery
 import com.gymapp.main.data.db.GymDao
 import com.gymapp.main.data.model.country.Country
 import com.gymapp.main.data.model.country.CountryMapper
+import com.gymapp.main.data.model.user.User
+import com.gymapp.main.data.model.user.UserByEmailMapper
 import com.gymapp.main.network.ApiManagerInterface
 
 open class BaseRepository(
@@ -13,6 +15,7 @@ open class BaseRepository(
 ) : BaseRepositoryInterface {
 
     private val countryMapper = CountryMapper()
+    private val userMapper = UserByEmailMapper()
 
     override fun getCountries(): LiveData<List<Country>>? {
         return gymDao.getCountriesList()
@@ -30,6 +33,25 @@ open class BaseRepository(
         }
 
         gymDao.insertCountries(countryMapper.mapToDtoList(countriesList as List<CountriesQuery.List>))
+    }
+
+    override suspend fun saveUserDetailsByEmail(email: String): String? {
+
+        val userDetailsResponse = apiManager.getUserDetailsByEmailAsync(email).await()
+
+        if (userDetailsResponse.errors != null && userDetailsResponse.errors!!.isNotEmpty()
+            || userDetailsResponse.data == null
+            || (userDetailsResponse.data!!.customerByEmail == null)
+        ) {
+            return "Error on getting user details"
+        }
+
+        gymDao.insertUser(userMapper.mapToDto(userDetailsResponse.data!!.customerByEmail!!))
+        return null
+    }
+
+    override suspend fun getCurrentUser(): LiveData<User> {
+        return gymDao.getCurrentUser()
     }
 
 }

@@ -3,7 +3,7 @@ package com.gymapp.main.data.model.user
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "customer_table")
+@Entity(tableName = "user_table")
 data class User(
     @PrimaryKey
     val id: String,

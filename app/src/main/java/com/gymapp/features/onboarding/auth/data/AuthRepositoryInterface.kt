@@ -9,7 +9,7 @@ import com.gymapp.main.data.model.user.User
 interface AuthRepositoryInterface : BaseRepositoryInterface {
 
     /**
-     * returns error message; null if successful
+     * returns error message (null if successful)
      */
     suspend fun registerUser(input: RegisterCustomerInput): String?
 }
