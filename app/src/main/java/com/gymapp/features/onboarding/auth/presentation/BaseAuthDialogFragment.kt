@@ -40,7 +40,6 @@ open abstract class BaseAuthDialogFragment() :
             showModalBottomSheet(this)
         }
 
-
         setupViewModelAndBindBaseObservers()
 
         continueWithOtpBtn.setOnClickListener {
@@ -54,6 +53,8 @@ open abstract class BaseAuthDialogFragment() :
                 authViewModel.validateOtp(otp)
             }
         }
+
+        bindAdditionalView()
 
     }
 
@@ -111,7 +112,7 @@ open abstract class BaseAuthDialogFragment() :
         bindViewModelObservers()
     }
 
-    fun showModalBottomSheet(listener: PhonePrefixSelectedListener) {
+    private fun showModalBottomSheet(listener: PhonePrefixSelectedListener) {
         authViewModel.getAvailableCountries()?.observe(viewLifecycleOwner, Observer {
             if (it.isNotEmpty()) {
 
@@ -134,7 +135,7 @@ open abstract class BaseAuthDialogFragment() :
         authViewModel.phoneCountry = country
     }
 
-    abstract fun bindAdditionalView(savedInstanceState: Bundle?)
+    abstract fun bindAdditionalView()
 
     abstract fun bindViewModelObservers()
 }

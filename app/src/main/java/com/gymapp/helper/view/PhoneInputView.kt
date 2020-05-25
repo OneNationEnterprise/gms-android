@@ -2,8 +2,10 @@ package com.gymapp.helper.view
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.doOnPreDraw
+import androidx.core.widget.doAfterTextChanged
 import com.bumptech.glide.Glide
 import com.gymapp.R
 import com.gymapp.helper.extensions.toPx
@@ -26,6 +28,10 @@ class PhoneInputView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
             inputPhoneNumberEditText.hint = hint
         }
 
+        inputPhoneNumberEditText.doAfterTextChanged {
+            errorInputPhoneTv.visibility = View.GONE
+        }
+
         attributes.recycle()
     }
 
@@ -36,7 +42,7 @@ class PhoneInputView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
     }
 
 
-    fun setError(visibility: Int, message: String= "") {
+    fun setError(visibility: Int, message: String = "") {
         if (message.isNotEmpty()) {
             errorInputPhoneTv.text = message
         }

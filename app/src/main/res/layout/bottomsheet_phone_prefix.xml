@@ -5,15 +5,7 @@
     android:id="@+id/bottomSheetLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_top_round_corner"
     android:elevation="10dp">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cardViewInnerProductContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp">
 
         <ImageView
             android:id="@+id/closeIv"
@@ -21,7 +13,8 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:src="@drawable/ic_close"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:tint="@color/blue001"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -38,8 +31,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/closeIv"
             tools:listitem="@layout/item_bottomsheet_phone_prefix" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

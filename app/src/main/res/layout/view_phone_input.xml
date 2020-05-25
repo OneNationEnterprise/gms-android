@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:imeOptions="actionDone"
             android:inputType="phone"
             android:paddingStart="@dimen/phone_input_edit_text_padding_left"
             android:textAlignment="viewStart"
@@ -55,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:paddingStart="3dp"
-            android:textColor="@color/blue001"
+            android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/flagIv"
@@ -74,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="@id/inputPhoneNumberLayout"
         app:layout_constraintStart_toStartOf="@+id/inputPhoneNumberLayout"
         app:layout_constraintTop_toBottomOf="@+id/inputPhoneNumberLayout"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

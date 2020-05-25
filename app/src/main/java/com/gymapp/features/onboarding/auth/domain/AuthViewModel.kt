@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 class AuthViewModel(
     private val repository: AuthRepositoryInterface,
     private val authInteractorInterface: AuthInteractorInterface
-) : BaseViewModel(){
+) : BaseViewModel() {
 
     private var countriesList: LiveData<List<Country>>? = null
 
@@ -45,7 +45,7 @@ class AuthViewModel(
 
         phoneVerifyCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(p0: PhoneAuthCredential) {
-
+                //todo do next based on login/register
             }
 
             override fun onVerificationFailed(p0: FirebaseException) {

@@ -7,18 +7,14 @@ class AuthLoginDialogFragment : BaseAuthDialogFragment() {
 
 
     companion object {
-        const val TAG = "AuthRegisterDialogFragment"
+        const val TAG = "AuthLoginDialogFragment"
 
         fun newInstance(): AuthLoginDialogFragment {
             return AuthLoginDialogFragment()
         }
     }
 
-    override fun bindViewModelObservers() {
+    override fun bindViewModelObservers() {}
 
-    }
-
-    override fun bindAdditionalView(savedInstanceState: Bundle?) {
-
-    }
+    override fun bindAdditionalView() {}
 }

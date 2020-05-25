@@ -108,6 +108,9 @@ dependencies {
     // Otp View
     implementation 'com.github.aabhasr1:OtpView:v1.1.2-ktx'
 
+    // ViewPager with dots
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+
     // Debug database
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
     debugImplementation 'com.amitshekhar.android:debug-db-encrypt:1.0.6'
