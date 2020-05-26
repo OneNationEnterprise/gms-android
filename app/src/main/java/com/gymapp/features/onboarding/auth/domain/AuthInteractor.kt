@@ -15,16 +15,16 @@ class AuthInteractor : AuthInteractorInterface {
         phoneNumber: String,
         phoneCountry: Country,
         activity: BaseActivity,
-        callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+        callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks,
+        token: PhoneAuthProvider.ForceResendingToken?
     ) {
-
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
             "${phoneCountry.dialCode}$phoneNumber", // Phone number to verify
             RESEND_OTP_TIMER.toLong(), // Timeout duration
             TimeUnit.MILLISECONDS, // Unit of timeout
             activity, // Activity (for callback binding)
-            callbacks
-        )
+            callbacks,
+            token)
     }
 
     override fun signInWithCredential(

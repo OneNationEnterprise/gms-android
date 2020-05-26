@@ -1,6 +1,8 @@
 package com.gymapp.features.onboarding.auth.domain
 
+import android.os.CountDownTimer
 import android.telephony.PhoneStateListener
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -30,11 +32,13 @@ class AuthViewModel(
     var otpFailedVerificationMessage = MutableLiveData<String>()
     var showRegisterWithEmail = MutableLiveData<Boolean>()
     var authErrorMessage = MutableLiveData<String?>()
+    var enableResendOtpButton = MutableLiveData<Boolean>()
 
-    private lateinit var resendAuthToken: PhoneAuthProvider.ForceResendingToken
+    private var resendAuthToken: PhoneAuthProvider.ForceResendingToken? = null
     private lateinit var phoneVerificationId: String
 
     private var phoneVerifyCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    private var resendOtpCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private var authResultListener: OnCompleteListener<AuthResult>
 
     var phoneCountry: Country? = null
@@ -60,6 +64,22 @@ class AuthViewModel(
             }
         }
 
+        resendOtpCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            override fun onVerificationCompleted(p0: PhoneAuthCredential) {
+                //todo do next based on login/register
+            }
+
+            override fun onVerificationFailed(p0: FirebaseException) {
+                //show error on resending otp
+            }
+
+            override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
+                phoneVerificationId = p0
+                resendAuthToken = p1
+            }
+        }
+
+
         authResultListener = OnCompleteListener<AuthResult> {
 
             if (it.isSuccessful) {
@@ -82,6 +102,7 @@ class AuthViewModel(
             }
         }
 
+        resendOtpVerificationTimer()
     }
 
     fun getAvailableCountries(): LiveData<List<Country>>? {
@@ -94,7 +115,18 @@ class AuthViewModel(
             phoneNumber,
             phoneCountry!!,
             activity,
-            phoneVerifyCallback
+            phoneVerifyCallback,
+            resendAuthToken
+        )
+    }
+
+    fun resendOtp(activity: BaseActivity) {
+        authInteractorInterface.verifyPhoneNumber(
+            phoneNumber,
+            phoneCountry!!,
+            activity,
+            resendOtpCallback,
+            resendAuthToken
         )
     }
 
@@ -122,6 +154,19 @@ class AuthViewModel(
             )
         }
     }
+
+
+    fun resendOtpVerificationTimer() {
+        enableResendOtpButton.value = false
+        object : CountDownTimer(60000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {}
+
+            override fun onFinish() {
+                enableResendOtpButton.value = true
+            }
+        }.start()
+    }
+
 
 }
 

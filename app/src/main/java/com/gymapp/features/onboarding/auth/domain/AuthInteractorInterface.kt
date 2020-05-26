@@ -12,7 +12,8 @@ interface AuthInteractorInterface {
         phoneNumber: String,
         phoneCountry: Country,
         activity: BaseActivity,
-        callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+        callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks,
+        token: PhoneAuthProvider.ForceResendingToken?
     )
 
     /**

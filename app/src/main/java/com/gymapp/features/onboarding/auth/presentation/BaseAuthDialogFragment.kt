@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseDialogFragment
@@ -55,7 +56,6 @@ open abstract class BaseAuthDialogFragment() :
         }
 
         bindAdditionalView()
-
     }
 
     private fun setupViewModelAndBindBaseObservers() {
@@ -106,6 +106,19 @@ open abstract class BaseAuthDialogFragment() :
                 startActivity(Intent(activity, HomepageActivity::class.java))
             } else {
                 //show error message
+            }
+        })
+
+        authViewModel.enableResendOtpButton.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                otpResendTv.setOnClickListener {
+                    authViewModel.resendOtpVerificationTimer()
+                    authViewModel.resendOtp(baseActivity)
+                }
+                otpResendTv.setTextColor(ContextCompat.getColor(baseActivity, R.color.red001))
+            } else {
+                otpResendTv.setOnClickListener {}
+                otpResendTv.setTextColor(R.color.blue001)
             }
         })
 
