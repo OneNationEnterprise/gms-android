@@ -1,4 +1,46 @@
 <resources>
     <!--General-->
-    <string name="continue_text">Continue</string>
+    <string name="continue_">Continue</string>
+    <string name="login">Login</string>
+    <string name="next">Next</string>
+    <string name="phone_number">Phone number</string>
+    <string name="edit">Edit</string>
+    <string name="profile">Profile</string>
+
+    <!--OnBoarding-->
+    <string name="onboarding_step_one_title">Unlimited possibilities</string>
+    <string name="onboarding_step_one_description">Book your classes get discounts and connect
+                                                    to the fitness community</string>
+
+    <string name="onboarding_step_two_title">Book classes</string>
+    <string name="onboarding_step_two_description">Cronut asymmetrical yuccie 3 wolf moon
+                                                    semiotics put a bird on it plaid.</string>
+
+    <string name="onboarding_step_three_title">Buy GYM Passes</string>
+    <string name="onboarding_step_three_description">Lorem Ipsum is simply dummy text of the
+                                                    printing and typesetting industry.</string>
+
+    <string name="onboarding_step_four_title">Memberships and Subscriptions</string>
+    <string name="onboarding_step_four_description">There are many variations of passages of Lorem Ipsum available, but the majority
+                                                    have suffered alteration in some form, by injected humour</string>
+    <!--Auth-->
+    <string name="auth_register_title_">Create account</string>
+    <string name="auth_page_title_">Get access to member exclusive products, world-class experts and instant benefits</string>
+    <string name="auth_register_input_phone">Enter your mobile number we will sent you an OTP  to validate the phone number</string>
+    <string name="auth_login_input_phone">Login using your phone number will send you an OTP</string>
+    <string name="auth_enter_otp_title">Enter the OTP code you recived</string>
+
+    <!--Homepage-->
+    <string name="homepage_title">Glad to see you!</string>
+    <string name="homepage_description">Book your classes, get discounts and get connect to the fitness community</string>
+
+    <!--Profile-->
+    <string name="profile_medical_">Medical ID</string>
+    <string name="profile_favourite">Favourite Classes</string>
+    <string name="profile_subscriptions">Passes and Subscriptions</string>
+    <string name="profile_payment">Payment</string>
+    <string name="profile_transactions">Transaction History</string>
+    <string name="profile_settings">Settings</string>
+
+
 </resources>

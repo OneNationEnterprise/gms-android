@@ -40,10 +40,22 @@ class OnBoardingActivity : BaseActivity(R.layout.activity_onboarding) {
     private fun initViewPager() {
 
         val viewPagerInfoTextList = listOf(
-            Pair("title1", "description1"),
-            Pair("title2", "description2"),
-            Pair("title3", "description3"),
-            Pair("title4", "description4")
+            Pair(
+                getString(R.string.onboarding_step_one_title),
+                getString(R.string.onboarding_step_one_description)
+            ),
+            Pair(
+                getString(R.string.onboarding_step_two_title),
+                getString(R.string.onboarding_step_two_description)
+            ),
+            Pair(
+                getString(R.string.onboarding_step_three_title),
+                getString(R.string.onboarding_step_three_description)
+            ),
+            Pair(
+                getString(R.string.onboarding_step_four_title),
+                getString(R.string.onboarding_step_four_description)
+            )
         )
 
         val adapter = OnBoardingTextAdapter(viewPagerInfoTextList)

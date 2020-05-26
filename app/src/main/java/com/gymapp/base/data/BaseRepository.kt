@@ -50,7 +50,7 @@ open class BaseRepository(
         return null
     }
 
-    override suspend fun getCurrentUser(): LiveData<User> {
+    override fun getCurrentUser(): LiveData<User> {
         return gymDao.getCurrentUser()
     }
 

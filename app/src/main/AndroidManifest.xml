@@ -29,9 +29,12 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".features.homepage.HomepageActivity"
+            android:name=".features.homepage.presentation.HomepageActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".features.profile.presentation.ProfileActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

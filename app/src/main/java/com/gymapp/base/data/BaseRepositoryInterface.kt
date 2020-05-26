@@ -26,5 +26,5 @@ interface BaseRepositoryInterface {
     /**
      * returns current session user from Room
      */
-    suspend fun getCurrentUser(): LiveData<User>
+    fun getCurrentUser(): LiveData<User>
 }

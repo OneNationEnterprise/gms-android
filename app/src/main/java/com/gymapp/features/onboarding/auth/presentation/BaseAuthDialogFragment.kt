@@ -4,12 +4,11 @@ import `in`.aabhasjindal.otptextview.OTPListener
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseDialogFragment
-import com.gymapp.features.homepage.HomepageActivity
+import com.gymapp.features.homepage.presentation.HomepageActivity
 import com.gymapp.features.onboarding.auth.domain.AuthViewModel
 import com.gymapp.helper.modal.phoneprefix.PhonePrefixModalBottomsheet
 import com.gymapp.helper.modal.phoneprefix.PhonePrefixSelectedListener
@@ -29,6 +28,8 @@ open abstract class BaseAuthDialogFragment() :
     lateinit var authViewModel: AuthViewModel
 
     override fun bindView(savedInstanceState: Bundle?) {
+
+        bindPageText()
 
         render = Render(context!!)
         render.setDuration(300)
@@ -149,6 +150,6 @@ open abstract class BaseAuthDialogFragment() :
     }
 
     abstract fun bindAdditionalView()
-
     abstract fun bindViewModelObservers()
+    abstract fun bindPageText()
 }

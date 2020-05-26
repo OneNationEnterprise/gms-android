@@ -8,7 +8,9 @@ import com.gymapp.R
 import com.gymapp.helper.extensions.isValidEmail
 import com.gymapp.helper.extensions.isValidName
 import com.gymapp.helper.extensions.isValidPassword
+import kotlinx.android.synthetic.main.dialog_auth.*
 import kotlinx.android.synthetic.main.register_flow_input_otp.*
+import kotlinx.android.synthetic.main.register_flow_input_phone.*
 import kotlinx.android.synthetic.main.register_fow_input_email.*
 import render.animations.Slide
 
@@ -24,7 +26,6 @@ class AuthRegisterDialogFragment : BaseAuthDialogFragment() {
     }
 
     override fun bindAdditionalView() {
-
 
         registerUserBtn.setOnClickListener {
 
@@ -74,6 +75,12 @@ class AuthRegisterDialogFragment : BaseAuthDialogFragment() {
                 authInputOtpLayout.visibility = View.GONE
             }
         })
+    }
+
+    override fun bindPageText() {
+        pageTitleTv.text = getString(R.string.auth_register_title_)
+        signUpPhoneDescriptionTv.text = getString(R.string.auth_page_title_)
+        signUpPhoneTitleTv.text = getString(R.string.auth_register_input_phone)
     }
 
 }

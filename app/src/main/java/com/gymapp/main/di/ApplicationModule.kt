@@ -1,6 +1,9 @@
 package com.gymapp.main.di
 
 import androidx.room.Room
+import com.gymapp.features.homepage.data.HomepageRepository
+import com.gymapp.features.homepage.data.HomepageRepositoryInterface
+import com.gymapp.features.homepage.domain.HomepageViewModel
 import com.gymapp.features.onboarding.auth.data.AuthRepository
 import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
 import com.gymapp.features.onboarding.auth.domain.AuthInteractor
@@ -69,6 +72,10 @@ object ApplicationModule {
         factory<AuthInteractorInterface> {
             AuthInteractor()
         }
+
+        factory<HomepageRepositoryInterface> {
+            HomepageRepository(get(), get())
+        }
     }
 
     val viewModelModule = module {
@@ -79,6 +86,10 @@ object ApplicationModule {
 
         viewModel {
             AuthViewModel(get(), get())
+        }
+
+        viewModel {
+            HomepageViewModel(get())
         }
     }
 

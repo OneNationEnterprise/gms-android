@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="new account creation enter sms"
+            android:text="@string/auth_enter_otp_title"
             android:textSize="16sp" />
 
         <in.aabhasjindal.otptextview.OtpTextView
