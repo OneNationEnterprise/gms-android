@@ -147,7 +147,7 @@ class AuthViewModel(
                     firstName = name,
                     email = email,
                     password = password,
-                    contactNumber = phoneNumber,
+                    contactNumber = "${phoneCountry?.dialCode}$phoneNumber",
                     countryId = phoneCountry!!.id,
                     isPhoneVerified = true
                 )
