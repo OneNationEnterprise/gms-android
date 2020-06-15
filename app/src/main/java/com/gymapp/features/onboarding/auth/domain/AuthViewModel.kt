@@ -79,7 +79,6 @@ class AuthViewModel(
             }
         }
 
-
         authResultListener = OnCompleteListener<AuthResult> {
 
             if (it.isSuccessful) {

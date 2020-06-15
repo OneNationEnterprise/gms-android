@@ -69,7 +69,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/phone_input_edit_text_padding_left"
-        android:text="error_phone_wrong_validation"
+        android:text="@string/error_phone_wrong_validation"
         android:textColor="@color/red001"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/inputPhoneNumberLayout"

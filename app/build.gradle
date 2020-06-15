@@ -118,6 +118,12 @@ dependencies {
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
     debugImplementation 'com.amitshekhar.android:debug-db-encrypt:1.0.6'
 
+    //Loading spinner
+    implementation 'com.github.ybq:Android-SpinKit:1.2.0'
+
+    //Notification banner
+    implementation 'com.github.shasin89:NotificationBanner:1.1.0'
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'

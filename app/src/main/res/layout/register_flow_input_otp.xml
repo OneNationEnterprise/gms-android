@@ -37,7 +37,8 @@
             android:padding="4dp"
             android:text="new account creation edit phone"
             android:textColor="@color/blue001"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/otpEditPhoneTv"
@@ -54,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="@string/auth_enter_otp_title"
+            android:textColor="@color/blue001"
             android:textSize="16sp" />
 
         <in.aabhasjindal.otptextview.OtpTextView
@@ -75,8 +77,10 @@
         android:id="@+id/invalidOTPCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="new_account_creation_invalid_otp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/new_account_creation_invalid_otp"
         android:textColor="@color/red001"
         android:textSize="14sp"
         android:visibility="gone"
@@ -92,6 +96,7 @@
         android:layout_marginTop="16dp"
         android:text="new_account_creation_otp"
         android:textSize="14sp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/invalidOTPCode" />

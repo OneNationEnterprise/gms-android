@@ -29,6 +29,11 @@
     <string name="auth_register_input_phone">Enter your mobile number we will sent you an OTP  to validate the phone number</string>
     <string name="auth_login_input_phone">Login using your phone number will send you an OTP</string>
     <string name="auth_enter_otp_title">Enter the OTP code you recived</string>
+    <string name="edt_hint_first_name">First name</string>
+    <string name="edt_hint_email">Email</string>
+    <string name="edt_hint_password">Password</string>
+    <string name="new_account_creation_register_agree">By continuing, you agree to our</string>
+    <string name="new_account_creation_register_terms">Terms and Conditions</string>
 
     <!--Homepage-->
     <string name="homepage_title">Glad to see you!</string>
@@ -42,5 +47,10 @@
     <string name="profile_transactions">Transaction History</string>
     <string name="profile_settings">Settings</string>
 
+
+    <!--ERRORS-->
+    <!--Auth-->
+    <string name="error_phone_wrong_validation">Error phone validation</string>
+    <string name="new_account_creation_invalid_otp">Error OTP validation</string>
 
 </resources>

@@ -107,6 +107,8 @@ open abstract class BaseAuthDialogFragment() :
                 startActivity(Intent(activity, HomepageActivity::class.java))
             } else {
                 //show error message
+                fullScreenLoading(false)
+                
             }
         })
 

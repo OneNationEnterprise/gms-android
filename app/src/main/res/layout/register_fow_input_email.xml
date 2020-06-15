@@ -30,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:hint="edt_hint_first_name"
+            android:hint="@string/edt_hint_first_name"
             android:inputType="textEmailAddress"
             android:textAlignment="viewStart"
             android:textColor="@color/white" />
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:hint="edt_hint_email"
+            android:hint="@string/edt_hint_email"
             android:inputType="textEmailAddress"
             android:textAlignment="viewStart"
             android:textColor="@color/white" />
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:hint="edt_hint_password"
+            android:hint="@string/edt_hint_password"
             android:inputType="textPassword"
             android:textAlignment="viewStart" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -89,7 +89,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="new_account_creation_register_agree"
+        android:textSize="15sp"
+        android:text="@string/new_account_creation_register_agree"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
@@ -100,7 +101,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="4dp"
         android:textStyle="bold"
-        android:text="new_account_creation_register_terms"
+        android:text="@string/new_account_creation_register_terms"
         android:textColor="@color/red001"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,4 +122,9 @@
         app:layout_constraintTop_toBottomOf="@+id/termsLink" />
 
 
+
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/loader_fullscreen"
+        android:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

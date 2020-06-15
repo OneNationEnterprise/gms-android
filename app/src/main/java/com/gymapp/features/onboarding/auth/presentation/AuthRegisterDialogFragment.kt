@@ -44,6 +44,8 @@ class AuthRegisterDialogFragment : BaseAuthDialogFragment() {
                 return@setOnClickListener
             }
 
+            fullScreenLoading()
+
             authViewModel.registerUser(
                 editTextFirstName.text.toString(),
                 editTextEmail.text.toString(),
@@ -67,6 +69,7 @@ class AuthRegisterDialogFragment : BaseAuthDialogFragment() {
 
         authViewModel.showRegisterWithEmail.observe(viewLifecycleOwner, Observer {
             if (it) {
+
                 render.setAnimation(Slide().OutLeft(authInputOtpLayout))
                 render.start()
                 render.setAnimation(Slide().InRight(registerEmailLayout))

@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.gymapp.R
+import kotlinx.android.synthetic.main.register_fow_input_email.*
 
 abstract class BaseDialogFragment(@LayoutRes val layoutResourceId: Int) : DialogFragment() {
 
@@ -78,6 +79,20 @@ abstract class BaseDialogFragment(@LayoutRes val layoutResourceId: Int) : Dialog
     }
 
     abstract fun bindView(savedInstanceState: Bundle?)
+
+    fun fullScreenLoading(show: Boolean = true) {
+
+        if (progressBar == null) return
+
+        when (show) {
+            false -> {
+                progressBar.visibility = View.GONE
+            }
+            true -> {
+                progressBar.visibility = View.VISIBLE
+            }
+        }
+    }
 
 
 }
