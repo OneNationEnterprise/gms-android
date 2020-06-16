@@ -47,5 +47,8 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/loader_fullscreen"
+        android:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,11 @@ abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity
         setupViewModel()
 
         setupCustomBackBtn()
+
+        bindViewModelObservers()
     }
+
+    abstract fun bindViewModelObservers()
 
     private fun setupCustomBackBtn() {
         if (backIv != null) {

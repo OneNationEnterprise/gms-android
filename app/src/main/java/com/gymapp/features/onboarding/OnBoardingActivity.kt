@@ -37,6 +37,8 @@ class OnBoardingActivity : BaseActivity(R.layout.activity_onboarding) {
 
     override fun setupViewModel() {}
 
+    override fun bindViewModelObservers() {}
+
     private fun initViewPager() {
 
         val viewPagerInfoTextList = listOf(

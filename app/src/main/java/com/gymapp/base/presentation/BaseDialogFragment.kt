@@ -15,7 +15,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.gymapp.R
-import kotlinx.android.synthetic.main.register_fow_input_email.*
+import kotlinx.android.synthetic.main.dialog_auth.*
 
 abstract class BaseDialogFragment(@LayoutRes val layoutResourceId: Int) : DialogFragment() {
 
@@ -49,7 +49,7 @@ abstract class BaseDialogFragment(@LayoutRes val layoutResourceId: Int) : Dialog
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         // creating the fullscreen dialog
-        val dialog = Dialog(context!!)
+        val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(root)
         dialog.window?.let {
@@ -57,7 +57,7 @@ abstract class BaseDialogFragment(@LayoutRes val layoutResourceId: Int) : Dialog
             it.setBackgroundDrawable(
                 ColorDrawable(
                     ContextCompat.getColor(
-                        context!!,
+                        requireContext(),
                         android.R.color.transparent
                     )
                 )

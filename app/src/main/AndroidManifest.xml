@@ -26,6 +26,7 @@
 
         <activity
             android:name=".features.onboarding.OnBoardingActivity"
+            android:noHistory="true"
             android:screenOrientation="portrait" />
 
         <activity
@@ -33,7 +34,11 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".features.profile.presentation.ProfileActivity"
+            android:name="com.gymapp.features.profile.main.presentation.ProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.profile.settings.presentation.SettingsActivity"
             android:screenOrientation="portrait" />
 
     </application>

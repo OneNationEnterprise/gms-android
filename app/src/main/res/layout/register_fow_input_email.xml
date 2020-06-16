@@ -121,10 +121,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/termsLink" />
 
-
-
-    <include
-        android:id="@+id/progressBar"
-        layout="@layout/loader_fullscreen"
-        android:visibility="gone" />
 </androidx.constraintlayout.widget.ConstraintLayout>

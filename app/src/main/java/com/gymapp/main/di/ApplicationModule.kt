@@ -9,7 +9,9 @@ import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
 import com.gymapp.features.onboarding.auth.domain.AuthInteractor
 import com.gymapp.features.onboarding.auth.domain.AuthInteractorInterface
 import com.gymapp.features.onboarding.auth.domain.AuthViewModel
-import com.gymapp.main.GymApplication
+import com.gymapp.features.profile.main.data.ProfileRepository
+import com.gymapp.features.profile.main.data.ProfileRepositoryInterface
+import com.gymapp.features.profile.main.domain.ProfileViewModel
 import com.gymapp.main.data.db.GymDatabase
 import com.gymapp.main.launcher.data.LauncherRepository
 import com.gymapp.main.launcher.data.LauncherRepositoryInterface
@@ -18,9 +20,7 @@ import com.gymapp.main.network.ApiManagerImpl
 import com.gymapp.main.network.ApiManagerInterface
 import com.gymapp.main.network.interceptors.AuthHeaderTokenInterceptor
 import com.readystatesoftware.chuck.ChuckInterceptor
-import okhttp3.CertificatePinner
 import okhttp3.OkHttpClient
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -54,7 +54,7 @@ object ApplicationModule {
         single { get<GymDatabase>().gymDao() }
     }
 
-    val dataModule = module {
+    val repositoryModule = module {
         factory<LauncherRepositoryInterface> {
             LauncherRepository(
                 get(),
@@ -76,6 +76,10 @@ object ApplicationModule {
         factory<HomepageRepositoryInterface> {
             HomepageRepository(get(), get())
         }
+
+        factory<ProfileRepositoryInterface> {
+            ProfileRepository(get(), get())
+        }
     }
 
     val viewModelModule = module {
@@ -90,6 +94,10 @@ object ApplicationModule {
 
         viewModel {
             HomepageViewModel(get())
+        }
+
+        viewModel {
+            ProfileViewModel(get())
         }
     }
 

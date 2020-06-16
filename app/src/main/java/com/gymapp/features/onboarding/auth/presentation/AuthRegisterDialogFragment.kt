@@ -1,6 +1,5 @@
 package com.gymapp.features.onboarding.auth.presentation
 
-import android.os.Bundle
 import android.view.View
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer

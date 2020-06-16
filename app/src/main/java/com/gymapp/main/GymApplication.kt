@@ -2,7 +2,7 @@ package com.gymapp.main
 
 import android.app.Application
 import com.gymapp.main.di.ApplicationModule
-import com.gymapp.main.di.ApplicationModule.dataModule
+import com.gymapp.main.di.ApplicationModule.repositoryModule
 import com.gymapp.main.di.ApplicationModule.databaseModule
 import com.gymapp.main.di.ApplicationModule.networkModule
 import com.gymapp.main.di.ApplicationModule.viewModelModule
@@ -17,7 +17,7 @@ class GymApplication : Application() {
             modules(
                 networkModule,
                 databaseModule,
-                dataModule,
+                repositoryModule,
                 viewModelModule
             )
         }

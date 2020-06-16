@@ -31,7 +31,7 @@ open abstract class BaseAuthDialogFragment() :
 
         bindPageText()
 
-        render = Render(context!!)
+        render = Render(requireContext())
         render.setDuration(300)
 
         closeIv.setOnClickListener {
@@ -108,7 +108,6 @@ open abstract class BaseAuthDialogFragment() :
             } else {
                 //show error message
                 fullScreenLoading(false)
-                
             }
         })
 
