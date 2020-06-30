@@ -1,2 +1,2 @@
-# gym-android
+# gms-android
 Gym android application repository
