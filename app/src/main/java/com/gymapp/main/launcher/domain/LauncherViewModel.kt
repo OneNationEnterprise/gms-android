@@ -23,7 +23,7 @@ class LauncherViewModel(private val repository: LauncherRepositoryInterface) :
             errorFetchingUser.value =
                 repository.saveUserDetailsByEmail(FirebaseAuth.getInstance().currentUser?.email!!)
         } else {
-            errorFetchingUser.value = null
+            errorFetchingUser.value = "User not found"
         }
 
     }

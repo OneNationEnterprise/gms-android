@@ -12,6 +12,9 @@ import com.gymapp.features.onboarding.auth.domain.AuthViewModel
 import com.gymapp.features.profile.main.data.ProfileRepository
 import com.gymapp.features.profile.main.data.ProfileRepositoryInterface
 import com.gymapp.features.profile.main.domain.ProfileViewModel
+import com.gymapp.features.profile.settings.data.SettingsRepository
+import com.gymapp.features.profile.settings.data.SettingsRepositoryInterface
+import com.gymapp.features.profile.settings.domain.SettingsViewModel
 import com.gymapp.main.data.db.GymDatabase
 import com.gymapp.main.launcher.data.LauncherRepository
 import com.gymapp.main.launcher.data.LauncherRepositoryInterface
@@ -80,6 +83,10 @@ object ApplicationModule {
         factory<ProfileRepositoryInterface> {
             ProfileRepository(get(), get())
         }
+
+        factory<SettingsRepositoryInterface> {
+            SettingsRepository(get(), get())
+        }
     }
 
     val viewModelModule = module {
@@ -98,6 +105,10 @@ object ApplicationModule {
 
         viewModel {
             ProfileViewModel(get())
+        }
+
+        viewModel {
+            SettingsViewModel(get())
         }
     }
 

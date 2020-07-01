@@ -13,8 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class HomepageActivity : BaseActivity(R.layout.activity_homepage) {
 
     lateinit var homepageViewModel: HomepageViewModel
-
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         userLayoutContainer.setOnClickListener {

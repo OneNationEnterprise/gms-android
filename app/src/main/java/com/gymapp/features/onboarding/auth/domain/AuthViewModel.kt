@@ -166,6 +166,27 @@ class AuthViewModel(
         }.start()
     }
 
+    fun loginWithEmailAndPassword(email: String, password: String) {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                if(it.isSuccessful){
+                    val firebaseUser = it.result?.user
+
+                    if (firebaseUser == null || firebaseUser.email == null) {
+                        authErrorMessage.value = "No user information from firebase"
+                        return@addOnCompleteListener
+                    }
+
+                    viewModelScope.launch {
+                        authErrorMessage.value =
+                            repository.saveUserDetailsByEmail(firebaseUser!!.email!!)
+                    }
+                } else {
+                    authErrorMessage.value = it.exception?.localizedMessage
+                }
+            }
+    }
+
 
 }
 

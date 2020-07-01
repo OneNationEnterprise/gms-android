@@ -12,6 +12,7 @@ import com.gymapp.features.homepage.presentation.HomepageActivity
 import com.gymapp.features.onboarding.auth.domain.AuthViewModel
 import com.gymapp.helper.modal.phoneprefix.PhonePrefixModalBottomsheet
 import com.gymapp.helper.modal.phoneprefix.PhonePrefixSelectedListener
+import com.gymapp.helper.ui.InAppBannerNotification
 import com.gymapp.main.data.model.country.Country
 import kotlinx.android.synthetic.main.dialog_auth.*
 import kotlinx.android.synthetic.main.register_flow_input_otp.*
@@ -106,7 +107,7 @@ open abstract class BaseAuthDialogFragment() :
                 //registration successful, open next page
                 startActivity(Intent(activity, HomepageActivity::class.java))
             } else {
-                //show error message
+                InAppBannerNotification.showErrorNotification(authContainer, context, it)
                 fullScreenLoading(false)
             }
         })
@@ -140,7 +141,7 @@ open abstract class BaseAuthDialogFragment() :
                     PhonePrefixModalBottomsheet.TAG
                 )
             } else {
-                //todo show no available countries
+                InAppBannerNotification.showErrorNotification(authContainer, context, "Error on getting available countries")
             }
         })
     }

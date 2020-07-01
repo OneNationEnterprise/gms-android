@@ -35,6 +35,8 @@
     <string name="edt_hint_password">Password</string>
     <string name="new_account_creation_register_agree">By continuing, you agree to our</string>
     <string name="new_account_creation_register_terms">Terms and Conditions</string>
+    <string name="login_page_title_text">Get access to member exclusive products, world-class experts and instant benefits.</string>
+    <string name="login_page_continue_with_email">→ Continue with Email</string>
 
     <!--Homepage-->
     <string name="homepage_title">Glad to see you!</string>
