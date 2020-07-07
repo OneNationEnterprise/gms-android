@@ -1,0 +1,6 @@
+fragment brandFields on Brand{
+    id
+    name
+    phone
+    gymCount
+}

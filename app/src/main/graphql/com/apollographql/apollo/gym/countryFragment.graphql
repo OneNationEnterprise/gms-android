@@ -1,4 +1,4 @@
-fragment CountryFields on Country{
+fragment countryFields on Country{
     id
     isoCode
     dialCode

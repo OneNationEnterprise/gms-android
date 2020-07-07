@@ -1,0 +1,5 @@
+query gym($id: ID!){
+    gym(id: $id){
+        ...gymFields
+    }
+}

@@ -1,0 +1,12 @@
+fragment gymFields on Gym{
+    name
+    address{
+        country{
+            ...countryFields
+        }
+        unitNumber
+    }
+    brand{
+        ...brandFields
+    }
+}
