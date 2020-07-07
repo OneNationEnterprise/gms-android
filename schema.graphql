@@ -5,7 +5,11 @@ schema {
     mutation: Mutation
 }
 
-"Admins to manage brand, branches, admin platform"
+union MembershipRefTypePayload = Branch | Brand
+
+union PassRefTypePayload = Branch | Brand
+
+"Admins to manage brand, branches, admin platform.."
 type Admin {
     authId: String!
     branches: [Branch]
@@ -145,6 +149,106 @@ type BrandsPayload {
     paging: PaginatorOutput
 }
 
+type BuyAPassPayload {
+    error: OrderPassError
+    errorMessage: String
+    errors: [OrderPassError!]
+    orderPass: OrderPass
+}
+
+type ContentElement {
+    contentGroup: ContentGroup!
+    contentType: ContentType!
+    createdAt: Datetime!
+    createdById: ID!
+    data: ContentElementData
+    id: ID!
+    lastUpdatedById: ID!
+    orderNo: Int!
+    reference: String!
+    status: GlobalStatusType!
+    type: ContentElementType!
+    updatedAt: Datetime!
+}
+
+type ContentElementData {
+    description: String
+    name: String!
+    options: [ContentElementDataOption]
+    placeHolder: String
+    required: Boolean!
+    value: String
+}
+
+type ContentElementDataOption {
+    id: String!
+    label: String!
+}
+
+type ContentElementValue {
+    contentElement: ContentElement
+    contentGroup: ContentGroup
+    contentType: ContentType
+    createdAt: Datetime!
+    createdById: ID
+    customer: Customer!
+    data: ContentElementData
+    fieldValue: String!
+    id: ID!
+    lastUpdatedById: ID
+    orderNo: Int!
+    reference: String!
+    status: GlobalStatusType!
+    type: ContentElementType!
+    updatedAt: Datetime!
+}
+
+type ContentElementValuesPayload {
+    list: [ContentElementValue]
+    paging: PaginatorOutput
+}
+
+type ContentElementsPayload {
+    list: [ContentElement]
+    paging: PaginatorOutput
+}
+
+type ContentGroup {
+    contentElements: [ContentElement]
+    contentType: ContentType!
+    createdAt: Datetime!
+    createdById: ID!
+    description: String
+    id: ID!
+    lastUpdatedById: ID!
+    name: String!
+    orderNo: Int!
+    status: GlobalStatusType!
+    updatedAt: Datetime!
+}
+
+type ContentGroupsPayload {
+    list: [ContentGroup]
+    paging: PaginatorOutput
+}
+
+type ContentType {
+    contentElements: [ContentElement]
+    contentGroups: [ContentGroup]
+    createdAt: Datetime!
+    createdById: ID!
+    id: ID!
+    lastUpdatedById: ID!
+    status: GlobalStatusType!
+    type: ContentTypes!
+    updatedAt: Datetime!
+}
+
+type ContentTypesPayload {
+    list: [ContentType]
+    paging: PaginatorOutput
+}
+
 type CountriesPayload {
     list: [Country]
     paging: PaginatorOutput
@@ -157,7 +261,6 @@ type Country {
     id: ID!
     isoCode: String
     languages: [Language]!
-    locationsRadius: Int
     name: String!
     servicePhoneNumber: String
     status: StatusType
@@ -190,7 +293,7 @@ type CurrencyDetails {
     symbol: String
 }
 
-"Customer/Users"
+"Customer/Users..."
 type Customer {
     authId: String!
     contactNumber: String
@@ -211,104 +314,11 @@ type Customer {
     updatedAt: Datetime!
 }
 
-type CustomerContentElement {
-    contentGroup: CustomerContentGroup!
-    contentType: CustomerContentType!
-    createdAt: Datetime!
-    createdById: ID!
-    data: CustomerContentElementData
-    id: ID!
-    lastUpdatedById: ID!
-    orderNo: Int!
-    reference: String!
-    status: GlobalStatusType!
-    type: CustomerContentElementType!
-    updatedAt: Datetime!
-}
-
-type CustomerContentElementData {
-    description: String
-    name: String!
-    options: [CustomerContentElementDataOption]
-    placeHolder: String
-    required: Boolean!
-    value: String
-}
-
-type CustomerContentElementDataOption {
-    id: String!
-    label: String!
-}
-
-type CustomerContentElementValue {
-    contentElement: CustomerContentElement
-    contentGroup: CustomerContentGroup
-    contentType: CustomerContentType
-    createdAt: Datetime!
-    createdById: ID
-    customer: Customer!
-    data: CustomerContentElementData
-    fieldValue: String!
-    id: ID!
-    lastUpdatedById: ID
-    orderNo: Int!
-    reference: String!
-    status: GlobalStatusType!
-    type: CustomerContentElementType!
-    updatedAt: Datetime!
-}
-
-type CustomerContentElementValuesPayload {
-    list: [CustomerContentElementValue]
-    paging: PaginatorOutput
-}
-
-type CustomerContentElementsPayload {
-    list: [CustomerContentElement]
-    paging: PaginatorOutput
-}
-
-type CustomerContentGroup {
-    contentElements: [CustomerContentElement]
-    contentType: CustomerContentType!
-    createdAt: Datetime!
-    createdById: ID!
-    description: String
-    id: ID!
-    lastUpdatedById: ID!
-    name: String!
-    orderNo: Int!
-    status: GlobalStatusType!
-    updatedAt: Datetime!
-}
-
-type CustomerContentGroupsPayload {
-    list: [CustomerContentGroup]
-    paging: PaginatorOutput
-}
-
-type CustomerContentType {
-    contentElements: [CustomerContentElement]
-    contentGroups: [CustomerContentGroup]
-    createdAt: Datetime!
-    createdById: ID!
-    id: ID!
-    lastUpdatedById: ID!
-    status: GlobalStatusType!
-    type: CustomerContentTypes!
-    updatedAt: Datetime!
-}
-
-type CustomerContentTypesPayload {
-    list: [CustomerContentType]
-    paging: PaginatorOutput
-}
-
 type CustomerMedicalFormPayload {
     error: CustomerError
     errorMessage: String
     errors: [CustomerError!]
-    medicalForm: [CustomerContentElementValue]
+    medicalForm: [ContentElementValue]
 }
 
 type CustomersPayload {
@@ -318,14 +328,13 @@ type CustomersPayload {
 
 "Gyms"
 type Gym {
+    address: GymAddress!
     admins: [Admin]
     amenities: [String!]
     brand: Brand!
-    city: String!
-    country: Country!
-    countryId: ID!
     createdAt: Datetime!
     createdBy: Admin!
+    distance: Float
     email: String!
     id: ID!
     images: [String!]!
@@ -334,12 +343,36 @@ type Gym {
     name: String!
     operatingHours: [GymOperatingHours]
     phone: String!
-    state: String!
     status: GymStatus!
-    street: String!
-    unitNumber: String!
     updatedAt: Datetime!
-    zipCode: String!
+}
+
+"Gym Address"
+type GymAddress {
+    building: String
+    city: String!
+    country: Country!
+    countryId: ID!
+    createdAt: Datetime!
+    floorNo: String
+    geoLocation: GymAddressGeoLocation!
+    gym: Gym!
+    id: ID!
+    "The longitude component of the geo coordinates for this address, in degrees"
+    latitude: Float!
+    "The longitude component of the geo coordinates for this address, in degrees"
+    longitude: Float!
+    shortAddress: String
+    state: String
+    street: String
+    unitNumber: String
+    updatedAt: Datetime!
+    zipCode: String
+}
+
+type GymAddressGeoLocation {
+    coordinates: [Float]
+    type: String
 }
 
 "Gym Operating Hours"
@@ -358,6 +391,27 @@ type GymOperatingHours {
 
 type GymsPayload {
     list: [Gym]
+    paging: PaginatorOutput
+}
+
+"Instructor/Users"
+type Instructor {
+    authId: String!
+    brand: Brand!
+    contactNumber: String
+    createdAt: Datetime!
+    email: String!
+    firstName: String!
+    gender: GlobalGenderType!
+    id: ID
+    lastName: String
+    photo: String
+    status: GlobalStatusType!
+    updatedAt: Datetime!
+}
+
+type InstructorsPayload {
+    list: [Instructor]
     paging: PaginatorOutput
 }
 
@@ -403,7 +457,7 @@ type Membership {
     name: String!
     period: Int!
     photo: String!
-    referenceType: ReferenceTypePayload
+    referenceType: MembershipRefTypePayload
     status: GlobalStatusType!
     updatedAt: Datetime!
 }
@@ -415,10 +469,12 @@ type MembershipsPayload {
 
 type Mutation {
     amenityUpsert(input: AmenityInput!): SaveAmenityPayload
+    buyAPass(input: BuyAPassInput!): BuyAPassPayload
     countryUpsert(input: CountryInput!): SaveCountryPayload
     currencyUpsert(input: CurrencyInput!): SaveCurrencyPayload
     languageUpsert(input: LanguageInput!): SaveLanguagePayload
     registerCustomer(input: RegisterCustomerInput!): RegisterCustomerPayload
+    registerInstructor(input: RegisterInstructorInput!): RegisterInstructorPayload
     saveAdmin(input: SaveAdminInput!): SaveAdminPayload
     saveBranch(input: SaveBranchInput!): SaveBranchPayload
     saveBranchAdmin(input: SaveBranchAdminInput!): SaveBranchAdminPayload
@@ -429,16 +485,18 @@ type Mutation {
     saveBrandAdmin(input: SaveBrandAdminInput!): SaveBrandAdminPayload
     saveBrandStatusUpdate(input: SaveBrandStatusInput!): SaveBrandPayload
     saveBrandsAdminsTable(brandId: ID!, input: [SaveBrandsAdminsTableInput]): SaveBrandAdminTablePayload
+    saveContentElement(input: SaveContentElementInput!): SaveContentElementPayload
+    saveContentElementValue(input: SaveContentElementValueInput!): SaveContentElementValuePayload
+    saveContentGroup(input: SaveContentGroupInput!): SaveContentGroupPayload
+    saveContentType(input: SaveContentTypeInput!): SaveContentTypePayload
     saveCustomer(input: SaveCustomerInput!): SaveCustomerPayload
-    saveCustomerContentElement(input: SaveCustomerContentElementInput!): SaveCustomerContentElementPayload
-    saveCustomerContentElementValue(input: SaveCustomerContentElementValueInput!): SaveCustomerContentElementValuePayload
-    saveCustomerContentGroup(input: SaveCustomerContentGroupInput!): SaveCustomerContentGroupPayload
-    saveCustomerContentType(input: SaveCustomerContentTypeInput!): SaveCustomerContentTypePayload
     saveCustomerMedicalForm(input: CustomerMedicalForm!): CustomerMedicalFormPayload
     saveCustomerPhoto(input: CustomerPhotoInput!): RegisterCustomerPayload
     saveGym(input: SaveGymInput!): SaveGymPayload
     saveGymOperatingHours(gymId: ID!, input: [SaveGymOperatingHoursInput!]!): SaveGymOperatingHoursPayload
     saveGymStatusUpdate(input: SaveGymStatusInput!): SaveGymPayload
+    saveInstructor(input: SaveInstructorInput!): SaveInstructorPayload
+    saveInstructorStatusUpdate(input: SaveInstructorStatusInput!): SaveInstructorPayload
     saveLanguageCountry(input: SaveLanguageCountryInput!): SaveLanguageCountryPayload
     saveMembership(input: SaveMembershipInput!): SaveMembershipPayload
     savePass(input: SavePassInput!): SavePassPayload
@@ -446,8 +504,26 @@ type Mutation {
     saveRole(input: SaveRoleInput!): SaveRolePayload
     saveRolePermission(input: SaveRolePermissionInput!): SaveRolePermissionPayload
     saveRolesPermissionsTable(input: [SaveRolesPermissionsTableInput]): SaveRolePermissionTablePayload
-    sortCustomerContentElement(contentTypeId: ID!, ids: [ID!]!): Boolean
-    sortCustomerContentGroup(contentTypeId: ID!, ids: [ID!]!): Boolean
+    sortContentElement(contentTypeId: ID!, ids: [ID!]!): Boolean
+    sortContentGroup(contentTypeId: ID!, ids: [ID!]!): Boolean
+}
+
+"Passes bought by customers"
+type OrderPass {
+    allowedCheckins: Int
+    amount: CurrencyValue
+    countryId: ID!
+    createdAt: Datetime!
+    customerId: ID!
+    gracePeriod: Int
+    gymId: ID!
+    id: ID!
+    passId: ID!
+    paymentStatus: PaymentStatus!
+    period: Int
+    shortCode: String!
+    status: PassStatus!
+    updatedAt: Datetime!
 }
 
 type PaginatorOutput {
@@ -474,11 +550,6 @@ type Pass {
     status: GlobalStatusType
     type: PassType!
     updatedAt: Datetime!
-}
-
-type PassRefTypePayload {
-    branch: Branch
-    brand: Brand
 }
 
 type PassesPayload {
@@ -519,6 +590,14 @@ type Query {
     brandAdmin(id: ID!): BrandAdmin
     brandAdmins(paging: PaginatorInput!, params: BrandAdminsFilter): BrandAdminsPayload!
     brands(paging: PaginatorInput, params: BrandsFilter): BrandsPayload!
+    contentElement(id: ID!): ContentElement
+    contentElementValue(id: ID!): ContentElementValue
+    contentElementValues(paging: PaginatorInput!, params: ContentElementValuesFilter): ContentElementValuesPayload
+    contentElements(paging: PaginatorInput!, params: ContentElementsFilter): ContentElementsPayload
+    contentGroup(id: ID!): ContentGroup
+    contentGroups(paging: PaginatorInput!, params: ContentGroupsFilter): ContentGroupsPayload
+    contentType(id: ID!): ContentType
+    contentTypes(paging: PaginatorInput!, params: ContentTypesFilter): ContentTypesPayload
     countries(filter: CountryFilter, paging: PaginatorInput): CountriesPayload!
     countriesById(ids: [ID!]!): [Country!]!
     country(id: ID!): Country!
@@ -526,27 +605,24 @@ type Query {
     currency(id: ID!): Currency!
     customer(id: ID!): Customer
     customerByEmail(email: String!): Customer
-    customerContentElement(id: ID!): CustomerContentElement
-    customerContentElementValue(id: ID!): CustomerContentElementValue
-    customerContentElementValues(paging: PaginatorInput!, params: CustomerContentElementValuesFilter): CustomerContentElementValuesPayload
-    customerContentElements(paging: PaginatorInput!, params: CustomerContentElementsFilter): CustomerContentElementsPayload
-    customerContentGroup(id: ID!): CustomerContentGroup
-    customerContentGroups(paging: PaginatorInput!, params: CustomerContentGroupsFilter): CustomerContentGroupsPayload
-    customerContentType(id: ID!): CustomerContentType
-    customerContentTypes(paging: PaginatorInput!, params: CustomerContentTypesFilter): CustomerContentTypesPayload
     customers(paging: PaginatorInput!, params: CustomersFilter): CustomersPayload!
-    getMedicalForm: [CustomerContentGroup!]!
+    getMedicalForm: [ContentGroup!]!
     gym(id: ID!): Gym!
+    gymAddress(gymId: ID!): GymAddress
     gymOperatingHours(gymId: ID!): [GymOperatingHours]
-    gyms(paging: PaginatorInput, params: GymsFilter): GymsPayload!
+    gyms(paging: PaginatorInput!, params: GymsFilter): GymsPayload!
+    gymsInRadius(paging: PaginatorInput!, params: GymsInRadiusFilter): GymsPayload!
+    instructor(id: ID!): Instructor
+    instructorByEmail(email: String!): Instructor
+    instructors(paging: PaginatorInput, params: InstructorsFilter): InstructorsPayload!
     language(id: ID!): Language!
     languageCountries(filter: LanguageCountriessFilter, paging: PaginatorInput!): LanguageCountriessPayload!
     languageCountry(id: ID!): LanguageCountry
     languages(filter: LanguageFilter, paging: PaginatorInput!): LanguagesPayload!
     membership(id: ID!): Membership!
-    memberships(paging: PaginatorInput!, params: MembershipsFilter): MembershipsPayload!
+    memberships(paging: PaginatorInput, params: MembershipsFilter): MembershipsPayload!
     pass(id: ID!): Pass!
-    passes(paging: PaginatorInput!, params: PassesFilter): PassesPayload!
+    passes(paging: PaginatorInput, params: PassesFilter): PassesPayload!
     permission(id: ID!): Permission
     permissions(paging: PaginatorInput!, params: PermissionsFilter): PermissionsPayload!
     role(id: ID!): Role
@@ -555,16 +631,19 @@ type Query {
     roles(paging: PaginatorInput!, params: RolesFilter): RolesPayload!
 }
 
-type ReferenceTypePayload {
-    branch: Branch
-    brand: Brand
-}
-
 type RegisterCustomerPayload {
     customer: Customer
     error: CustomerError
     errorMessage: String
     errors: [CustomerError!]
+}
+
+type RegisterInstructorPayload {
+    error: InstructorError
+    errorMessage: String
+    errors: [InstructorError!]
+    instructor: Instructor
+    password: String
 }
 
 "Role"
@@ -663,6 +742,30 @@ type SaveBrandPayload {
     errors: [BrandError!]
 }
 
+type SaveContentElementPayload {
+    contentElement: ContentElement
+    error: ContentElementError
+    errors: [ContentElementError!]
+}
+
+type SaveContentElementValuePayload {
+    contentElementValue: ContentElementValue
+    error: ContentElementValueError
+    errors: [ContentElementValueError!]
+}
+
+type SaveContentGroupPayload {
+    contentGroup: ContentGroup
+    error: ContentGroupError
+    errors: [ContentGroupError!]
+}
+
+type SaveContentTypePayload {
+    contentType: ContentType
+    error: ContentTypeError
+    errors: [ContentTypeError!]
+}
+
 type SaveCountryPayload {
     country: Country
     error: CountryError
@@ -673,30 +776,6 @@ type SaveCurrencyPayload {
     currency: Currency
     error: CurrencyError
     errors: [CurrencyError!]
-}
-
-type SaveCustomerContentElementPayload {
-    customerContentElement: CustomerContentElement
-    error: CustomerContentElementError
-    errors: [CustomerContentElementError!]
-}
-
-type SaveCustomerContentElementValuePayload {
-    customerContentElementValue: CustomerContentElementValue
-    error: CustomerContentElementValueError
-    errors: [CustomerContentElementValueError!]
-}
-
-type SaveCustomerContentGroupPayload {
-    customerContentGroup: CustomerContentGroup
-    error: CustomerContentGroupError
-    errors: [CustomerContentGroupError!]
-}
-
-type SaveCustomerContentTypePayload {
-    customerContentType: CustomerContentType
-    error: CustomerContentTypeError
-    errors: [CustomerContentTypeError!]
 }
 
 type SaveCustomerPayload {
@@ -714,8 +793,16 @@ type SaveGymOperatingHoursPayload {
 
 type SaveGymPayload {
     error: GymError
+    errorMessage: String
     errors: [GymError!]
     gym: Gym
+}
+
+type SaveInstructorPayload {
+    error: InstructorError
+    errorMessage: String
+    errors: [InstructorError!]
+    instructor: Instructor
 }
 
 type SaveLanguageCountryPayload {
@@ -813,23 +900,13 @@ enum BrandStatus {
     INACTIVE
 }
 
-enum CountryError {
-    DUPLICATE_NAME
-    INVALID_ID
-}
-
-enum CurrencyError {
-    DUPLICATE_NAME
-    INVALID_ID
-}
-
-enum CustomerContentElementError {
+enum ContentElementError {
     DUPLICATE_REFERENCE
     INVALID_DATA
     INVALID_ID
 }
 
-enum CustomerContentElementType {
+enum ContentElementType {
     BUTTON
     CHECKBOX
     DATE
@@ -839,25 +916,35 @@ enum CustomerContentElementType {
     TEXTBOX
 }
 
-enum CustomerContentElementValueError {
+enum ContentElementValueError {
     DUPLICATE_FIELD
     INVALID_CONTENT_ELEMENT_ID
     INVALID_ID
 }
 
-enum CustomerContentGroupError {
+enum ContentGroupError {
     DUPLICATE_NAME
     INVALID_DATA
     INVALID_ID
 }
 
-enum CustomerContentTypeError {
+enum ContentTypeError {
     DUPLICATE_TYPE
     INVALID_ID
 }
 
-enum CustomerContentTypes {
+enum ContentTypes {
     MEDICAL_ID
+}
+
+enum CountryError {
+    DUPLICATE_NAME
+    INVALID_ID
+}
+
+enum CurrencyError {
+    DUPLICATE_NAME
+    INVALID_ID
 }
 
 enum CustomerError {
@@ -878,7 +965,6 @@ enum GlobalGenderType {
 
 enum GlobalStatusType {
     ACTIVE
-    DELETED
     INACTIVE
 }
 
@@ -899,6 +985,16 @@ enum GymStatus {
     INACTIVE
 }
 
+enum InstructorError {
+    DUPLICATE_CONTACT_NUMBER
+    DUPLICATE_EMAIL
+    FIELD_REQUIRED
+    FIREBASE
+    INVALID_FIELD_DATA
+    INVALID_ID
+    INVALID_INSTRUCTOR
+}
+
 enum LanguageCountryError {
     DUPLICATE_PERMISSION
     INVALID_ID
@@ -912,7 +1008,6 @@ enum LanguageError {
 enum MembershipAccessType {
     BRANCH
     BRAND
-    COUNTRY
 }
 
 enum MembershipError {
@@ -920,10 +1015,19 @@ enum MembershipError {
     INVALID_ID
 }
 
+enum OrderPassError {
+    INVALID_PASS_ID
+}
+
 enum PassAccessType {
     BRANCH
     BRAND
-    COUNTRY
+}
+
+enum PassStatus {
+    ACTIVE
+    CANCELED
+    INACTIVE
 }
 
 enum PassType {
@@ -931,6 +1035,12 @@ enum PassType {
     EVENING
     MORNING
     RUSH
+}
+
+enum PaymentStatus {
+    FAILURE
+    PENDING
+    SUCCESS
 }
 
 enum PermissionError {
@@ -1004,6 +1114,58 @@ input BrandsFilter {
     status: BrandStatus
 }
 
+input BuyAPassInput {
+    customerId: ID!
+    passId: ID!
+}
+
+input ContentElementDataInput {
+    description: String
+    name: String!
+    options: [ContentElementDataOptionInput]
+    placeHolder: String
+    required: Boolean!
+    value: String
+}
+
+input ContentElementDataOptionInput {
+    id: String!
+    label: String!
+}
+
+input ContentElementValuesFilter {
+    contentElementId: ID
+    contentGroupId: ID
+    contentTypeId: ID
+    customerId: ID
+    fieldValue: String
+    reference: String
+    searchText: String
+    status: GlobalStatusType
+    type: ContentElementType
+}
+
+input ContentElementsFilter {
+    contentGroupId: ID
+    contentTypeId: ID
+    reference: String
+    searchText: String
+    status: GlobalStatusType
+    type: ContentElementType
+}
+
+input ContentGroupsFilter {
+    contentTypeId: ID
+    searchText: String
+    status: GlobalStatusType
+}
+
+input ContentTypesFilter {
+    searchText: String
+    status: GlobalStatusType
+    type: ContentTypes
+}
+
 input CountryFilter {
     searchText: String
     status: String
@@ -1047,53 +1209,6 @@ input CurrencyInput {
     subUnitName: String!
 }
 
-input CustomerContentElementDataInput {
-    description: String
-    name: String!
-    options: [CustomerContentElementDataOptionInput]
-    placeHolder: String
-    required: Boolean!
-    value: String
-}
-
-input CustomerContentElementDataOptionInput {
-    id: String!
-    label: String!
-}
-
-input CustomerContentElementValuesFilter {
-    contentElementId: ID
-    contentGroupId: ID
-    contentTypeId: ID
-    customerId: ID
-    fieldValue: String
-    reference: String
-    searchText: String
-    status: GlobalStatusType
-    type: CustomerContentElementType
-}
-
-input CustomerContentElementsFilter {
-    contentGroupId: ID
-    contentTypeId: ID
-    reference: String
-    searchText: String
-    status: GlobalStatusType
-    type: CustomerContentElementType
-}
-
-input CustomerContentGroupsFilter {
-    contentTypeId: ID
-    searchText: String
-    status: GlobalStatusType
-}
-
-input CustomerContentTypesFilter {
-    searchText: String
-    status: GlobalStatusType
-    type: CustomerContentTypes
-}
-
 input CustomerMedicalForm {
     contentElements: [CustomerMedicalFormField]
     customerId: ID!
@@ -1115,11 +1230,33 @@ input CustomersFilter {
     status: GlobalStatusType
 }
 
+"A set of GIS co-ordinates"
+input GISLocationInput {
+    "Latitude, in degrees"
+    latitude: Float!
+    "Longitude, in degrees"
+    longitude: Float!
+}
+
 input GymsFilter {
     brandId: ID
     countryId: ID
     searchText: String
     status: GymStatus
+}
+
+input GymsInRadiusFilter {
+    brandIds: [ID!]
+    "User's current location"
+    location: GISLocationInput!
+    "Search Radius"
+    radius: Float!
+}
+
+input InstructorsFilter {
+    gender: GlobalGenderType
+    searchText: String
+    status: GlobalStatusType
 }
 
 input LanguageCountriessFilter {
@@ -1176,6 +1313,17 @@ input RegisterCustomerInput {
     lastName: String
     password: String!
     photo: String
+}
+
+input RegisterInstructorInput {
+    brandId: ID!
+    contactNumber: String!
+    email: String!
+    firstName: String!
+    gender: GlobalGenderType!
+    lastName: String
+    photo: String
+    status: GlobalStatusType!
 }
 
 input RolePermissionsFilter {
@@ -1266,24 +1414,25 @@ input SaveBrandsAdminsTableInput {
     adminId: ID!
 }
 
-input SaveCustomerContentElementInput {
+input SaveContentElementInput {
     contentGroupId: ID!
     contentTypeId: ID!
-    data: CustomerContentElementDataInput
+    data: ContentElementDataInput
     id: ID
+    options: [ContentElementDataOptionInput]
     reference: String!
     status: GlobalStatusType!
-    type: CustomerContentElementType!
+    type: ContentElementType!
 }
 
-input SaveCustomerContentElementValueInput {
+input SaveContentElementValueInput {
     contentElementId: ID!
     customerId: ID!
     fieldValue: String!
     id: ID
 }
 
-input SaveCustomerContentGroupInput {
+input SaveContentGroupInput {
     contentTypeId: ID!
     description: String
     id: ID
@@ -1291,10 +1440,10 @@ input SaveCustomerContentGroupInput {
     status: GlobalStatusType!
 }
 
-input SaveCustomerContentTypeInput {
+input SaveContentTypeInput {
     id: ID
     status: GlobalStatusType!
-    type: CustomerContentTypes!
+    type: ContentTypes!
 }
 
 input SaveCustomerInput {
@@ -1309,21 +1458,16 @@ input SaveCustomerInput {
 }
 
 input SaveGymInput {
+    address: addressInput!
     amenities: [String!]
     brandId: ID!
-    city: String!
-    countryId: ID!
     email: String!
     id: ID
     images: [String!]!
     legalName: String!
     name: String!
     phone: String!
-    state: String!
     status: GymStatus!
-    street: String!
-    unitNumber: String!
-    zipCode: String!
 }
 
 input SaveGymOperatingHoursInput {
@@ -1337,6 +1481,23 @@ input SaveGymOperatingHoursInput {
 input SaveGymStatusInput {
     id: ID!
     status: GymStatus!
+}
+
+input SaveInstructorInput {
+    brandId: ID!
+    contactNumber: String!
+    email: String!
+    firstName: String!
+    gender: GlobalGenderType
+    id: ID!
+    lastName: String
+    photo: String
+    status: GlobalStatusType!
+}
+
+input SaveInstructorStatusInput {
+    id: ID!
+    status: GlobalStatusType!
 }
 
 input SaveLanguageCountryInput {
@@ -1402,6 +1563,23 @@ input SaveRolePermissionInput {
 input SaveRolesPermissionsTableInput {
     permissionId: ID!
     roleId: ID!
+}
+
+input addressInput {
+    building: String
+    city: String!
+    countryId: ID!
+    floorNo: String
+    id: ID
+    "The longitude component of the geo coordinates for this address, in degrees"
+    latitude: Float!
+    "The longitude component of the geo coordinates for this address, in degrees"
+    longitude: Float!
+    shortAddress: String
+    state: String
+    street: String
+    unitNumber: String!
+    zipCode: String!
 }
 
 
