@@ -21,7 +21,6 @@ open class BaseRepository(
         return gymDao.getCountriesList()
     }
 
-    @Suppress("UNCHECKED_CAST")
     override suspend fun saveCountries() {
 
         val countryQueryResponse = apiManager.getCountriesAsync().await()

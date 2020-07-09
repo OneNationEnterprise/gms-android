@@ -1,11 +1,13 @@
 package com.gymapp.features.onboarding
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.transition.TransitionManager
 import androidx.viewpager2.widget.ViewPager2
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
+import com.gymapp.features.homepage.presentation.HomepageActivity
 import com.gymapp.features.onboarding.auth.presentation.AuthLoginDialogFragment
 import com.gymapp.features.onboarding.auth.presentation.AuthRegisterDialogFragment
 import com.gymapp.helper.view.ZoomOutPageTransformer
@@ -30,6 +32,10 @@ class OnBoardingActivity : BaseActivity(R.layout.activity_onboarding) {
 
         continueBtn.setOnClickListener {
             viewPager2.currentItem = currentItemPage + 1
+        }
+
+        skipTv.setOnClickListener {
+            startActivity(Intent(this, HomepageActivity::class.java))
         }
 
         initViewPager()

@@ -31,14 +31,14 @@ android {
             manifestPlaceholders = [appName: "GYM Staging"]
             debuggable true
             buildConfigField("String", "BASE_SERVER_URL", "http://ad82ca9ee5fa74f8b8bf78963b2c735d-586376887.eu-west-1.elb.amazonaws.com/graphql")
-            resValue("string", "DB_PASSWORD_app_db", "gymapp")
+//            resValue("string", "DB_PASSWORD_app_db", "gymapp")
         }
 
         staging {
             initWith debug
             applicationIdSuffix ".staging"
             manifestPlaceholders = [appName: "GYM Develop"]
-            resValue("string", "DB_PASSWORD_app_db", "gymapp")
+//            resValue("string", "DB_PASSWORD_app_db", "gymapp")
         }
     }
     compileOptions {

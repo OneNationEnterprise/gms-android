@@ -1,24 +1,24 @@
 package com.gymapp.main.data.model.country
 
 import com.apollographql.apollo.gym.CountriesQuery
-import com.apollographql.apollo.gym.CustomerByEmailQuery
+import com.apollographql.apollo.gym.fragment.CountryFields
 import com.gymapp.base.data.BaseDataMapperInterface
 
-class CountryMapper : BaseDataMapperInterface<CountriesQuery.List, Country> {
+class CountryMapper : BaseDataMapperInterface<CountryFields, Country> {
 
-    override fun mapToDto(input: CountriesQuery.List): Country {
+    override fun mapToDto(countryFields: CountryFields): Country {
         return Country(
-            id = input.fragments.countryFields.id,
-            dialCode = input.fragments.countryFields.dialCode ?: "",
-            isoCode = input.fragments.countryFields.isoCode ?: "",
-            name = input.fragments.countryFields.name,
-            flagPhoto = input.fragments.countryFields.flagPhoto ?: ""
+            id = countryFields.id,
+            dialCode = countryFields.dialCode ?: "",
+            isoCode = countryFields.isoCode ?: "",
+            name = countryFields.name,
+            flagPhoto = countryFields.flagPhoto ?: ""
         )
     }
 
-    override fun mapToDtoList(input: List<CountriesQuery.List>): List<Country> {
+    override fun mapToDtoList(input: List<CountryFields?>): List<Country> {
         return input.map {
-            mapToDto(it)
+            mapToDto(it!!)
         }
     }
 }

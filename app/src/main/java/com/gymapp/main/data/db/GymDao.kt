@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.gymapp.main.data.model.country.Country
+import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.user.User
 
 @Dao
@@ -22,5 +23,8 @@ interface GymDao {
 
     @Query("SELECT * from user_table")
     fun getCurrentUser(): LiveData<User>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertNearbyGyms(gyms: List<Gym>)
 
 }

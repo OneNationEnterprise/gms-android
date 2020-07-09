@@ -1,27 +1,27 @@
 package com.gymapp.main.data.model.user
 
-import com.apollographql.apollo.gym.CustomerByEmailQuery
+import com.apollographql.apollo.gym.CountriesQuery
 import com.apollographql.apollo.gym.RegisterUserMutation
 import com.gymapp.base.data.BaseDataMapperInterface
 
 class UserRegistrationMapper :
     BaseDataMapperInterface<RegisterUserMutation.Customer, User> {
 
-    override fun mapToDto(customer: RegisterUserMutation.Customer): User {
+    override fun mapToDto(input: RegisterUserMutation.Customer): User {
         return User(
-            customer.fragments.customerFields.id,
-            customer.fragments.customerFields.fullName,
-            customer.fragments.customerFields.email,
-            customer.fragments.customerFields.contactNumber,
-            customer.fragments.customerFields.countryId,
-            customer.fragments.customerFields.photo
+            input.fragments.customerFields.id,
+            input.fragments.customerFields.fullName,
+            input.fragments.customerFields.email,
+            input.fragments.customerFields.contactNumber,
+            input.fragments.customerFields.countryId,
+            input.fragments.customerFields.photo
         )
 
     }
 
-    override fun mapToDtoList(input: List<RegisterUserMutation.Customer>): List<User> {
+    override fun mapToDtoList(input: List<RegisterUserMutation.Customer?>): List<User> {
         return input.map {
-            mapToDto(it)
+            mapToDto(it!!)
         }
     }
 }

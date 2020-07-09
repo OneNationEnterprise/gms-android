@@ -1,5 +1,6 @@
 package com.gymapp.main.data.model.user
 
+import com.apollographql.apollo.gym.CountriesQuery
 import com.apollographql.apollo.gym.CustomerByEmailQuery
 import com.gymapp.base.data.BaseDataMapperInterface
 
@@ -18,9 +19,9 @@ class UserByEmailMapper :
 
     }
 
-    override fun mapToDtoList(input: List<CustomerByEmailQuery.CustomerByEmail>): List<User> {
+    override fun mapToDtoList(input: List<CustomerByEmailQuery.CustomerByEmail?>): List<User> {
         return input.map {
-            mapToDto(it)
+            mapToDto(it!!)
         }
     }
 }

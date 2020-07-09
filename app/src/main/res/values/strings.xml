@@ -7,6 +7,7 @@
     <string name="edit">Edit</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>
+    <string name="skip">SKIP</string>
 
     <!--OnBoarding-->
     <string name="onboarding_step_one_title">Unlimited possibilities</string>

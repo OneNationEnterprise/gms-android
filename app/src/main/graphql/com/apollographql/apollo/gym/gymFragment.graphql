@@ -1,6 +1,7 @@
 fragment gymFields on Gym{
     name
     address{
+        id
         country{
             ...countryFields
         }
