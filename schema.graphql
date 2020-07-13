@@ -5,14 +5,13 @@ schema {
     mutation: Mutation
 }
 
-union MembershipRefTypePayload = Branch | Brand
+union MembershipRefTypePayload = ExternalBrand_VP | ExternalGym_VP
 
-union PassRefTypePayload = Branch | Brand
+union PassRefTypePayload = ExternalBrand_VP | ExternalGym_VP
 
 "Admins to manage brand, branches, admin platform.."
 type Admin {
     authId: String!
-    branches: [Branch]
     brands: [Brand]
     contactNumber: String
     createdAt: Datetime!
@@ -46,62 +45,6 @@ type Amenity {
     id: ID!
     name: String!
     status: StatusType!
-}
-
-"Branches/Gyms."
-type Branch {
-    admins: [Admin!]
-    brand: Brand!
-    createdAt: Datetime!
-    createdBy: Admin!
-    description: String!
-    id: ID!
-    lastUpdatedBy: Admin!
-    name: String!
-    status: GlobalStatusType!
-    updatedAt: Datetime!
-    weeklySchedule: [BranchWeeklySchedule]
-}
-
-"BranchAdmin"
-type BranchAdmin {
-    admin: Admin!
-    branch: Branch!
-    createdAt: Datetime!
-    createdBy: Admin!
-    id: ID!
-    lastUpdatedBy: Admin!
-    updatedAt: Datetime!
-}
-
-type BranchAdminsPayload {
-    list: [BranchAdmin]
-    paging: PaginatorOutput
-}
-
-"BranchWeeklySchedule"
-type BranchWeeklySchedule {
-    branch: Branch!
-    closeAllDay: Boolean!
-    createdAt: Datetime!
-    createdBy: Admin!
-    day: Int!
-    id: ID!
-    lastUpdatedBy: Admin!
-    openAllDay: Boolean!
-    openDuration: Int
-    openTime: LocalTime
-    updatedAt: Datetime!
-}
-
-type BranchWeeklySchedulesPayload {
-    list: [BranchWeeklySchedule]
-    paging: PaginatorOutput
-}
-
-type BranchsPayload {
-    list: [Branch]
-    paging: PaginatorOutput
 }
 
 "Brands/Gyms"
@@ -326,6 +269,38 @@ type CustomersPayload {
     paging: PaginatorOutput
 }
 
+type ExternalBrand_VP {
+    countryId: ID!
+    email: String!
+    id: ID!
+    legalName: String
+    logo: String!
+    name: String!
+    phone: String!
+    status: GlobalStatusType!
+}
+
+type ExternalGym_VP {
+    brandId: ID!
+    email: String!
+    id: ID!
+    legalName: String
+    logo: String!
+    name: String!
+    phone: String!
+    status: GlobalStatusType!
+}
+
+type ExternalInstructor_VP {
+    contactNumber: String!
+    email: String!
+    firstName: String!
+    id: ID!
+    lastName: String
+    photo: String
+    status: GlobalStatusType!
+}
+
 "Gyms"
 type Gym {
     address: GymAddress!
@@ -373,6 +348,69 @@ type GymAddress {
 type GymAddressGeoLocation {
     coordinates: [Float]
     type: String
+}
+
+type GymClass {
+    age: Age
+    amount: CurrencyValue!
+    brand: ExternalBrand_VP!
+    countryId: ID!
+    createdAt: Datetime!
+    createdById: ID!
+    description: String
+    difficultyLevel: DifficultyLevel!
+    duration: Float
+    endDate: Date
+    estimatedCaloriesBurnt: String!
+    gender: GlobalGenderType!
+    gym: ExternalGym_VP!
+    gymClassCategory: GymClassCategory!
+    id: ID!
+    images: [String!]
+    instructor: ExternalInstructor_VP
+    isWeekelyScheduled: Boolean!
+    lastUpdatedById: ID!
+    name: String!
+    openTime: LocalTime
+    schedule: [GymClassWeeklySchedule!]
+    spots: Int!
+    spotsAlotted: Int
+    startDate: Date!
+    status: GlobalStatusType
+    updatedAt: Datetime!
+}
+
+type GymClassCategory {
+    brand: ExternalBrand_VP!
+    createdAt: Datetime!
+    description: String
+    gym: ExternalGym_VP!
+    id: ID!
+    image: String
+    name: String!
+    status: GlobalStatusType
+    updatedAt: Datetime!
+}
+
+type GymClassCategoryPayload {
+    list: [GymClassCategory]
+    paging: PaginatorOutput
+}
+
+type GymClassWeeklySchedule {
+    closeAllDay: Boolean!
+    createdAt: Datetime!
+    day: Int!
+    duration: Float
+    id: ID!
+    instructor: ExternalInstructor_VP
+    openTime: LocalTime
+    updatedAt: Datetime!
+}
+
+type GymClassesPayload {
+    list: [GymClass]
+    paging: PaginatorOutput
 }
 
 "Gym Operating Hours"
@@ -445,21 +483,60 @@ type LanguagesPayload {
 type Membership {
     accessType: MembershipAccessType!
     age: Age
-    allowedCheckins: Int!
-    amount: Int!
+    allowedCheckins: Int
+    amount: CurrencyValue!
+    countryId: ID!
     createdAt: Datetime!
-    createdBy: Admin!
+    createdById: ID!
     description: String
     gender: GlobalGenderType!
-    gracePeriod: Int!
+    gracePeriod: Int
     id: ID!
-    lastUpdatedBy: Admin!
+    image: String
+    isWeekelyScheduled: Boolean!
+    lastUpdatedById: ID!
+    lifetime: Boolean
+    membershipCategory: MembershipCategory!
+    membershipSubCategory: MembershipSubCategory!
     name: String!
-    period: Int!
-    photo: String!
+    period: Int
     referenceType: MembershipRefTypePayload
     status: GlobalStatusType!
     updatedAt: Datetime!
+}
+
+type MembershipCategory {
+    accessType: MembershipAccessType!
+    createdAt: Datetime!
+    description: String
+    id: ID!
+    image: String
+    name: String!
+    referenceType: MembershipRefTypePayload
+    status: GlobalStatusType
+    subCategories: [MembershipSubCategory!]
+    updatedAt: Datetime!
+}
+
+type MembershipCategoryPayload {
+    list: [MembershipCategory]
+    paging: PaginatorOutput
+}
+
+type MembershipSubCategory {
+    createdAt: Datetime!
+    description: String
+    id: ID!
+    image: String
+    membershipCategory: MembershipCategory!
+    name: String!
+    status: GlobalStatusType
+    updatedAt: Datetime!
+}
+
+type MembershipSubCategoryPayload {
+    list: [MembershipSubCategory]
+    paging: PaginatorOutput
 }
 
 type MembershipsPayload {
@@ -476,11 +553,6 @@ type Mutation {
     registerCustomer(input: RegisterCustomerInput!): RegisterCustomerPayload
     registerInstructor(input: RegisterInstructorInput!): RegisterInstructorPayload
     saveAdmin(input: SaveAdminInput!): SaveAdminPayload
-    saveBranch(input: SaveBranchInput!): SaveBranchPayload
-    saveBranchAdmin(input: SaveBranchAdminInput!): SaveBranchAdminPayload
-    saveBranchWeeklySchedule(input: SaveBranchWeeklyScheduleInput!): SaveBranchWeeklySchedulePayload
-    saveBranchesAdminsTable(branchId: ID!, input: [SaveBranchesAdminsTableInput]): SaveBranchAdminTablePayload
-    saveBranchesWeeklySchedulesTable(branchId: ID!, input: [SaveBranchesWeeklySchedulesTableInput!]!): SaveBranchWeeklyScheduleTablePayload
     saveBrand(input: SaveBrandInput!): SaveBrandPayload
     saveBrandAdmin(input: SaveBrandAdminInput!): SaveBrandAdminPayload
     saveBrandStatusUpdate(input: SaveBrandStatusInput!): SaveBrandPayload
@@ -493,12 +565,16 @@ type Mutation {
     saveCustomerMedicalForm(input: CustomerMedicalForm!): CustomerMedicalFormPayload
     saveCustomerPhoto(input: CustomerPhotoInput!): RegisterCustomerPayload
     saveGym(input: SaveGymInput!): SaveGymPayload
+    saveGymClass(input: SaveGymClassInput!): SaveGymClassPayload
+    saveGymClassCategory(input: SaveGymClassCategoryInput!): SaveGymClassCategoryPayload
     saveGymOperatingHours(gymId: ID!, input: [SaveGymOperatingHoursInput!]!): SaveGymOperatingHoursPayload
     saveGymStatusUpdate(input: SaveGymStatusInput!): SaveGymPayload
     saveInstructor(input: SaveInstructorInput!): SaveInstructorPayload
     saveInstructorStatusUpdate(input: SaveInstructorStatusInput!): SaveInstructorPayload
     saveLanguageCountry(input: SaveLanguageCountryInput!): SaveLanguageCountryPayload
     saveMembership(input: SaveMembershipInput!): SaveMembershipPayload
+    saveMembershipCategory(input: SaveMembershipCategoryInput!): SaveMembershipCategoryPayload
+    saveMembershipSubCategory(input: SaveMembershipSubCategoryInput!): SaveMembershipSubCategoryPayload
     savePass(input: SavePassInput!): SavePassPayload
     savePermission(input: SavePermissionInput!): SavePermissionPayload
     saveRole(input: SaveRoleInput!): SaveRolePayload
@@ -536,13 +612,13 @@ type Pass {
     accessType: PassAccessType!
     age: Age
     allowedCheckins: Int!
-    amount: Int!
+    amount: CurrencyValue!
     createdAt: Datetime!
-    createdBy: Admin!
+    createdById: ID!
     gender: GlobalGenderType!
     gracePeriod: Int!
     id: ID!
-    lastUpdatedBy: Admin!
+    lastUpdatedById: ID!
     name: String!
     period: Int!
     photo: String!
@@ -580,12 +656,6 @@ type Query {
     adminByEmail(email: String!): Admin
     admins(paging: PaginatorInput!, params: AdminsFilter): AdminsPayload!
     amenities(filter: AmenityFilter): [Amenity]
-    branch(id: ID!): Branch!
-    branchAdmin(id: ID!): BranchAdmin
-    branchAdmins(paging: PaginatorInput!, params: BranchAdminsFilter): BranchAdminsPayload!
-    branchWeeklySchedule(id: ID!): BranchWeeklySchedule
-    branchWeeklySchedules(paging: PaginatorInput!, params: BranchWeeklySchedulesFilter): BranchWeeklySchedulesPayload!
-    branches(paging: PaginatorInput!, params: BranchsFilter): BranchsPayload!
     brand(id: ID!): Brand!
     brandAdmin(id: ID!): BrandAdmin
     brandAdmins(paging: PaginatorInput!, params: BrandAdminsFilter): BrandAdminsPayload!
@@ -609,6 +679,11 @@ type Query {
     getMedicalForm: [ContentGroup!]!
     gym(id: ID!): Gym!
     gymAddress(gymId: ID!): GymAddress
+    gymClass(id: ID!): GymClass!
+    gymClassCategories(paging: PaginatorInput, params: GymClassCategoryFilter): GymClassCategoryPayload!
+    gymClassCategory(id: ID!): GymClassCategory!
+    gymClassSechedule(gymClassId: ID!): [GymClassWeeklySchedule!]
+    gymClasses(paging: PaginatorInput, params: GymClassesFilter): GymClassesPayload!
     gymOperatingHours(gymId: ID!): [GymOperatingHours]
     gyms(paging: PaginatorInput!, params: GymsFilter): GymsPayload!
     gymsInRadius(paging: PaginatorInput!, params: GymsInRadiusFilter): GymsPayload!
@@ -620,6 +695,10 @@ type Query {
     languageCountry(id: ID!): LanguageCountry
     languages(filter: LanguageFilter, paging: PaginatorInput!): LanguagesPayload!
     membership(id: ID!): Membership!
+    membershipCategories(paging: PaginatorInput, params: MembershipCategoryFilter): MembershipCategoryPayload!
+    membershipCategory(id: ID!): MembershipCategory!
+    membershipSubCategories(paging: PaginatorInput, params: MembershipSubCategoryFilter): MembershipSubCategoryPayload!
+    membershipSubCategory(id: ID!): MembershipSubCategory!
     memberships(paging: PaginatorInput, params: MembershipsFilter): MembershipsPayload!
     pass(id: ID!): Pass!
     passes(paging: PaginatorInput, params: PassesFilter): PassesPayload!
@@ -694,36 +773,6 @@ type SaveAmenityPayload {
     errors: [AmenityError!]
 }
 
-type SaveBranchAdminPayload {
-    branchAdmin: BranchAdmin
-    error: BranchAdminError
-    errors: [BranchAdminError!]
-}
-
-type SaveBranchAdminTablePayload {
-    error: BranchAdminError
-    errors: [BranchAdminError!]
-    updated: Boolean
-}
-
-type SaveBranchPayload {
-    branch: Branch
-    error: BranchError
-    errors: [BranchError!]
-}
-
-type SaveBranchWeeklySchedulePayload {
-    branchWeeklySchedule: BranchWeeklySchedule
-    error: BranchWeeklyScheduleError
-    errors: [BranchWeeklyScheduleError!]
-}
-
-type SaveBranchWeeklyScheduleTablePayload {
-    error: BranchWeeklyScheduleError
-    errors: [BranchWeeklyScheduleError!]
-    updated: Boolean
-}
-
 type SaveBrandAdminPayload {
     brandAdmin: BrandAdmin
     error: BrandAdminError
@@ -785,6 +834,19 @@ type SaveCustomerPayload {
     errors: [CustomerError!]
 }
 
+type SaveGymClassCategoryPayload {
+    error: GymClassCategoryError
+    errorMessage: String
+    errors: [GymClassCategoryError!]
+    gymClassCategory: GymClassCategory
+}
+
+type SaveGymClassPayload {
+    error: GymClassError
+    errors: [GymClassError!]
+    gymClass: GymClass
+}
+
 type SaveGymOperatingHoursPayload {
     error: GymOperatingHoursError
     errors: [GymOperatingHoursError!]
@@ -817,10 +879,24 @@ type SaveLanguagePayload {
     language: Language
 }
 
+type SaveMembershipCategoryPayload {
+    error: MembershipCategoryError
+    errorMessage: String
+    errors: [MembershipCategoryError!]
+    membershipCategory: MembershipCategory
+}
+
 type SaveMembershipPayload {
     error: MembershipError
     errors: [MembershipError!]
     memebership: Membership
+}
+
+type SaveMembershipSubCategoryPayload {
+    error: MembershipSubCategoryError
+    errorMessage: String
+    errors: [MembershipSubCategoryError!]
+    membershipSubCategory: MembershipSubCategory
 }
 
 type SavePassPayload {
@@ -862,25 +938,6 @@ enum AdminError {
 
 enum AmenityError {
     DUPLICATE_NAME
-    INVALID_ID
-}
-
-enum BranchAdminError {
-    DUPLICATE_ADMIN
-    INVALID_BRANCH
-    INVALID_ID
-}
-
-enum BranchError {
-    DUPLICATE_NAME
-    INVALID_BRAND
-    INVALID_ID
-}
-
-enum BranchWeeklyScheduleError {
-    DUPLICATE_DAY
-    INVALID_BRANCH
-    INVALID_DAY
     INVALID_ID
 }
 
@@ -957,6 +1014,12 @@ enum CustomerError {
     INVALID_ID
 }
 
+enum DifficultyLevel {
+    ADVANCE
+    BEGINNER
+    INTERMEDIATE
+}
+
 enum GlobalGenderType {
     ANY
     FEMALE
@@ -966,6 +1029,27 @@ enum GlobalGenderType {
 enum GlobalStatusType {
     ACTIVE
     INACTIVE
+}
+
+enum GymClassCategoryError {
+    DUPLICATE_NAME
+    INVALID_GYM_ID
+    INVALID_ID
+}
+
+enum GymClassError {
+    DUPLICATE_NAME
+    DURATION_REQUIRED
+    INSTRUCTOR_REQUIRED
+    INVALID_BRAND_ID
+    INVALID_CATEGORY_ID
+    INVALID_DATE_RANGE
+    INVALID_GYM_ID
+    INVALID_ID
+    INVALID_INSTRUCTOR_ID
+    INVALID_SCHEDULE
+    OPEN_TIME_REQUIRED
+    SECHEDULE_REQUIRED
 }
 
 enum GymError {
@@ -1010,8 +1094,23 @@ enum MembershipAccessType {
     BRAND
 }
 
+enum MembershipCategoryError {
+    DUPLICATE_NAME
+    INVALID_BRAND_ID
+    INVALID_GYM_ID
+    INVALID_ID
+}
+
 enum MembershipError {
     DUPLICATE_NAME
+    INVALID_CATEGORY_ID
+    INVALID_ID
+    INVALID_SUB_CATEGORY_ID
+}
+
+enum MembershipSubCategoryError {
+    DUPLICATE_NAME
+    INVALID_CATEGORY_ID
     INVALID_ID
 }
 
@@ -1083,23 +1182,6 @@ input AmenityInput {
     id: ID
     name: String!
     status: StatusType!
-}
-
-input BranchAdminsFilter {
-    adminId: ID
-    branchId: ID
-    searchText: String
-}
-
-input BranchWeeklySchedulesFilter {
-    branchId: ID
-    day: Int
-    searchText: String
-}
-
-input BranchsFilter {
-    searchText: String
-    status: GlobalStatusType
 }
 
 input BrandAdminsFilter {
@@ -1238,6 +1320,33 @@ input GISLocationInput {
     longitude: Float!
 }
 
+input GymClassCategoryFilter {
+    brandId: ID
+    gymId: ID
+    searchText: String
+    status: GlobalStatusType
+}
+
+input GymClassScheduleInput {
+    closeAllDay: Boolean
+    day: Int!
+    duration: Float
+    instructorId: ID
+    openTime: LocalTime
+}
+
+input GymClassesFilter {
+    available: Boolean
+    brandId: ID
+    countryId: ID
+    difficultyLevel: DifficultyLevel
+    forDate: Date
+    gymClassCategoryId: ID
+    gymId: ID
+    searchText: String
+    status: GlobalStatusType
+}
+
 input GymsFilter {
     brandId: ID
     countryId: ID
@@ -1277,7 +1386,25 @@ input LanguageInput {
     status: StatusType!
 }
 
+input MembershipCategoryFilter {
+    accessType: MembershipAccessType
+    referenceTypeId: ID
+    searchText: String
+    status: GlobalStatusType
+}
+
+input MembershipSubCategoryFilter {
+    membershipCategoryId: ID
+    searchText: String
+    status: GlobalStatusType
+}
+
 input MembershipsFilter {
+    countryId: ID
+    isWeekelyScheduled: Boolean
+    lifetime: Boolean
+    membershipCategoryId: ID
+    membershipSubCategoryId: ID
     referenceTypeId: ID
     searchText: String
     status: GlobalStatusType
@@ -1345,42 +1472,6 @@ input SaveAdminInput {
     lastName: String!
     overwrite: Boolean
     status: GlobalStatusType!
-}
-
-input SaveBranchAdminInput {
-    adminId: ID!
-    branchId: ID!
-    id: ID
-}
-
-input SaveBranchInput {
-    brandId: ID!
-    description: String
-    id: ID
-    name: String!
-    status: GlobalStatusType!
-}
-
-input SaveBranchWeeklyScheduleInput {
-    branchId: ID!
-    closeAllDay: Boolean
-    day: Int!
-    id: ID
-    openAllDay: Boolean
-    openDuration: Int
-    openTime: LocalTime
-}
-
-input SaveBranchesAdminsTableInput {
-    adminId: ID!
-}
-
-input SaveBranchesWeeklySchedulesTableInput {
-    closeAllDay: Boolean
-    day: Int!
-    openAllDay: Boolean
-    openDuration: Int
-    openTime: LocalTime
 }
 
 input SaveBrandAdminInput {
@@ -1457,6 +1548,40 @@ input SaveCustomerInput {
     photo: String
 }
 
+input SaveGymClassCategoryInput {
+    description: String
+    gymId: ID!
+    id: ID
+    image: String
+    name: String!
+    status: GlobalStatusType!
+}
+
+input SaveGymClassInput {
+    age: AgeInput!
+    amount: CurrencyValue!
+    countryId: ID!
+    description: String
+    difficultyLevel: DifficultyLevel!
+    duration: Float
+    endDate: Date!
+    estimatedCaloriesBurnt: String!
+    gender: GlobalGenderType!
+    gymClassCategoryId: ID!
+    gymId: ID!
+    id: ID
+    images: [String!]
+    instructorId: ID
+    isWeekelyScheduled: Boolean!
+    name: String!
+    openTime: LocalTime
+    schedule: [GymClassScheduleInput!]
+    spots: Int!
+    spotsAlotted: Int
+    startDate: Date!
+    status: GlobalStatusType!
+}
+
 input SaveGymInput {
     address: addressInput!
     amenities: [String!]
@@ -1506,19 +1631,43 @@ input SaveLanguageCountryInput {
     languageId: ID!
 }
 
+input SaveMembershipCategoryInput {
+    accessType: MembershipAccessType!
+    description: String
+    id: ID
+    image: String
+    name: String!
+    referenceTypeId: ID!
+    status: GlobalStatusType!
+}
+
 input SaveMembershipInput {
     accessType: MembershipAccessType!
     age: AgeInput!
-    allowedCheckins: Int!
+    allowedCheckins: Int
     amount: CurrencyValue!
+    countryId: ID!
     description: String
     gender: GlobalGenderType!
-    gracePeriod: Int!
+    gracePeriod: Int
     id: ID
+    image: String!
+    isWeekelyScheduled: Boolean!
+    lifetime: Boolean
+    membershipCategoryId: ID!
+    membershipSubCategoryId: ID!
     name: String!
-    period: Int!
-    photo: String!
+    period: Int
     referenceTypeId: ID!
+    status: GlobalStatusType!
+}
+
+input SaveMembershipSubCategoryInput {
+    description: String
+    id: ID
+    image: String
+    membershipCategoryId: ID!
+    name: String!
     status: GlobalStatusType!
 }
 
@@ -1583,8 +1732,8 @@ input addressInput {
 }
 
 
-"An iso 8601 date-time string"
-scalar Datetime
+"Scalar used to describe currency amounts. Serialized as a string to retain decimal precision."
+scalar CurrencyValue
 
 "A day in format 'yyyy-mm-dd'"
 scalar Date
@@ -1592,5 +1741,5 @@ scalar Date
 "An 24-hour time expressed as an hour/minute pair in local time, i.e. '18:00'"
 scalar LocalTime
 
-"Scalar used to describe currency amounts. Serialized as a string to retain decimal precision."
-scalar CurrencyValue
+"An iso 8601 date-time string"
+scalar Datetime

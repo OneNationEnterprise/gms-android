@@ -2,6 +2,7 @@ package com.gymapp.base.data
 
 import androidx.lifecycle.LiveData
 import com.apollographql.apollo.gym.CountriesQuery
+import com.apollographql.apollo.gym.fragment.CountryFields
 import com.gymapp.main.data.db.GymDao
 import com.gymapp.main.data.model.country.Country
 import com.gymapp.main.data.model.country.CountryMapper
@@ -25,13 +26,19 @@ open class BaseRepository(
 
         val countryQueryResponse = apiManager.getCountriesAsync().await()
 
-        val countriesList = countryQueryResponse.data?.countries?.list
+        val countriesList = countryQueryResponse.data?.countries?.list as List<CountriesQuery.List>
 
         if (countriesList.isNullOrEmpty()) {
             return
         }
 
-        gymDao.insertCountries(countryMapper.mapToDtoList(countriesList as List<CountriesQuery.List>))
+        val countryFieldsList = ArrayList<CountryFields>()
+
+        for (country in countriesList) {
+            countryFieldsList.add(country.fragments.countryFields)
+        }
+
+        gymDao.insertCountries(countryMapper.mapToDtoList(countryFieldsList))
     }
 
     override suspend fun saveUserDetailsByEmail(email: String): String? {
