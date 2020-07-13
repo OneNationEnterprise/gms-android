@@ -24,7 +24,7 @@ interface GymDao {
     @Query("SELECT * from user_table")
     fun getCurrentUser(): LiveData<User>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNearbyGyms(gyms: List<Gym>)
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertNearbyGyms(gyms: List<Gym>)
 
 }
