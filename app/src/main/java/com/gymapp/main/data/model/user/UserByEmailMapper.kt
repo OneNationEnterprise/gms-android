@@ -19,9 +19,9 @@ class UserByEmailMapper :
 
     }
 
-    override fun mapToDtoList(input: List<CustomerByEmailQuery.CustomerByEmail?>): List<User> {
+    override fun mapToDtoList(input: List<CustomerByEmailQuery.CustomerByEmail>): List<User> {
         return input.map {
-            mapToDto(it!!)
+            mapToDto(it)
         }
     }
 }

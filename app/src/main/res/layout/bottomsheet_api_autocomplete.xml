@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/apiAutocomplete"
+    style="?attr/bottomSheetStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_top_round_corner"
+    android:focusableInTouchMode="true"
+    android:padding="12dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <ImageView
+        android:id="@+id/headerLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_cart_header_line"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/placeSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@drawable/bg_token_search"
+        android:drawableLeft="@drawable/ic_search"
+        android:drawableTint="@color/black"
+        android:drawablePadding="6dp"
+        android:hint="@string/search_address"
+        android:inputType="textPostalAddress"
+        android:padding="4dp"
+        android:layout_gravity="start"
+        android:textAlignment="viewStart"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/cancelTxt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerLine" />
+
+    <ImageView
+        android:id="@+id/clearTextIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintTop_toTopOf="@id/placeSearch"
+        app:layout_constraintBottom_toBottomOf="@id/placeSearch"
+        app:layout_constraintEnd_toEndOf="@id/placeSearch"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_subtract" />
+
+    <TextView
+        android:id="@+id/cancelTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="4dp"
+        android:text="@string/cancel"
+        android:textColor="@color/red001"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/placeSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/placeSearch" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/placesRv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="#FFF"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintTop_toBottomOf="@+id/placeSearch" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/confirmAddress"
+        style="@style/Button.Primary.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/confirm_address"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/placeSearch" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

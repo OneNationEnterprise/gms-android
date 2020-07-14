@@ -18,4 +18,7 @@
     <color name="translucent_blue_overlay">#C9040915</color>
 
 
+    <!--todo-->
+    <color name="loading_background">#5FA7AEAC</color>
+
 </resources>

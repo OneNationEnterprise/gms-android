@@ -1,4 +1,5 @@
 fragment gymFields on Gym{
+    id
     name
     address{
         id

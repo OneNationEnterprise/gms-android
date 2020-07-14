@@ -18,4 +18,9 @@
     <!--Edit Text-->
     <dimen name="edit_text_height">56dp</dimen>
 
+
+    <!--Bottom Sheet-->
+    <dimen name="select_location_peek_height_collapsed">148dp</dimen>
+
+
 </resources>

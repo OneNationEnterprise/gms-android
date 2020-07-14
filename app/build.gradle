@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-android-extensions'
     id 'com.apollographql.apollo'
     id 'kotlin-kapt'
-//    id 'com.google.gms.google-services'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -17,6 +17,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -28,16 +29,17 @@ android {
         }
         debug {
             applicationIdSuffix ".develop"
-            manifestPlaceholders = [appName: "GYM Staging"]
+            manifestPlaceholders = [appName: "GYM Develop"]
             debuggable true
             buildConfigField("String", "BASE_SERVER_URL", "http://ad82ca9ee5fa74f8b8bf78963b2c735d-586376887.eu-west-1.elb.amazonaws.com/graphql")
+            buildConfigField("String", "GOOGLE_MAPS_API", "AIzaSyBT0Oty_zje_wZHO9TtRBfyDJnWZDPZiYI")
+            buildConfigField("String", "GOOGLE_PLACES_API", "AIzaSyBT0Oty_zje_wZHO9TtRBfyDJnWZDPZiYI")
 //            resValue("string", "DB_PASSWORD_app_db", "gymapp")
         }
-
         staging {
             initWith debug
             applicationIdSuffix ".staging"
-            manifestPlaceholders = [appName: "GYM Develop"]
+            manifestPlaceholders = [appName: "GYM Staging"]
 //            resValue("string", "DB_PASSWORD_app_db", "gymapp")
         }
     }
@@ -60,6 +62,8 @@ dependencies {
     def firebase_auth_version = "19.3.1"
     def chuck_version = "1.1.0"
     def glide_version = "4.11.0"
+    def anko_version = "0.10.8"
+    def materialize_version = "1.2.0"
 
     // Apollo
     implementation(
@@ -130,6 +134,16 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.gms:play-services-places:17.0.0'
     implementation 'com.google.android.libraries.places:places:2.3.0'
+
+    //Permission Manager
+    implementation 'com.github.florent37:runtime-permission-kotlin:1.1.0'
+
+    //helpers for Android SDK
+    implementation "org.jetbrains.anko:anko:$anko_version"
+
+    //Keyboard Utils
+    implementation "com.mikepenz:materialize:$materialize_version"
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'

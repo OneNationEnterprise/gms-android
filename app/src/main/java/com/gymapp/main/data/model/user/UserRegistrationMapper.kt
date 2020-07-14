@@ -19,9 +19,9 @@ class UserRegistrationMapper :
 
     }
 
-    override fun mapToDtoList(input: List<RegisterUserMutation.Customer?>): List<User> {
+    override fun mapToDtoList(input: List<RegisterUserMutation.Customer>): List<User> {
         return input.map {
-            mapToDto(it!!)
+            mapToDto(it)
         }
     }
 }

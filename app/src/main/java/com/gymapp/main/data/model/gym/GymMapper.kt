@@ -21,9 +21,9 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
         )
     }
 
-    override fun mapToDtoList(input: List<GymsInRadiusQuery.List?>): List<Gym> {
+    override fun mapToDtoList(input: List<GymsInRadiusQuery.List>): List<Gym> {
         return input.map {
-            mapToDto(it!!)
+            mapToDto(it)
         }
     }
 
@@ -45,7 +45,7 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
 
         return GymAddress(
             id = address.id,
-            country = countryMapper.mapToDto(address.country.fragments.countryFields),
+//            country = countryMapper.mapToDto(address.country.fragments.countryFields),
             unitNumber = address.unitNumber ?: ""
         )
 
