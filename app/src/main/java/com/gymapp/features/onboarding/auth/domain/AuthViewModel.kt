@@ -1,8 +1,6 @@
 package com.gymapp.features.onboarding.auth.domain
 
 import android.os.CountDownTimer
-import android.telephony.PhoneStateListener
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -16,7 +14,6 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
-import com.gymapp.helper.modal.phoneprefix.PhonePrefixSelectedListener
 import com.gymapp.main.data.model.country.Country
 import kotlinx.coroutines.launch
 
@@ -147,7 +144,7 @@ class AuthViewModel(
                     email = email,
                     password = password,
                     contactNumber = "${phoneCountry?.dialCode}$phoneNumber",
-                    countryId = phoneCountry!!.id,
+                    countryId = phoneCountry!!.countryId,
                     isPhoneVerified = true
                 )
             )

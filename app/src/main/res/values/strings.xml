@@ -13,6 +13,7 @@
     <string name="cancel">Cancel</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="passes">Passes</string>
 
     <!--OnBoarding-->
     <string name="onboarding_step_one_title">Unlimited possibilities</string>
@@ -78,6 +79,11 @@
     <string name="place_the_pin_at_your_location">Place the pin at your location</string>
     <string name="addresses_select_address">Pinpoint Your Location</string>
     <string name="dialog_app_location">This app wants to use your location</string>
+
+
+    <!--Homepage-->
+    <string name="homepage_nearby_gyms">Nearby Gyms</string>
+    <string name="homepage_view_map">View map</string>
 
 
     <!--ERRORS-->

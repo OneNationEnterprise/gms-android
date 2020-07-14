@@ -15,8 +15,8 @@ import kotlinx.coroutines.CoroutineScope
 @Database(
     entities = [Country::class,
         User::class,
-       /* Gym::class,
-        GymAddress::class,*/
+        Gym::class,
+        GymAddress::class,
         Brand::class
     ], version = 1, exportSchema = false
 )

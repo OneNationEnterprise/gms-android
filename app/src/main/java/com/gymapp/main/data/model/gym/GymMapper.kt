@@ -1,6 +1,5 @@
 package com.gymapp.main.data.model.gym
 
-import com.apollographql.apollo.gym.CountriesQuery
 import com.apollographql.apollo.gym.GymsInRadiusQuery
 import com.apollographql.apollo.gym.fragment.GymFields
 import com.gymapp.base.data.BaseDataMapperInterface
@@ -14,16 +13,16 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
         val gymFields = input.fragments.gymFields
 
         return Gym(
-            id = gymFields.id,
+            gymId = gymFields.id,
             name = gymFields.name,
             address = mapGymAddress(gymFields.address),
             brand = mapBrand(gymFields.brand)
         )
     }
 
-    override fun mapToDtoList(input: List<GymsInRadiusQuery.List>): List<Gym> {
+    override fun mapToDtoList(input: List<GymsInRadiusQuery.List?>): List<Gym> {
         return input.map {
-            mapToDto(it)
+            mapToDto(it!!)
         }
     }
 
@@ -32,7 +31,7 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
         val brandFields = brand.fragments.brandFields
 
         return Brand(
-            id = brandFields.id,
+            brandId = brandFields.id,
             name = brandFields.name,
             phone = brandFields.phone,
             gymCount = brandFields.gymCount
@@ -44,8 +43,8 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
         val countryMapper = CountryMapper()
 
         return GymAddress(
-            id = address.id,
-//            country = countryMapper.mapToDto(address.country.fragments.countryFields),
+            gymAddressId = address.id,
+            country = countryMapper.mapToDto(address.country.fragments.countryFields),
             unitNumber = address.unitNumber ?: ""
         )
 

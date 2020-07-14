@@ -23,6 +23,7 @@ class HomepageActivity : BaseActivity(R.layout.activity_homepage) {
 
     override fun setupViewModel() {
         homepageViewModel = getViewModel()
+//        homepageViewModel.cae
     }
 
     override fun bindViewModelObservers() {

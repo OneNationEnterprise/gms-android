@@ -1,6 +1,5 @@
 package com.gymapp.main.data.model.country
 
-import com.apollographql.apollo.gym.CountriesQuery
 import com.apollographql.apollo.gym.fragment.CountryFields
 import com.gymapp.base.data.BaseDataMapperInterface
 
@@ -8,7 +7,7 @@ class CountryMapper : BaseDataMapperInterface<CountryFields, Country> {
 
     override fun mapToDto(countryFields: CountryFields): Country {
         return Country(
-            id = countryFields.id,
+            countryId = countryFields.id,
             dialCode = countryFields.dialCode ?: "",
             isoCode = countryFields.isoCode ?: "",
             name = countryFields.name,

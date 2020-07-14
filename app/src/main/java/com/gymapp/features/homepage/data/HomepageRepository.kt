@@ -26,7 +26,7 @@ class HomepageRepository(private val apiManager: ApiManagerInterface, private va
         }
         val list = gymsInRadiusResponse.data!!.gymsInRadius.list
 
-//        gymDao.insertNearbyGyms(gymMapper.mapToDtoList(list!!))
+        gymDao.insertNearbyGyms(gymMapper.mapToDtoList(list!!))
         return null
     }
 

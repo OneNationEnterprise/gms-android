@@ -7,6 +7,7 @@
     <!--blue-->
     <color name="blue001">#AAB9DC</color>
     <color name="blue002">#1F2432</color>
+    <color name="blue005">#0B101A</color>
     <!--gray-->
     <color name="gray001">#979797</color>
     <color name="gray002">#5FA7AEAC</color>
@@ -16,6 +17,7 @@
 
     <!--Translucent -->
     <color name="translucent_blue_overlay">#C9040915</color>
+
 
 
     <!--todo-->

@@ -4,4 +4,4 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Brand(@PrimaryKey val id: String, val name: String, val phone: String, val gymCount: Int)
+data class Brand(@PrimaryKey val brandId: String, val name: String, val phone: String, val gymCount: Int)

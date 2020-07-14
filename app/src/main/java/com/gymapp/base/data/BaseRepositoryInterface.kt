@@ -2,6 +2,7 @@ package com.gymapp.base.data
 
 import androidx.lifecycle.LiveData
 import com.gymapp.main.data.model.country.Country
+import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.user.User
 
 interface BaseRepositoryInterface {
@@ -27,4 +28,6 @@ interface BaseRepositoryInterface {
      * returns current session user from Room
      */
     fun getCurrentUser(): LiveData<User>
+
+    fun getNearbyGyms(): LiveData<List<Gym>>
 }

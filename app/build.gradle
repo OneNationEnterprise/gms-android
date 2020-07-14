@@ -144,6 +144,9 @@ dependencies {
     //Keyboard Utils
     implementation "com.mikepenz:materialize:$materialize_version"
 
+    //Viewpager
+    implementation "com.duolingo.open:rtl-viewpager:2.0.0"
+
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
