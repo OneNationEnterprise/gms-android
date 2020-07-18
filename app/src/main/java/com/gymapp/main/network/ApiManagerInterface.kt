@@ -1,11 +1,9 @@
 package com.gymapp.main.network
 
-import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.gym.*
 import com.apollographql.apollo.gym.type.GymsInRadiusFilter
 import com.apollographql.apollo.gym.type.RegisterCustomerInput
-import com.gymapp.main.data.model.user.User
 import kotlinx.coroutines.Deferred
 
 interface ApiManagerInterface {
@@ -16,7 +14,7 @@ interface ApiManagerInterface {
 
     suspend fun getUserDetailsByEmailAsync(email: String): Deferred<Response<CustomerByEmailQuery.Data>>
 
-    suspend fun getGymsInRadiusAsync(input: Input<GymsInRadiusFilter>): Deferred<Response<GymsInRadiusQuery.Data>>
+    suspend fun getGymsInRadiusAsync(input: GymsInRadiusFilter): Deferred<Response<GymsInRadiusQuery.Data>>
 
     suspend fun getGymDetailAsync(id: String): Deferred<Response<GymQuery.Data>>
 

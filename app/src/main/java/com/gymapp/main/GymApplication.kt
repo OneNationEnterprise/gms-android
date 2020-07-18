@@ -2,7 +2,6 @@ package com.gymapp.main
 
 import android.app.Application
 import com.google.firebase.FirebaseApp
-import com.gymapp.main.di.ApplicationModule
 import com.gymapp.main.di.ApplicationModule.repositoryModule
 import com.gymapp.main.di.ApplicationModule.databaseModule
 import com.gymapp.main.di.ApplicationModule.networkModule

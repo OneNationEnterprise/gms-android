@@ -13,9 +13,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.gymapp.R
 import com.gymapp.main.data.model.country.Country
 import kotlinx.android.synthetic.main.bottomsheet_phone_prefix.*
-import java.lang.reflect.GenericDeclaration
-import java.lang.reflect.Type
-import java.lang.reflect.TypeVariable
 
 class PhonePrefixModalBottomsheet(
     var countries: List<Country>,

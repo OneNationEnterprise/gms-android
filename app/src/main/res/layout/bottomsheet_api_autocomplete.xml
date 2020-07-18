@@ -51,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="@id/placeSearch"
         app:layout_constraintEnd_toEndOf="@id/placeSearch"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/ic_subtract" />
+        android:src="@drawable/ic_close_vct" />
 
     <TextView
         android:id="@+id/cancelTxt"

@@ -14,6 +14,10 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="passes">Passes</string>
+    <string name="store">Store</string>
+    <string name="about">About</string>
+    <string name="amenities">Amenities</string>
+    <string name="directions">Directions</string>
 
     <!--OnBoarding-->
     <string name="onboarding_step_one_title">Unlimited possibilities</string>
@@ -57,7 +61,6 @@
     <string name="profile_transactions">Transaction History</string>
     <string name="profile_settings">Settings</string>
 
-
     <!--Settings-->
     <string name="settings_general">General</string>
     <string name="settings_support">Support</string>
@@ -73,17 +76,22 @@
     <string name="settings_website">Website</string>
     <string name="settings_sign_out">Sign Out</string>
 
-
     <!--Select Location-->
     <string name="turn_on_location_services">Turn <b>ON</b> <font color="#08bfb0"><b>Location services</b></font> so that <b>COFE App</b> can show COFE Shops near you</string>
     <string name="place_the_pin_at_your_location">Place the pin at your location</string>
     <string name="addresses_select_address">Pinpoint Your Location</string>
     <string name="dialog_app_location">This app wants to use your location</string>
 
-
     <!--Homepage-->
     <string name="homepage_nearby_gyms">Nearby Gyms</string>
     <string name="homepage_view_map">View map</string>
+
+    <!--Mapview-->
+    <string name="mapview_search_view">Search for a Gym</string>
+
+    <!--Gym detail-->
+    <string name="call_gym">Call gym</string>
+    <string name="buy_membership">Buy membership</string>
 
 
     <!--ERRORS-->

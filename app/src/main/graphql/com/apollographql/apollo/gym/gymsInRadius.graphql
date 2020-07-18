@@ -1,5 +1,5 @@
-query gymsInRadius($params: GymsInRadiusFilter){
-    gymsInRadius(params: $params){
+query gymsInRadius($paging: PaginatorInput!, $params: GymsInRadiusFilter){
+    gymsInRadius(paging: $paging, params: $params){
         list{
           ...gymFields
         }

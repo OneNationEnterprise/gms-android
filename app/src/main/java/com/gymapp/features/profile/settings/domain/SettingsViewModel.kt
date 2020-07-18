@@ -1,6 +1,5 @@
 package com.gymapp.features.profile.settings.domain
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.gymapp.base.domain.BaseViewModel

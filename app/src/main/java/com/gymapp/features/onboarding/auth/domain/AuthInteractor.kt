@@ -1,7 +1,6 @@
 package com.gymapp.features.onboarding.auth.domain
 
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.main.data.model.country.Country

@@ -280,7 +280,7 @@ class SelectLocationActivity : BaseActivity(R.layout.activity_select_location), 
             (((supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).view?.findViewById<View>(
                 Integer.parseInt("1")
             )?.parent as View).findViewById<View>(Integer.parseInt("2")) as ImageView)
-        locationButton.imageResource = R.drawable.ic_locate_me
+//        locationButton.imageResource = R.drawable.ic_locate_me
 
         val rlp = locationButton.layoutParams as (RelativeLayout.LayoutParams)
         // position on right bottom

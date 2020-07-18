@@ -1,13 +1,8 @@
 package com.gymapp.base.data
 
 import com.apollographql.apollo.ApolloClient
-import com.apollographql.apollo.api.Response
-import com.apollographql.apollo.coroutines.toDeferred
-import com.apollographql.apollo.gym.CountriesQuery
 import com.gymapp.BuildConfig
-import com.gymapp.main.network.ApiManagerInterface
 import com.gymapp.main.network.interceptors.AuthHeaderTokenInterceptor
-import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
 
 open class BaseApiManager(private var okHttpClient: OkHttpClient) {

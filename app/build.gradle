@@ -17,7 +17,6 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -37,7 +36,6 @@ android {
 //            resValue("string", "DB_PASSWORD_app_db", "gymapp")
         }
         staging {
-            initWith debug
             applicationIdSuffix ".staging"
             manifestPlaceholders = [appName: "GYM Staging"]
 //            resValue("string", "DB_PASSWORD_app_db", "gymapp")
@@ -146,6 +144,9 @@ dependencies {
 
     //Viewpager
     implementation "com.duolingo.open:rtl-viewpager:2.0.0"
+
+    //ViewPager with dots
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

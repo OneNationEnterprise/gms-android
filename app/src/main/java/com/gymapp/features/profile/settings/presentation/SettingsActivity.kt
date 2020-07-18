@@ -6,11 +6,8 @@ import androidx.lifecycle.Observer
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.homepage.presentation.HomepageActivity
-import com.gymapp.features.profile.main.domain.ProfileViewModel
 import com.gymapp.features.profile.settings.domain.SettingsViewModel
-import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.activity_settings.*
-import kotlinx.android.synthetic.main.user_icon.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class SettingsActivity : BaseActivity(R.layout.activity_settings) {

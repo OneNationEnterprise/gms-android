@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutionException
 class AuthHeaderTokenInterceptor : Interceptor {
 
     companion object {
-        const val AUTHORIZATION = "Authorization"
+        const val AUTHORIZATION = "authorization"
         const val BEARER = "Bearer"
     }
 
@@ -32,7 +32,7 @@ class AuthHeaderTokenInterceptor : Interceptor {
 
                     request = request
                         .newBuilder()
-                        .header(AUTHORIZATION, "$BEARER $sessionToken")
+                        .header(AUTHORIZATION, "$sessionToken")
                         .build()
 
                 } catch (e: ExecutionException) {

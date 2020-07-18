@@ -14,9 +14,9 @@ class BrandMapper : BaseDataMapperInterface<BrandFields, Brand> {
         )
     }
 
-    override fun mapToDtoList(input: List<BrandFields>): List<Brand> {
+    override fun mapToDtoList(input: List<BrandFields?>): List<Brand> {
         return input.map {
-            mapToDto(it)
+            mapToDto(it!!)
         }
     }
 }
