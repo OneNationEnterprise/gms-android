@@ -7,17 +7,21 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.gymapp.R
+import com.gymapp.main.data.model.brand.HomepageBrandListItem
 import java.util.ArrayList
 
-class HomepageGymsItemAdapter(var context: Context /*var brandsNearSelectedLocation: ArrayList<LocationsInRadius.Brand>*/) :
+class HomepageGymsItemAdapter(
+    var context: Context,
+    var brandListItem: MutableList<HomepageBrandListItem>
+) :
     PagerAdapter() {
     override fun isViewFromObject(view: View, anyObject: Any): Boolean {
         return view == anyObject
     }
 
     override fun getCount(): Int {
-//        return brandsNearSelectedLocation.size
-        return 3
+//        return brandListItem.size
+        return 16
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {

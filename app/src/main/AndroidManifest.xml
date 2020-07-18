@@ -4,17 +4,19 @@
     package="com.gymapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".main.GymApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
-        tools:replace="allowBackup"
         android:label="${appName}"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GymApp"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:replace="allowBackup">
         <activity
             android:name=".main.launcher.presentation.LauncherActivity"
             android:noHistory="true">

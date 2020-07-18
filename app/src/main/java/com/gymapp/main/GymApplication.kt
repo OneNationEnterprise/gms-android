@@ -25,4 +25,11 @@ class GymApplication : Application() {
             )
         }
     }
+
+    override fun onTerminate() {
+        super.onTerminate()
+    }
+
+
+
 }

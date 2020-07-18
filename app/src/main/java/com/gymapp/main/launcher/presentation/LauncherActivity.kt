@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import java.lang.Exception
 
 class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
 
@@ -43,6 +44,7 @@ class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getLocation()
+
     }
 
     @SuppressLint("MissingPermission")
@@ -58,6 +60,11 @@ class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
                 mFusedLocationClient.lastLocation
                     .addOnSuccessListener(activity) { location ->
 
+                        if (location == null) {
+                            openMapActivity()
+                            return@addOnSuccessListener
+                        }
+
                         //memory cache current postion
                         UserCurrentLocalization.position =
                             LatLng(location.latitude, location.longitude)
@@ -68,13 +75,16 @@ class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
                         }
                     }
                     .addOnFailureListener {
-                        //open map activity
-                        startActivity(Intent(activity, SelectLocationActivity::class.java))
+                        openMapActivity()
                     }
             }).onDeclined() { _ ->
             //open map activity
             startActivity(Intent(activity, SelectLocationActivity::class.java))
         }
+    }
+
+    private fun openMapActivity() {
+        startActivity(Intent(activity, SelectLocationActivity::class.java))
     }
 
 }
