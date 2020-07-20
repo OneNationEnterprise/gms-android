@@ -1,6 +1,6 @@
 package com.gymapp.main.di
 
-import androidx.room.Room
+//import androidx.room.Room
 import com.gymapp.main.data.repository.GymsRepository
 import com.gymapp.main.data.repository.GymsRepositoryInterface
 import com.gymapp.features.homepage.domain.HomepageViewModel
@@ -16,7 +16,7 @@ import com.gymapp.features.profile.main.domain.ProfileViewModel
 import com.gymapp.features.profile.settings.data.SettingsRepository
 import com.gymapp.features.profile.settings.data.SettingsRepositoryInterface
 import com.gymapp.features.profile.settings.domain.SettingsViewModel
-import com.gymapp.main.data.db.GymDatabase
+//import com.gymapp.main.data.db.GymDatabase
 import com.gymapp.main.launcher.data.LauncherRepository
 import com.gymapp.main.launcher.data.LauncherRepositoryInterface
 import com.gymapp.main.launcher.domain.LauncherViewModel
@@ -46,47 +46,47 @@ object ApplicationModule {
             single<ApiManagerInterface> { ApiManagerImpl(get()) }
         }
 
-    val databaseModule = module {
-        single {
-            Room.databaseBuilder(
-                androidContext(),
-                GymDatabase::class.java,
-                GymDatabase.DATABASE_NAME
-            ).build()
-        }
-
-        single { get<GymDatabase>().gymDao() }
-    }
+//    val databaseModule = module {
+//        single {
+//            Room.databaseBuilder(
+//                androidContext(),
+//                GymDatabase::class.java,
+//                GymDatabase.DATABASE_NAME
+//            ).build()
+//        }
+//
+//        single { get<GymDatabase>().gymDao() }
+//    }
 
     val repositoryModule = module {
-        factory<LauncherRepositoryInterface> {
+        single<LauncherRepositoryInterface> {
             LauncherRepository(
-                get(),
                 get()
+//                get()
             )
         }
 
-        factory<AuthRepositoryInterface> {
+        single<AuthRepositoryInterface> {
             AuthRepository(
-                get(),
                 get()
+//                get()
             )
         }
 
-        factory<AuthInteractorInterface> {
+        single<AuthInteractorInterface> {
             AuthInteractor()
         }
 
         single<GymsRepositoryInterface> {
-            GymsRepository(get(), get())
+            GymsRepository(get()/*, get()*/)
         }
 
-        factory<ProfileRepositoryInterface> {
-            ProfileRepository(get(), get())
+        single<ProfileRepositoryInterface> {
+            ProfileRepository(get()/*, get()*/)
         }
 
-        factory<SettingsRepositoryInterface> {
-            SettingsRepository(get(), get())
+        single<SettingsRepositoryInterface> {
+            SettingsRepository(get()/*, get()*/)
         }
     }
 

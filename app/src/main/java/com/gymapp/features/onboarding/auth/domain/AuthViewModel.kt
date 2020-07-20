@@ -22,7 +22,7 @@ class AuthViewModel(
     private val authInteractorInterface: AuthInteractorInterface
 ) : BaseViewModel() {
 
-    private var countriesList: LiveData<List<Country>>? = null
+    private var countriesList: MutableLiveData<List<Country>>? = null
 
     var showOtpView = MutableLiveData<Boolean>()
     var showPhoneNumberError = MutableLiveData<Boolean>()
@@ -42,7 +42,7 @@ class AuthViewModel(
     private var phoneNumber: String = ""
 
     init {
-        countriesList = repository.getCountries()
+        countriesList?.value = repository.getCountries()
 
         phoneVerifyCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(p0: PhoneAuthCredential) {

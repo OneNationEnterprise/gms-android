@@ -121,7 +121,7 @@ open abstract class BaseAuthDialogFragment() :
                 otpResendTv.setTextColor(ContextCompat.getColor(baseActivity, R.color.red001))
             } else {
                 otpResendTv.setOnClickListener {}
-                otpResendTv.setTextColor(R.color.blue001)
+                otpResendTv.setTextColor(resources.getColor(R.color.blue001))
             }
         })
 

@@ -10,7 +10,7 @@ interface BaseRepositoryInterface {
     /**
      * returns available countries list from db or remote
      */
-    fun getCountries(): LiveData<List<Country>>?
+    fun getCountries(): ArrayList<Country>
 
     /**
      * save available countries list into db
@@ -27,7 +27,7 @@ interface BaseRepositoryInterface {
     /**
      * returns current session user from Room
      */
-    fun getCurrentUser(): LiveData<User>
+    fun getCurrentUser():User?
 
 
 }

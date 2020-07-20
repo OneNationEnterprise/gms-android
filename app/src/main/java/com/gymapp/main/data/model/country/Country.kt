@@ -1,11 +1,11 @@
 package com.gymapp.main.data.model.country
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+//import androidx.room.Entity
+//import androidx.room.PrimaryKey
 
-@Entity(tableName = "country_table")
+//@Entity(tableName = "country_table")
 data class Country(
-    @PrimaryKey
+//    @PrimaryKey
     val countryId: String,
     val isoCode: String,
     val dialCode: String,

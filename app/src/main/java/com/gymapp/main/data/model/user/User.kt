@@ -1,11 +1,11 @@
 package com.gymapp.main.data.model.user
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+//import androidx.room.Entity
+//import androidx.room.PrimaryKey
 
-@Entity(tableName = "user_table")
+//@Entity(tableName = "user_table")
 data class User(
-    @PrimaryKey
+//    @PrimaryKey
     val id: String,
     val fullName: String,
     val email: String,

@@ -15,13 +15,14 @@ import com.gymapp.main.data.model.user.User
 class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInterface) :
     BaseViewModel() {
 
-    var user: LiveData<User> = gymsRepositoryInterface.getCurrentUser()
+    lateinit var user: MutableLiveData<User?>
     var errorListingGyms = MutableLiveData<String?>()
     var gymBrandsList = MutableLiveData<MutableList<HomepageBrandListItem>>()
     var nearByGyms = MutableLiveData<List<Gym>>()
 
     suspend fun fetchGymList() {
 
+      user.value  = gymsRepositoryInterface.getCurrentUser()
         val filter = GymsInRadiusFilter(
             GISLocationInput(
                 UserCurrentLocalization.position.longitude,

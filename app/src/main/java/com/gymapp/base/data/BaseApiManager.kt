@@ -2,6 +2,7 @@ package com.gymapp.base.data
 
 import com.apollographql.apollo.ApolloClient
 import com.gymapp.BuildConfig
+import com.gymapp.helper.Constants
 import com.gymapp.main.network.interceptors.AuthHeaderTokenInterceptor
 import okhttp3.OkHttpClient
 
@@ -16,14 +17,14 @@ open class BaseApiManager(private var okHttpClient: OkHttpClient) {
 
         ApolloClient.builder()
             .okHttpClient(noAuthTokenHttpClient)
-            .serverUrl("${BuildConfig.BASE_SERVER_URL}")
+            .serverUrl(Constants.BASE_SERVER_URL)
             .build()
     }
 
     val graphQlClient: ApolloClient by lazy {
         ApolloClient.builder()
             .okHttpClient(okHttpClient)
-            .serverUrl("${BuildConfig.BASE_SERVER_URL}")
+            .serverUrl(Constants.BASE_SERVER_URL)
             .build()
     }
 

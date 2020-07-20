@@ -3,23 +3,28 @@ package com.gymapp.base.data
 import androidx.lifecycle.LiveData
 import com.apollographql.apollo.gym.CountriesQuery
 import com.apollographql.apollo.gym.fragment.CountryFields
-import com.gymapp.main.data.db.GymDao
+//import com.gymapp.main.data.db.GymDao
 import com.gymapp.main.data.model.country.Country
 import com.gymapp.main.data.model.country.CountryMapper
+import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.user.User
 import com.gymapp.main.data.model.user.UserByEmailMapper
 import com.gymapp.main.network.ApiManagerInterface
 
 open class BaseRepository(
-    private val apiManager: ApiManagerInterface,
-    private val gymDao: GymDao
+    private val apiManager: ApiManagerInterface
+//    private val gymDao: GymDao
 ) : BaseRepositoryInterface {
 
     private val countryMapper = CountryMapper()
     private val userMapper = UserByEmailMapper()
 
-    override fun getCountries(): LiveData<List<Country>>? {
-        return gymDao.getCountriesList()
+    var countriesList = ArrayList<Country>()
+    var user: User? = null
+
+    override fun getCountries(): ArrayList<Country> {
+//        return gymDao.getCountriesList()
+        return countriesList
     }
 
     override suspend fun saveCountries() {
@@ -38,7 +43,9 @@ open class BaseRepository(
             countryFieldsList.add(country.fragments.countryFields)
         }
 
-        gymDao.insertCountries(countryMapper.mapToDtoList(countryFieldsList))
+//        gymDao.insertCountries(countryMapper.mapToDtoList(countryFieldsList))
+
+        this.countriesList = countryMapper.mapToDtoList(countryFieldsList) as ArrayList<Country>
     }
 
     override suspend fun saveUserDetailsByEmail(email: String): String? {
@@ -52,12 +59,14 @@ open class BaseRepository(
             return "Error on getting user details"
         }
 
-        gymDao.insertUser(userMapper.mapToDto(userDetailsResponse.data!!.customerByEmail!!))
+//        gymDao.insertUser(userMapper.mapToDto(userDetailsResponse.data!!.customerByEmail!!))
+
+        user = userMapper.mapToDto(userDetailsResponse.data!!.customerByEmail!!)
         return null
     }
 
-    override fun getCurrentUser(): LiveData<User> {
-        return gymDao.getCurrentUser()
+    override fun getCurrentUser(): User? {
+        return user
     }
 
 }

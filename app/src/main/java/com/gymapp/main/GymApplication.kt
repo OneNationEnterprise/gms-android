@@ -4,7 +4,7 @@ import android.app.Application
 import com.amitshekhar.DebugDB
 import com.google.firebase.FirebaseApp
 import com.gymapp.main.di.ApplicationModule.repositoryModule
-import com.gymapp.main.di.ApplicationModule.databaseModule
+//import com.gymapp.main.di.ApplicationModule.databaseModule
 import com.gymapp.main.di.ApplicationModule.networkModule
 import com.gymapp.main.di.ApplicationModule.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -20,7 +20,7 @@ class GymApplication : Application() {
             androidContext(this@GymApplication)
             modules(
                 networkModule,
-                databaseModule,
+//                databaseModule,
                 repositoryModule,
                 viewModelModule
             )

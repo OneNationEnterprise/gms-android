@@ -2,12 +2,12 @@ package com.gymapp.features.onboarding.auth.data
 
 import com.apollographql.apollo.gym.type.RegisterCustomerInput
 import com.gymapp.base.data.BaseRepository
-import com.gymapp.main.data.db.GymDao
+//import com.gymapp.main.data.db.GymDao
 import com.gymapp.main.data.model.user.UserRegistrationMapper
 import com.gymapp.main.network.ApiManagerInterface
 
-class AuthRepository(private val apiManager: ApiManagerInterface, private val gymDao: GymDao) :
-    BaseRepository(apiManager, gymDao), AuthRepositoryInterface {
+class AuthRepository(private val apiManager: ApiManagerInterface/*, private val gymDao: GymDao*/) :
+    BaseRepository(apiManager/*, gymDao*/), AuthRepositoryInterface {
 
     private val userRegistrationMapper = UserRegistrationMapper()
 
@@ -24,9 +24,9 @@ class AuthRepository(private val apiManager: ApiManagerInterface, private val gy
         val customer =
             apiResponse.data?.registerCustomer?.customer ?: return "Null customer response"
 
-        val user = userRegistrationMapper.mapToDto(customer)
+         user = userRegistrationMapper.mapToDto(customer)
 
-        gymDao.insertUser(user)
+//        gymDao.insertUser(user)
 
         return null
     }

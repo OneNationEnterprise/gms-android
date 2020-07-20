@@ -3,13 +3,13 @@ package com.gymapp.main.data.repository
 import androidx.lifecycle.LiveData
 import com.apollographql.apollo.gym.type.GymsInRadiusFilter
 import com.gymapp.base.data.BaseRepository
-import com.gymapp.main.data.db.GymDao
+//import com.gymapp.main.data.db.GymDao
 import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.gym.GymMapper
 import com.gymapp.main.network.ApiManagerInterface
 
-class GymsRepository(private val apiManager: ApiManagerInterface, private val gymDao: GymDao) :
-    BaseRepository(apiManager, gymDao),
+class GymsRepository(private val apiManager: ApiManagerInterface/*, private val gymDao: GymDao*/) :
+    BaseRepository(apiManager/*, gymDao*/),
     GymsRepositoryInterface {
 
     private val gymMapper = GymMapper()

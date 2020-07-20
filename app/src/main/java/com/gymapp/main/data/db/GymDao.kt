@@ -1,36 +1,36 @@
 package com.gymapp.main.data.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+//import androidx.room.Dao
+//import androidx.room.Insert
+//import androidx.room.OnConflictStrategy
+//import androidx.room.Query
 import com.gymapp.main.data.model.country.Country
 import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.user.User
 
-@Dao
-interface GymDao {
+//@Dao
+//interface GymDao {
 
-    @Query("SELECT * from country_table")
-    fun getCountriesList(): LiveData<List<Country>>
+//    @Query("SELECT * from country_table")
+//    fun getCountriesList(): LiveData<List<Country>>
+//
+//    @Insert(onConflict = OnConflictStrategy.IGNORE)
+//    suspend fun insertCountries(country: List<Country>)
+//
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertUser(user: User)
+//
+//    @Query("SELECT * from user_table")
+//    fun getCurrentUser(): LiveData<User>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertCountries(country: List<Country>)
+//    @Query("SELECT * from gym_table")
+//    fun getNearbyGyms(): LiveData<List<Gym>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUser(user: User)
+//    @Query("SELECT * from gym_table")
+//    fun getNearbyGymsTEST(): List<Gym>
 
-    @Query("SELECT * from user_table")
-    fun getCurrentUser(): LiveData<User>
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    suspend fun insertNearbyGyms(gyms: List<Gym>)
 
-    @Query("SELECT * from gym_table")
-    fun getNearbyGyms(): LiveData<List<Gym>>
-
-    @Query("SELECT * from gym_table")
-    fun getNearbyGymsTEST(): List<Gym>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNearbyGyms(gyms: List<Gym>)
-
-}
+//}

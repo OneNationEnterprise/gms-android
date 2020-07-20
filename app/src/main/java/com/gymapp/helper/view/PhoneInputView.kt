@@ -6,9 +6,9 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.widget.doAfterTextChanged
-import com.bumptech.glide.Glide
 import com.gymapp.R
 import com.gymapp.helper.extensions.toPx
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_phone_input.view.*
 
 class PhoneInputView(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
@@ -60,7 +60,7 @@ class PhoneInputView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
         }
 
         if (!flagUrl.isNullOrEmpty()) {
-            Glide.with(viewContext).load(flagUrl).into(flagIv)
+            Picasso.get().load(flagUrl).into(flagIv)
         }
 
         phonePrefixHolder.doOnPreDraw {

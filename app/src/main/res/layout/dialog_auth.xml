@@ -19,6 +19,8 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:padding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_close"
         android:tint="@color/red001" />
 
@@ -28,6 +30,7 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="Page title"
+        app:layout_constraintTop_toTopOf="parent"
         android:textColor="@android:color/white"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
