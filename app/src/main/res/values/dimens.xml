@@ -23,5 +23,7 @@
 
     <!--Homepage pager-->
     <dimen name="homepage_pager_image_padding">-125dp</dimen>
+    <dimen name="bottom_sheet_peek_hidden">0dp</dimen>
+    <dimen name="bottom_sheet_peek_shown">220dp</dimen>
 
 </resources>

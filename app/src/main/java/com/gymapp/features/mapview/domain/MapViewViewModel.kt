@@ -27,5 +27,18 @@ class MapViewViewModel(val gymsRepositoryInterface: GymsRepositoryInterface) :
 
         filteredGymsList.postValue(cachedGymsList as ArrayList<Gym>)
     }
+
+
+    fun updateFilteredGymsList(queryString: String) {
+        val tempFilteredList = ArrayList<Gym>()
+
+        for(gym in cachedGymsList){
+            if(gym.name.contains(queryString)){
+                tempFilteredList.add(gym)
+            }
+        }
+
+        filteredGymsList.postValue(tempFilteredList)
+    }
 }
 

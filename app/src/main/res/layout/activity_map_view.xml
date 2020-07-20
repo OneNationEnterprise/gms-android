@@ -12,24 +12,35 @@
         android:layout_height="match_parent" />
 
     <EditText
-        android:id="@+id/placeSearch"
+        android:id="@+id/placeSearchEt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/bg_token_search"
-        android:drawableLeft="@drawable/ic_back_arrow"
         android:drawablePadding="6dp"
         android:drawableTint="@color/red001"
         android:gravity="center"
         android:hint="@string/mapview_search_view"
         android:inputType="textPostalAddress"
         android:padding="12dp"
-        android:textColor="@color/gray002"
+        android:maxLength="14"
+        android:textColor="@color/blue005"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/customBackIv"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="@id/placeSearchEt"
+        app:layout_constraintTop_toTopOf="@+id/placeSearchEt"
+        app:layout_constraintBottom_toBottomOf="@+id/placeSearchEt"
+        android:src="@drawable/ic_back_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

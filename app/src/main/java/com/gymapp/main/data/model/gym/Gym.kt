@@ -17,7 +17,8 @@ data class Gym(
 //    @Ignore
     val images: List<String>,
 //    @Embedded(prefix = "brand_")
-    val brand: Brand
+    val brand: Brand,
+    val distance: Double?
 
 )
 

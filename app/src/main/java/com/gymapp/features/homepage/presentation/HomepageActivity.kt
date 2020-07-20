@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import com.google.android.gms.maps.MapView
-import com.google.gson.Gson
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.homepage.domain.HomepageViewModel
@@ -39,7 +37,7 @@ class HomepageActivity : BaseActivity(R.layout.activity_homepage), HomepageGymCl
     override fun setupViewModel() {
         homepageViewModel = getViewModel()
         GlobalScope.launch(Dispatchers.Main) {
-            homepageViewModel.fetchGymList()
+            homepageViewModel.fetchGymList(this@HomepageActivity)
         }
     }
 

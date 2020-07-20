@@ -1,5 +1,6 @@
 package com.gymapp.main.data.repository
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import com.apollographql.apollo.gym.type.GymsInRadiusFilter
 import com.gymapp.base.data.BaseRepositoryInterface
@@ -17,4 +18,7 @@ interface GymsRepositoryInterface : BaseRepositoryInterface {
      * get saved gyms list from local Room database
      */
     fun getNearbyGyms():List<Gym>
+
+
+    fun setContextTemp(context: Context)
 }

@@ -31,7 +31,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.gymapp.BuildConfig
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.homepage.presentation.HomepageActivity
@@ -46,7 +45,6 @@ import kotlinx.android.synthetic.main.bottomsheet_api_autocomplete.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.imageResource
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class SelectLocationActivity : BaseActivity(R.layout.activity_select_location), OnMapReadyCallback,
@@ -167,8 +165,8 @@ class SelectLocationActivity : BaseActivity(R.layout.activity_select_location), 
     private fun initPlaces() {
         Places.initialize(this, Constants.GOOGLE_MAPS_API)
 
-        placeSearch.addTextChangedListener(filterTextWatcher)
-        placeSearch.setOnFocusChangeListener { v, hasFocus ->
+        placeSearchEt.addTextChangedListener(filterTextWatcher)
+        placeSearchEt.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 brandsListBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             } else {
@@ -192,7 +190,7 @@ class SelectLocationActivity : BaseActivity(R.layout.activity_select_location), 
 
         autoCompleteAdapter.notifyDataSetChanged()
 
-        placeSearch.setOnClickListener {
+        placeSearchEt.setOnClickListener {
             brandsListBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             headerLine.visibility = View.GONE
         }
@@ -202,7 +200,7 @@ class SelectLocationActivity : BaseActivity(R.layout.activity_select_location), 
         }
 
         clearTextIv.setOnClickListener {
-            placeSearch.setText("")
+            placeSearchEt.setText("")
         }
     }
 

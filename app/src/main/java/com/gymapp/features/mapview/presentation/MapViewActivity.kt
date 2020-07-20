@@ -6,8 +6,12 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.florent37.runtimepermission.kotlin.askPermission
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -15,19 +19,23 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.mapview.domain.MapViewViewModel
 import com.gymapp.helper.Constants
+import com.gymapp.helper.UserCurrentLocalization
 import com.gymapp.helper.extensions.toDp
 import com.gymapp.helper.view.BitmapHelper
 import com.gymapp.main.data.model.gym.Gym
+import com.mikepenz.materialize.util.KeyboardUtil
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_map_view.*
+import kotlinx.android.synthetic.main.bottomsheet_mapview_gyms_list.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.displayMetrics
-import org.jetbrains.anko.imageResource
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.lang.Exception
 
@@ -35,9 +43,26 @@ class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCall
 
     lateinit var mapViewModel: MapViewViewModel
     private var googleMap: GoogleMap? = null
+    private lateinit var gymsAdapter: MapViewGymListAdapter
+    private lateinit var brandsListBottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        gymsAdapter = MapViewGymListAdapter(ArrayList())
+
+        setupBottomSheet()
+
+        (supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).getMapAsync(this)
+
+        customBackIv.setOnClickListener {
+            onBackPressed()
+        }
+
+        placeSearchEt.doAfterTextChanged {
+            mapViewModel.updateFilteredGymsList(it.toString())
+        }
+
     }
 
     @SuppressLint("MissingPermission")
@@ -45,15 +70,20 @@ class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCall
 
         googleMap = p0
 
-//            googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(homeActivityListener.getCurrentSelectedAddress().geoPosition, 7f))
-//
-//            askPermission(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, acceptedblock = {
-//                googleMap?.isMyLocationEnabled = true
-//            }).onDeclined { _ -> }
+        googleMap?.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                UserCurrentLocalization.position, 10f
+            )
+        )
 
+        askPermission(
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            acceptedblock = {
+                googleMap?.isMyLocationEnabled = true
+            }).onDeclined { _ -> }
 
 //        googleMap?.setOnMarkerClickListener(mapViewBrandLocationVM)
-
 
         val locationButton =
             (((supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).view?.findViewById<View>(
@@ -67,7 +97,6 @@ class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCall
             )
         }
     }
-
 
     private fun addMarker(gym: Gym) {
         val profileView = ImageView(this)
@@ -95,10 +124,11 @@ class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCall
                     marker?.tag = ("${gym.gymId}###${gym.brand.brandId}")
                 }
 
-                override fun onError(e: Exception?) {}
+                override fun onError(e: Exception?) {
+
+                }
             })
     }
-
 
     override fun setupViewModel() {
         mapViewModel = getViewModel()
@@ -106,16 +136,63 @@ class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCall
 
     override fun bindViewModelObservers() {
         mapViewModel.filteredGymsList.observe(this, Observer {
-
             googleMap?.clear()
-
             if (it.isNullOrEmpty()) {
                 return@Observer
             }
-
+            updateGymsList(it)
             for (gym in it) {
                 addMarker(gym)
             }
         })
+    }
+
+    private fun updateGymsList(gyms: ArrayList<Gym>) {
+        gymsAdapter.updateList(gyms)
+
+        val linearLayoutManager = LinearLayoutManager(this)
+
+        // init locations recycleview
+        gymsListRv.apply {
+            adapter = gymsAdapter
+            layoutManager = linearLayoutManager
+        }
+
+        brandsListBottomSheetBehavior.peekHeight =
+            resources.getDimensionPixelSize(R.dimen.bottom_sheet_peek_shown)
+
+        brandsListBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+    private fun setupBottomSheet() {
+
+        brandsListBottomSheetBehavior = BottomSheetBehavior.from(gymsListContainer)
+        val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
+
+            @SuppressLint("SwitchIntDef")
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                    }
+
+                    BottomSheetBehavior.STATE_DRAGGING -> {
+                        KeyboardUtil.hideKeyboard(this@MapViewActivity)
+                    }
+
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        KeyboardUtil.hideKeyboard(this@MapViewActivity)
+                    }
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {}
+        }
+
+        brandsListBottomSheetBehavior.setBottomSheetCallback(bottomSheetCallback)
+        brandsListBottomSheetBehavior.saveFlags = BottomSheetBehavior.SAVE_ALL
+
+        brandsListBottomSheetBehavior.peekHeight =
+            resources.getDimensionPixelSize(R.dimen.bottom_sheet_peek_hidden)
+        brandsListBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 }

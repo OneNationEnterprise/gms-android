@@ -7,7 +7,9 @@
     <!--blue-->
     <color name="blue001">#AAB9DC</color>
     <color name="blue002">#1F2432</color>
+    <color name="blue003">#232836</color>
     <color name="blue005">#0B101A</color>
+
     <!--gray-->
     <color name="gray001">#979797</color>
     <color name="gray002">#5FA7AEAC</color>
@@ -22,5 +24,6 @@
 
     <!--todo-->
     <color name="loading_background">#5FA7AEAC</color>
+
 
 </resources>

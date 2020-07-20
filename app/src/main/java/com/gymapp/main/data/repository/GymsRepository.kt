@@ -1,12 +1,23 @@
 package com.gymapp.main.data.repository
 
-import androidx.lifecycle.LiveData
-import com.apollographql.apollo.gym.type.GymsInRadiusFilter
-import com.gymapp.base.data.BaseRepository
 //import com.gymapp.main.data.db.GymDao
+import android.content.Context
+import com.apollographql.apollo.gym.type.GymsInRadiusFilter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.gymapp.base.data.BaseRepository
+import com.gymapp.helper.Temporary
 import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.gym.GymMapper
 import com.gymapp.main.network.ApiManagerInterface
+import okio.BufferedSource
+import okio.Okio
+import okio.buffer
+import okio.source
+import java.io.IOException
+import java.io.InputStream
+import java.nio.charset.Charset
+
 
 class GymsRepository(private val apiManager: ApiManagerInterface/*, private val gymDao: GymDao*/) :
     BaseRepository(apiManager/*, gymDao*/),
@@ -14,6 +25,14 @@ class GymsRepository(private val apiManager: ApiManagerInterface/*, private val 
 
     private val gymMapper = GymMapper()
     var nearbyGymsList = ArrayList<Gym>()
+
+
+    //    TODO delete this
+    lateinit var context: Context
+
+    override fun setContextTemp(context: Context) {
+        this.context = context
+    }
 
     override suspend fun saveGymList(input: GymsInRadiusFilter): String? {
         val gymsInRadiusResponse = apiManager.getGymsInRadiusAsync(input).await()
@@ -36,9 +55,32 @@ class GymsRepository(private val apiManager: ApiManagerInterface/*, private val 
 
         val tempArrayList = ArrayList<Gym>()
 
-        for (i in 0..10) {
-            tempArrayList.add(nearbyGymsList[0])
+        //TODO delete this
+        var json: String = ""
+        for (i in 1..4) {
+            when (i) {
+                1 -> {
+                     json = Temporary.readFileFromAssets(context, "json/gym1.json")!!
+                }
+                2 -> {
+                     json = Temporary.readFileFromAssets(context, "json/gym2.json")!!
+                }
+                3 -> {
+                     json = Temporary.readFileFromAssets(context, "json/gym3.json")!!
+                }
+                4 -> {
+                     json = Temporary.readFileFromAssets(context, "json/gym4.json")!!
+                }
+            }
+
+            val gym = Gson().fromJson<Gym>(
+                json,
+                object : TypeToken<Gym>() {}.type
+            )
+
+            tempArrayList.add(gym)
         }
+
         return tempArrayList
     }
 

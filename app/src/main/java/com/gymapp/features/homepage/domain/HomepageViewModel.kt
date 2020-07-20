@@ -1,6 +1,6 @@
 package com.gymapp.features.homepage.domain
 
-import androidx.lifecycle.LiveData
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.gym.type.GISLocationInput
 import com.apollographql.apollo.gym.type.GymsInRadiusFilter
@@ -8,21 +8,22 @@ import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.main.data.repository.GymsRepositoryInterface
 import com.gymapp.helper.UserCurrentLocalization
 import com.gymapp.main.data.model.brand.HomepageBrandListItem
-import com.gymapp.main.data.model.country.Country
 import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.user.User
 
 class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInterface) :
     BaseViewModel() {
 
-    lateinit var user: MutableLiveData<User?>
+    var user = MutableLiveData<User?>()
     var errorListingGyms = MutableLiveData<String?>()
     var gymBrandsList = MutableLiveData<MutableList<HomepageBrandListItem>>()
     var nearByGyms = MutableLiveData<List<Gym>>()
 
-    suspend fun fetchGymList() {
+    suspend fun fetchGymList(context: Context) {
 
-      user.value  = gymsRepositoryInterface.getCurrentUser()
+        gymsRepositoryInterface.setContextTemp(context)
+
+        user.value = gymsRepositoryInterface.getCurrentUser()
         val filter = GymsInRadiusFilter(
             GISLocationInput(
                 UserCurrentLocalization.position.longitude,
@@ -41,12 +42,24 @@ class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInter
         val brandsList: MutableList<HomepageBrandListItem> = ArrayList()
 
         for (gym in nearByGyms.value!!) {
-            brandsList.add(
-                HomepageBrandListItem(
-                    gym.brand,
-                    true
+
+            if (!brandsList.contains(
+                    HomepageBrandListItem(
+                        gym.brand.brandId,
+                        gym.brand,
+                        false
+                    )
                 )
-            ) //TODO havePasses param should come from User obj
+            ) {
+                brandsList.add(
+                    HomepageBrandListItem(
+                        gym.brand.brandId,
+                        gym.brand,
+                        false
+                    )
+                )
+            }
+
         }
 
         gymBrandsList.value = brandsList
