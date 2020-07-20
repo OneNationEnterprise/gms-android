@@ -9,12 +9,12 @@ import androidx.viewpager.widget.PagerAdapter
 import com.gymapp.R
 import com.gymapp.features.homepage.presentation.adapter.HomepageGymClickListener
 import com.gymapp.main.data.model.brand.HomepageBrandListItem
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_homepage_brand.view.*
-import java.util.ArrayList
 
 class HomepageGymsItemAdapter(
     val context: Context,
-    private val brandListItem: MutableList<HomepageBrandListItem>,
+    private val gymListItem: MutableList<HomepageBrandListItem>,
     private val clickListener: HomepageGymClickListener
 ) :
     PagerAdapter() {
@@ -23,30 +23,35 @@ class HomepageGymsItemAdapter(
     }
 
     override fun getCount(): Int {
-        return brandListItem.size
+        return gymListItem.size
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.item_homepage_brand, container, false) as ViewGroup
 
-//        if (!brandsNearSelectedLocation[position].carouselImage().isNullOrEmpty()) {
-//            Picasso.get().load(brandsNearSelectedLocation[position].carouselImage()).into(view.brandFeaturedPhoto)
-//        }
-//
-//        if (!brandsNearSelectedLocation[position].profilePhoto().isNullOrEmpty()) {
-//            Picasso.get().load(brandsNearSelectedLocation[position].profilePhoto()).into(view.miniLogo)
-//        }
-//
+        val gym = gymListItem[position]
+
+        if (gym.gymImage.isNotEmpty()) {
+            Picasso.get().load(gym.gymImage).into(view.gymImageIv)
+        }
+
+        if (gym.brand.logo.isNotEmpty()) {
+            Picasso.get().load(gym.brand.logo).into(view.brandLogoIv)
+        }
+
         view.passesContainer.setOnClickListener {
-            clickListener.hasSelectedPasses(brandListItem[position].brand.brandId)
+            clickListener.hasSelectedPasses(gymListItem[position].brand.brandId)
         }
 
         view.productImageContainer.setOnClickListener {
-            clickListener.hasSelectedABrand(brandListItem[position].brand.brandId)
+            clickListener.hasSelectedABrand(gymListItem[position].brand.brandId)
         }
 
+        view.numberOfGymsTv.text = view.context.getString(R.string.homepage_gyms_nearby, gym.brand.gymCount.toString())
+
         container.addView(view)
+
         return view
     }
 

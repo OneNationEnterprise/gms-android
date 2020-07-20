@@ -7,4 +7,5 @@ import com.gymapp.main.network.ApiManagerInterface
 class ProfileRepository(apiManager: ApiManagerInterface/*, gymDao: GymDao*/) :
     BaseRepository(apiManager/*, gymDao*/), ProfileRepositoryInterface {
 
+
 }

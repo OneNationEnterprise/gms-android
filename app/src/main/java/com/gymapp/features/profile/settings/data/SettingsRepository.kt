@@ -6,4 +6,9 @@ import com.gymapp.main.network.ApiManagerInterface
 
 class SettingsRepository(apiManager: ApiManagerInterface/*, gymDao: GymDao*/) :
     BaseRepository(apiManager/*, gymDao*/), SettingsRepositoryInterface {
+
+    override fun invalidateUserDataOnLogout() {
+        user = null
+    }
+
 }

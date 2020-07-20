@@ -9,6 +9,7 @@ import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.homepage.domain.HomepageViewModel
 import com.gymapp.features.homepage.presentation.adapter.HomepageGymClickListener
 import com.gymapp.features.mapview.presentation.MapViewActivity
+import com.gymapp.features.onboarding.OnBoardingActivity
 import com.gymapp.features.profile.main.presentation.ProfileActivity
 import com.gymapp.helper.Constants
 import com.gymapp.helper.view.CustomPagerTransformer
@@ -26,11 +27,15 @@ class HomepageActivity : BaseActivity(R.layout.activity_homepage), HomepageGymCl
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        userLayoutContainer.setOnClickListener {
+        loggedInInitialsTextView.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
         viewMapTv.setOnClickListener {
             startActivity(Intent(this, MapViewActivity::class.java))
+        }
+        loggedOutHeaderImageProfile.setOnClickListener {
+            startActivity(Intent(this, OnBoardingActivity::class.java))
+            finish()
         }
     }
 
@@ -46,7 +51,8 @@ class HomepageActivity : BaseActivity(R.layout.activity_homepage), HomepageGymCl
             if (it != null) {
                 loggedInInitialsTextView.text = it.fullName[0].toString()
             } else {
-                //TODO - set profile public picture
+                loggedOutHeaderImageProfile.visibility = View.VISIBLE
+                loggedInInitialsTextView.visibility = View.GONE
             }
         })
 
@@ -57,27 +63,28 @@ class HomepageActivity : BaseActivity(R.layout.activity_homepage), HomepageGymCl
             } else {
                 zeroData.visibility = View.GONE
                 viewMapTv.visibility = View.VISIBLE
-            homepageViewModel.setupGymBrandsAdapter()
+                homepageViewModel.setupGymBrandsAdapter()
             }
         })
 
         homepageViewModel.gymBrandsList.observe(this, Observer {
             if (it.size > 0) {
 
-            pager.apply {
+                pager.apply {
 
-                adapter = HomepageGymsItemAdapter(this@HomepageActivity, it, this@HomepageActivity)
+                    adapter =
+                        HomepageGymsItemAdapter(this@HomepageActivity, it, this@HomepageActivity)
 
-                offscreenPageLimit = 14
+                    offscreenPageLimit = 14
 
-                setPageTransformer(
-                    true, CustomPagerTransformer(context)
-                )
-            }
+                    setPageTransformer(
+                        true, CustomPagerTransformer(context)
+                    )
+                }
 
-            pager.clipToPadding = false
-            pager.pageMargin =
-                resources.getDimension(R.dimen.homepage_pager_image_padding).toInt()
+                pager.clipToPadding = false
+                pager.pageMargin =
+                    resources.getDimension(R.dimen.homepage_pager_image_padding).toInt()
             }
         })
     }

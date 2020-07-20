@@ -7,6 +7,7 @@ import com.apollographql.apollo.gym.type.GymsInRadiusFilter
 import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.main.data.repository.GymsRepositoryInterface
 import com.gymapp.helper.UserCurrentLocalization
+import com.gymapp.main.data.model.brand.Brand
 import com.gymapp.main.data.model.brand.HomepageBrandListItem
 import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.user.User
@@ -39,30 +40,24 @@ class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInter
 
     fun setupGymBrandsAdapter() {
 
-        val brandsList: MutableList<HomepageBrandListItem> = ArrayList()
+        val homepageBrandsList: MutableList<HomepageBrandListItem> = ArrayList()
+        val brandsList: MutableList<Brand> = ArrayList()
 
         for (gym in nearByGyms.value!!) {
 
-            if (!brandsList.contains(
+            if (!brandsList.contains(gym.brand)) {
+                brandsList.add(gym.brand)
+                homepageBrandsList.add(
                     HomepageBrandListItem(
-                        gym.brand.brandId,
                         gym.brand,
-                        false
-                    )
-                )
-            ) {
-                brandsList.add(
-                    HomepageBrandListItem(
-                        gym.brand.brandId,
-                        gym.brand,
-                        false
+                        false,
+                        gym.images[0]
                     )
                 )
             }
-
         }
 
-        gymBrandsList.value = brandsList
+        gymBrandsList.value = homepageBrandsList
     }
 
 }

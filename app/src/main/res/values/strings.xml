@@ -85,6 +85,7 @@
     <!--Homepage-->
     <string name="homepage_nearby_gyms">Nearby Gyms</string>
     <string name="homepage_view_map">View map</string>
+    <string name="homepage_gyms_nearby">%1$s Gyms Nearby</string>
 
     <!--Mapview-->
     <string name="mapview_search_view">Search for a Gym</string>

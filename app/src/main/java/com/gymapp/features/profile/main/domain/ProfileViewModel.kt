@@ -8,11 +8,13 @@ import com.gymapp.main.data.model.user.User
 
 class ProfileViewModel(profileRepository: ProfileRepositoryInterface) : BaseViewModel() {
 
-    lateinit var user: MutableLiveData<User?>
+    var user = MutableLiveData<User?>()
 
     init {
         user.value = profileRepository.getCurrentUser()
     }
+
+
 
 
 }

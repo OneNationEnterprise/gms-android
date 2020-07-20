@@ -10,6 +10,7 @@ class SettingsViewModel(val settingsRepository: SettingsRepositoryInterface) : B
     var hasSignedOut = MutableLiveData<Boolean>()
 
     fun signOut() {
+        settingsRepository.invalidateUserDataOnLogout()
         FirebaseAuth.getInstance().signOut()
         hasSignedOut.value = true
     }

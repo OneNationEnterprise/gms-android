@@ -27,6 +27,7 @@
         android:padding="12dp"
         android:maxLength="14"
         android:textColor="@color/blue005"
+        android:textColorHint="@color/gray002"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
