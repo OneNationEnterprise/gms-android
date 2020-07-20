@@ -3,4 +3,5 @@ fragment brandFields on Brand{
     name
     phone
     gymCount
+    logo
 }

@@ -1,6 +1,7 @@
 package com.gymapp.main
 
 import android.app.Application
+import com.amitshekhar.DebugDB
 import com.google.firebase.FirebaseApp
 import com.gymapp.main.di.ApplicationModule.repositoryModule
 import com.gymapp.main.di.ApplicationModule.databaseModule
@@ -14,7 +15,7 @@ class GymApplication : Application() {
         super.onCreate()
 
         FirebaseApp.initializeApp(this)
-
+        DebugDB.getAddressLog()
         startKoin {
             androidContext(this@GymApplication)
             modules(

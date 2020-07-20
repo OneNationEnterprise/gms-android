@@ -27,6 +27,9 @@ interface GymDao {
     @Query("SELECT * from gym_table")
     fun getNearbyGyms(): LiveData<List<Gym>>
 
+    @Query("SELECT * from gym_table")
+    fun getNearbyGymsTEST(): List<Gym>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertNearbyGyms(gyms: List<Gym>)
 

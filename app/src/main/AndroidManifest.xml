@@ -42,6 +42,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".features.mapview.presentation.MapViewActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.gymapp.features.profile.main.presentation.ProfileActivity"
             android:screenOrientation="portrait" />
 

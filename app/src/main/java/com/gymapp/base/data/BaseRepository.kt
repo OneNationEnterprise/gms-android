@@ -6,7 +6,6 @@ import com.apollographql.apollo.gym.fragment.CountryFields
 import com.gymapp.main.data.db.GymDao
 import com.gymapp.main.data.model.country.Country
 import com.gymapp.main.data.model.country.CountryMapper
-import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.user.User
 import com.gymapp.main.data.model.user.UserByEmailMapper
 import com.gymapp.main.network.ApiManagerInterface
@@ -59,10 +58,6 @@ open class BaseRepository(
 
     override fun getCurrentUser(): LiveData<User> {
         return gymDao.getCurrentUser()
-    }
-
-    override fun getNearbyGyms(): LiveData<List<Gym>> {
-        return gymDao.getNearbyGyms()
     }
 
 }

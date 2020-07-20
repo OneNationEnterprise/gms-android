@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import com.google.android.gms.maps.MapView
+import com.google.gson.Gson
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.homepage.domain.HomepageViewModel
+import com.gymapp.features.homepage.presentation.adapter.HomepageGymClickListener
 import com.gymapp.features.mapview.presentation.MapViewActivity
 import com.gymapp.features.profile.main.presentation.ProfileActivity
+import com.gymapp.helper.Constants
 import com.gymapp.helper.view.CustomPagerTransformer
 import kotlinx.android.synthetic.main.activity_homepage.*
 import kotlinx.android.synthetic.main.user_icon.*
@@ -18,7 +21,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class HomepageActivity : BaseActivity(R.layout.activity_homepage) {
+class HomepageActivity : BaseActivity(R.layout.activity_homepage), HomepageGymClickListener {
 
     lateinit var homepageViewModel: HomepageViewModel
 
@@ -50,22 +53,22 @@ class HomepageActivity : BaseActivity(R.layout.activity_homepage) {
         })
 
         homepageViewModel.nearByGyms.observe(this, Observer {
-//            if (it == null || it.isEmpty()) {
-//                zeroData.visibility = View.VISIBLE
-//                viewMapTv.visibility = View.GONE
-//            } else {
-//                zeroData.visibility = View.GONE
-//                viewMapTv.visibility = View.VISIBLE
+            if (it == null || it.isEmpty()) {
+                zeroData.visibility = View.VISIBLE
+                viewMapTv.visibility = View.GONE
+            } else {
+                zeroData.visibility = View.GONE
+                viewMapTv.visibility = View.VISIBLE
             homepageViewModel.setupGymBrandsAdapter()
-//            }
+            }
         })
 
         homepageViewModel.gymBrandsList.observe(this, Observer {
-//            if (it.size > 0) {
+            if (it.size > 0) {
 
             pager.apply {
 
-                adapter = HomepageGymsItemAdapter(this@HomepageActivity, it)
+                adapter = HomepageGymsItemAdapter(this@HomepageActivity, it, this@HomepageActivity)
 
                 offscreenPageLimit = 14
 
@@ -77,8 +80,22 @@ class HomepageActivity : BaseActivity(R.layout.activity_homepage) {
             pager.clipToPadding = false
             pager.pageMargin =
                 resources.getDimension(R.dimen.homepage_pager_image_padding).toInt()
-//            }
+            }
         })
+    }
+
+    override fun hasSelectedABrand(brandId: String) {
+        val intent = Intent(this, MapViewActivity::class.java)
+        val args = Bundle()
+
+        args.putString(Constants.brandId, brandId)
+        intent.putExtra(Constants.arguments, args)
+
+        startActivity(intent)
+    }
+
+    override fun hasSelectedPasses(brandId: String) {
+        //TODO
     }
 
 

@@ -58,8 +58,6 @@ class SelectLocationActivity : BaseActivity(R.layout.activity_select_location), 
     private lateinit var launcherViewModel: LauncherViewModel
 
     private val context = this
-    private var wasOpenJustToUpdateSelectedLocationCache: Boolean = false
-    private var wasOpenFromSplashScreen: Boolean = false
 
     private val REQUEST_OPEN_SETTINGS = 1234
 
@@ -81,9 +79,9 @@ class SelectLocationActivity : BaseActivity(R.layout.activity_select_location), 
 
         toolbarTitle.text = getString(R.string.addresses_select_address)
 
-        if (!isLocationEnabled(this) && wasOpenFromSplashScreen) {
-            displayPromptForEnablingGPS()
-        }
+//        if (!isLocationEnabled(this) && wasOpenFromSplashScreen) {
+//            displayPromptForEnablingGPS()
+//        }
     }
 
     override fun bindViewModelObservers() {
@@ -167,7 +165,7 @@ class SelectLocationActivity : BaseActivity(R.layout.activity_select_location), 
     }
 
     private fun initPlaces() {
-        Places.initialize(this, BuildConfig.GOOGLE_MAPS_API)
+        Places.initialize(this, Constants.GOOGLE_MAPS_API)
 
         placeSearch.addTextChangedListener(filterTextWatcher)
         placeSearch.setOnFocusChangeListener { v, hasFocus ->
@@ -262,8 +260,8 @@ class SelectLocationActivity : BaseActivity(R.layout.activity_select_location), 
             googleMap.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(
                     LatLng(
-                        Constants.kLatitude,
-                        Constants.kLongitude
+                        Constants.dubaiLatitude,
+                        Constants.dubaiLongitude
                     ), 7f
                 )
             )
@@ -280,7 +278,8 @@ class SelectLocationActivity : BaseActivity(R.layout.activity_select_location), 
             (((supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).view?.findViewById<View>(
                 Integer.parseInt("1")
             )?.parent as View).findViewById<View>(Integer.parseInt("2")) as ImageView)
-//        locationButton.imageResource = R.drawable.ic_locate_me
+
+        locationButton.visibility = View.GONE
 
         val rlp = locationButton.layoutParams as (RelativeLayout.LayoutParams)
         // position on right bottom

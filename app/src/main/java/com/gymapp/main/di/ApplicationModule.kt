@@ -1,9 +1,10 @@
 package com.gymapp.main.di
 
 import androidx.room.Room
-import com.gymapp.features.homepage.data.HomepageRepository
-import com.gymapp.features.homepage.data.HomepageRepositoryInterface
+import com.gymapp.main.data.repository.GymsRepository
+import com.gymapp.main.data.repository.GymsRepositoryInterface
 import com.gymapp.features.homepage.domain.HomepageViewModel
+import com.gymapp.features.mapview.domain.MapViewViewModel
 import com.gymapp.features.onboarding.auth.data.AuthRepository
 import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
 import com.gymapp.features.onboarding.auth.domain.AuthInteractor
@@ -76,8 +77,8 @@ object ApplicationModule {
             AuthInteractor()
         }
 
-        factory<HomepageRepositoryInterface> {
-            HomepageRepository(get(), get())
+        single<GymsRepositoryInterface> {
+            GymsRepository(get(), get())
         }
 
         factory<ProfileRepositoryInterface> {
@@ -101,6 +102,10 @@ object ApplicationModule {
 
         viewModel {
             HomepageViewModel(get())
+        }
+
+        viewModel {
+            MapViewViewModel(get())
         }
 
         viewModel {

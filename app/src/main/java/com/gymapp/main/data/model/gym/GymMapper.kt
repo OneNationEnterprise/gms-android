@@ -16,6 +16,7 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
             gymId = gymFields.id,
             name = gymFields.name,
             address = mapGymAddress(gymFields.address),
+            images = gymFields.images,
             brand = mapBrand(gymFields.brand)
         )
     }
@@ -34,18 +35,18 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
             brandId = brandFields.id,
             name = brandFields.name,
             phone = brandFields.phone,
-            gymCount = brandFields.gymCount
+            gymCount = brandFields.gymCount,
+            logo = brandFields.logo
         )
     }
 
     private fun mapGymAddress(address: GymFields.Address): GymAddress {
-
-        val countryMapper = CountryMapper()
-
         return GymAddress(
             gymAddressId = address.id,
-            country = countryMapper.mapToDto(address.country.fragments.countryFields),
-            unitNumber = address.unitNumber ?: ""
+            countryId = address.country.id,
+            unitNumber = address.unitNumber ?: "",
+            longitude = address.longitude,
+            latitude = address.latitude
         )
 
     }

@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.viewpager.widget.PagerAdapter
 import com.gymapp.R
+import com.gymapp.features.homepage.presentation.adapter.HomepageGymClickListener
 import com.gymapp.main.data.model.brand.HomepageBrandListItem
+import kotlinx.android.synthetic.main.item_homepage_brand.view.*
 import java.util.ArrayList
 
 class HomepageGymsItemAdapter(
-    var context: Context,
-    var brandListItem: MutableList<HomepageBrandListItem>
+    val context: Context,
+    private val brandListItem: MutableList<HomepageBrandListItem>,
+    private val clickListener: HomepageGymClickListener
 ) :
     PagerAdapter() {
     override fun isViewFromObject(view: View, anyObject: Any): Boolean {
@@ -20,8 +23,7 @@ class HomepageGymsItemAdapter(
     }
 
     override fun getCount(): Int {
-//        return brandListItem.size
-        return 16
+        return brandListItem.size
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -36,9 +38,13 @@ class HomepageGymsItemAdapter(
 //            Picasso.get().load(brandsNearSelectedLocation[position].profilePhoto()).into(view.miniLogo)
 //        }
 //
-//        view.brandIconsContainer.setOnClickListener {
-//            listener.onBrandSelected(brandsNearSelectedLocation[position].id())
-//        }
+        view.passesContainer.setOnClickListener {
+            clickListener.hasSelectedPasses(brandListItem[position].brand.brandId)
+        }
+
+        view.productImageContainer.setOnClickListener {
+            clickListener.hasSelectedABrand(brandListItem[position].brand.brandId)
+        }
 
         container.addView(view)
         return view

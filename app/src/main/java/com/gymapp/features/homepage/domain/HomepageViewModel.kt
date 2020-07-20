@@ -5,17 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.gym.type.GISLocationInput
 import com.apollographql.apollo.gym.type.GymsInRadiusFilter
 import com.gymapp.base.domain.BaseViewModel
-import com.gymapp.features.homepage.data.HomepageRepositoryInterface
+import com.gymapp.main.data.repository.GymsRepositoryInterface
 import com.gymapp.helper.UserCurrentLocalization
-import com.gymapp.main.data.model.brand.Brand
 import com.gymapp.main.data.model.brand.HomepageBrandListItem
+import com.gymapp.main.data.model.country.Country
 import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.user.User
-import java.lang.Exception
 
-class HomepageViewModel(val homepageRepository: HomepageRepositoryInterface) : BaseViewModel() {
+class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInterface) :
+    BaseViewModel() {
 
-    var user: LiveData<User> = homepageRepository.getCurrentUser()
+    var user: LiveData<User> = gymsRepositoryInterface.getCurrentUser()
     var errorListingGyms = MutableLiveData<String?>()
     var gymBrandsList = MutableLiveData<MutableList<HomepageBrandListItem>>()
     var nearByGyms = MutableLiveData<List<Gym>>()
@@ -30,32 +30,23 @@ class HomepageViewModel(val homepageRepository: HomepageRepositoryInterface) : B
             radius = 5000.0
         )
 
-//        /**
-//         * if there are already gym locations saved in database don't query the server again
-//         */
-//        if(homepageRepository.getNearbyGyms().value!=null && homepageRepository.getNearbyGyms().value!!.isEmpty()){
-        errorListingGyms.value = homepageRepository.saveGymList(filter)
-//        }
+        errorListingGyms.value = gymsRepositoryInterface.saveGymList(filter)
 
-        nearByGyms.value = homepageRepository.getNearbyGyms().value
+        nearByGyms.value = gymsRepositoryInterface.getNearbyGyms()
     }
 
     fun setupGymBrandsAdapter() {
 
         val brandsList: MutableList<HomepageBrandListItem> = ArrayList()
 
-//        if (!::nearByGyms.isInitialized) {
-//            throw Throwable("NearByGyms should be initialized in this point")
-//        }
-//
-//        for (gym in nearByGyms.value!!) {
-//            brandsList.add(
-//                HomepageBrandListItem(
-//                    gym.brand,
-//                    true
-//                )
-//            ) //TODO havePasses param should come from User obj
-//        }
+        for (gym in nearByGyms.value!!) {
+            brandsList.add(
+                HomepageBrandListItem(
+                    gym.brand,
+                    true
+                )
+            ) //TODO havePasses param should come from User obj
+        }
 
         gymBrandsList.value = brandsList
     }

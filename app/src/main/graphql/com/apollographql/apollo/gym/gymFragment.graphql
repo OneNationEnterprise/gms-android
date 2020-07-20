@@ -4,10 +4,13 @@ fragment gymFields on Gym{
     address{
         id
         country{
-            ...countryFields
+            id
         }
         unitNumber
+        latitude
+        longitude
     }
+    images
     brand{
         ...brandFields
     }

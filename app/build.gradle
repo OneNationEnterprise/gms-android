@@ -30,9 +30,6 @@ android {
             applicationIdSuffix ".develop"
             manifestPlaceholders = [appName: "GYM Develop"]
             debuggable true
-            buildConfigField("String", "BASE_SERVER_URL", "http://ad82ca9ee5fa74f8b8bf78963b2c735d-586376887.eu-west-1.elb.amazonaws.com/graphql")
-            buildConfigField("String", "GOOGLE_MAPS_API", "AIzaSyBT0Oty_zje_wZHO9TtRBfyDJnWZDPZiYI")
-            buildConfigField("String", "GOOGLE_PLACES_API", "AIzaSyBT0Oty_zje_wZHO9TtRBfyDJnWZDPZiYI")
 //            resValue("string", "DB_PASSWORD_app_db", "gymapp")
         }
         staging {
@@ -147,6 +144,9 @@ dependencies {
 
     //ViewPager with dots
     implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"

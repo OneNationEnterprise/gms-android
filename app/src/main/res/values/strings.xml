@@ -77,7 +77,7 @@
     <string name="settings_sign_out">Sign Out</string>
 
     <!--Select Location-->
-    <string name="turn_on_location_services">Turn <b>ON</b> <font color="#08bfb0"><b>Location services</b></font> so that <b>COFE App</b> can show COFE Shops near you</string>
+    <string name="turn_on_location_services">Turn <b>ON</b> <font color="#1F2432"><b>Location services</b></font> so that <b>COFE App</b> can show COFE Shops near you</string>
     <string name="place_the_pin_at_your_location">Place the pin at your location</string>
     <string name="addresses_select_address">Pinpoint Your Location</string>
     <string name="dialog_app_location">This app wants to use your location</string>
