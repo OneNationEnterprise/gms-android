@@ -44,7 +44,6 @@ class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getLocation()
-
     }
 
     @SuppressLint("MissingPermission")
@@ -66,8 +65,9 @@ class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
                         }
 
                         //memory cache current postion
-                        UserCurrentLocalization.position =
+                        UserCurrentLocalization.setUserCurrentLocalization(
                             LatLng(location.latitude, location.longitude)
+                        )
 
                         //fetch data
                         GlobalScope.launch(Dispatchers.Main) {
@@ -79,7 +79,7 @@ class LauncherActivity : BaseActivity(R.layout.activity_launcher) {
                     }
             }).onDeclined() { _ ->
             //open map activity
-            startActivity(Intent(activity, SelectLocationActivity::class.java))
+            openMapActivity()
         }
     }
 

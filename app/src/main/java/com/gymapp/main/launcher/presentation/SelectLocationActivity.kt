@@ -323,7 +323,7 @@ class SelectLocationActivity : BaseActivity(R.layout.activity_select_location), 
 
 
     fun cacheCurrentLocation(location: LatLng) {
-        UserCurrentLocalization.position = location
+        UserCurrentLocalization.setUserCurrentLocalization(location)
         //fetch data
         GlobalScope.launch(Dispatchers.Main) {
             launcherViewModel.fetchData()

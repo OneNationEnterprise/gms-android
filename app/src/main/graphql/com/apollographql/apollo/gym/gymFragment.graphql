@@ -7,8 +7,9 @@ fragment gymFields on Gym{
             id
         }
         unitNumber
-        latitude
-        longitude
+        geoLocation{
+            coordinates
+        }
     }
     images
     brand{

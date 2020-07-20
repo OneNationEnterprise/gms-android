@@ -1,4 +1,4 @@
-package com.gymapp.main.data.repository
+package com.gymapp.main.data.repository.gyms
 
 //import com.gymapp.main.data.db.GymDao
 import android.content.Context
@@ -10,13 +10,6 @@ import com.gymapp.helper.Temporary
 import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.gym.GymMapper
 import com.gymapp.main.network.ApiManagerInterface
-import okio.BufferedSource
-import okio.Okio
-import okio.buffer
-import okio.source
-import java.io.IOException
-import java.io.InputStream
-import java.nio.charset.Charset
 
 
 class GymsRepository(private val apiManager: ApiManagerInterface/*, private val gymDao: GymDao*/) :

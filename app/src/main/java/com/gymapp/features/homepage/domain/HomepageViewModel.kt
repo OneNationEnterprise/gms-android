@@ -5,14 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.gym.type.GISLocationInput
 import com.apollographql.apollo.gym.type.GymsInRadiusFilter
 import com.gymapp.base.domain.BaseViewModel
-import com.gymapp.main.data.repository.GymsRepositoryInterface
+import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
+import com.gymapp.main.data.repository.gyms.GymsRepositoryInterface
 import com.gymapp.helper.UserCurrentLocalization
 import com.gymapp.main.data.model.brand.Brand
 import com.gymapp.main.data.model.brand.HomepageBrandListItem
 import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.user.User
 
-class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInterface) :
+class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInterface, private val authRepositoryInterface: AuthRepositoryInterface) :
     BaseViewModel() {
 
     var user = MutableLiveData<User?>()
@@ -24,11 +25,11 @@ class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInter
 
         gymsRepositoryInterface.setContextTemp(context)
 
-        user.value = gymsRepositoryInterface.getCurrentUser()
+        user.value = authRepositoryInterface.getCurrentUser()
         val filter = GymsInRadiusFilter(
             GISLocationInput(
-                UserCurrentLocalization.position.longitude,
-                UserCurrentLocalization.position.latitude
+                UserCurrentLocalization.position!!.longitude,
+                UserCurrentLocalization.position!!.latitude
             ),
             radius = 5000.0
         )

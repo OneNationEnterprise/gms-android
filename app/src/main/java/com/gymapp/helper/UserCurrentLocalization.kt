@@ -2,15 +2,15 @@ package com.gymapp.helper
 
 import com.google.android.gms.maps.model.LatLng
 
-
 object UserCurrentLocalization {
 
-    lateinit var position: LatLng
+    var position: LatLng? = null
 
     fun getUserCurrentLocalizationLatLng(): LatLng? {
-        if (this::position.isInitialized) {
-            return position
-        }
-        return null
+        return position
+    }
+
+    fun setUserCurrentLocalization(position: LatLng) {
+        this.position = position
     }
 }

@@ -118,7 +118,12 @@ class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCall
                     //add round corner
                     image = BitmapHelper.setRoundedCorners(image, 14f)
                     markerOptions.icon(BitmapDescriptorFactory.fromBitmap(image))
-                    markerOptions.position(LatLng(gym.address.latitude, gym.address.longitude))
+                    markerOptions.position(
+                        LatLng(
+                            gym.address.geoLocation.coordinates!![1]!!,
+                            gym.address.geoLocation.coordinates[0]!!
+                        )
+                    )
 
                     val marker = googleMap?.addMarker(markerOptions)
                     marker?.tag = ("${gym.gymId}###${gym.brand.brandId}")

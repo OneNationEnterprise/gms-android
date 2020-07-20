@@ -1,11 +1,12 @@
 {
-  "id": "id01",
+  "gymId": "id01",
   "name": "Gym01",
   "address": {
     "gymAddressId": "adressid01",
     "countryId": "UAE",
-    "latitude": 25.276987,
-    "longitude": 55.296249,
+    "geoLocation": {
+      "coordinates": [55.296249,25.276987]
+    },
     "unitNumber": "unitnr01"
   },
   "images": [

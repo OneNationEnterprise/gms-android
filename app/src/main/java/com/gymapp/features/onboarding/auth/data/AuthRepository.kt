@@ -2,6 +2,8 @@ package com.gymapp.features.onboarding.auth.data
 
 import com.apollographql.apollo.gym.type.RegisterCustomerInput
 import com.gymapp.base.data.BaseRepository
+import com.gymapp.main.data.model.user.User
+import com.gymapp.main.data.model.user.UserByEmailMapper
 //import com.gymapp.main.data.db.GymDao
 import com.gymapp.main.data.model.user.UserRegistrationMapper
 import com.gymapp.main.network.ApiManagerInterface
@@ -9,6 +11,8 @@ import com.gymapp.main.network.ApiManagerInterface
 class AuthRepository(private val apiManager: ApiManagerInterface/*, private val gymDao: GymDao*/) :
     BaseRepository(apiManager/*, gymDao*/), AuthRepositoryInterface {
 
+    private val userMapper = UserByEmailMapper()
+    private var user: User? = null
     private val userRegistrationMapper = UserRegistrationMapper()
 
     override suspend fun registerUser(input: RegisterCustomerInput): String? {
@@ -24,13 +28,36 @@ class AuthRepository(private val apiManager: ApiManagerInterface/*, private val 
         val customer =
             apiResponse.data?.registerCustomer?.customer ?: return "Null customer response"
 
-         user = userRegistrationMapper.mapToDto(customer)
+        user = userRegistrationMapper.mapToDto(customer)
 
 //        gymDao.insertUser(user)
 
         return null
     }
 
+    override suspend fun saveUserDetailsByEmail(email: String): String? {
 
+        val userDetailsResponse = apiManager.getUserDetailsByEmailAsync(email).await()
+
+        if (userDetailsResponse.errors != null && userDetailsResponse.errors!!.isNotEmpty()
+            || userDetailsResponse.data == null
+            || (userDetailsResponse.data!!.customerByEmail == null)
+        ) {
+            return "Error on getting user details"
+        }
+
+//        gymDao.insertUser(userMapper.mapToDto(userDetailsResponse.data!!.customerByEmail!!))
+
+        user = userMapper.mapToDto(userDetailsResponse.data!!.customerByEmail!!)
+        return null
+    }
+
+    override fun getCurrentUser(): User? {
+        return user
+    }
+
+    override fun invalidateUserDataOnLogout() {
+        user = null
+    }
 }
 

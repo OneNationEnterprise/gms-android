@@ -1,4 +1,4 @@
-package com.gymapp.main.data.repository
+package com.gymapp.main.data.repository.gyms
 
 import android.content.Context
 import androidx.lifecycle.LiveData

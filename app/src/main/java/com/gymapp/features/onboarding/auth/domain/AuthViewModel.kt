@@ -15,14 +15,16 @@ import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
 import com.gymapp.main.data.model.country.Country
+import com.gymapp.main.data.repository.config.ConfigRepositoryInterface
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
-    private val repository: AuthRepositoryInterface,
+    private val authRepository: AuthRepositoryInterface,
+    private val configRepository: ConfigRepositoryInterface,
     private val authInteractorInterface: AuthInteractorInterface
 ) : BaseViewModel() {
 
-    private var countriesList: MutableLiveData<List<Country>>? = null
+    private var countriesList = MutableLiveData<List<Country>>()
 
     var showOtpView = MutableLiveData<Boolean>()
     var showPhoneNumberError = MutableLiveData<Boolean>()
@@ -42,7 +44,7 @@ class AuthViewModel(
     private var phoneNumber: String = ""
 
     init {
-        countriesList?.value = repository.getCountries()
+        countriesList?.value = configRepository.getCountries()
 
         phoneVerifyCallback = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(p0: PhoneAuthCredential) {
@@ -85,7 +87,7 @@ class AuthViewModel(
                     //already registered --> cache customer details from server
                     viewModelScope.launch {
                         authErrorMessage.value =
-                            repository.saveUserDetailsByEmail(firebaseUser!!.email!!)
+                            authRepository.saveUserDetailsByEmail(firebaseUser!!.email!!)
                     }
                     return@OnCompleteListener
                 }
@@ -138,7 +140,7 @@ class AuthViewModel(
 
     fun registerUser(name: String, email: String, password: String) {
         viewModelScope.launch {
-            authErrorMessage.value = repository.registerUser(
+            authErrorMessage.value = authRepository.registerUser(
                 RegisterCustomerInput(
                     firstName = name,
                     email = email,
@@ -176,7 +178,7 @@ class AuthViewModel(
 
                     viewModelScope.launch {
                         authErrorMessage.value =
-                            repository.saveUserDetailsByEmail(firebaseUser!!.email!!)
+                            authRepository.saveUserDetailsByEmail(firebaseUser!!.email!!)
                     }
                 } else {
                     authErrorMessage.value = it.exception?.localizedMessage

@@ -28,11 +28,10 @@ data class GymAddress(
     val gymAddressId: String,
 //    @Embedded(prefix = "gym_address_")
     val countryId: String,
-//    @Embedded(prefix = "gym_address_")
-    val latitude: Double,
-//    @Embedded(prefix = "gym_address_")
-    val longitude: Double,
+    val geoLocation: Geolocation,
 //    @Embedded(prefix = "gym_address_")
     val unitNumber: String
 
 )
+
+data class Geolocation(val coordinates: List<Double?>?)

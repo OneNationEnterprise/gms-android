@@ -3,7 +3,7 @@ package com.gymapp.features.mapview.domain
 import androidx.lifecycle.MutableLiveData
 import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.main.data.model.gym.Gym
-import com.gymapp.main.data.repository.GymsRepositoryInterface
+import com.gymapp.main.data.repository.gyms.GymsRepositoryInterface
 
 class MapViewViewModel(val gymsRepositoryInterface: GymsRepositoryInterface) :
     BaseViewModel() {

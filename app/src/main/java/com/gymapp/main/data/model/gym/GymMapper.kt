@@ -46,10 +46,16 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
             gymAddressId = address.id,
             countryId = address.country.id,
             unitNumber = address.unitNumber ?: "",
-            longitude = address.longitude,
-            latitude = address.latitude
+            geoLocation = mapGeolocation(address.geoLocation)
         )
 
     }
 
+
+    private fun mapGeolocation(geolocation: GymFields.GeoLocation): Geolocation {
+        return Geolocation(
+            coordinates = geolocation.coordinates
+        )
+
+    }
 }
