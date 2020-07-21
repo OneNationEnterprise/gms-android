@@ -10,11 +10,13 @@ import com.gymapp.R
 import com.gymapp.base.presentation.BaseDialogFragment
 import com.gymapp.features.homepage.presentation.HomepageActivity
 import com.gymapp.features.onboarding.auth.domain.AuthViewModel
+import com.gymapp.features.onboarding.forgotpassw.ForgotPasswordDialogFragment
 import com.gymapp.helper.modal.phoneprefix.PhonePrefixModalBottomsheet
 import com.gymapp.helper.modal.phoneprefix.PhonePrefixSelectedListener
 import com.gymapp.helper.ui.InAppBannerNotification
 import com.gymapp.main.data.model.country.Country
 import kotlinx.android.synthetic.main.dialog_auth.*
+import kotlinx.android.synthetic.main.login_flow_with_email.*
 import kotlinx.android.synthetic.main.register_flow_input_otp.*
 import kotlinx.android.synthetic.main.register_flow_input_phone.*
 import kotlinx.android.synthetic.main.view_phone_input.*
@@ -54,6 +56,13 @@ open abstract class BaseAuthDialogFragment() :
 
             override fun onOTPComplete(otp: String) {
                 authViewModel.validateOtp(otp)
+            }
+        }
+
+        forgotPasswordTv.setOnClickListener {
+            activity?.supportFragmentManager?.let { it1 ->
+                ForgotPasswordDialogFragment.newInstance()
+                    .show(it1, ForgotPasswordDialogFragment.TAG)
             }
         }
 
@@ -141,7 +150,11 @@ open abstract class BaseAuthDialogFragment() :
                     PhonePrefixModalBottomsheet.TAG
                 )
             } else {
-                InAppBannerNotification.showErrorNotification(authContainer, context, "Error on getting available countries")
+                InAppBannerNotification.showErrorNotification(
+                    authContainer,
+                    context,
+                    "Error on getting available countries"
+                )
             }
         })
     }

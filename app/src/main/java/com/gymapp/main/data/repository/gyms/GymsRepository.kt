@@ -45,36 +45,36 @@ class GymsRepository(private val apiManager: ApiManagerInterface/*, private val 
     override fun getNearbyGyms(): List<Gym> {
 //        return gymDao.getNearbyGyms()
 
-//        val tempArrayList = ArrayList<Gym>()
-//
-//        //TODO delete this
-//        var json: String = ""
-//        for (i in 1..4) {
-//            when (i) {
-//                1 -> {
-//                     json = Temporary.readFileFromAssets(context, "json/gym1.json")!!
-//                }
-//                2 -> {
-//                     json = Temporary.readFileFromAssets(context, "json/gym2.json")!!
-//                }
-//                3 -> {
-//                     json = Temporary.readFileFromAssets(context, "json/gym3.json")!!
-//                }
-//                4 -> {
-//                     json = Temporary.readFileFromAssets(context, "json/gym4.json")!!
-//                }
-//            }
-//
-//            val gym = Gson().fromJson<Gym>(
-//                json,
-//                object : TypeToken<Gym>() {}.type
-//            )
-//
-//            tempArrayList.add(gym)
-//        }
-//
-//        return tempArrayList
-        return nearbyGymsList
+        val tempArrayList = ArrayList<Gym>()
+
+        //TODO delete this
+        var json: String = ""
+        for (i in 1..4) {
+            when (i) {
+                1 -> {
+                     json = Temporary.readFileFromAssets(context, "json/gym1.json")!!
+                }
+                2 -> {
+                     json = Temporary.readFileFromAssets(context, "json/gym2.json")!!
+                }
+                3 -> {
+                     json = Temporary.readFileFromAssets(context, "json/gym3.json")!!
+                }
+                4 -> {
+                     json = Temporary.readFileFromAssets(context, "json/gym4.json")!!
+                }
+            }
+
+            val gym = Gson().fromJson<Gym>(
+                json,
+                object : TypeToken<Gym>() {}.type
+            )
+
+            tempArrayList.add(gym)
+        }
+
+        return tempArrayList
+//        return nearbyGymsList
     }
 
 
