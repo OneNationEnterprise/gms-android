@@ -1,0 +1,7 @@
+query gymClassCategory($id: ID!){
+    gymClassCategory(id: $id){
+        image
+        description
+        subtitle
+    }
+}

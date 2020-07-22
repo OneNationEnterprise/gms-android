@@ -11,6 +11,17 @@ fragment gymFields on Gym{
             coordinates
         }
     }
+    description
+    amenityList{
+        icon
+        name
+    }
+    opening{
+        operatingTime{ 
+            begin
+            end
+        }
+    }
     images
     brand{
         ...brandFields

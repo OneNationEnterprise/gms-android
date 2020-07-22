@@ -11,8 +11,9 @@ union PassRefTypePayload = ExternalBrand_VP | ExternalGym_VP
 
 "Admins to manage brand, branches, admin platform.."
 type Admin {
+    adminType: AdminType!
     authId: String!
-    brands: [Brand]
+    brand: Brand
     contactNumber: String
     createdAt: Datetime!
     createdBy: Admin
@@ -20,10 +21,24 @@ type Admin {
     firstName: String!
     fullName: String!
     gender: GlobalGenderType
+    gym: Gym
     id: ID!
     lastName: String
     lastUpdatedBy: Admin
+    permissions: [String!]
+    roles: [VendorRole_Common!]
     status: GlobalStatusType!
+    updatedAt: Datetime!
+}
+
+"Admins to roles"
+type AdminRole {
+    admin: Admin!
+    createdAt: Datetime!
+    createdById: ID
+    id: ID!
+    lastUpdatedById: ID
+    role: VendorRole_Common!
     updatedAt: Datetime!
 }
 
@@ -38,6 +53,7 @@ type Age {
 }
 
 type Amenity {
+    icon: String
     id: ID!
     name: String!
     status: GlobalStatusType!
@@ -47,12 +63,13 @@ type Amenity {
 type Brand {
     admins: [Admin!]
     city: String!
-    country: ExternalCountry_Common!
+    country: VendorCountry_Common!
     createdAt: Datetime!
     createdBy: Admin!
     email: String!
     gymCount: Int!
     id: ID!
+    image: String
     lastUpdatedBy: Admin!
     legalName: String!
     logo: String!
@@ -260,27 +277,12 @@ type ExternalBrand_VP {
     status: GlobalStatusType!
 }
 
-type ExternalCountry_Common {
-    currency: ExternalCurrency_Common!
-    dialCode: String
-    flagPhoto: String
+"Brands"
+type ExternalBrand_Vendors {
+    createdAt: Datetime!
     id: ID!
-    isoCode: String
     name: String!
-    servicePhoneNumber: String
-    status: GlobalStatusType
-    timeZoneIdentifier: String
-    vat: Float!
-    vatId: String
-}
-
-type ExternalCurrency_Common {
-    code: String!
-    decimalPlace: Int!
-    lowestDenomination: Float!
-    name: String!
-    subUnitName: String!
-    symbol: String
+    updatedAt: Datetime!
 }
 
 type ExternalGym_VP {
@@ -292,6 +294,14 @@ type ExternalGym_VP {
     name: String!
     phone: String!
     status: GlobalStatusType!
+}
+
+"Gyms."
+type ExternalGym_Vendors {
+    createdAt: Datetime!
+    id: ID!
+    name: String!
+    updatedAt: Datetime!
 }
 
 type ExternalInstructor_VP {
@@ -309,9 +319,11 @@ type Gym {
     address: GymAddress!
     admins: [Admin!]
     amenities: [String!]
+    amenityList: [Amenity!]
     brand: Brand!
     createdAt: Datetime!
     createdBy: Admin!
+    description: String
     distance: Float
     email: String!
     id: ID!
@@ -319,6 +331,7 @@ type Gym {
     lastUpdatedBy: Admin!
     legalName: String!
     name: String!
+    opening: GymOpening
     operatingHours: [GymOperatingHours]
     phone: String!
     status: GymStatus!
@@ -329,16 +342,13 @@ type Gym {
 type GymAddress {
     building: String
     city: String!
-    country: ExternalCountry_Common!
+    country: VendorCountry_Common!
     createdAt: Datetime!
     floorNo: String
+    "The longitude component of the geo coordinates for this address, in degrees"
     geoLocation: GymAddressGeoLocation!
     gym: Gym!
     id: ID!
-    "The longitude component of the geo coordinates for this address, in degrees"
-    latitude: Float!
-    "The longitude component of the geo coordinates for this address, in degrees"
-    longitude: Float!
     shortAddress: String
     state: String
     street: String
@@ -399,14 +409,14 @@ type GymClass {
 }
 
 type GymClassCategory {
-    brand: ExternalBrand_VP!
     createdAt: Datetime!
     description: String
-    gym: ExternalGym_VP!
+    gymClasses: [GymClass!]
     id: ID!
     image: String
     name: String!
     status: GlobalStatusType
+    subtitle: String
     updatedAt: Datetime!
 }
 
@@ -429,6 +439,11 @@ type GymClassWeeklySchedule {
 type GymClassesPayload {
     list: [GymClass]
     paging: PaginatorOutput
+}
+
+type GymOpening {
+    isOpen: Boolean!
+    operatingTime: TimeRange
 }
 
 "Gym Operating Hours"
@@ -504,6 +519,7 @@ type Membership {
     age: Age
     allowedCheckins: Int
     amount: CurrencyValue!
+    colorCode: String
     countryId: ID!
     createdAt: Datetime!
     createdById: ID!
@@ -516,7 +532,7 @@ type Membership {
     lastUpdatedById: ID!
     lifetime: Boolean
     membershipCategory: MembershipCategory!
-    membershipSubCategory: MembershipSubCategory!
+    membershipSubCategory: MembershipSubCategory
     name: String!
     period: Int
     referenceType: MembershipRefTypePayload
@@ -526,13 +542,11 @@ type Membership {
 }
 
 type MembershipCategory {
-    accessType: MembershipAccessType!
     createdAt: Datetime!
     description: String
     id: ID!
     image: String
     name: String!
-    referenceType: MembershipRefTypePayload
     status: GlobalStatusType
     subCategories: [MembershipSubCategory!]
     updatedAt: Datetime!
@@ -610,9 +624,10 @@ type Mutation {
     savePass(input: SavePassInput!): SavePassPayload
     savePassCategory(input: SavePassCategoryInput!): SavePassCategoryPayload
     savePermission(input: SavePermissionInput!): SavePermissionPayload
+    saveProduct(input: SaveProductInput!): SaveProductPayload
+    saveProductCategory(input: SaveProductCategoryInput!): SaveProductCategoryPayload
+    saveProductStock(input: SaveProductStockInput!): SaveProductStockPayload
     saveRole(input: SaveRoleInput!): SaveRolePayload
-    saveRolePermission(input: SaveRolePermissionInput!): SaveRolePermissionPayload
-    saveRolesPermissionsTable(input: [SaveRolesPermissionsTableInput]): SaveRolePermissionTablePayload
     sortContentElement(contentTypeId: ID!, ids: [ID!]!): Boolean
     sortContentGroup(contentTypeId: ID!, ids: [ID!]!): Boolean
     syncAdminsWithFirebase: Boolean
@@ -649,9 +664,11 @@ type Pass {
     age: Age
     allowedCheckins: Int!
     amount: CurrencyValue!
+    colorCode: String
     countryId: ID!
     createdAt: Datetime!
     createdById: ID!
+    description: String
     gender: GlobalGenderType!
     gracePeriod: Int!
     id: ID!
@@ -669,10 +686,8 @@ type Pass {
 }
 
 type PassCategory {
-    brand: ExternalBrand_VP!
     createdAt: Datetime!
     description: String
-    gym: ExternalGym_VP!
     id: ID!
     image: String
     name: String!
@@ -704,18 +719,81 @@ type PassesPayload {
 "Permission"
 type Permission {
     createdAt: Datetime!
-    createdBy: Admin!
+    createdById: ID
     description: String
     id: ID!
-    lastUpdatedBy: Admin!
+    lastUpdatedById: ID
     name: String!
     roles: [Role]
-    status: GlobalStatusType!
+    status: StatusType!
     updatedAt: Datetime!
 }
 
 type PermissionsPayload {
     list: [Permission]
+    paging: PaginatorOutput
+}
+
+"Products."
+type Product {
+    barcode: String!
+    brandId: ID!
+    categoryId: ID!
+    createdAt: Datetime!
+    createdBy: ID!
+    description: String!
+    express: Boolean!
+    id: ID!
+    images: [String!]
+    lastUpdatedBy: ID!
+    listPrice: Int!
+    name: String!
+    returnPolicy: Boolean!
+    returnPolicyDescription: String
+    returnPolicyPeriod: Int
+    salePrice: Int!
+    sku: String!
+    status: ProductStatus!
+    updatedAt: Datetime!
+    warranty: Boolean!
+    warrantyDescription: String
+    warrantyPeriod: Int
+}
+
+type ProductCategoriesPayload {
+    list: [ProductCategory]
+    paging: PaginatorOutput
+}
+
+"Product Categories."
+type ProductCategory {
+    createdAt: Datetime!
+    createdBy: ID!
+    id: ID!
+    lastUpdatedBy: ID!
+    name: String!
+    updatedAt: Datetime!
+}
+
+"Product Stocks."
+type ProductStock {
+    createdAt: Datetime!
+    createdBy: ID!
+    gymId: ID!
+    id: ID!
+    lastUpdatedBy: ID!
+    productId: ID!
+    quantity: Int!
+    updatedAt: Datetime!
+}
+
+type ProductStocksPayload {
+    list: [ProductStock]
+    paging: PaginatorOutput
+}
+
+type ProductsPayload {
+    list: [Product]
     paging: PaginatorOutput
 }
 
@@ -778,6 +856,12 @@ type Query {
     passes(paging: PaginatorInput, params: PassesFilter): PassesPayload!
     permission(id: ID!): Permission
     permissions(paging: PaginatorInput!, params: PermissionsFilter): PermissionsPayload!
+    product(id: ID!): Product!
+    productCategories(paging: PaginatorInput!, params: ProductCategoriesFilter): ProductCategoriesPayload!
+    productCategory(id: ID!): ProductCategory!
+    productStock(id: ID!): ProductStock!
+    productStocks(paging: PaginatorInput!, params: ProductStocksFilter): ProductStocksPayload!
+    products(paging: PaginatorInput!, params: ProductsFilter): ProductsPayload!
     role(id: ID!): Role
     rolePermission(id: ID!): RolePermission
     rolePermissions(paging: PaginatorInput!, params: RolePermissionsFilter): RolePermissionsPayload!
@@ -802,22 +886,22 @@ type RegisterInstructorPayload {
 "Role"
 type Role {
     createdAt: Datetime!
-    createdBy: Admin!
+    createdById: ID
     description: String
     id: ID!
-    lastUpdatedBy: Admin!
+    lastUpdatedById: ID
     name: String!
     permissions: [Permission]
-    status: GlobalStatusType!
+    status: StatusType!
     updatedAt: Datetime!
 }
 
 "RolePermission"
 type RolePermission {
     createdAt: Datetime!
-    createdBy: Admin!
+    createdById: ID
     id: ID!
-    lastUpdatedBy: Admin!
+    lastUpdatedById: ID
     permission: Permission!
     role: Role!
     updatedAt: Datetime!
@@ -862,6 +946,7 @@ type SaveBrandAdminTablePayload {
 type SaveBrandPayload {
     brand: Brand
     error: BrandError
+    errorMessage: String
     errors: [BrandError!]
 }
 
@@ -998,22 +1083,92 @@ type SavePermissionPayload {
     permission: Permission
 }
 
+type SaveProductCategoryPayload {
+    error: ProductCategoryError
+    errors: [ProductCategoryError!]
+    productCategory: ProductCategory
+}
+
+type SaveProductPayload {
+    error: ProductError
+    errors: [ProductError!]
+    product: Product
+}
+
+type SaveProductStockPayload {
+    error: ProductStockError
+    errors: [ProductStockError!]
+    productStock: ProductStock
+}
+
 type SaveRolePayload {
     error: RoleError
     errors: [RoleError!]
     role: Role
 }
 
-type SaveRolePermissionPayload {
-    error: RolePermissionError
-    errors: [RolePermissionError!]
-    rolePermission: RolePermission
+type TimeRange {
+    begin: Datetime!
+    end: Datetime!
 }
 
-type SaveRolePermissionTablePayload {
-    error: RolePermissionError
-    errors: [RolePermissionError!]
-    rolesPermissions: [RolePermission]
+type VendorCountry_Common {
+    currency: VendorCurrency_Common!
+    dialCode: String
+    flagPhoto: String
+    id: ID!
+    isoCode: String
+    name: String!
+    servicePhoneNumber: String
+    status: GlobalStatusType
+    timeZoneIdentifier: String
+    vat: Float!
+    vatId: String
+}
+
+type VendorCurrency_Common {
+    code: String!
+    decimalPlace: Int!
+    lowestDenomination: Float!
+    name: String!
+    subUnitName: String!
+    symbol: String
+}
+
+type VendorPermission_Common {
+    id: ID!
+    name: String
+    status: GlobalStatusType!
+}
+
+type VendorPlanCountry_Common {
+    currency: VendorPlanCurrency_Common!
+    dialCode: String
+    flagPhoto: String
+    id: ID!
+    isoCode: String
+    name: String!
+    servicePhoneNumber: String
+    status: GlobalStatusType
+    timeZoneIdentifier: String
+    vat: Float!
+    vatId: String
+}
+
+type VendorPlanCurrency_Common {
+    code: String!
+    decimalPlace: Int!
+    lowestDenomination: Float!
+    name: String!
+    subUnitName: String!
+    symbol: String
+}
+
+type VendorRole_Common {
+    id: ID!
+    name: String
+    permissions: [VendorPermission_Common!]
+    status: GlobalStatusType!
 }
 
 enum AdminError {
@@ -1023,6 +1178,18 @@ enum AdminError {
     INVALID_BRAND_ID
     INVALID_GYM_ID
     INVALID_ID
+    ROLES_REQUIRED
+}
+
+enum AdminRoleError {
+    DUPLICATE_EMAIL
+    INVALID_ID
+}
+
+enum AdminType {
+    BRANCH
+    BRAND
+    GLOBAL
 }
 
 enum AmenityError {
@@ -1037,6 +1204,7 @@ enum BrandAdminError {
 }
 
 enum BrandError {
+    ADMIN_ALREADY_EXISTS
     DUPLICATE_NAME
     INVALID_ID
 }
@@ -1144,6 +1312,7 @@ enum GymClassError {
 }
 
 enum GymError {
+    ADMIN_ALREADY_EXISTS
     DUPLICATE_NAME
     INVALID_ID
 }
@@ -1250,11 +1419,34 @@ enum PermissionError {
     DUPLICATE_NAME
     INVALID_ID
     INVALID_ROLE
+    NOT_EDITABLE
+}
+
+enum ProductCategoryError {
+    DUPLICATE_NAME
+    INVALID_BRAND
+    INVALID_ID
+}
+
+enum ProductError {
+    DUPLICATE_NAME
+    INVALID_ID
+}
+
+enum ProductStatus {
+    ACTIVE
+    DELETED
+    INACTIVE
+}
+
+enum ProductStockError {
+    INVALID_ID
 }
 
 enum RoleError {
     DUPLICATE_NAME
     INVALID_ID
+    NOT_EDITABLE
 }
 
 enum RolePermissionError {
@@ -1269,6 +1461,7 @@ enum StatusType {
 }
 
 input AdminsFilter {
+    adminType: AdminType
     searchText: String
     status: GlobalStatusType
 }
@@ -1283,6 +1476,7 @@ input AmenityFilter {
 }
 
 input AmenityInput {
+    icon: String
     id: ID
     name: String!
     status: GlobalStatusType!
@@ -1416,8 +1610,6 @@ input GymAdminsFilter {
 }
 
 input GymClassCategoryFilter {
-    brandId: ID
-    gymId: ID
     searchText: String
     status: GlobalStatusType
 }
@@ -1485,8 +1677,6 @@ input LanguageInput {
 }
 
 input MembershipCategoryFilter {
-    accessType: MembershipAccessType
-    referenceTypeId: ID
     searchText: String
     status: GlobalStatusType
 }
@@ -1523,8 +1713,6 @@ input PaginatorInput {
 }
 
 input PassCategoryFilter {
-    brandId: ID
-    gymId: ID
     searchText: String
     status: GlobalStatusType
 }
@@ -1548,7 +1736,24 @@ input PassesFilter {
 
 input PermissionsFilter {
     searchText: String
-    status: GlobalStatusType
+    status: StatusType
+}
+
+input ProductCategoriesFilter {
+    searchText: String
+}
+
+input ProductStocksFilter {
+    gymId: ID
+    productId: ID
+    searchText: String
+}
+
+input ProductsFilter {
+    brandId: ID
+    categoryId: ID
+    searchText: String
+    status: ProductStatus
 }
 
 input RegisterCustomerInput {
@@ -1585,19 +1790,19 @@ input RolePermissionsFilter {
 
 input RolesFilter {
     searchText: String
-    status: GlobalStatusType
+    status: StatusType
 }
 
 input SaveAdminInput {
-    brandId: ID
+    adminType: AdminType!
     contactNumber: String
     email: String!
     firstName: String!
     gender: GlobalGenderType
-    gymId: ID
     id: ID
     lastName: String!
     overwrite: Boolean
+    referenceTypeId: ID
     roles: [String!]
     status: GlobalStatusType!
 }
@@ -1614,6 +1819,7 @@ input SaveBrandInput {
     countryId: ID!
     email: String!
     id: ID
+    image: String
     legalName: String!
     logo: String!
     name: String!
@@ -1685,7 +1891,6 @@ input SaveGymAdminInput {
 
 input SaveGymClassCategoryInput {
     description: String
-    gymId: ID!
     id: ID
     image: String
     name: String!
@@ -1723,6 +1928,7 @@ input SaveGymInput {
     adminIds: [ID!]
     amenities: [String!]
     brandId: ID!
+    description: String
     email: String!
     id: ID
     images: [String!]!
@@ -1774,12 +1980,10 @@ input SaveLanguageCountryInput {
 }
 
 input SaveMembershipCategoryInput {
-    accessType: MembershipAccessType!
     description: String
     id: ID
     image: String
     name: String!
-    referenceTypeId: ID!
     status: GlobalStatusType!
 }
 
@@ -1788,6 +1992,7 @@ input SaveMembershipInput {
     age: AgeInput!
     allowedCheckins: Int
     amount: CurrencyValue!
+    colorCode: String
     countryId: ID!
     description: String
     gender: GlobalGenderType!
@@ -1797,7 +2002,7 @@ input SaveMembershipInput {
     isWeekelyScheduled: Boolean!
     lifetime: Boolean
     membershipCategoryId: ID!
-    membershipSubCategoryId: ID!
+    membershipSubCategoryId: ID
     name: String!
     period: Int
     referenceTypeId: ID!
@@ -1816,7 +2021,6 @@ input SaveMembershipSubCategoryInput {
 
 input SavePassCategoryInput {
     description: String
-    gymId: ID!
     id: ID
     image: String
     name: String!
@@ -1828,7 +2032,9 @@ input SavePassInput {
     age: AgeInput!
     allowedCheckins: Int!
     amount: Int!
+    colorCode: String
     countryId: ID!
+    description: String
     gender: GlobalGenderType!
     gracePeriod: Int!
     id: ID
@@ -1847,8 +2053,41 @@ input SavePermissionInput {
     description: String
     id: ID
     name: String!
-    roles: [ID]
-    status: GlobalStatusType!
+    status: StatusType!
+}
+
+input SaveProductCategoryInput {
+    createdBy: ID
+    id: ID
+    name: String!
+}
+
+input SaveProductInput {
+    barcode: String!
+    brandId: ID!
+    categoryId: ID!
+    description: String!
+    express: Boolean!
+    id: ID
+    images: [String!]
+    listPrice: Int!
+    name: String!
+    returnPolicy: Boolean!
+    returnPolicyDescription: String
+    returnPolicyPeriod: Int
+    salePrice: Int!
+    sku: String!
+    status: ProductStatus!
+    warranty: Boolean!
+    warrantyDescription: String
+    warrantyPeriod: Int
+}
+
+input SaveProductStockInput {
+    gymId: ID!
+    id: ID
+    productId: ID!
+    quantity: Int!
 }
 
 input SaveRoleInput {
@@ -1856,18 +2095,7 @@ input SaveRoleInput {
     id: ID
     name: String!
     permissions: [ID]
-    status: GlobalStatusType!
-}
-
-input SaveRolePermissionInput {
-    id: ID
-    permissionId: ID!
-    roleId: ID!
-}
-
-input SaveRolesPermissionsTableInput {
-    permissionId: ID!
-    roleId: ID!
+    status: StatusType!
 }
 
 input addressInput {
@@ -1888,6 +2116,9 @@ input addressInput {
 }
 
 
+"An iso 8601 date-time string"
+scalar Datetime
+
 "Scalar used to describe currency amounts. Serialized as a string to retain decimal precision."
 scalar CurrencyValue
 
@@ -1896,6 +2127,3 @@ scalar Date
 
 "An 24-hour time expressed as an hour/minute pair in local time, i.e. '18:00'"
 scalar LocalTime
-
-"An iso 8601 date-time string"
-scalar Datetime
