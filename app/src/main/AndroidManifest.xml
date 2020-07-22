@@ -46,6 +46,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".features.gymdetail.presentation.GymDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.gymapp.features.profile.main.presentation.ProfileActivity"
             android:screenOrientation="portrait" />
 

@@ -19,6 +19,7 @@
     <string name="amenities">Amenities</string>
     <string name="directions">Directions</string>
     <string name="forgot_password">Forgot Password</string>
+    <string name="see_all">See All</string>
 
     <!--OnBoarding-->
     <string name="onboarding_step_one_title">Unlimited possibilities</string>
@@ -96,6 +97,7 @@
     <!--Gym detail-->
     <string name="call_gym">Call gym</string>
     <string name="buy_membership">Buy membership</string>
+
 
     <!--Forgot password-->
     <string name="forgot_password_title_text">Enter your account email address</string>

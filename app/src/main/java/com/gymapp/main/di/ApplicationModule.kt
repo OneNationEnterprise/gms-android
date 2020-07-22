@@ -1,6 +1,7 @@
 package com.gymapp.main.di
 
 //import androidx.room.Room
+import com.gymapp.features.gymdetail.domain.GymDetailViewModel
 import com.gymapp.main.data.repository.gyms.GymsRepository
 import com.gymapp.main.data.repository.gyms.GymsRepositoryInterface
 import com.gymapp.features.homepage.domain.HomepageViewModel
@@ -106,6 +107,10 @@ object ApplicationModule {
 
         viewModel {
             MapViewViewModel(get())
+        }
+
+        viewModel {
+            GymDetailViewModel(get())
         }
 
         viewModel {

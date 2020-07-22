@@ -5,12 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gymapp.R
+import com.gymapp.features.mapview.domain.GymClickListener
 import com.gymapp.main.data.model.gym.Gym
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_mapview_gym.view.*
 import java.util.*
 
-class MapViewGymListAdapter(var gyms: MutableList<Gym>) :
+class MapViewGymListAdapter(val gyms: MutableList<Gym>, val listener: GymClickListener) :
     RecyclerView.Adapter<GymViewHolder>() {
 
 
@@ -30,7 +31,7 @@ class MapViewGymListAdapter(var gyms: MutableList<Gym>) :
     }
 
     override fun onBindViewHolder(holder: GymViewHolder, position: Int) {
-        holder.bindView(gyms[position])
+        holder.bindView(gyms[position], listener)
     }
 
     fun updateList(gyms: MutableList<Gym>) {
@@ -43,10 +44,12 @@ class MapViewGymListAdapter(var gyms: MutableList<Gym>) :
 
 class GymViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
 
-    fun bindView(gym: Gym) {
+    fun bindView(
+        gym: Gym,
+        listener: GymClickListener
+    ) {
 
         itemView.gymNameTv.text = gym.name
-
 
         if (gym.distance != null) {
             itemView.gymDistanceTv.text = itemView.context.getString(
@@ -55,11 +58,12 @@ class GymViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
                 )
             )
         }
+
         itemView.brandLocationContainer.setOnClickListener {
-//            itemClickListener.onLocationSelected(location)
+            listener.onGymSelected(gym.gymId)
         }
 
-        if (!gym.brand.logo.isNullOrEmpty()) {
+        if (gym.brand.logo.isNotEmpty()) {
             Picasso.get().load(gym.brand.logo).into(itemView.brandLogoIv)
         }
     }

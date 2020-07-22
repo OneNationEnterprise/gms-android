@@ -18,7 +18,8 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
             address = mapGymAddress(gymFields.address),
             images = gymFields.images,
             brand = mapBrand(gymFields.brand),
-            distance = gymFields.distance
+            distance = gymFields.distance,
+            phone = gymFields.phone
         )
     }
 

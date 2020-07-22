@@ -2,6 +2,7 @@ package com.gymapp.features.mapview.presentation
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
@@ -18,10 +19,13 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
+import com.gymapp.features.gymdetail.presentation.GymDetailActivity
+import com.gymapp.features.mapview.domain.GymClickListener
 import com.gymapp.features.mapview.domain.MapViewViewModel
 import com.gymapp.helper.Constants
 import com.gymapp.helper.UserCurrentLocalization
@@ -39,7 +43,8 @@ import org.jetbrains.anko.displayMetrics
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.lang.Exception
 
-class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCallback {
+class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCallback,
+    GymClickListener, GoogleMap.OnMarkerClickListener {
 
     lateinit var mapViewModel: MapViewViewModel
     private var googleMap: GoogleMap? = null
@@ -49,7 +54,7 @@ class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCall
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        gymsAdapter = MapViewGymListAdapter(ArrayList())
+        gymsAdapter = MapViewGymListAdapter(ArrayList(), this)
 
         setupBottomSheet()
 
@@ -62,7 +67,6 @@ class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCall
         placeSearchEt.doAfterTextChanged {
             mapViewModel.updateFilteredGymsList(it.toString())
         }
-
     }
 
     @SuppressLint("MissingPermission")
@@ -83,7 +87,7 @@ class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCall
                 googleMap?.isMyLocationEnabled = true
             }).onDeclined { _ -> }
 
-//        googleMap?.setOnMarkerClickListener(mapViewBrandLocationVM)
+        googleMap?.setOnMarkerClickListener(this)
 
         val locationButton =
             (((supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment).view?.findViewById<View>(
@@ -126,7 +130,7 @@ class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCall
                     )
 
                     val marker = googleMap?.addMarker(markerOptions)
-                    marker?.tag = ("${gym.gymId}###${gym.brand.brandId}")
+                    marker?.tag = (gym.gymId)
                 }
 
                 override fun onError(e: Exception?) {
@@ -196,8 +200,24 @@ class MapViewActivity : BaseActivity(R.layout.activity_map_view), OnMapReadyCall
         brandsListBottomSheetBehavior.setBottomSheetCallback(bottomSheetCallback)
         brandsListBottomSheetBehavior.saveFlags = BottomSheetBehavior.SAVE_ALL
 
-        brandsListBottomSheetBehavior.peekHeight =
-            resources.getDimensionPixelSize(R.dimen.bottom_sheet_peek_hidden)
+        brandsListBottomSheetBehavior.peekHeight = resources.getDimensionPixelSize(R.dimen.bottom_sheet_peek_hidden)
         brandsListBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+    override fun onGymSelected(gymId: String) {
+        val intent = Intent(this, GymDetailActivity::class.java)
+        val args = Bundle()
+
+        args.putString(Constants.gymId, gymId)
+        intent.putExtra(Constants.arguments, args)
+
+        startActivity(intent)
+    }
+
+    override fun onMarkerClick(p0: Marker?): Boolean {
+        if (p0 != null) {
+            onGymSelected(p0.tag.toString())
+        }
+        return true
     }
 }

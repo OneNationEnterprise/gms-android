@@ -48,7 +48,8 @@ class HomepageGymsItemAdapter(
             clickListener.hasSelectedABrand(gymListItem[position].brand.brandId)
         }
 
-        view.numberOfGymsTv.text = view.context.getString(R.string.homepage_gyms_nearby, gym.brand.gymCount.toString())
+        view.numberOfGymsTv.text =
+            view.context.getString(R.string.homepage_gyms_nearby, gym.brand.gymCount.toString())
 
         container.addView(view)
 

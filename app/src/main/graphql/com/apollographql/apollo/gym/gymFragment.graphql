@@ -16,4 +16,10 @@ fragment gymFields on Gym{
         ...brandFields
     }
     distance
+    phone
+    amenities
+    operatingHours
+    {
+        openTime
+    }
 }
