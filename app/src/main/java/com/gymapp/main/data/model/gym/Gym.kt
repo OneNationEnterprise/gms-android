@@ -1,38 +1,32 @@
 package com.gymapp.main.data.model.gym
 
-//import androidx.room.Embedded
-//import androidx.room.Entity
-//import androidx.room.Ignore
-//import androidx.room.PrimaryKey
 import com.gymapp.main.data.model.brand.Brand
-import com.gymapp.main.data.model.country.Country
 
-//@Entity(tableName = "gym_table")
 data class Gym(
-//    @PrimaryKey
     val gymId: String,
     val name: String,
-//    @Embedded(prefix = "address_")
     val address: GymAddress,
-//    @Ignore
     val images: List<String>,
-//    @Embedded(prefix = "brand_")
     val brand: Brand,
-    val phone:String,
-    val distance: Double?
-
+    val phone: String,
+    val distance: Double?,
+    val description: String?,
+    val opening: Opening?,
+    val amenityList: List<Amenity>?
 )
 
-//@Entity(tableName = "gym_address_table")
 data class GymAddress(
-//    @PrimaryKey
     val gymAddressId: String,
-//    @Embedded(prefix = "gym_address_")
     val countryId: String,
     val geoLocation: Geolocation,
-//    @Embedded(prefix = "gym_address_")
     val unitNumber: String
 
 )
 
 data class Geolocation(val coordinates: List<Double?>?)
+
+data class Opening(val operatingTime: OperatingTime)
+
+data class OperatingTime(val begin: String?, val end: String?)
+
+data class Amenity(val icon: String?, val name: String)

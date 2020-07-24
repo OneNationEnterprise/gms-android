@@ -4,7 +4,6 @@ import com.apollographql.apollo.gym.GymsInRadiusQuery
 import com.apollographql.apollo.gym.fragment.GymFields
 import com.gymapp.base.data.BaseDataMapperInterface
 import com.gymapp.main.data.model.brand.Brand
-import com.gymapp.main.data.model.country.CountryMapper
 
 class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
 
@@ -19,7 +18,11 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
             images = gymFields.images,
             brand = mapBrand(gymFields.brand),
             distance = gymFields.distance,
-            phone = gymFields.phone
+            phone = gymFields.phone,
+            description = gymFields.description,
+            opening = mapOpening(gymFields.opening),
+            amenityList = mapAmenity(gymFields.amenityList)
+
         )
     }
 
@@ -49,7 +52,6 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
             unitNumber = address.unitNumber ?: "",
             geoLocation = mapGeolocation(address.geoLocation)
         )
-
     }
 
 
@@ -57,6 +59,20 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
         return Geolocation(
             coordinates = geolocation.coordinates
         )
+    }
 
+    private fun mapOpening(opening: GymFields.Opening?): Opening {
+        return Opening(
+            OperatingTime(
+                begin = opening?.operatingTime?.begin.toString(),
+                end = opening?.operatingTime?.end.toString()
+            )
+        )
+    }
+
+    private fun mapAmenity(amenityList: List<GymFields.AmenityList>?): List<Amenity>? {
+        return amenityList?.map {
+            Amenity(it.icon, it.name)
+        }
     }
 }

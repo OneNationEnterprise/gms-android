@@ -1,4 +1,4 @@
-package com.gymapp.features.gymdetail.presentation
+package com.gymapp.features.gymdetail.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.View

@@ -17,7 +17,7 @@ fragment gymFields on Gym{
         name
     }
     opening{
-        operatingTime{ 
+        operatingTime{
             begin
             end
         }
@@ -28,9 +28,4 @@ fragment gymFields on Gym{
     }
     distance
     phone
-    amenities
-    operatingHours
-    {
-        openTime
-    }
 }

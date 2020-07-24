@@ -1,0 +1,8 @@
+query gymClassCategories{
+    gymClassCategories{
+        list{
+            name
+            image
+        }
+    }
+}

@@ -1,7 +1,8 @@
 package com.gymapp.main.data.repository.gyms
 
 import android.content.Context
-import androidx.lifecycle.LiveData
+import com.apollographql.apollo.gym.GymClassCategoriesQuery
+import com.apollographql.apollo.gym.GymClassCategoryQuery
 import com.apollographql.apollo.gym.type.GymsInRadiusFilter
 import com.gymapp.base.data.BaseRepositoryInterface
 import com.gymapp.main.data.model.gym.Gym
@@ -17,8 +18,14 @@ interface GymsRepositoryInterface : BaseRepositoryInterface {
     /**
      * get saved gyms list from local Room database
      */
-    fun getNearbyGyms():List<Gym>
+    fun getNearbyGyms(): List<Gym>
 
+    /**
+     * cache from remote and return list of available categories
+     */
+    suspend fun getGymCategories(): List<GymClassCategoriesQuery.List?>?
 
     fun setContextTemp(context: Context)
+
+
 }

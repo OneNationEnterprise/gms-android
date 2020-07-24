@@ -38,4 +38,8 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
     override suspend fun getGymDetailAsync(id: String): Deferred<Response<GymQuery.Data>> {
         return graphQlNoAuthClient.query(GymQuery(id)).toDeferred()
     }
+
+    override suspend fun getGymCategoriesAsync(): Deferred<Response<GymClassCategoriesQuery.Data>> {
+        return graphQlNoAuthClient.query(GymClassCategoriesQuery()).toDeferred()
+    }
 }

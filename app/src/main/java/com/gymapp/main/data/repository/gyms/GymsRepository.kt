@@ -2,6 +2,8 @@ package com.gymapp.main.data.repository.gyms
 
 //import com.gymapp.main.data.db.GymDao
 import android.content.Context
+import com.apollographql.apollo.gym.GymClassCategoriesQuery
+import com.apollographql.apollo.gym.GymClassCategoryQuery
 import com.apollographql.apollo.gym.type.GymsInRadiusFilter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -38,30 +40,41 @@ class GymsRepository(private val apiManager: ApiManagerInterface/*, private val 
 
         nearbyGymsList = gymMapper.mapToDtoList(list!!) as ArrayList<Gym>
 
-//        gymDao.insertNearbyGyms(gymMapper.mapToDtoList(list!!))
         return null
     }
 
     override fun getNearbyGyms(): List<Gym> {
-//        return gymDao.getNearbyGyms()
+        return nearbyGymsList
+    }
 
-        val tempArrayList = ArrayList<Gym>()
+    override suspend fun getGymCategories(): List<GymClassCategoriesQuery.List?>? {
+        val gymCategoriesResponse = apiManager.getGymCategoriesAsync().await()
+        return gymCategoriesResponse.data?.gymClassCategories?.list
+    }
 
-        //TODO delete this
+
+
+
+
+
+
+    //////////////////////////// MOCK GYM DATA ////////////////////////
+
+    /*        //TODO delete this
         var json: String = ""
         for (i in 1..4) {
             when (i) {
                 1 -> {
-                     json = Temporary.readFileFromAssets(context, "json/gym1.json")!!
+                    json = Temporary.readFileFromAssets(context, "json/gym1.json")!!
                 }
                 2 -> {
-                     json = Temporary.readFileFromAssets(context, "json/gym2.json")!!
+                    json = Temporary.readFileFromAssets(context, "json/gym2.json")!!
                 }
                 3 -> {
-                     json = Temporary.readFileFromAssets(context, "json/gym3.json")!!
+                    json = Temporary.readFileFromAssets(context, "json/gym3.json")!!
                 }
                 4 -> {
-                     json = Temporary.readFileFromAssets(context, "json/gym4.json")!!
+                    json = Temporary.readFileFromAssets(context, "json/gym4.json")!!
                 }
             }
 
@@ -73,9 +86,7 @@ class GymsRepository(private val apiManager: ApiManagerInterface/*, private val 
             tempArrayList.add(gym)
         }
 
-        return tempArrayList
-//        return nearbyGymsList
-    }
+        return tempArrayList*/
 
 
 }
