@@ -7,6 +7,7 @@ object Constants {
     const val brandId = "extra.brand.id"
     const val gymId = "extra.gym.id"
     const val gymLogo = "extra.gym.logo"
+    const val gymName = "extra.gym.name"
     const val subscriptionType = "subscription.type"
     const val BASE_SERVER_URL =
         "http://ad82ca9ee5fa74f8b8bf78963b2c735d-586376887.eu-west-1.elb.amazonaws.com/graphql"

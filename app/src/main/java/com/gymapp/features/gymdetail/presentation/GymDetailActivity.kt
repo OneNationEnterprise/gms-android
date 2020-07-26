@@ -27,7 +27,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
 
     lateinit var gymDetailViewModel: GymDetailViewModel
-    private var gymLogo = ""
+    private var gymName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,13 +97,10 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
 
         dotsIndicator.setViewPager2(gymImagesViewPager)
 
-        gymNameTv.text = gym.name
+        gymName = gym.name
 
-        gymLogo = gym.brand.logo
+        gymNameTv.text = gymName
 
-        if (!gymLogo.isNullOrEmpty()) {
-            Picasso.get().load(gym.brand.logo).into(gymLogoIv)
-        }
         if (gym.description.isNullOrEmpty()) {
             aboutTitleTv.visibility = View.GONE
         }
@@ -161,8 +158,8 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
         )
 
         args.putString(
-            Constants.gymLogo,
-            gymLogo
+            Constants.gymName,
+            gymName
         )
         args.putSerializable(
             Constants.subscriptionType,

@@ -87,13 +87,7 @@ class SubscriptionViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView
         subscriptionSelectedListener: SubscriptionSelectedListener
     ) {
 
-        if (isItemSelected) {
-            itemView.selectorIv.background =
-                ContextCompat.getDrawable(itemView.context, R.drawable.ic_selector_on);
-        } else {
-            itemView.selectorIv.background =
-                ContextCompat.getDrawable(itemView.context, R.drawable.ic_selector_off);
-        }
+        itemView.selectorIv.isChecked = isItemSelected
 
         itemView.amountTv.text = subscription.amountLabel
         itemView.descriptionTv.text = subscription.description
@@ -108,14 +102,27 @@ class SubscriptionViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView
                     colorCode = "#$colorCode"
                 }
 
-                ImageViewCompat.setImageTintList( itemView.startColorIv, ColorStateList.valueOf(Color.parseColor(colorCode)))
-//                ImageViewCompat.setImageTintList( itemView.startColorIv, ColorStateList.valueOf(Color.parseColor(colorCode)))
+                ImageViewCompat.setImageTintList(
+                    itemView.startColorIv,
+                    ColorStateList.valueOf(Color.parseColor(colorCode))
+                )
+                ImageViewCompat.setImageTintList(
+                    itemView.overlayBackgroundIv,
+                    ColorStateList.valueOf(Color.parseColor(colorCode))
+                )
+
             }
-        } catch (e: IllegalArgumentException) { }
+        } catch (e: IllegalArgumentException) {
+        }
 
         itemView.subscriptionContainer.setOnClickListener {
             subscriptionSelectedListener.onSubscriptionSelected(subscription)
         }
+
+        itemView.selectorIv.setOnClickListener {
+            subscriptionSelectedListener.onSubscriptionSelected(subscription)
+        }
+
 
     }
 }

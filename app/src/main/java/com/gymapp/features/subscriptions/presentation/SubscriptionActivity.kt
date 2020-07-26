@@ -14,10 +14,8 @@ import com.gymapp.helper.Constants
 import com.gymapp.helper.SubscriptionType
 import com.gymapp.helper.ui.InAppBannerNotification
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_gym_detail.*
 import kotlinx.android.synthetic.main.activity_subscription.*
 import kotlinx.android.synthetic.main.activity_subscription.backArrowIv
-import kotlinx.android.synthetic.main.activity_subscription.gymLogoIv
 import kotlinx.android.synthetic.main.dialog_auth.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -47,8 +45,7 @@ class SubscriptionActivity : BaseActivity(R.layout.activity_subscription) {
 
         bindSubscriptionType(type)
 
-        Picasso.get().load(intent.getBundleExtra(Constants.arguments)?.getString(Constants.gymLogo))
-            .into(gymLogoIv)
+        gymNameTv.text = intent.getBundleExtra(Constants.arguments)?.getString(Constants.gymName)
 
         backArrowIv.setOnClickListener {
             onBackPressed()
