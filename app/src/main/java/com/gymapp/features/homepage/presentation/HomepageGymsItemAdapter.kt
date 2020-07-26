@@ -49,7 +49,7 @@ class HomepageGymsItemAdapter(
         }
 
         view.numberOfGymsTv.text =
-            view.context.getString(R.string.homepage_gyms_nearby, gym.brand.gymCount.toString())
+            view.context.getString(R.string.homepage_gyms_nearby, gym.gymCount.toString())
 
         container.addView(view)
 

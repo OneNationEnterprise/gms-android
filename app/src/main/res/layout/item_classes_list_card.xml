@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/subscriptionContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginEnd="16dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="9dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue003"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/clockIv"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_clock"
+            app:layout_constraintBottom_toBottomOf="@id/startHourTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/startHourTv" />
+
+        <TextView
+            android:id="@+id/startHourTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/classTitleTv"
+            app:layout_constraintStart_toEndOf="@id/clockIv"
+            tools:text="18:00" />
+
+        <TextView
+            android:id="@+id/classTitleTv"
+            style="@style/FontLocalizedBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@id/startHourTv"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Body Pump" />
+
+        <TextView
+            android:id="@+id/difficultyTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/difficulty"
+            android:textColor="@color/blue001"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/classTitleTv" />
+
+        <TextView
+            android:id="@+id/difficultyValueTv"
+            style="@style/FontLocalizedBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/difficultyTv"
+            tools:text="Advanced" />
+
+        <TextView
+            android:id="@+id/caloriesBurnedTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/calories_burned"
+            android:textColor="@color/blue001"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/classTitleTv" />
+
+        <TextView
+            android:id="@+id/caloriesBurnedValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_calories"
+            android:drawablePadding="4dp"
+            android:text="est. 240-300 calories"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/caloriesBurnedTv"
+            app:layout_constraintTop_toBottomOf="@+id/caloriesBurnedTv" />
+
+
+        <TextView
+            android:id="@+id/spotsTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/spots_available"
+            android:textColor="@color/blue001"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/difficultyValueTv" />
+
+        <TextView
+            android:id="@+id/spotsValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/purple001"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="@+id/spotsTv"
+            app:layout_constraintStart_toStartOf="@+id/spotsTv"
+            app:layout_constraintTop_toBottomOf="@+id/spotsTv"
+            tools:text="12/14" />
+
+        <TextView
+            android:id="@+id/durationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/duration"
+            android:textColor="@color/blue001"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/caloriesBurnedTv"
+            app:layout_constraintTop_toBottomOf="@+id/difficultyValueTv" />
+
+        <TextView
+            android:id="@+id/durationValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50'"
+            android:textColor="@color/purple001"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@id/durationTv"
+            app:layout_constraintStart_toStartOf="@id/durationTv"
+            app:layout_constraintTop_toBottomOf="@+id/durationTv" />
+
+
+        <TextView
+            android:id="@+id/priceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/price"
+            android:textColor="@color/blue001"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/durationTv"
+            app:layout_constraintTop_toBottomOf="@+id/difficultyValueTv" />
+
+        <TextView
+            android:id="@+id/priceValueTv"
+            style="@style/FontLocalizedBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red001"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@id/priceTv"
+            app:layout_constraintTop_toBottomOf="@+id/priceTv"
+            tools:text="12.000 kwd" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

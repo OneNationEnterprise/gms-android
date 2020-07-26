@@ -45,7 +45,7 @@
         android:elevation="9dp"
         android:textColor="@color/white"
         android:padding="3dp"
-        android:background="@color/translucent_blue_overlay"
+        android:background="@drawable/bg_darkgray_round_corners"
         app:layout_constraintBottom_toBottomOf="@id/productImageContainer"
         app:layout_constraintEnd_toEndOf="@id/productImageContainer"
         app:layout_constraintStart_toStartOf="@id/productImageContainer"

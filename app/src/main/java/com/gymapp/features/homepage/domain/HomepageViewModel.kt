@@ -51,10 +51,15 @@ class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInter
                 homepageBrandsList.add(
                     HomepageBrandListItem(
                         gym.brand,
-                        false,
                         gym.images[0]
                     )
                 )
+            } else {
+                homepageBrandsList.map {
+                    if(gym.brand.brandId == it.brand.brandId){
+                        it.gymCount+=1
+                    }
+                }
             }
         }
 

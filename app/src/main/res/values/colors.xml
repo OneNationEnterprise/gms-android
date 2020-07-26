@@ -18,9 +18,11 @@
     <color name="brown001">#7E7367</color>
     <color name="brown002">#C3B49B</color>
 
+    <!--purple-->
+    <color name="purple001">#A188BF</color>
+
     <!--Translucent -->
     <color name="translucent_blue_overlay">#C9040915</color>
-
 
 
     <!--todo-->

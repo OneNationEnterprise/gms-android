@@ -2,6 +2,7 @@ package com.gymapp.main.data.repository.config
 
 import com.apollographql.apollo.gym.CountriesQuery
 import com.apollographql.apollo.gym.fragment.CountryFields
+import com.apollographql.apollo.gym.type.StatusType
 import com.gymapp.main.data.model.country.Country
 import com.gymapp.main.data.model.country.CountryMapper
 import com.gymapp.main.network.ApiManagerInterface
@@ -29,7 +30,9 @@ class ConfigRepository(private val apiManager: ApiManagerInterface) : ConfigRepo
         val countryFieldsList = ArrayList<CountryFields>()
 
         for (country in countriesList) {
-            countryFieldsList.add(country.fragments.countryFields)
+            if (country.fragments.countryFields.status == StatusType.ACTIVE) {
+                countryFieldsList.add(country.fragments.countryFields)
+            }
         }
 
 //        gymDao.insertCountries(countryMapper.mapToDtoList(countryFieldsList))

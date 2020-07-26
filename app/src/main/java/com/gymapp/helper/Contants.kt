@@ -9,6 +9,8 @@ object Constants {
     const val gymLogo = "extra.gym.logo"
     const val gymName = "extra.gym.name"
     const val subscriptionType = "subscription.type"
+    const val classesListPageName = "classes.list.page.name"
+
     const val BASE_SERVER_URL =
         "http://ad82ca9ee5fa74f8b8bf78963b2c735d-586376887.eu-west-1.elb.amazonaws.com/graphql"
     const val GOOGLE_MAPS_API = "AIzaSyBT0Oty_zje_wZHO9TtRBfyDJnWZDPZiYI"

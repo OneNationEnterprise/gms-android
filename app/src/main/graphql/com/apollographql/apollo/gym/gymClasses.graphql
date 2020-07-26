@@ -1,0 +1,7 @@
+query Classes($params: GymClassesFilter){
+    gymClasses(params: $params){
+        list{
+            ...classFields
+        }
+    }
+}

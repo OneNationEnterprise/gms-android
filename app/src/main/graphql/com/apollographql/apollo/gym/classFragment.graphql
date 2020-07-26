@@ -1,0 +1,17 @@
+fragment classFields on GymClass{
+    id
+    images
+    amount
+    name
+    description
+    difficultyLevel
+    spots
+    spotsAlotted
+    estimatedCaloriesBurnt
+    startDate
+    instructor{
+        firstName
+        lastName
+    }
+
+}
