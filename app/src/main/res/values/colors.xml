@@ -12,6 +12,7 @@
 
     <!--gray-->
     <color name="gray001">#979797</color>
+    <color name="gray0015">#7B818D</color>
     <color name="gray002">#5FA7AEAC</color>
     <!-- brown -->
     <color name="brown001">#7E7367</color>

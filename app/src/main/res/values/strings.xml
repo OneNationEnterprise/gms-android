@@ -105,6 +105,16 @@
     <string name="forgot_password_resent_text">An email was sent to the %1$s containing a link to reset your password</string>
     <string name="forgot_password_open_email">Open Email App</string>
 
+
+    <!--Membership & Passes-->
+    <string name="buy_membership_">Buy your membership</string>
+    <string name="buy_pass">Buy a Pass</string>
+    <string name="buy_pass_description">Buy your passes, get discounts \nand connect to the fitness community.</string>
+    <string name="buy_membership_description">Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,</string>
+    <string name="select_membership">Select your membership</string>
+    <string name="select_pass">Select your pass</string>
+
+
     <!--ERRORS-->
     <!--Auth-->
     <string name="error_phone_wrong_validation">Error phone validation</string>

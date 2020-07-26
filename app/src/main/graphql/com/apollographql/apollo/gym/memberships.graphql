@@ -1,0 +1,13 @@
+query Memberships($params: MembershipsFilter){
+    memberships(params: $params){
+        list{
+            id
+            name
+            description
+            amount
+            amountLabel
+            colorCode
+            image
+        }
+    }
+}

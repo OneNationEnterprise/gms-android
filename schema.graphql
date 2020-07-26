@@ -104,6 +104,13 @@ type BrandsPayload {
     paging: PaginatorOutput
 }
 
+type BuyAMembershipPayload {
+    error: OrderMembershipError
+    errorMessage: String
+    errors: [OrderMembershipError!]
+    orderMembership: OrderMembership
+}
+
 type BuyAPassPayload {
     error: OrderPassError
     errorMessage: String
@@ -305,6 +312,7 @@ type ExternalGym_Vendors {
 }
 
 type ExternalInstructor_VP {
+    authId: String
     contactNumber: String!
     email: String!
     firstName: String!
@@ -312,6 +320,22 @@ type ExternalInstructor_VP {
     lastName: String
     photo: String
     status: GlobalStatusType!
+}
+
+type FavouriteGymClassPayload {
+    error: GymClassError
+    errorMessage: String
+    errors: [GymClassError!]
+    favourite: Boolean
+}
+
+type FavouriteGymClassesPayload {
+    list: [GymClass!]
+    paging: PaginatorOutput
+}
+
+type FormatterPaymentMethod {
+    referenceId: String
 }
 
 "Gyms"
@@ -519,6 +543,7 @@ type Membership {
     age: Age
     allowedCheckins: Int
     amount: CurrencyValue!
+    amountLabel: String!
     colorCode: String
     countryId: ID!
     createdAt: Datetime!
@@ -557,6 +582,20 @@ type MembershipCategoryPayload {
     paging: PaginatorOutput
 }
 
+type MembershipInvoice {
+    components: [MembershipInvoiceComponent!]
+    currency: VendorPlanCurrency_Common
+    error: MembershipError
+    errorMessage: String
+    errors: [MembershipError]
+}
+
+type MembershipInvoiceComponent {
+    label: String
+    type: InvoiceComponentType!
+    value: CurrencyValue
+}
+
 type MembershipSubCategory {
     createdAt: Datetime!
     description: String
@@ -591,8 +630,10 @@ type MembershipsPayload {
 
 type Mutation {
     amenityUpsert(input: AmenityInput!): SaveAmenityPayload
+    buyAMembership(input: BuyAMembershipInput!): BuyAMembershipPayload
     buyAPass(input: BuyAPassInput!): BuyAPassPayload
     countryUpsert(input: CountryInput!): SaveCountryPayload
+    favouriteGymClass(input: FavouriteGymClassInput!): FavouriteGymClassPayload
     languageUpsert(input: LanguageInput!): SaveLanguagePayload
     registerCustomer(input: RegisterCustomerInput!): RegisterCustomerPayload
     registerInstructor(input: RegisterInstructorInput!): RegisterInstructorPayload
@@ -633,6 +674,20 @@ type Mutation {
     syncAdminsWithFirebase: Boolean
     syncCustomersWithFirebase: Boolean
     syncInstructorsWithFirebase: Boolean
+    unFavouriteGymClass(input: FavouriteGymClassInput!): FavouriteGymClassPayload
+}
+
+"Memberships bought by customers"
+type OrderMembership {
+    createdAt: Datetime!
+    customerId: ID!
+    id: ID!
+    membershipId: ID!
+    paymentMethod: PaymentMethod!
+    paymentStatus: PaymentStatus!
+    shortCode: String!
+    status: MembershipStatus!
+    updatedAt: Datetime!
 }
 
 "Passes bought by customers"
@@ -716,6 +771,14 @@ type PassesPayload {
     paging: PaginatorOutput
 }
 
+type PaymentMethod {
+    id: ID!
+    orderType: OrderType!
+    paymentMethod: FormatterPaymentMethod
+    provider: String
+    type: String
+}
+
 "Permission"
 type Permission {
     createdAt: Datetime!
@@ -737,7 +800,9 @@ type PermissionsPayload {
 "Products."
 type Product {
     barcode: String!
+    brand: ExternalBrand_Vendors
     brandId: ID!
+    category: ProductCategory
     categoryId: ID!
     createdAt: Datetime!
     createdBy: ID!
@@ -745,6 +810,7 @@ type Product {
     express: Boolean!
     id: ID!
     images: [String!]
+    inventory: [ProductStock!]
     lastUpdatedBy: ID!
     listPrice: Int!
     name: String!
@@ -772,6 +838,7 @@ type ProductCategory {
     id: ID!
     lastUpdatedBy: ID!
     name: String!
+    status: ProductCategoryStatus!
     updatedAt: Datetime!
 }
 
@@ -822,6 +889,7 @@ type Query {
     customerByAuth: Customer
     customerByEmail(email: String!): Customer
     customers(paging: PaginatorInput!, params: CustomersFilter): CustomersPayload!
+    favouriteGymClasses(paging: PaginatorInput, params: GymClassesFilter): FavouriteGymClassesPayload!
     getMedicalForm: [ContentGroup!]!
     gym(id: ID!): Gym!
     gymAddress(gymId: ID!): GymAddress
@@ -845,6 +913,7 @@ type Query {
     membership(id: ID!): Membership!
     membershipCategories(paging: PaginatorInput, params: MembershipCategoryFilter): MembershipCategoryPayload!
     membershipCategory(id: ID!): MembershipCategory!
+    membershipInvoice(input: MembershipInvoiceInput!): MembershipInvoice!
     membershipSechedule(membershipId: ID!): [MembershipWeeklySchedule!]
     membershipSubCategories(paging: PaginatorInput, params: MembershipSubCategoryFilter): MembershipSubCategoryPayload!
     membershipSubCategory(id: ID!): MembershipSubCategory!
@@ -1054,7 +1123,7 @@ type SaveMembershipCategoryPayload {
 type SaveMembershipPayload {
     error: MembershipError
     errors: [MembershipError!]
-    memebership: Membership
+    membership: Membership
 }
 
 type SaveMembershipSubCategoryPayload {
@@ -1296,11 +1365,14 @@ enum GymClassCategoryError {
 }
 
 enum GymClassError {
+    ALREADY_FAVOURITE
     DUPLICATE_NAME
     DURATION_REQUIRED
     INSTRUCTOR_REQUIRED
     INVALID_BRAND_ID
     INVALID_CATEGORY_ID
+    INVALID_CLASS_ID
+    INVALID_CUSTOMER
     INVALID_DATE_RANGE
     INVALID_GYM_ID
     INVALID_ID
@@ -1339,6 +1411,19 @@ enum InstructorError {
     INVALID_INSTRUCTOR
 }
 
+enum InvoiceComponentType {
+    "Same as total which is due on customer to pay minus the credits the customer have if payment method is credits"
+    AMOUNT_DUE
+    "Any service fee"
+    SERVICE_FEE
+    "Subtotal without discounts but after reduction the cost of items which are free"
+    SUBTOTAL
+    "The total cost of the order after all the discounts and perks"
+    TOTAL
+    "VOUCHER (amount)"
+    VOUCHER
+}
+
 enum LanguageCountryError {
     DUPLICATE_PERMISSION
     INVALID_ID
@@ -1368,11 +1453,19 @@ enum MembershipError {
     GRACE_PERIOD_REQUIRED
     INVALID_CATEGORY_ID
     INVALID_ID
+    INVALID_MEMBERSHIP_ID
     INVALID_SCHEDULE
     INVALID_SUB_CATEGORY_ID
+    MEMBERSHIP_NOT_ACTIVE
     OPEN_TIME_REQUIRED
     PERIOD_REQUIRED
     SECHEDULE_REQUIRED
+}
+
+enum MembershipStatus {
+    ACTIVE
+    CANCELED
+    INACTIVE
 }
 
 enum MembershipSubCategoryError {
@@ -1381,8 +1474,20 @@ enum MembershipSubCategoryError {
     INVALID_ID
 }
 
+enum OrderMembershipError {
+    INVALID_MEMBERSHIP_ID
+    MEMBERSHIP_NOT_ACTIVE
+}
+
 enum OrderPassError {
     INVALID_PASS_ID
+}
+
+enum OrderType {
+    GYM_CLASS
+    MEMBERSHIP
+    PASS
+    STORE
 }
 
 enum PassAccessType {
@@ -1426,6 +1531,12 @@ enum ProductCategoryError {
     DUPLICATE_NAME
     INVALID_BRAND
     INVALID_ID
+}
+
+enum ProductCategoryStatus {
+    ACTIVE
+    DELETED
+    INACTIVE
 }
 
 enum ProductError {
@@ -1492,6 +1603,10 @@ input BrandsFilter {
     countryId: ID
     searchText: String
     status: BrandStatus
+}
+
+input BuyAMembershipInput {
+    membershipId: ID!
 }
 
 input BuyAPassInput {
@@ -1595,6 +1710,10 @@ input CustomersFilter {
     status: GlobalStatusType
 }
 
+input FavouriteGymClassInput {
+    gymClassId: ID!
+}
+
 "A set of GIS co-ordinates"
 input GISLocationInput {
     "Latitude, in degrees"
@@ -1681,6 +1800,10 @@ input MembershipCategoryFilter {
     status: GlobalStatusType
 }
 
+input MembershipInvoiceInput {
+    membershipId: ID!
+}
+
 input MembershipScheduleInput {
     closeAllDay: Boolean
     day: Int!
@@ -1741,6 +1864,7 @@ input PermissionsFilter {
 
 input ProductCategoriesFilter {
     searchText: String
+    status: ProductCategoryStatus
 }
 
 input ProductStocksFilter {
@@ -2060,6 +2184,7 @@ input SaveProductCategoryInput {
     createdBy: ID
     id: ID
     name: String!
+    status: ProductCategoryStatus!
 }
 
 input SaveProductInput {
@@ -2070,6 +2195,7 @@ input SaveProductInput {
     express: Boolean!
     id: ID
     images: [String!]
+    inventory: [SaveProductStockInProductInput!]
     listPrice: Int!
     name: String!
     returnPolicy: Boolean!
@@ -2081,6 +2207,12 @@ input SaveProductInput {
     warranty: Boolean!
     warrantyDescription: String
     warrantyPeriod: Int
+}
+
+input SaveProductStockInProductInput {
+    gymId: ID!
+    id: ID
+    quantity: Int!
 }
 
 input SaveProductStockInput {
@@ -2119,11 +2251,11 @@ input addressInput {
 "An iso 8601 date-time string"
 scalar Datetime
 
-"Scalar used to describe currency amounts. Serialized as a string to retain decimal precision."
-scalar CurrencyValue
-
 "A day in format 'yyyy-mm-dd'"
 scalar Date
+
+"Scalar used to describe currency amounts. Serialized as a string to retain decimal precision."
+scalar CurrencyValue
 
 "An 24-hour time expressed as an hour/minute pair in local time, i.e. '18:00'"
 scalar LocalTime

@@ -20,23 +20,22 @@ class AmenityAdapter(var amenities: List<Amenity>) :
     }
 
     override fun getItemCount(): Int {
-//        return amenities.size
-        return 14
+        return amenities.size
     }
 
     override fun onBindViewHolder(holder: AmenityViewHolder, position: Int) {
-        holder.bindView(/*amenities[position]*/)
+        holder.bindView(amenities[position])
     }
 
 }
 
 class AmenityViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
 
-    fun bindView(/*amenity: Amenity*/) {
+    fun bindView(amenity: Amenity) {
 
-//        if (!amenity.icon.isNullOrEmpty()) {
-//            Picasso.get().load(amenity.icon).into(itemView.iconIv)
-//        }
-//        itemView.nameTv.text = amenity.name
+        if (!amenity.icon.isNullOrEmpty()) {
+            Picasso.get().load(amenity.icon).into(itemView.iconIv)
+        }
+        itemView.nameTv.text = amenity.name
     }
 }

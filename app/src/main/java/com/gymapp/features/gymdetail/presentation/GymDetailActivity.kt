@@ -13,7 +13,10 @@ import com.gymapp.features.gymdetail.domain.GymDetailViewModel
 import com.gymapp.features.gymdetail.presentation.adapter.AmenityAdapter
 import com.gymapp.features.gymdetail.presentation.adapter.ClassCategoriesAdapter
 import com.gymapp.features.gymdetail.presentation.adapter.ImageGalleryAdapter
+import com.gymapp.features.subscriptions.presentation.SubscriptionActivity
 import com.gymapp.helper.Constants
+import com.gymapp.helper.DateHelper
+import com.gymapp.helper.SubscriptionType
 import com.gymapp.main.data.model.gym.Gym
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_gym_detail.*
@@ -24,6 +27,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
 
     lateinit var gymDetailViewModel: GymDetailViewModel
+    private var gymLogo = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +40,24 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
 
         backArrowIv.setOnClickListener {
             onBackPressed()
+        }
+
+        passesContainer.setOnClickListener {
+            intent.getBundleExtra(Constants.arguments)?.getString(Constants.gymId)?.let { it1 ->
+                openSubscriptionClass(
+                    SubscriptionType.PASS,
+                    it1
+                )
+            }
+        }
+
+        buyMembershipBtn.setOnClickListener {
+            intent.getBundleExtra(Constants.arguments)?.getString(Constants.gymId)?.let { it1 ->
+                openSubscriptionClass(
+                    SubscriptionType.MEMBERSHIP,
+                    it1
+                )
+            }
         }
     }
 
@@ -77,9 +99,21 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
 
         gymNameTv.text = gym.name
 
-        Picasso.get().load(gym.brand.logo).into(gymLogoIv)
+        gymLogo = gym.brand.logo
+
+        if (!gymLogo.isNullOrEmpty()) {
+            Picasso.get().load(gym.brand.logo).into(gymLogoIv)
+        }
+        if (gym.description.isNullOrEmpty()) {
+            aboutTitleTv.visibility = View.GONE
+        }
 
         aboutDescriptionTv.text = gym.description
+
+        scheduleTv.text = DateHelper.getGymDetailTime(
+            gym.opening?.operatingTime?.begin,
+            gym.opening?.operatingTime?.end
+        )
 
         directionsContainer.setOnClickListener {
             val gmmIntentUri = Uri.parse(
@@ -114,6 +148,30 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
             adapter = AmenityAdapter(gym.amenityList)
             layoutManager = gridLayoutManager
         }
-
     }
+
+
+    private fun openSubscriptionClass(subscriptionTypeType: SubscriptionType, gymId: String) {
+        val intent = Intent(this, SubscriptionActivity::class.java)
+        val args = Bundle()
+
+        args.putString(
+            Constants.gymId,
+            gymId
+        )
+
+        args.putString(
+            Constants.gymLogo,
+            gymLogo
+        )
+        args.putSerializable(
+            Constants.subscriptionType,
+            subscriptionTypeType
+        )
+        intent.putExtra(Constants.arguments, args)
+
+        startActivity(intent)
+    }
+
+
 }

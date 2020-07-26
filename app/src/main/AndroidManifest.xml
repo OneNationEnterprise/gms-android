@@ -57,6 +57,10 @@
             android:name=".features.profile.settings.presentation.SettingsActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".features.subscriptions.presentation.SubscriptionActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBT0Oty_zje_wZHO9TtRBfyDJnWZDPZiYI" />

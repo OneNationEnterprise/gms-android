@@ -8,5 +8,5 @@
         android:topRightRadius="8dp" />
 
 
-    <solid android:color="@color/gray001" />
+    <solid android:color="@color/loading_background" />
 </shape>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/blue002"
+    android:background="@color/blue005"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -26,9 +26,9 @@
 
         <ImageView
             android:id="@+id/gymLogoIv"
-            android:layout_width="80dp"
-            android:layout_height="20dp"
-            android:background="@color/white"
+            android:layout_width="68dp"
+            android:layout_height="14dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/backArrowIv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,6 @@
             android:text="Gym Name"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/backArrowIv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,171 +60,181 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/scheduleTv"
-                style="@style/FontLocalizedBold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_gray_round_corners"
-                android:padding="5dp"
-                android:text="8AM - 10PM"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/gymImagesViewPager"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/topContainer"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginTop="5dp"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintTop_toBottomOf="@id/scheduleTv" />
-
-            <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
-                android:id="@+id/dotsIndicator"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                app:dotsColor="@color/md_white_1000"
-                app:dotsCornerRadius="8dp"
-                app:dotsSize="5dp"
-                app:dotsSpacing="2dp"
-                app:dotsWidthFactor="2.5"
-                app:layout_constraintEnd_toEndOf="parent"
-
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gymImagesViewPager"
-                app:progressMode="false"
-                app:selectedDotColor="@color/accent" />
-
-
-            <LinearLayout
-                android:id="@+id/passesContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@+id/storeContainer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dotsIndicator">
-
-
-                <ImageView
-                    android:id="@+id/passesIv"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/round_shape"
-                    android:padding="14dp"
-                    android:src="@drawable/ic_passes" />
+                android:paddingBottom="16dp"
+                android:background="@drawable/bg_top_gym_detail"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:id="@+id/scheduleTv"
                     style="@style/FontLocalizedBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:text="@string/passes"
-                    android:textColor="@color/red001"
-                    android:textSize="14sp" />
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_gray_round_corners"
+                    android:padding="5dp"
+                    android:text="8AM - 10PM"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/gymImagesViewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintTop_toBottomOf="@id/scheduleTv" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/storeContainer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/passesContainer"
-                app:layout_constraintTop_toBottomOf="@+id/dotsIndicator">
-
-
-                <ImageView
-                    android:id="@+id/storeIv"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/round_shape"
-                    android:padding="14dp"
-                    android:src="@drawable/ic_passes" />
-
-                <TextView
-                    style="@style/FontLocalizedBold"
+                <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+                    android:id="@+id/dotsIndicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:text="@string/store"
-                    android:textColor="@color/red001"
-                    android:textSize="14sp" />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:dotsColor="@color/md_white_1000"
+                    app:dotsCornerRadius="8dp"
+                    app:dotsSize="5dp"
+                    app:dotsSpacing="2dp"
+                    app:dotsWidthFactor="2.5"
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/gymImagesViewPager"
+                    app:progressMode="false"
+                    app:selectedDotColor="@color/accent" />
+
+                <LinearLayout
+                    android:id="@+id/passesContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/storeContainer"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dotsIndicator">
+
+                    <ImageView
+                        android:id="@+id/passesIv"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/round_shape"
+                        android:padding="14dp"
+                        android:src="@drawable/ic_passes" />
+
+                    <TextView
+                        style="@style/FontLocalizedBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="@string/passes"
+                        android:textColor="@color/red001"
+                        android:textSize="14sp" />
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <TextView
-                android:id="@+id/aboutTitleTv"
-                style="@style/FontLocalizedMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:text="@string/about"
-                android:textColor="@color/blue001"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/passesContainer" />
+                <LinearLayout
+                    android:id="@+id/storeContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/passesContainer"
+                    app:layout_constraintTop_toBottomOf="@+id/dotsIndicator">
 
-            <TextView
-                android:id="@+id/aboutDescriptionTv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/aboutTitleTv" />
 
-            <TextView
-                android:id="@+id/amenitiesTitleTv"
-                style="@style/FontLocalizedMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/amenities"
-                android:textColor="@color/blue001"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/aboutDescriptionTv" />
+                    <ImageView
+                        android:id="@+id/storeIv"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/round_shape"
+                        android:padding="14dp"
+                        android:src="@drawable/ic_passes" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/amenitiesRv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/amenitiesTitleTv" />
+                    <TextView
+                        style="@style/FontLocalizedBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="@string/store"
+                        android:textColor="@color/red001"
+                        android:textSize="14sp" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/aboutTitleTv"
+                    style="@style/FontLocalizedMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:text="@string/about"
+                    android:textColor="@color/blue001"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/passesContainer" />
+
+                <TextView
+                    android:id="@+id/aboutDescriptionTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/aboutTitleTv" />
+
+                <TextView
+                    android:id="@+id/amenitiesTitleTv"
+                    style="@style/FontLocalizedMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/amenities"
+                    android:textColor="@color/blue001"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/aboutDescriptionTv" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/amenitiesRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    app:layout_constraintTop_toBottomOf="@id/amenitiesTitleTv"
+                    tools:layout_editor_absoluteX="8dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:id="@+id/directionButtonsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:weightSum="1"
-                app:layout_constraintTop_toBottomOf="@+id/amenitiesRv">
+                app:layout_constraintTop_toBottomOf="@+id/topContainer">
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".05" />
 
                 <LinearLayout
                     android:id="@+id/directionsContainer"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".44"
+                    android:layout_weight=".49"
                     android:background="@drawable/button_left"
                     android:elevation="9dp"
                     android:gravity="center"
@@ -254,7 +263,7 @@
                     android:id="@+id/callContainer"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight=".44"
+                    android:layout_weight=".49"
                     android:background="@drawable/button_right"
                     android:elevation="9dp"
                     android:gravity="center"
@@ -273,11 +282,6 @@
                         android:textColor="@color/white" />
 
                 </LinearLayout>
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".05" />
 
             </LinearLayout>
 

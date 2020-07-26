@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="10dp"
         android:text="Test name"
+        android:textSize="11sp"
         android:textColor="@color/white" />
 
 </LinearLayout>

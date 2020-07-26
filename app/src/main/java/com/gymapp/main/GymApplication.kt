@@ -7,6 +7,7 @@ import com.gymapp.main.di.ApplicationModule.repositoryModule
 //import com.gymapp.main.di.ApplicationModule.databaseModule
 import com.gymapp.main.di.ApplicationModule.networkModule
 import com.gymapp.main.di.ApplicationModule.viewModelModule
+import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -15,6 +16,9 @@ class GymApplication : Application() {
         super.onCreate()
 
         FirebaseApp.initializeApp(this)
+
+        AndroidThreeTen.init(this)
+
         DebugDB.getAddressLog()
         startKoin {
             androidContext(this@GymApplication)

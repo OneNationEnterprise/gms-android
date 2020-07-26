@@ -4,9 +4,7 @@ import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.coroutines.toDeferred
 import com.apollographql.apollo.gym.*
-import com.apollographql.apollo.gym.type.GymsInRadiusFilter
-import com.apollographql.apollo.gym.type.PaginatorInput
-import com.apollographql.apollo.gym.type.RegisterCustomerInput
+import com.apollographql.apollo.gym.type.*
 import com.gymapp.base.data.BaseApiManager
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
@@ -41,5 +39,13 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
 
     override suspend fun getGymCategoriesAsync(): Deferred<Response<GymClassCategoriesQuery.Data>> {
         return graphQlNoAuthClient.query(GymClassCategoriesQuery()).toDeferred()
+    }
+
+    override suspend fun getMembershipAsync(input: Input<MembershipsFilter>): Deferred<Response<MembershipsQuery.Data>> {
+        return graphQlNoAuthClient.query(MembershipsQuery(input)).toDeferred()
+    }
+
+    override suspend fun getPassesAsync(input: Input<PassesFilter>): Deferred<Response<PassesQuery.Data>> {
+        return graphQlNoAuthClient.query(PassesQuery(input)).toDeferred()
     }
 }

@@ -1,0 +1,12 @@
+query Passes($params: PassesFilter){
+    passes(params: $params){
+        list{
+            id
+            name
+            description
+            amount
+            colorCode
+            image
+        }
+    }
+}

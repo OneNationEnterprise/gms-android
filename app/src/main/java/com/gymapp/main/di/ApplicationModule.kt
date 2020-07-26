@@ -15,8 +15,11 @@ import com.gymapp.features.profile.main.data.ProfileRepository
 import com.gymapp.features.profile.main.data.ProfileRepositoryInterface
 import com.gymapp.features.profile.main.domain.ProfileViewModel
 import com.gymapp.features.profile.settings.domain.SettingsViewModel
+import com.gymapp.features.subscriptions.domain.SubscriptionViewModel
 import com.gymapp.main.data.repository.config.ConfigRepository
 import com.gymapp.main.data.repository.config.ConfigRepositoryInterface
+import com.gymapp.main.data.repository.subscription.SubscriptionRepository
+import com.gymapp.main.data.repository.subscription.SubscriptionRepositoryInterface
 //import com.gymapp.main.data.db.GymDatabase
 import com.gymapp.main.launcher.data.LauncherRepository
 import com.gymapp.main.launcher.data.LauncherRepositoryInterface
@@ -89,6 +92,10 @@ object ApplicationModule {
         single<ProfileRepositoryInterface> {
             ProfileRepository(get()/*, get()*/)
         }
+
+        single<SubscriptionRepositoryInterface> {
+            SubscriptionRepository(get())
+        }
     }
 
     val viewModelModule = module {
@@ -119,6 +126,10 @@ object ApplicationModule {
 
         viewModel {
             SettingsViewModel(get())
+        }
+
+        viewModel {
+            SubscriptionViewModel(get())
         }
     }
 
