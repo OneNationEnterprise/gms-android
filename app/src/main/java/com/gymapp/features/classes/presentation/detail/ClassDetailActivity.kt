@@ -9,7 +9,6 @@ import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.classes.domain.ClassesViewModel
 import com.gymapp.features.classes.presentation.detail.adapter.ClassImageAdapter
-import com.gymapp.features.gymdetail.presentation.adapter.ImageGalleryAdapter
 import com.gymapp.helper.Constants
 import com.gymapp.main.data.model.classes.Class
 import kotlinx.android.synthetic.main.activity_class_detail.*

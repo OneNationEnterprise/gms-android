@@ -1,4 +1,4 @@
-package com.gymapp.features.classes.list.presentation
+package com.gymapp.features.classes.presentation.list
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
+import com.gymapp.features.classes.data.model.ClassDate
 import com.gymapp.features.classes.domain.ClassesViewModel
 import com.gymapp.features.classes.presentation.detail.ClassDetailActivity
+import com.gymapp.features.classes.presentation.list.adapter.ClassesAdapter
+import com.gymapp.features.classes.presentation.list.adapter.DatesAdapter
 import com.gymapp.helper.Constants
 import com.gymapp.helper.DateHelper
 import kotlinx.android.synthetic.main.activity_classes_list.*
@@ -22,15 +25,18 @@ class ClassesActivity : BaseActivity(R.layout.activity_classes_list) {
 
     lateinit var classesAdapter: ClassesAdapter
 
+    lateinit var datesAdapter: DatesAdapter
+
+    lateinit var bundle: Bundle
+
     override fun setupViewModel() {
         classesViewModel = getViewModel()
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val bundle = intent.getBundleExtra(Constants.arguments) ?: return
+        bundle = intent.getBundleExtra(Constants.arguments) ?: return
 
         setTitle(bundle.getString(Constants.classesListPageName)!!)
 
@@ -43,6 +49,8 @@ class ClassesActivity : BaseActivity(R.layout.activity_classes_list) {
                 bundle.getString(Constants.categoryId)
             )
         }
+
+        classesViewModel.createDatesList()
     }
 
     private fun setupAdapter() {
@@ -55,12 +63,24 @@ class ClassesActivity : BaseActivity(R.layout.activity_classes_list) {
             adapter = classesAdapter
             layoutManager = linearLayoutManager
         }
+
+        datesAdapter = DatesAdapter(ClassDate("", ""), ArrayList(), classesViewModel)
+
+        val horizontalLinearLayoutManager =
+            LinearLayoutManager(this@ClassesActivity, LinearLayoutManager.HORIZONTAL, false)
+
+        datesRv.apply {
+            adapter = datesAdapter
+            layoutManager = horizontalLinearLayoutManager
+        }
+
     }
 
     override fun bindViewModelObservers() {
         classesViewModel.classesList.observe(this, Observer {
             if (it.isNullOrEmpty()) {
                 noDataTv.visibility = View.VISIBLE
+                classesAdapter.updateList(ArrayList())
                 return@Observer
             }
 
@@ -78,6 +98,24 @@ class ClassesActivity : BaseActivity(R.layout.activity_classes_list) {
             intent.putExtra(Constants.arguments, args)
 
             startActivity(intent)
+        })
+
+        classesViewModel.classDate.observe(this, Observer {
+
+            classesAdapter.updateList(ArrayList())
+            datesAdapter.updateSelectedClassDate(it)
+
+            GlobalScope.launch {
+                classesViewModel.fetchClassesList(
+                    bundle.getString(Constants.gymId),
+                    it.dateForServerRequest,
+                    bundle.getString(Constants.categoryId)
+                )
+            }
+        })
+
+        classesViewModel.datesList.observe(this, Observer {
+            datesAdapter.initAdapter(it[0], it)
         })
     }
 

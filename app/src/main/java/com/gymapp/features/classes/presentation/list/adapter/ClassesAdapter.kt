@@ -1,4 +1,4 @@
-package com.gymapp.features.classes.list.presentation
+package com.gymapp.features.classes.presentation.list.adapter
 
 import android.view.LayoutInflater
 import android.view.View

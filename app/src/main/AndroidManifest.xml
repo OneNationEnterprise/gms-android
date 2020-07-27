@@ -62,7 +62,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".features.classes.list.presentation.ClassesActivity"
+            android:name=".features.classes.presentation.list.ClassesActivity"
             android:screenOrientation="portrait" />
 
         <activity

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
-import com.gymapp.features.classes.list.presentation.ClassesActivity
+import com.gymapp.features.classes.presentation.list.ClassesActivity
 import com.gymapp.features.gymdetail.domain.GymDetailViewModel
 import com.gymapp.features.gymdetail.presentation.adapter.AmenityAdapter
 import com.gymapp.features.gymdetail.presentation.adapter.ClassCategoriesAdapter
