@@ -1,13 +1,15 @@
 package com.gymapp.helper
 
 object Constants {
+
     const val dubaiLatitude = 25.276987
     const val dubaiLongitude = 55.296249
     const val arguments = "extra.arguments"
     const val brandId = "extra.brand.id"
     const val gymId = "extra.gym.id"
-    const val gymLogo = "extra.gym.logo"
+    const val categoryId = "extra.category.id"
     const val gymName = "extra.gym.name"
+    const val classId = "extra.class.id"
     const val subscriptionType = "subscription.type"
     const val classesListPageName = "classes.list.page.name"
 

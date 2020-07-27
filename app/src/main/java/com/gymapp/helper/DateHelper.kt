@@ -1,15 +1,23 @@
 package com.gymapp.helper
 
+import android.icu.text.SimpleDateFormat
 import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZoneOffset
 import org.threeten.bp.format.DateTimeFormatterBuilder
 import org.threeten.bp.temporal.ChronoField
+import java.util.*
 
 object DateHelper {
 
     val dateTimeFormatter = DateTimeFormatterBuilder()
         .appendPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+        .parseDefaulting(ChronoField.MILLI_OF_SECOND, 0)
+        .toFormatter()
+
+    val classRequestFormat = DateTimeFormatterBuilder()
+        .appendPattern("yyyy-MM-dd")
         .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
         .parseDefaulting(ChronoField.MILLI_OF_SECOND, 0)
         .toFormatter()
@@ -50,5 +58,17 @@ object DateHelper {
         val endAmPmFormat = amPmTimeFormatter.format(end)
 
         return "$startHour $startAmPmFormat - $endHour $endAmPmFormat"
+    }
+
+    fun getClassHourFormat(date: String): String {
+        val begin = (LocalDateTime.parse(date, dateTimeFormatter).atOffset(
+            ZoneOffset.UTC
+        ).toInstant()).atZone(ZoneId.of("Asia/Dubai"))
+
+        return begin.format(hourTimeFormatter).replace(" ", "")
+    }
+
+    fun getCurrentDate(): String {
+        return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
     }
 }

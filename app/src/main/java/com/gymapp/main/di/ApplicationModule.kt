@@ -1,6 +1,9 @@
 package com.gymapp.main.di
 
 //import androidx.room.Room
+import com.gymapp.features.classes.data.ClassesRepository
+import com.gymapp.features.classes.data.ClassesRepositoryInterface
+import com.gymapp.features.classes.domain.ClassesViewModel
 import com.gymapp.features.gymdetail.domain.GymDetailViewModel
 import com.gymapp.main.data.repository.gyms.GymsRepository
 import com.gymapp.main.data.repository.gyms.GymsRepositoryInterface
@@ -96,6 +99,10 @@ object ApplicationModule {
         single<SubscriptionRepositoryInterface> {
             SubscriptionRepository(get())
         }
+
+        single<ClassesRepositoryInterface> {
+            ClassesRepository(get())
+        }
     }
 
     val viewModelModule = module {
@@ -130,6 +137,10 @@ object ApplicationModule {
 
         viewModel {
             SubscriptionViewModel(get())
+        }
+
+        viewModel {
+            ClassesViewModel(get())
         }
     }
 

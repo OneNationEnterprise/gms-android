@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue005"
+    android:fitsSystemWindows="true">
+
+    <ImageView
+        android:id="@+id/backArrowIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:src="@drawable/ic_back_arrow"
+        android:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageIv"
+        android:layout_width="68dp"
+        android:layout_height="14dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/backArrowIv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backArrowIv" />
+
+    <TextView
+        android:id="@+id/titleNameTv"
+        style="@style/FontLocalizedBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gym Name"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/backArrowIv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/backArrowIv"
+        app:layout_constraintWidth_percent="1" />
+
+    <ImageView
+        android:id="@+id/favouritesIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:src="@drawable/ic_favourites_off"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/imagesViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="211dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintTop_toBottomOf="@id/backArrowIv" />
+
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/dotsIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:dotsColor="@color/md_white_1000"
+        app:dotsCornerRadius="8dp"
+        app:dotsSize="5dp"
+        app:dotsSpacing="2dp"
+        app:dotsWidthFactor="2.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagesViewPager"
+        app:progressMode="false"
+        app:selectedDotColor="@color/accent" />
+
+
+    <ImageView
+        android:id="@+id/clockIv"
+        android:layout_width="16dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="26dp"
+        android:src="@drawable/ic_clock"
+        app:layout_constraintBottom_toBottomOf="@id/startHourTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/startHourTv" />
+
+    <TextView
+        android:id="@+id/startHourTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/classTitleTv"
+        app:layout_constraintStart_toEndOf="@id/clockIv"
+        tools:text="18:00" />
+
+    <TextView
+        android:id="@+id/classTitleTv"
+        style="@style/FontLocalizedBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="26dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toEndOf="@id/startHourTv"
+        app:layout_constraintTop_toBottomOf="@id/dotsIndicator"
+        tools:text="Body Pump" />
+
+    <TextView
+        android:id="@+id/priceValueTv"
+        style="@style/FontLocalizedBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="26dp"
+        android:textColor="@color/red001"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/classTitleTv"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="12.000 kwd" />
+
+
+    <TextView
+        android:id="@+id/difficultyTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/difficulty"
+        android:textColor="@color/blue001"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/classTitleTv" />
+
+    <TextView
+        android:id="@+id/difficultyValueTv"
+        style="@style/FontLocalizedBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/difficultyTv"
+        tools:text="Advanced" />
+
+    <TextView
+        android:id="@+id/caloriesBurnedTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="26dp"
+        android:text="@string/calories_burned"
+        android:textColor="@color/blue001"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/classTitleTv" />
+
+    <TextView
+        android:id="@+id/caloriesBurnedValueTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="26dp"
+        android:drawableLeft="@drawable/ic_calories"
+        android:drawablePadding="4dp"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/caloriesBurnedTv"
+        tools:text="est. 240-300 calories" />
+
+    <TextView
+        android:id="@+id/descriptionTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="26dp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/caloriesBurnedValueTv"
+        tools:text="ajsdbajsbdjiasbdjas duias duas gduiasg udg asuodg uasgd uasgd uasg duasg sahdbiashdbahs gdiasg diyasg digasiudg asuidg uaisgd uiasgd uiasgd uasgd iasgd iasg diuasgduiasg duiasg duiasg dias d" />
+
+
+    <TextView
+        android:id="@+id/instructorTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:text="@string/instructor"
+        android:textColor="@color/blue001"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionTv" />
+
+    <TextView
+        android:id="@+id/instructorNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple001"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/instructorTv"
+        app:layout_constraintTop_toBottomOf="@+id/instructorTv"
+        tools:text="nea Ionel" />
+
+    <TextView
+        android:id="@+id/spotsTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/spots_available"
+        android:textColor="@color/blue001"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instructorNameTv" />
+
+    <TextView
+        android:id="@+id/spotsValueTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple001"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/spotsTv"
+        app:layout_constraintTop_toBottomOf="@+id/spotsTv"
+        tools:text="12/14" />
+
+    <TextView
+        android:id="@+id/durationTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/duration"
+        android:textColor="@color/blue001"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spotsValueTv" />
+
+    <TextView
+        android:id="@+id/durationValueTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple001"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/durationTv"
+        app:layout_constraintTop_toBottomOf="@+id/durationTv"
+        tools:text="50'" />
+
+    <Button
+        android:id="@+id/buyMembershipBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="16dp"
+        android:padding="14dp"
+        android:text="@string/book_spot"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

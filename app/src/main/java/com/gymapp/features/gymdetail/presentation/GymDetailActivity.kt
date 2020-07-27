@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
+import com.gymapp.features.classes.list.presentation.ClassesActivity
 import com.gymapp.features.gymdetail.domain.GymDetailViewModel
 import com.gymapp.features.gymdetail.presentation.adapter.AmenityAdapter
 import com.gymapp.features.gymdetail.presentation.adapter.ClassCategoriesAdapter
@@ -32,10 +33,11 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val gymId = intent.getBundleExtra(Constants.arguments)?.getString(Constants.gymId) ?: return
+
+
         GlobalScope.launch {
-            gymDetailViewModel.setupGymData(
-                intent.getBundleExtra(Constants.arguments)?.getString(Constants.gymId)
-            )
+            gymDetailViewModel.setupGymData(gymId)
         }
 
         backArrowIv.setOnClickListener {
@@ -43,21 +45,15 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
         }
 
         passesContainer.setOnClickListener {
-            intent.getBundleExtra(Constants.arguments)?.getString(Constants.gymId)?.let { it1 ->
-                openSubscriptionClass(
-                    SubscriptionType.PASS,
-                    it1
-                )
-            }
+            openSubscriptionClass(SubscriptionType.PASS, gymId)
         }
 
         buyMembershipBtn.setOnClickListener {
-            intent.getBundleExtra(Constants.arguments)?.getString(Constants.gymId)?.let { it1 ->
-                openSubscriptionClass(
-                    SubscriptionType.MEMBERSHIP,
-                    it1
-                )
-            }
+            openSubscriptionClass(SubscriptionType.MEMBERSHIP, gymId)
+        }
+
+        seeAllTv.setOnClickListener {
+            openClassList(gymId, getString(R.string.all_classes))
         }
     }
 
@@ -165,6 +161,19 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
             Constants.subscriptionType,
             subscriptionTypeType
         )
+        intent.putExtra(Constants.arguments, args)
+
+        startActivity(intent)
+    }
+
+    private fun openClassList(gymId: String, screenName: String) {
+        val intent = Intent(this, ClassesActivity::class.java)
+        val args = Bundle()
+
+        args.putString(Constants.gymId, gymId)
+
+        args.putString(Constants.classesListPageName, screenName)
+
         intent.putExtra(Constants.arguments, args)
 
         startActivity(intent)

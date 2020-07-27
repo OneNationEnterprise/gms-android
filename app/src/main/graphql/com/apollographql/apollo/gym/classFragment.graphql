@@ -8,7 +8,8 @@ fragment classFields on GymClass{
     spots
     spotsAlotted
     estimatedCaloriesBurnt
-    startDate
+    openTime
+    duration
     instructor{
         firstName
         lastName

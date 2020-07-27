@@ -4,6 +4,7 @@
     <!-- Colors -->
     <!--red-->
     <color name="red001">#F95365</color>
+    <color name="red003">#FF0202</color>
     <!--blue-->
     <color name="blue001">#AAB9DC</color>
     <color name="blue002">#1F2432</color>
@@ -24,6 +25,11 @@
     <!--Translucent -->
     <color name="translucent_blue_overlay">#C9040915</color>
 
+    <!--green-->
+    <color name="green002">#5DCE71</color>
+
+    <!--yellow-->
+    <color name="yellow005">#E0C016</color>
 
     <!--todo-->
     <color name="loading_background">#5FA7AEAC</color>

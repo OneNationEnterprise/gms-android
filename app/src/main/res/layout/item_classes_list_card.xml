@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/subscriptionContainer"
+    android:id="@+id/classContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textColor="@color/white"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@id/classTitleTv"
             app:layout_constraintStart_toEndOf="@id/clockIv"
             tools:text="18:00" />
@@ -45,6 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:textSize="15sp"
             android:textColor="@color/white"
             app:layout_constraintStart_toEndOf="@id/startHourTv"
             app:layout_constraintTop_toTopOf="parent"
@@ -57,7 +59,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/difficulty"
             android:textColor="@color/blue001"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/classTitleTv" />
 
@@ -67,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/difficultyTv"
             tools:text="Advanced" />
@@ -79,7 +81,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/calories_burned"
             android:textColor="@color/blue001"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/classTitleTv" />
@@ -92,7 +94,7 @@
             android:drawablePadding="4dp"
             android:text="est. 240-300 calories"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="@id/caloriesBurnedTv"
             app:layout_constraintTop_toBottomOf="@+id/caloriesBurnedTv" />
 
@@ -104,7 +106,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/spots_available"
             android:textColor="@color/blue001"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/difficultyValueTv" />
 
@@ -113,7 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/purple001"
-            android:textSize="13sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@+id/spotsTv"
             app:layout_constraintStart_toStartOf="@+id/spotsTv"
             app:layout_constraintTop_toBottomOf="@+id/spotsTv"
@@ -126,7 +128,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/duration"
             android:textColor="@color/blue001"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="@id/caloriesBurnedTv"
             app:layout_constraintTop_toBottomOf="@+id/difficultyValueTv" />
 
@@ -136,7 +138,7 @@
             android:layout_height="wrap_content"
             android:text="50'"
             android:textColor="@color/purple001"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="@id/durationTv"
             app:layout_constraintStart_toStartOf="@id/durationTv"
             app:layout_constraintTop_toBottomOf="@+id/durationTv" />
@@ -149,7 +151,7 @@
             android:layout_marginTop="16dp"
             android:text="@string/price"
             android:textColor="@color/blue001"
-            android:textSize="12sp"
+            android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/durationTv"
             app:layout_constraintTop_toBottomOf="@+id/difficultyValueTv" />
@@ -160,7 +162,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/red001"
-            android:textSize="13sp"
+            android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@id/priceTv"
             app:layout_constraintTop_toBottomOf="@+id/priceTv"
             tools:text="12.000 kwd" />

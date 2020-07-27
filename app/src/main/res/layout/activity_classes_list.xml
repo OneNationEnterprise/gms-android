@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue005"
+    android:fitsSystemWindows="true"
+    android:gravity="center_horizontal"
     android:orientation="vertical">
 
     <include layout="@layout/item_toolbar" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/datesRv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/noDataTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="48dp"
+        android:text="@string/no_classes"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/classesRv"

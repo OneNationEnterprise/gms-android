@@ -48,4 +48,8 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
     override suspend fun getPassesAsync(input: Input<PassesFilter>): Deferred<Response<PassesQuery.Data>> {
         return graphQlNoAuthClient.query(PassesQuery(input)).toDeferred()
     }
+
+    override suspend fun getClassesAsync(input: Input<GymClassesFilter>): Deferred<Response<ClassesQuery.Data>> {
+        return graphQlNoAuthClient.query(ClassesQuery(input)).toDeferred()
+    }
 }

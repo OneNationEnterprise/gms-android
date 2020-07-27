@@ -3,10 +3,7 @@ package com.gymapp.main.network
 import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.gym.*
-import com.apollographql.apollo.gym.type.GymsInRadiusFilter
-import com.apollographql.apollo.gym.type.MembershipsFilter
-import com.apollographql.apollo.gym.type.PassesFilter
-import com.apollographql.apollo.gym.type.RegisterCustomerInput
+import com.apollographql.apollo.gym.type.*
 import kotlinx.coroutines.Deferred
 
 interface ApiManagerInterface {
@@ -26,4 +23,6 @@ interface ApiManagerInterface {
     suspend fun getMembershipAsync(input: Input<MembershipsFilter>): Deferred<Response<MembershipsQuery.Data>>
 
     suspend fun getPassesAsync(input: Input<PassesFilter>): Deferred<Response<PassesQuery.Data>>
+
+    suspend fun getClassesAsync(input: Input<GymClassesFilter>): Deferred<Response<ClassesQuery.Data>>
 }
