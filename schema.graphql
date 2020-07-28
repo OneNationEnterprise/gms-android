@@ -5,6 +5,8 @@ schema {
     mutation: Mutation
 }
 
+union CustomerMembershipRefTypePayload = OrderHistoryBrand | OrderHistoryGym
+
 union MembershipRefTypePayload = ExternalBrand_VP | ExternalGym_VP
 
 union PassRefTypePayload = ExternalBrand_VP | ExternalGym_VP
@@ -266,6 +268,58 @@ type CustomerMedicalFormPayload {
     errorMessage: String
     errors: [CustomerError!]
     medicalForm: [ContentElementValue]
+}
+
+"CustomerMembership.."
+type CustomerMembership {
+    accessType: CustomerMembershipAccessType!
+    age: Age
+    allowedCheckins: Int
+    amount: CurrencyValue!
+    amountLabel: String!
+    colorCode: String
+    countryId: ID!
+    createdAt: Datetime!
+    customer: ID!
+    description: String
+    gender: GlobalGenderType!
+    gracePeriod: Int
+    id: ID!
+    image: String
+    isWeekelyScheduled: Boolean!
+    lifetime: Boolean
+    membershipId: ID!
+    name: String!
+    paymentMethod: CustomerPaymentMethod!
+    period: Int
+    referenceType: CustomerMembershipRefTypePayload
+    schedule: [CustomerMembershipWeeklySchedule!]
+    status: MembershipStatus!
+    updatedAt: Datetime!
+}
+
+type CustomerMembershipWeeklySchedule {
+    closeAllDay: Boolean!
+    createdAt: Datetime!
+    customerMembership: CustomerMembership!
+    day: Int!
+    duration: Float
+    id: ID!
+    openTime: LocalTime
+    updatedAt: Datetime!
+}
+
+type CustomerMembershipsPayload {
+    list: [CustomerMembership]
+    paging: PaginatorOutput
+}
+
+type CustomerPaymentMethod {
+    id: ID!
+    orderType: String!
+    paymentMethod: FormatterPaymentMethod
+    provider: String
+    type: String
 }
 
 type CustomersPayload {
@@ -669,12 +723,77 @@ type Mutation {
     saveProductCategory(input: SaveProductCategoryInput!): SaveProductCategoryPayload
     saveProductStock(input: SaveProductStockInput!): SaveProductStockPayload
     saveRole(input: SaveRoleInput!): SaveRolePayload
-    sortContentElement(contentTypeId: ID!, ids: [ID!]!): Boolean
+    sortContentElement(contentGroupId: ID!, ids: [ID!]!): Boolean
     sortContentGroup(contentTypeId: ID!, ids: [ID!]!): Boolean
     syncAdminsWithFirebase: Boolean
+    syncCustomerKafka: Boolean
     syncCustomersWithFirebase: Boolean
     syncInstructorsWithFirebase: Boolean
     unFavouriteGymClass(input: FavouriteGymClassInput!): FavouriteGymClassPayload
+}
+
+type OrderHistoryBrand {
+    countryId: ID!
+    email: String!
+    id: ID!
+    legalName: String
+    logo: String!
+    name: String!
+    phone: String!
+    status: GlobalStatusType!
+}
+
+type OrderHistoryCountry {
+    currency: OrderHistoryCurrency!
+    dialCode: String
+    flagPhoto: String
+    id: ID!
+    isoCode: String
+    name: String!
+    servicePhoneNumber: String
+    status: GlobalStatusType
+    timeZoneIdentifier: String
+    vat: Float!
+    vatId: String
+}
+
+type OrderHistoryCurrency {
+    code: String!
+    decimalPlace: Int!
+    lowestDenomination: Float!
+    name: String!
+    subUnitName: String!
+    symbol: String
+}
+
+type OrderHistoryCustomer {
+    authId: String!
+    contactNumber: String
+    country: OrderHistoryCountry!
+    createdAt: Datetime!
+    dob: Date
+    email: String!
+    firstName: String!
+    fullName: String!
+    gender: GlobalGenderType
+    id: ID!
+    isEmailVerified: Boolean!
+    isPhoneVerified: Boolean!
+    lastName: String!
+    photo: String
+    status: GlobalStatusType!
+    updatedAt: Datetime!
+}
+
+type OrderHistoryGym {
+    brandId: ID!
+    email: String!
+    id: ID!
+    legalName: String
+    logo: String!
+    name: String!
+    phone: String!
+    status: GlobalStatusType!
 }
 
 "Memberships bought by customers"
@@ -804,6 +923,7 @@ type Product {
     brandId: ID!
     category: ProductCategory
     categoryId: ID!
+    countryId: ID!
     createdAt: Datetime!
     createdBy: ID!
     description: String!
@@ -819,7 +939,7 @@ type Product {
     returnPolicyPeriod: Int
     salePrice: Int!
     sku: String!
-    status: ProductStatus!
+    status: GlobalStatusType!
     updatedAt: Datetime!
     warranty: Boolean!
     warrantyDescription: String
@@ -836,10 +956,25 @@ type ProductCategory {
     createdAt: Datetime!
     createdBy: ID!
     id: ID!
+    image: String
     lastUpdatedBy: ID!
     name: String!
-    status: ProductCategoryStatus!
+    status: GlobalStatusType!
     updatedAt: Datetime!
+}
+
+type ProductInvoice {
+    components: [ProductInvoiceComponent!]
+    currency: VendorsShopCurrency_Common
+    error: ProductError
+    errorMessage: String
+    errors: [ProductError]
+}
+
+type ProductInvoiceComponent {
+    label: String
+    type: InvoiceComponentType!
+    value: CurrencyValue
 }
 
 "Product Stocks."
@@ -888,6 +1023,9 @@ type Query {
     "Lookup a customer by the currently logged in user id"
     customerByAuth: Customer
     customerByEmail(email: String!): Customer
+    customerMembership(id: ID!): CustomerMembership!
+    customerMembershipSechedule(customerMembershipId: ID!): [CustomerMembershipWeeklySchedule!]
+    customerMemberships(paging: PaginatorInput, params: CustomerMembershipsFilter): CustomerMembershipsPayload!
     customers(paging: PaginatorInput!, params: CustomersFilter): CustomersPayload!
     favouriteGymClasses(paging: PaginatorInput, params: GymClassesFilter): FavouriteGymClassesPayload!
     getMedicalForm: [ContentGroup!]!
@@ -928,6 +1066,7 @@ type Query {
     product(id: ID!): Product!
     productCategories(paging: PaginatorInput!, params: ProductCategoriesFilter): ProductCategoriesPayload!
     productCategory(id: ID!): ProductCategory!
+    productInvoice(input: ProductInvoiceInput!): ProductInvoice!
     productStock(id: ID!): ProductStock!
     productStocks(paging: PaginatorInput!, params: ProductStocksFilter): ProductStocksPayload!
     products(paging: PaginatorInput!, params: ProductsFilter): ProductsPayload!
@@ -1240,6 +1379,29 @@ type VendorRole_Common {
     status: GlobalStatusType!
 }
 
+type VendorsShopCountry_Common {
+    currency: VendorsShopCurrency_Common!
+    dialCode: String
+    flagPhoto: String
+    id: ID!
+    isoCode: String
+    name: String!
+    servicePhoneNumber: String
+    status: GlobalStatusType
+    timeZoneIdentifier: String
+    vat: Float!
+    vatId: String
+}
+
+type VendorsShopCurrency_Common {
+    code: String!
+    decimalPlace: Int!
+    lowestDenomination: Float!
+    name: String!
+    subUnitName: String!
+    symbol: String
+}
+
 enum AdminError {
     DUPLICATE_CONTACT_NUMBER
     DUPLICATE_EMAIL
@@ -1333,6 +1495,27 @@ enum CustomerError {
     INVALID_CUSTOMER
     INVALID_FIELD_DATA
     INVALID_ID
+}
+
+enum CustomerMembershipAccessType {
+    BRANCH
+    BRAND
+}
+
+enum CustomerMembershipError {
+    CHECKINS_REQUIRED
+    DUPLICATE_NAME
+    DURATION_REQUIRED
+    GRACE_PERIOD_REQUIRED
+    INVALID_CATEGORY_ID
+    INVALID_CUSTOMER_MEMBERSHIP_ID
+    INVALID_ID
+    INVALID_SCHEDULE
+    INVALID_SUB_CATEGORY_ID
+    MEMBERSHIP_NOT_ACTIVE
+    OPEN_TIME_REQUIRED
+    PERIOD_REQUIRED
+    SECHEDULE_REQUIRED
 }
 
 enum DifficultyLevel {
@@ -1533,21 +1716,11 @@ enum ProductCategoryError {
     INVALID_ID
 }
 
-enum ProductCategoryStatus {
-    ACTIVE
-    DELETED
-    INACTIVE
-}
-
 enum ProductError {
     DUPLICATE_NAME
     INVALID_ID
-}
-
-enum ProductStatus {
-    ACTIVE
-    DELETED
-    INACTIVE
+    INVALID_MEMBERSHIP_ID
+    MEMBERSHIP_NOT_ACTIVE
 }
 
 enum ProductStockError {
@@ -1699,6 +1872,18 @@ input CustomerMedicalFormField {
     fieldValue: String!
 }
 
+input CustomerMembershipsFilter {
+    accessType: CustomerMembershipAccessType
+    countryId: ID
+    isWeekelyScheduled: Boolean
+    lifetime: Boolean
+    membershipCategoryId: ID
+    membershipSubCategoryId: ID
+    referenceTypeId: ID
+    searchText: String
+    status: GlobalStatusType
+}
+
 input CustomerPhotoInput {
     id: ID!
     photo: String!
@@ -1729,6 +1914,7 @@ input GymAdminsFilter {
 }
 
 input GymClassCategoryFilter {
+    gymId: ID
     searchText: String
     status: GlobalStatusType
 }
@@ -1864,7 +2050,11 @@ input PermissionsFilter {
 
 input ProductCategoriesFilter {
     searchText: String
-    status: ProductCategoryStatus
+    status: GlobalStatusType
+}
+
+input ProductInvoiceInput {
+    productId: ID!
 }
 
 input ProductStocksFilter {
@@ -1876,8 +2066,9 @@ input ProductStocksFilter {
 input ProductsFilter {
     brandId: ID
     categoryId: ID
+    countryId: ID
     searchText: String
-    status: ProductStatus
+    status: GlobalStatusType
 }
 
 input RegisterCustomerInput {
@@ -2183,14 +2374,16 @@ input SavePermissionInput {
 input SaveProductCategoryInput {
     createdBy: ID
     id: ID
+    image: String
     name: String!
-    status: ProductCategoryStatus!
+    status: GlobalStatusType!
 }
 
 input SaveProductInput {
     barcode: String!
     brandId: ID!
     categoryId: ID!
+    countryId: ID!
     description: String!
     express: Boolean!
     id: ID
@@ -2203,7 +2396,7 @@ input SaveProductInput {
     returnPolicyPeriod: Int
     salePrice: Int!
     sku: String!
-    status: ProductStatus!
+    status: GlobalStatusType!
     warranty: Boolean!
     warrantyDescription: String
     warrantyPeriod: Int
@@ -2248,14 +2441,14 @@ input addressInput {
 }
 
 
-"An iso 8601 date-time string"
-scalar Datetime
-
-"A day in format 'yyyy-mm-dd'"
-scalar Date
-
 "Scalar used to describe currency amounts. Serialized as a string to retain decimal precision."
 scalar CurrencyValue
 
 "An 24-hour time expressed as an hour/minute pair in local time, i.e. '18:00'"
 scalar LocalTime
+
+"An iso 8601 date-time string"
+scalar Datetime
+
+"A day in format 'yyyy-mm-dd'"
+scalar Date

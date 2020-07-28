@@ -49,9 +49,9 @@ class GymsRepository(private val apiManager: ApiManagerInterface/*, private val 
     override suspend fun getGymCategories(gymId: String): List<GymClassCategoriesQuery.List?>? {
 
         val input = Input.fromNullable(GymClassCategoryFilter(
-            status = Input.fromNullable(GlobalStatusType.ACTIVE)
+            status = Input.fromNullable(GlobalStatusType.ACTIVE),
+            gymId = Input.fromNullable(gymId)
         ))
-
 
         val gymCategoriesResponse = apiManager.getGymCategoriesAsync(input).await()
         return gymCategoriesResponse.data?.gymClassCategories?.list
