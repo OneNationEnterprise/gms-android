@@ -33,7 +33,7 @@ class MapViewViewModel(val gymsRepositoryInterface: GymsRepositoryInterface) :
         val tempFilteredList = ArrayList<Gym>()
 
         for(gym in cachedGymsList){
-            if(gym.name.contains(queryString)){
+            if(gym.name.toLowerCase().contains(queryString.toLowerCase())){
                 tempFilteredList.add(gym)
             }
         }

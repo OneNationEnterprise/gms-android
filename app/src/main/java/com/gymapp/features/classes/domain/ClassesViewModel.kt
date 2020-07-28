@@ -72,6 +72,7 @@ class ClassesViewModel(private val classesRepositoryInterface: ClassesRepository
         )
 
         for (i in 1..10) {
+            val c = Calendar.getInstance()
             c.add(Calendar.DATE, i)
 
             date = c.time

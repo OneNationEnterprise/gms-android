@@ -31,7 +31,7 @@ class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInter
                 UserCurrentLocalization.position!!.longitude,
                 UserCurrentLocalization.position!!.latitude
             ),
-            radius = 15000.0
+            radius = 25000.0
         )
 
         errorListingGyms.value = gymsRepositoryInterface.saveGymList(filter)
