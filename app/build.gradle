@@ -149,6 +149,9 @@ dependencies {
     //Date helper
     implementation 'com.jakewharton.threetenabp:threetenabp:1.1.0'
 
+    //Checkout
+    implementation 'com.github.checkout:frames-android:v2.0.6'
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.1.0-alpha04'

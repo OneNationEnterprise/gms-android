@@ -129,6 +129,20 @@
     <string name="estimate_cals_burned">est. %1$s cals </string>
     <string name="book_spot">Book a Spot</string>
 
+    <!--Payment CC-->
+    <string name="no_saved_credit_cards">Looks like you have not saved any <b>Credit Cards</b></string>
+    <string name="save_cc">Save Credit Card</string>
+    <string name="card_number">Card number</string>
+    <string name="expiry_date">Expiry Date</string>
+    <string name="cvv_cvc">CVV/CVC</string>
+    <string name="add_credit_card">Add Credit Card</string>
+    <string name="card_date_error">Wrong date</string>
+
+    <!--Payment Cards Errors-->
+    <string name="invalid_card_number">Invalid card number</string>
+    <string name="card_is_expired">Card is expired</string>
+    <string name="invalid_cvv">Invalid CVV</string>
+    <string name="invalid_name">Invalid name</string>
 
     <!--ERRORS-->
     <!--Auth-->

@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.profile.main.domain.ProfileViewModel
+import com.gymapp.features.profile.payment.presentation.CardsListActivity
 import com.gymapp.features.profile.settings.presentation.SettingsActivity
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.user_icon.*
@@ -24,6 +25,9 @@ class ProfileActivity : BaseActivity(R.layout.activity_profile) {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
 
+        paymentContainer.setOnClickListener {
+            startActivity(Intent(this, CardsListActivity::class.java))
+        }
     }
 
     override fun setupViewModel() {

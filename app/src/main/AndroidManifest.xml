@@ -69,6 +69,14 @@
             android:name=".features.classes.presentation.detail.ClassDetailActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".features.profile.payment.presentation.CardsListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.profile.payment.presentation.SaveCardActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBT0Oty_zje_wZHO9TtRBfyDJnWZDPZiYI" />
