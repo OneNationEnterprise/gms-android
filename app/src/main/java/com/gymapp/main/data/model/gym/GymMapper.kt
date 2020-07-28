@@ -72,7 +72,7 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
 
     private fun mapAmenity(amenityList: List<GymFields.AmenityList>?): List<Amenity>? {
         return amenityList?.map {
-            Amenity(it.icon, it.name)
+            Amenity(it.icon, it.name, it.status)
         }
     }
 }

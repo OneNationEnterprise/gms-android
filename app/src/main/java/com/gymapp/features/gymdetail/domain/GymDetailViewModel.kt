@@ -24,12 +24,12 @@ class GymDetailViewModel(val gymsRepositoryInterface: GymsRepositoryInterface) :
             it.gymId == gymId
         })
 
-        getClassCategories()
+        getClassCategories(gymId)
     }
 
 
-    private suspend fun getClassCategories() {
-        val classCategories = gymsRepositoryInterface.getGymCategories()
+    private suspend fun getClassCategories(gymId: String) {
+        val classCategories = gymsRepositoryInterface.getGymCategories(gymId)
 
         if (classCategories.isNullOrEmpty()) {
             return

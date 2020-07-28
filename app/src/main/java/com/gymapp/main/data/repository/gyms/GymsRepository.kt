@@ -2,13 +2,12 @@ package com.gymapp.main.data.repository.gyms
 
 //import com.gymapp.main.data.db.GymDao
 import android.content.Context
+import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.gym.GymClassCategoriesQuery
-import com.apollographql.apollo.gym.GymClassCategoryQuery
+import com.apollographql.apollo.gym.type.GlobalStatusType
+import com.apollographql.apollo.gym.type.GymClassCategoryFilter
 import com.apollographql.apollo.gym.type.GymsInRadiusFilter
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.gymapp.base.data.BaseRepository
-import com.gymapp.helper.Temporary
 import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.gym.GymMapper
 import com.gymapp.main.network.ApiManagerInterface
@@ -47,8 +46,14 @@ class GymsRepository(private val apiManager: ApiManagerInterface/*, private val 
         return nearbyGymsList
     }
 
-    override suspend fun getGymCategories(): List<GymClassCategoriesQuery.List?>? {
-        val gymCategoriesResponse = apiManager.getGymCategoriesAsync().await()
+    override suspend fun getGymCategories(gymId: String): List<GymClassCategoriesQuery.List?>? {
+
+        val input = Input.fromNullable(GymClassCategoryFilter(
+            status = Input.fromNullable(GlobalStatusType.ACTIVE)
+        ))
+
+
+        val gymCategoriesResponse = apiManager.getGymCategoriesAsync(input).await()
         return gymCategoriesResponse.data?.gymClassCategories?.list
     }
 

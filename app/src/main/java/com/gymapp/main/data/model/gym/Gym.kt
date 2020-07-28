@@ -1,5 +1,6 @@
 package com.gymapp.main.data.model.gym
 
+import com.apollographql.apollo.gym.type.GlobalStatusType
 import com.gymapp.main.data.model.brand.Brand
 
 data class Gym(
@@ -29,4 +30,4 @@ data class Opening(val operatingTime: OperatingTime)
 
 data class OperatingTime(val begin: String?, val end: String?)
 
-data class Amenity(val icon: String?, val name: String)
+data class Amenity(val icon: String?, val name: String, val status: GlobalStatusType)

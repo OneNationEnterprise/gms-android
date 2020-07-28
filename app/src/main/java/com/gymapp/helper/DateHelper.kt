@@ -1,9 +1,7 @@
 package com.gymapp.helper
 
 import android.icu.text.SimpleDateFormat
-import org.threeten.bp.LocalDateTime
-import org.threeten.bp.ZoneId
-import org.threeten.bp.ZoneOffset
+import org.threeten.bp.*
 import org.threeten.bp.format.DateTimeFormatterBuilder
 import org.threeten.bp.temporal.ChronoField
 import java.util.*
@@ -36,7 +34,7 @@ object DateHelper {
     fun getGymDetailTime(startTime: String?, endTime: String?): String {
 
         if (startTime.isNullOrEmpty() || endTime.isNullOrEmpty() || startTime.contains("null")) {
-            return "-"
+            return "Closed"
         }
 
         val begin = (LocalDateTime.parse(startTime, dateTimeFormatter).atOffset(
@@ -46,6 +44,9 @@ object DateHelper {
         val end = (LocalDateTime.parse(endTime, dateTimeFormatter).atOffset(
             ZoneOffset.UTC
         ).toInstant()).atZone(ZoneId.of("Asia/Dubai"))
+
+
+        if (moreThanOneDayDifference(begin, end)) return "Open 24h"
 
 
         val startHour = begin.format(hourTimeFormatter).removePrefix("0").replace(" ", "")
@@ -70,5 +71,9 @@ object DateHelper {
 
     fun getCurrentDate(): String {
         return SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+    }
+
+    private fun moreThanOneDayDifference(from: ZonedDateTime, to: ZonedDateTime): Boolean {
+        return Duration.between(from, to).toMillis() >= 86400000
     }
 }

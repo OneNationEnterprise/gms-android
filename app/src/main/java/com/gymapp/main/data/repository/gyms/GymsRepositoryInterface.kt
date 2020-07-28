@@ -2,7 +2,6 @@ package com.gymapp.main.data.repository.gyms
 
 import android.content.Context
 import com.apollographql.apollo.gym.GymClassCategoriesQuery
-import com.apollographql.apollo.gym.GymClassCategoryQuery
 import com.apollographql.apollo.gym.type.GymsInRadiusFilter
 import com.gymapp.base.data.BaseRepositoryInterface
 import com.gymapp.main.data.model.gym.Gym
@@ -23,7 +22,7 @@ interface GymsRepositoryInterface : BaseRepositoryInterface {
     /**
      * cache from remote and return list of available categories
      */
-    suspend fun getGymCategories(): List<GymClassCategoriesQuery.List?>?
+    suspend fun getGymCategories(gymId: String): List<GymClassCategoriesQuery.List?>?
 
     fun setContextTemp(context: Context)
 

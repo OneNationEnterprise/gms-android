@@ -1,6 +1,7 @@
-query gymClassCategories{
-    gymClassCategories{
+query gymClassCategories($params: GymClassCategoryFilter){
+    gymClassCategories(params: $params){
         list{
+            id
             name
             image
         }

@@ -15,6 +15,7 @@ fragment gymFields on Gym{
     amenityList{
         icon
         name
+        status
     }
     opening{
         operatingTime{

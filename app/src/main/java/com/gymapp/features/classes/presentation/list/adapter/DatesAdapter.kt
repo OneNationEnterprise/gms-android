@@ -53,8 +53,7 @@ class ClassDateViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!)
     fun bindView(
         classDate: ClassDate,
         classSelectedListener: ClassSelectedListener,
-        selectedClassDate: ClassDate,
-        showPadding:Boolean
+        selectedClassDate: ClassDate
     ) {
 
         if (classDate == selectedClassDate) {

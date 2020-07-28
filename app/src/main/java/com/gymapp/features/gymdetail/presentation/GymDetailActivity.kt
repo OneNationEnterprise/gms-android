@@ -7,11 +7,14 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.apollographql.apollo.gym.GymClassCategoriesQuery
+import com.apollographql.apollo.gym.type.GlobalStatusType
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.classes.presentation.list.ClassesActivity
 import com.gymapp.features.gymdetail.domain.GymDetailViewModel
 import com.gymapp.features.gymdetail.presentation.adapter.AmenityAdapter
+import com.gymapp.features.gymdetail.presentation.adapter.CategorySelectedListener
 import com.gymapp.features.gymdetail.presentation.adapter.ClassCategoriesAdapter
 import com.gymapp.features.gymdetail.presentation.adapter.ImageGalleryAdapter
 import com.gymapp.features.subscriptions.presentation.SubscriptionActivity
@@ -19,21 +22,23 @@ import com.gymapp.helper.Constants
 import com.gymapp.helper.DateHelper
 import com.gymapp.helper.SubscriptionType
 import com.gymapp.main.data.model.gym.Gym
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_gym_detail.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
+class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail), CategorySelectedListener {
 
     lateinit var gymDetailViewModel: GymDetailViewModel
     private var gymName = ""
+    lateinit var bundle: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val gymId = intent.getBundleExtra(Constants.arguments)?.getString(Constants.gymId) ?: return
+        bundle = intent.getBundleExtra(Constants.arguments) ?: return
+
+        val gymId = bundle.getString(Constants.gymId) ?: return
 
 
         GlobalScope.launch {
@@ -53,7 +58,7 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
         }
 
         seeAllTv.setOnClickListener {
-            openClassList(gymId, getString(R.string.all_classes))
+            openClassList(gymId, screenName = getString(R.string.all_classes))
         }
     }
 
@@ -71,7 +76,7 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
             classesTv.visibility = View.VISIBLE
             seeAllTv.visibility = View.VISIBLE
 
-            val optionSetAdapter = ClassCategoriesAdapter(it)
+            val optionSetAdapter = ClassCategoriesAdapter(it, this)
 
             val linearLayoutManager =
                 LinearLayoutManager(this@GymDetailActivity, LinearLayoutManager.HORIZONTAL, false)
@@ -137,12 +142,15 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
             }
         }
 
+        val activeAmenityList = gym.amenityList.filter {
+            it.status == GlobalStatusType.ACTIVE
+        }
+
         amenitiesRv.apply {
-            adapter = AmenityAdapter(gym.amenityList)
+            adapter = AmenityAdapter(activeAmenityList)
             layoutManager = gridLayoutManager
         }
     }
-
 
     private fun openSubscriptionClass(subscriptionTypeType: SubscriptionType, gymId: String) {
         val intent = Intent(this, SubscriptionActivity::class.java)
@@ -166,17 +174,23 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail) {
         startActivity(intent)
     }
 
-    private fun openClassList(gymId: String, screenName: String) {
+    private fun openClassList(gymId: String, categoryId: String? = null, screenName: String) {
         val intent = Intent(this, ClassesActivity::class.java)
         val args = Bundle()
 
         args.putString(Constants.gymId, gymId)
+
+        args.putString(Constants.categoryId, categoryId)
 
         args.putString(Constants.classesListPageName, screenName)
 
         intent.putExtra(Constants.arguments, args)
 
         startActivity(intent)
+    }
+
+    override fun onCategorySelected(category: GymClassCategoriesQuery.List) {
+        openClassList(bundle.getString(Constants.gymId)!!, category.id, category.name)
     }
 
 

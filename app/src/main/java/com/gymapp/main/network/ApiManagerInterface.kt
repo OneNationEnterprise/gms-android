@@ -18,7 +18,7 @@ interface ApiManagerInterface {
 
     suspend fun getGymDetailAsync(id: String): Deferred<Response<GymQuery.Data>>
 
-    suspend fun getGymCategoriesAsync(): Deferred<Response<GymClassCategoriesQuery.Data>>
+    suspend fun getGymCategoriesAsync(input: Input<GymClassCategoryFilter>): Deferred<Response<GymClassCategoriesQuery.Data>>
 
     suspend fun getMembershipAsync(input: Input<MembershipsFilter>): Deferred<Response<MembershipsQuery.Data>>
 
