@@ -1,0 +1,23 @@
+query GetMedicalForm{
+    getMedicalForm{
+        id
+        name
+        status
+        contentElements{
+            id
+            type
+            status
+            data{
+                name
+                placeHolder
+                description
+                value
+                required
+                options{
+                    id
+                    label
+                }
+            }
+        }
+    }
+}

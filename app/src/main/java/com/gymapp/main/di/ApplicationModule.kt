@@ -17,6 +17,8 @@ import com.gymapp.features.onboarding.auth.domain.AuthViewModel
 import com.gymapp.features.profile.main.data.ProfileRepository
 import com.gymapp.features.profile.main.data.ProfileRepositoryInterface
 import com.gymapp.features.profile.main.domain.ProfileViewModel
+import com.gymapp.features.profile.medical.domain.MedicalFormViewModel
+import com.gymapp.features.profile.payment.domain.SaveCardViewModel
 import com.gymapp.features.profile.settings.domain.SettingsViewModel
 import com.gymapp.features.subscriptions.domain.SubscriptionViewModel
 import com.gymapp.main.data.repository.config.ConfigRepository
@@ -141,6 +143,14 @@ object ApplicationModule {
 
         viewModel {
             ClassesViewModel(get())
+        }
+
+        viewModel {
+            SaveCardViewModel()
+        }
+
+        viewModel {
+            MedicalFormViewModel(get())
         }
     }
 

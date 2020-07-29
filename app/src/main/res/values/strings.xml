@@ -144,9 +144,15 @@
     <string name="invalid_cvv">Invalid CVV</string>
     <string name="invalid_name">Invalid name</string>
 
+    <!--Medical form-->
+    <string name="medical_form_page_title">Medical ID</string>
+
+
     <!--ERRORS-->
     <!--Auth-->
     <string name="error_phone_wrong_validation">Error phone validation</string>
     <string name="new_account_creation_invalid_otp">Error OTP validation</string>
+
+    <string name="medical_form_info_text">A medical ID provides medical information about you that may be important in an emergency, like allergies and medical conditions.</string>
 
 </resources>

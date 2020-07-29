@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GymApp"
         android:usesCleartextTraffic="true"
-        tools:replace="allowBackup">
+        tools:replace="android:allowBackup, android:theme, android:label">
         <activity
             android:name=".main.launcher.presentation.LauncherActivity"
             android:noHistory="true">
@@ -75,6 +75,10 @@
 
         <activity
             android:name=".features.profile.payment.presentation.SaveCardActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.profile.medical.presentation.MedicalFormActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

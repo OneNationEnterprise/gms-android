@@ -6,6 +6,8 @@ import androidx.lifecycle.Observer
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.profile.main.domain.ProfileViewModel
+import com.gymapp.features.profile.medical.domain.MedicalFormViewModel
+import com.gymapp.features.profile.medical.presentation.MedicalFormActivity
 import com.gymapp.features.profile.payment.presentation.CardsListActivity
 import com.gymapp.features.profile.settings.presentation.SettingsActivity
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -21,13 +23,18 @@ class ProfileActivity : BaseActivity(R.layout.activity_profile) {
 
         setCustomToolbarTitle(getString(R.string.profile))
 
-        settingsContainer.setOnClickListener {
-            startActivity(Intent(this, SettingsActivity::class.java))
+        medicalContainer.setOnClickListener {
+            startActivity(Intent(this, MedicalFormActivity::class.java))
         }
 
         paymentContainer.setOnClickListener {
             startActivity(Intent(this, CardsListActivity::class.java))
         }
+
+        settingsContainer.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
     }
 
     override fun setupViewModel() {
