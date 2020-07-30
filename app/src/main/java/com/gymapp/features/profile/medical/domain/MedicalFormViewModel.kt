@@ -6,11 +6,11 @@ import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.features.profile.medical.data.MedicalFormListObject
 import com.gymapp.features.profile.medical.data.items.CheckBoxItem
 import com.gymapp.features.profile.medical.data.items.GroupTitleItem
+import com.gymapp.features.profile.medical.data.items.SaveButtonItem
 import com.gymapp.features.profile.medical.data.items.TextBoxItem
 import com.gymapp.main.network.ApiManagerInterface
 
 class MedicalFormViewModel(private val apiManagerInterface: ApiManagerInterface) : BaseViewModel() {
-
 
     val itemsForInMedicalFormAdapterList = MutableLiveData<List<MedicalFormListObject>>()
 
@@ -31,6 +31,7 @@ class MedicalFormViewModel(private val apiManagerInterface: ApiManagerInterface)
             )
 
             if (item.contentElements.isNullOrEmpty()) {
+                itemsForInMedicalFormAdapterList.removeAt(itemsForInMedicalFormAdapterList.size - 1)
                 continue
             }
 
@@ -42,10 +43,11 @@ class MedicalFormViewModel(private val apiManagerInterface: ApiManagerInterface)
                     ContentElementType.TEXTBOX -> {
                         itemsForInMedicalFormAdapterList.add(TextBoxItem(contentElement))
                     }
-
                 }
             }
         }
+
+        itemsForInMedicalFormAdapterList.add(SaveButtonItem())
 
         this.itemsForInMedicalFormAdapterList.postValue(itemsForInMedicalFormAdapterList)
     }

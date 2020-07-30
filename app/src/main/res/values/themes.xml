@@ -26,6 +26,17 @@
     </style>
 
 
+    <style name="MedicalForm.EditText.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:height">@dimen/edit_text_height</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="android:textColorHint">@color/blue001</item>
+        <item name="boxStrokeColor">@color/medical_form_input_et</item>
+        <item name="hintTextColor">@color/red001</item>
+        <item name="hintEnabled">true</item>
+    </style>
+
+
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
