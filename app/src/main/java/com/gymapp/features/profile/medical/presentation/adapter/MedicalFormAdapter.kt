@@ -13,9 +13,14 @@ import com.gymapp.features.profile.medical.presentation.adapter.holder.TextBoxHo
 import com.gymapp.helper.MedicalFormRecycleViewItemType
 
 class MedicalFormAdapter(
-    var contentElements: List<MedicalFormListObject>
+    private var contentElements: List<MedicalFormListObject>,
+    private val medicalFormItemListener: MedicalFormItemListener
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        var saveField: Boolean = false
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
@@ -57,6 +62,10 @@ class MedicalFormAdapter(
         return contentElements[position].getType().ordinal
     }
 
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
     override fun getItemCount(): Int {
         return contentElements.size
     }
@@ -64,16 +73,24 @@ class MedicalFormAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (contentElements[position].getType()) {
             MedicalFormRecycleViewItemType.TEXTBOX -> {
-                (holder as TextBoxHolder).bindView(contentElements[position])
+                (holder as TextBoxHolder).bindView(
+                    contentElements[position],
+                    medicalFormItemListener,
+                    position
+                )
             }
             MedicalFormRecycleViewItemType.CHECKBOX -> {
-                (holder as CheckBoxHolder).bindView(contentElements[position])
+                (holder as CheckBoxHolder).bindView(
+                    contentElements[position],
+                    medicalFormItemListener,
+                    position
+                )
             }
             MedicalFormRecycleViewItemType.GROUP_TITLE -> {
                 (holder as GroupTitleHolder).bindView(contentElements[position])
             }
             MedicalFormRecycleViewItemType.SAVE_BUTTON -> {
-                (holder as SaveButtonHolder).bindView(contentElements[position])
+                (holder as SaveButtonHolder).bindView(medicalFormItemListener)
             }
         }
     }
@@ -84,3 +101,4 @@ class MedicalFormAdapter(
     }
 
 }
+

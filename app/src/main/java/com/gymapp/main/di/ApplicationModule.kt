@@ -150,7 +150,7 @@ object ApplicationModule {
         }
 
         viewModel {
-            MedicalFormViewModel(get())
+            MedicalFormViewModel(get(), get())
         }
     }
 

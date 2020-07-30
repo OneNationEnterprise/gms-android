@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="4dp">
+    android:layout_marginTop="4dp"
+    android:orientation="vertical">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/contentElementInputLayout"
@@ -20,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:hint="Hint"
+            android:imeOptions="actionDone"
             android:inputType="textEmailAddress"
             android:textAlignment="viewStart"
             android:textColor="@color/white" />

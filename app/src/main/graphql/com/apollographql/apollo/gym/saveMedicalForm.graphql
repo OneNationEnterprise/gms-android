@@ -1,0 +1,6 @@
+mutation saveMedicalForm($input: CustomerMedicalForm!){
+    saveCustomerMedicalForm(input: $input){
+        error
+        errorMessage
+    }
+}

@@ -27,4 +27,6 @@ interface ApiManagerInterface {
     suspend fun getClassesAsync(input: Input<GymClassesFilter>): Deferred<Response<ClassesQuery.Data>>
 
     suspend fun getMedicalFormAsync(): Deferred<Response<GetMedicalFormQuery.Data>>
+
+    suspend fun saveMedicalFormAsync(input: CustomerMedicalForm): Deferred<Response<SaveMedicalFormMutation.Data>>
 }

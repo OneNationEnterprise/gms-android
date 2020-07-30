@@ -56,4 +56,8 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
     override suspend fun getMedicalFormAsync(): Deferred<Response<GetMedicalFormQuery.Data>> {
         return graphQlClient.query(GetMedicalFormQuery()).toDeferred()
     }
+
+    override suspend fun saveMedicalFormAsync(input: CustomerMedicalForm): Deferred<Response<SaveMedicalFormMutation.Data>> {
+        return graphQlClient.mutate(SaveMedicalFormMutation(input)).toDeferred()
+    }
 }

@@ -146,6 +146,8 @@
 
     <!--Medical form-->
     <string name="medical_form_page_title">Medical ID</string>
+    <string name="input_field_error_msg">This field is mandatory</string>
+    <string name="form_saved">Form saved successfully</string>
 
 
     <!--ERRORS-->
