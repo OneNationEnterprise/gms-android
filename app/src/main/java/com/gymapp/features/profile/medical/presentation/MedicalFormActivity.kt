@@ -4,11 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.apollographql.apollo.gym.type.CustomerMedicalFormField
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.gymdetail.presentation.adapter.ClassCategoriesAdapter
 import com.gymapp.features.profile.medical.domain.MedicalFormViewModel
 import com.gymapp.features.profile.medical.presentation.adapter.MedicalFormAdapter
+import com.gymapp.features.profile.medical.presentation.adapter.MedicalFormItemListener
+import com.gymapp.features.profile.medical.presentation.view.MedicalFormCustomView
+import com.gymapp.helper.MedicalFormRecycleViewItemType
 import com.gymapp.helper.ui.InAppBannerNotification
 import kotlinx.android.synthetic.main.activity_gym_detail.*
 import kotlinx.android.synthetic.main.activity_medical_form.*
@@ -17,17 +21,15 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
-class MedicalFormActivity : BaseActivity(R.layout.activity_medical_form) {
+class MedicalFormActivity : BaseActivity(R.layout.activity_medical_form), MedicalFormItemListener {
 
     lateinit var medicalFormViewModel: MedicalFormViewModel
-    lateinit var medicalFormAdapter: MedicalFormAdapter
+    var customViewsList = ArrayList<MedicalFormCustomView>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setTitle(getString(R.string.medical_form_page_title))
-
-        initAdapter()
 
         loading.visibility = View.VISIBLE
 
@@ -42,18 +44,20 @@ class MedicalFormActivity : BaseActivity(R.layout.activity_medical_form) {
 
     override fun bindViewModelObservers() {
         medicalFormViewModel.itemsForInMedicalFormAdapterList.observe(this, Observer {
-            medicalFormAdapter.updateList(it)
-            loading.visibility = View.GONE
-        })
 
-        medicalFormViewModel.notifyAdapterToSaveFields.observe(this, Observer {
-            loading.visibility = View.VISIBLE
+            for (item in it) {
+                val view = MedicalFormCustomView(this, item, this)
 
-            MedicalFormAdapter.saveField = true
+                if (item.getType() == MedicalFormRecycleViewItemType.TEXTBOX || item.getType() == MedicalFormRecycleViewItemType.CHECKBOX) {
+                    customViewsList.add(view)
+                }
 
-            for (i in 0 until it) {
-                medicalFormAdapter.notifyItemChanged(i)
+                medicalFormContainer.addView(
+                    view
+                )
             }
+
+            loading.visibility = View.GONE
         })
 
         medicalFormViewModel.dismissLoadingState.observe(this, Observer {
@@ -81,22 +85,30 @@ class MedicalFormActivity : BaseActivity(R.layout.activity_medical_form) {
         })
     }
 
+    private fun saveFields() {
+        loading.visibility = View.VISIBLE
+
+        for (item in customViewsList) {
+            if (item.isRequired && item.value.isNullOrEmpty()) {
+                item.showTextBoxError()
+                medicalFormViewModel.clearContentElementsList()
+                dismissLoadingState()
+                return
+            }
+            medicalFormViewModel.saveField(CustomerMedicalFormField(item.id, item.value ?: ""))
+        }
+    }
+
     override fun onDestroy() {
         MedicalFormAdapter.saveField = false
         super.onDestroy()
     }
 
-    private fun initAdapter() {
+    override fun dismissLoadingState() {
+        loading.visibility = View.GONE
+    }
 
-        medicalFormAdapter = MedicalFormAdapter(ArrayList(), medicalFormViewModel)
-
-        medicalFormAdapter.setHasStableIds(true)
-
-        val linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        medicalFormRv.apply {
-            adapter = medicalFormAdapter
-            layoutManager = linearLayoutManager
-        }
+    override fun onSaveClicked() {
+        saveFields()
     }
 }

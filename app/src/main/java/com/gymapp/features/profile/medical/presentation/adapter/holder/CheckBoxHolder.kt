@@ -37,12 +37,12 @@ class CheckBoxHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
 
         if (MedicalFormAdapter.saveField) {
 
-            medicalFormItemListener.saveField(
-                CustomerMedicalFormField(
-                    item.data.id,
-                    item.data.value ?: "false"
-                )
-            )
+//            medicalFormItemListener.saveField(
+//                CustomerMedicalFormField(
+//                    item.data.id,
+//                    item.data.value ?: "false"
+//                )
+//            )
         }
     }
 }

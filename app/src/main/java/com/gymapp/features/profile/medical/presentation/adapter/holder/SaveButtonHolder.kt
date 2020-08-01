@@ -11,7 +11,7 @@ class SaveButtonHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
     fun bindView(medicalFormItemListener: MedicalFormItemListener) {
 
         itemView.saveBtn.setOnClickListener {
-            medicalFormItemListener.notifyAdapterToSaveFields()
+//            medicalFormItemListener.notifyAdapterToSaveFields()
         }
     }
 }

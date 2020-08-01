@@ -47,12 +47,12 @@ class TextBoxHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
             }
 
             /** callback to [MedicalFormViewModel.kt]  to add field to saved list*/
-            medicalFormItemListener.saveField(
-                CustomerMedicalFormField(
-                    item.data.id,
-                    item.data.value ?: ""
-                )
-            )
+//            medicalFormItemListener.saveField(
+//                CustomerMedicalFormField(
+//                    item.data.id,
+//                    item.data.value ?: ""
+//                )
+//            )
         }
 
     }

@@ -19,8 +19,7 @@ import com.gymapp.main.network.ApiManagerInterface
 class MedicalFormViewModel(
     private val apiManagerInterface: ApiManagerInterface,
     private val authRepositoryInterface: AuthRepositoryInterface
-) : BaseViewModel(),
-    MedicalFormItemListener {
+) : BaseViewModel() {
 
     val itemsForInMedicalFormAdapterList = MutableLiveData<ArrayList<MedicalFormListObject>>()
     val notifyAdapterToSaveFields = MutableLiveData<Int>() // number of items in list to be notified
@@ -86,11 +85,7 @@ class MedicalFormViewModel(
         this.itemsForInMedicalFormAdapterList.postValue(itemsForInMedicalFormAdapterList)
     }
 
-    override fun updateFieldValue(position: Int, item: MedicalFormListObject) {
-        itemsForInMedicalFormAdapterList.value?.set(position, item)
-    }
-
-    override fun saveField(
+    fun saveField(
         field: CustomerMedicalFormField
     ) {
         // create element
@@ -116,8 +111,17 @@ class MedicalFormViewModel(
         }
     }
 
+    fun clearContentElementsList() {
+        // clear elements from previous state when save was called but one required field was  null/empty
+        // or form was form was saved
+        contentElementsFieldList.clear()
+    }
+
     suspend fun saveMedicalFormData(input: CustomerMedicalForm) {
+        
         val apiResponse = apiManagerInterface.saveMedicalFormAsync(input).await()
+
+        clearContentElementsList()
 
         if (apiResponse.data?.saveCustomerMedicalForm?.errorMessage != null) {
             showErrorBanner.postValue(apiResponse.data?.saveCustomerMedicalForm?.errorMessage)
@@ -125,17 +129,6 @@ class MedicalFormViewModel(
         }
 
         showSuccessBanner.postValue(true)
-    }
-
-    override fun notifyAdapterToSaveFields() {
-        // clear elements from previous state when save was called but one required field was  null/empty
-        contentElementsFieldList.clear()
-
-        notifyAdapterToSaveFields.value = itemsForInMedicalFormAdapterList.value?.size
-    }
-
-    override fun dismissLoadingState() {
-        dismissLoadingState.value = true
     }
 
 }
