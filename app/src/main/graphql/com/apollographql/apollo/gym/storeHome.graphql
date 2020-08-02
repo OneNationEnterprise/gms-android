@@ -1,0 +1,23 @@
+query StoreHome($input: StoreHomeInput){
+    storeHome(input: $input){
+        storeImages{
+            id
+            image
+        }
+        stores{
+            id
+            name
+            status
+            logo
+        }
+        categories{
+            id
+            image
+            status
+            name
+        }
+        bestSellers{
+            ...StoreProductFields
+        }
+    }
+}

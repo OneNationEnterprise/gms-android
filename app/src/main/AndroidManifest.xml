@@ -81,6 +81,10 @@
             android:name=".features.profile.medical.presentation.MedicalFormActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".features.store.presentation.homepage.StoreActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBT0Oty_zje_wZHO9TtRBfyDJnWZDPZiYI" />

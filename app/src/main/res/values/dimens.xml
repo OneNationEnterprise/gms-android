@@ -26,4 +26,12 @@
     <dimen name="bottom_sheet_peek_hidden">0dp</dimen>
     <dimen name="bottom_sheet_peek_shown">220dp</dimen>
 
+
+    <!--Store category item-->
+    <dimen name="margin_start_first_item">16dp</dimen>
+    <dimen name="margin_start_next_item">8dp</dimen>
+    <dimen name="margin_end_last_item">8dp</dimen>
+    <dimen name="thumbnail_size">108dp</dimen>
+
+
 </resources>

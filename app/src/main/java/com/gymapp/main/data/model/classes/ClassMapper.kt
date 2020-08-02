@@ -1,11 +1,8 @@
 package com.gymapp.main.data.model.classes
 
 import com.apollographql.apollo.gym.ClassesQuery
-import com.apollographql.apollo.gym.GymsInRadiusQuery
 import com.apollographql.apollo.gym.fragment.ClassFields
-import com.apollographql.apollo.gym.type.DifficultyLevel
 import com.gymapp.base.data.BaseDataMapperInterface
-import com.gymapp.main.data.model.gym.Gym
 
 class ClassMapper : BaseDataMapperInterface<ClassesQuery.List, Class> {
 
@@ -30,7 +27,10 @@ class ClassMapper : BaseDataMapperInterface<ClassesQuery.List, Class> {
         )
     }
 
-    override fun mapToDtoList(input: List<ClassesQuery.List?>): List<Class> {
+    override fun mapToDtoList(input: List<ClassesQuery.List?>?): List<Class> {
+
+        if (input.isNullOrEmpty()) return emptyList()
+
         return input.map {
             mapToDto(it!!)
         }

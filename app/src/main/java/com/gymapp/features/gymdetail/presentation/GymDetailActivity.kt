@@ -17,6 +17,7 @@ import com.gymapp.features.gymdetail.presentation.adapter.AmenityAdapter
 import com.gymapp.features.gymdetail.presentation.adapter.CategorySelectedListener
 import com.gymapp.features.gymdetail.presentation.adapter.ClassCategoriesAdapter
 import com.gymapp.features.gymdetail.presentation.adapter.ImageGalleryAdapter
+import com.gymapp.features.store.presentation.homepage.StoreActivity
 import com.gymapp.features.subscriptions.presentation.SubscriptionActivity
 import com.gymapp.helper.Constants
 import com.gymapp.helper.DateHelper
@@ -51,6 +52,10 @@ class GymDetailActivity : BaseActivity(R.layout.activity_gym_detail), CategorySe
 
         passesContainer.setOnClickListener {
             openSubscriptionClass(SubscriptionType.PASS, gymId)
+        }
+
+        storeContainer.setOnClickListener {
+            startActivity(Intent(this, StoreActivity::class.java))
         }
 
         buyMembershipBtn.setOnClickListener {

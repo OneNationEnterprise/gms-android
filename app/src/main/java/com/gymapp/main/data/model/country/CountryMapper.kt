@@ -15,7 +15,10 @@ class CountryMapper : BaseDataMapperInterface<CountryFields, Country> {
         )
     }
 
-    override fun mapToDtoList(input: List<CountryFields?>): List<Country> {
+    override fun mapToDtoList(input: List<CountryFields?>?): List<Country> {
+
+        if (input.isNullOrEmpty()) return emptyList()
+
         return input.map {
             mapToDto(it!!)
         }

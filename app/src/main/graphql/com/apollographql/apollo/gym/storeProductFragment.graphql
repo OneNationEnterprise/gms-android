@@ -1,0 +1,12 @@
+fragment StoreProductFields on Product{
+    id
+    name
+    status
+    listPrice
+    salePrice
+    description
+    warranty
+    returnPolicy
+    express
+    images
+}

@@ -91,6 +91,10 @@
     <string name="homepage_nearby_gyms">Nearby Gyms</string>
     <string name="homepage_view_map">View map</string>
     <string name="homepage_gyms_nearby">%1$s Gyms Nearby</string>
+    <string name="homepage_store_title">Shop</string>
+    <string name="homepage_video_title">Video</string>
+    <string name="homepage_store_description">Equipment and food supplements</string>
+    <string name="homepage_video_description">On Demand</string>
 
     <!--Mapview-->
     <string name="mapview_search_view">Search for a Gym</string>
@@ -148,6 +152,30 @@
     <string name="medical_form_page_title">Medical ID</string>
     <string name="input_field_error_msg">This field is mandatory</string>
     <string name="form_saved">Form saved successfully</string>
+
+
+    <!--GYM Store-->
+    <string name="store_title_name">Gym Store</string>
+    <string name="store_description">Description</string>
+    <string name="store_customer_also_viewed">Customers Also Viewed</string>
+    <!--Store-Cart-->
+    <string name="store_add_to_cart">Add to cart </string>
+    <string name="store_proceed_checkout">Proceed to Checkout</string>
+    <string name="store_choose_delivery">Choose Delivery Address</string>
+    <string name="store_items">Items in your order</string>
+    <string name="store_checkout_subtotal">Subtotal</string>
+    <string name="store_checkout_shipping">Shipping Fee</string>
+    <string name="store_checkout_amount_due">Amount Due</string>
+    <string name="store_availability">Availability</string>
+    <string name="store_warranty">Warranty</string>
+    <string name="store_returns">Returns</string>
+    <string name="store_in_stock">in stock</string>
+    <string name="store_out_of_stock">This item is currently unavailable</string>
+    <string name="store_view_cart">View Cart</string>
+    <string name="store_items_in_cart">%1$s items</string>
+    <string name="store_shopping_cart">Shopping cart</string>
+    <string name="store_cart_subtotal">Subtotal</string>
+    <string name="store_out_stock">Out of stock</string>
 
 
     <!--ERRORS-->

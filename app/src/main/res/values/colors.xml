@@ -15,9 +15,11 @@
     <color name="gray001">#979797</color>
     <color name="gray0015">#7B818D</color>
     <color name="gray002">#5FA7AEAC</color>
+    <color name="gray003">#40C8C7CC</color>
     <!-- brown -->
     <color name="brown001">#7E7367</color>
     <color name="brown002">#C3B49B</color>
+    <color name="brown004">#594a42</color>
 
     <!--purple-->
     <color name="purple001">#A188BF</color>
@@ -26,7 +28,9 @@
     <color name="translucent_blue_overlay">#C9040915</color>
 
     <!--green-->
+    <color name="green001">#89CA00</color>
     <color name="green002">#5DCE71</color>
+    <color name="green003">#4089CA00</color>
 
     <!--yellow-->
     <color name="yellow005">#E0C016</color>

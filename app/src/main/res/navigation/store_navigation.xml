@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    app:startDestination="@id/store_fragment">
+
+    <fragment
+        android:id="@+id/store_fragment"
+        android:name="com.gymapp.features.store.presentation.homepage.StoreFragment">
+        <action
+            android:id="@+id/action_store_fragment_to_allproducts_fragment"
+            app:destination="@id/allproducts_fragment" />
+        <action
+            android:id="@+id/action_store_fragment_to_brands_list_fragment"
+            app:destination="@id/brands_list_fragment" />
+        <action
+            android:id="@+id/action_store_fragment_to_storeBrandProductsFragment"
+            app:destination="@id/allproducts_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/allproducts_fragment"
+        android:name="com.gymapp.features.store.presentation.products.StoreProductsFragment" />
+
+    <fragment
+        android:id="@+id/brands_list_fragment"
+        android:name="com.gymapp.features.store.presentation.brand.StoreBrandListFragment">
+        <action
+            android:id="@+id/action_brands_list_fragment_to_storeProductsFragment"
+            app:destination="@id/allproducts_fragment" />
+    </fragment>
+
+    <activity
+        android:id="@+id/storeProductDetailActivity"
+        android:name="com.cofedistrict.ui.features.store.products.detail.StoreProductDetailActivity"
+        android:label="StoreProductDetailActivity" />
+
+
+</navigation>

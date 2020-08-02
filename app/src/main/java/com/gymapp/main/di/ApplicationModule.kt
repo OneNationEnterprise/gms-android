@@ -20,6 +20,9 @@ import com.gymapp.features.profile.main.domain.ProfileViewModel
 import com.gymapp.features.profile.medical.domain.MedicalFormViewModel
 import com.gymapp.features.profile.payment.domain.SaveCardViewModel
 import com.gymapp.features.profile.settings.domain.SettingsViewModel
+import com.gymapp.features.store.data.StoreRepository
+import com.gymapp.features.store.data.StoreRepositoryInterface
+import com.gymapp.features.store.domain.products.StoreProductsViewModel
 import com.gymapp.features.subscriptions.domain.SubscriptionViewModel
 import com.gymapp.main.data.repository.config.ConfigRepository
 import com.gymapp.main.data.repository.config.ConfigRepositoryInterface
@@ -105,6 +108,10 @@ object ApplicationModule {
         single<ClassesRepositoryInterface> {
             ClassesRepository(get())
         }
+
+        single<StoreRepositoryInterface> {
+            StoreRepository(get())
+        }
     }
 
     val viewModelModule = module {
@@ -151,6 +158,10 @@ object ApplicationModule {
 
         viewModel {
             MedicalFormViewModel(get(), get())
+        }
+
+        viewModel {
+            StoreProductsViewModel(get())
         }
     }
 

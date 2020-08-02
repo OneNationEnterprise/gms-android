@@ -53,6 +53,7 @@ android {
 
 dependencies {
     def lifecycle_version = "2.2.0"
+    def nav_version = "2.3.0"
     def room_version = "2.2.5"
     def firebase_analytics_version = "17.4.1"
     def firebase_auth_version = "19.3.1"
@@ -72,6 +73,10 @@ dependencies {
 
     // LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    // NavHost
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     // Room
 //    kapt "androidx.room:room-compiler:$room_version"

@@ -29,4 +29,6 @@ interface ApiManagerInterface {
     suspend fun getMedicalFormAsync(): Deferred<Response<GetMedicalFormQuery.Data>>
 
     suspend fun saveMedicalFormAsync(input: CustomerMedicalForm): Deferred<Response<SaveMedicalFormMutation.Data>>
+
+    suspend fun getStoreHomeAsync(input: StoreHomeInput?): Deferred<Response<StoreHomeQuery.Data>>
 }

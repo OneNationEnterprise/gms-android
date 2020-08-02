@@ -7,6 +7,8 @@ schema {
 
 union CustomerMembershipRefTypePayload = OrderHistoryBrand | OrderHistoryGym
 
+union CustomerPassRefTypePayload = OrderHistoryBrand | OrderHistoryGym
+
 union MembershipRefTypePayload = ExternalBrand_VP | ExternalGym_VP
 
 union PassRefTypePayload = ExternalBrand_VP | ExternalGym_VP
@@ -280,7 +282,7 @@ type CustomerMembership {
     colorCode: String
     countryId: ID!
     createdAt: Datetime!
-    customer: ID!
+    customer: OrderHistoryCustomer!
     description: String
     gender: GlobalGenderType!
     gracePeriod: Int
@@ -314,6 +316,51 @@ type CustomerMembershipsPayload {
     paging: PaginatorOutput
 }
 
+"CustomerPass.."
+type CustomerPass {
+    accessType: CustomerPassAccessType!
+    age: Age
+    allowedCheckins: Int
+    amount: CurrencyValue!
+    amountLabel: String!
+    colorCode: String
+    countryId: ID!
+    createdAt: Datetime!
+    customer: OrderHistoryCustomer!
+    description: String
+    gender: GlobalGenderType!
+    gracePeriod: Int
+    id: ID!
+    image: String
+    isWeekelyScheduled: Boolean!
+    name: String!
+    passCategoryId: ID
+    passId: ID!
+    paymentMethod: CustomerPaymentMethod!
+    period: Int
+    referenceType: CustomerPassRefTypePayload
+    schedule: [CustomerPassWeeklySchedule!]
+    status: PassStatus!
+    type: PassType!
+    updatedAt: Datetime!
+}
+
+type CustomerPassWeeklySchedule {
+    closeAllDay: Boolean!
+    createdAt: Datetime!
+    customerPass: CustomerPass!
+    day: Int!
+    duration: Float
+    id: ID!
+    openTime: LocalTime
+    updatedAt: Datetime!
+}
+
+type CustomerPassesPayload {
+    list: [CustomerPass]
+    paging: PaginatorOutput
+}
+
 type CustomerPaymentMethod {
     id: ID!
     orderType: String!
@@ -340,10 +387,19 @@ type ExternalBrand_VP {
 
 "Brands"
 type ExternalBrand_Vendors {
-    createdAt: Datetime!
+    country: VendorsShopCountry_Common!
+    email: String!
     id: ID!
+    legalName: String
+    logo: String!
     name: String!
-    updatedAt: Datetime!
+    phone: String!
+    status: GlobalStatusType!
+}
+
+type ExternalBrand_VendorsPayload {
+    list: [ExternalBrand_Vendors]
+    paging: PaginatorOutput
 }
 
 type ExternalGym_VP {
@@ -359,10 +415,14 @@ type ExternalGym_VP {
 
 "Gyms."
 type ExternalGym_Vendors {
-    createdAt: Datetime!
+    brand: ExternalBrand_Vendors!
+    email: String!
     id: ID!
+    legalName: String
+    logo: String!
     name: String!
-    updatedAt: Datetime!
+    phone: String
+    status: GlobalStatusType!
 }
 
 type ExternalInstructor_VP {
@@ -565,6 +625,12 @@ type InstructorsPayload {
     paging: PaginatorOutput
 }
 
+type InvoiceComponent {
+    label: String
+    type: InvoiceComponentType!
+    value: CurrencyValue
+}
+
 type Language {
     code: String!
     countries: [Country]!
@@ -637,17 +703,11 @@ type MembershipCategoryPayload {
 }
 
 type MembershipInvoice {
-    components: [MembershipInvoiceComponent!]
+    components: [InvoiceComponent!]
     currency: VendorPlanCurrency_Common
     error: MembershipError
     errorMessage: String
     errors: [MembershipError]
-}
-
-type MembershipInvoiceComponent {
-    label: String
-    type: InvoiceComponentType!
-    value: CurrencyValue
 }
 
 type MembershipSubCategory {
@@ -723,6 +783,7 @@ type Mutation {
     saveProductCategory(input: SaveProductCategoryInput!): SaveProductCategoryPayload
     saveProductStock(input: SaveProductStockInput!): SaveProductStockPayload
     saveRole(input: SaveRoleInput!): SaveRolePayload
+    saveStoreImage(input: SaveStoreImageInput!): SaveStoreImagePayload
     sortContentElement(contentGroupId: ID!, ids: [ID!]!): Boolean
     sortContentGroup(contentTypeId: ID!, ids: [ID!]!): Boolean
     syncAdminsWithFirebase: Boolean
@@ -811,17 +872,12 @@ type OrderMembership {
 
 "Passes bought by customers"
 type OrderPass {
-    allowedCheckins: Int
-    amount: CurrencyValue
-    countryId: ID!
     createdAt: Datetime!
     customerId: ID!
-    gracePeriod: Int
-    gymId: ID!
     id: ID!
     passId: ID!
+    paymentMethod: PaymentMethod!
     paymentStatus: PaymentStatus!
-    period: Int
     shortCode: String!
     status: PassStatus!
     updatedAt: Datetime!
@@ -874,6 +930,14 @@ type PassCategoryPayload {
     paging: PaginatorOutput
 }
 
+type PassInvoice {
+    components: [InvoiceComponent!]
+    currency: VendorPlanCurrency_Common
+    error: MembershipError
+    errorMessage: String
+    errors: [MembershipError]
+}
+
 type PassWeeklySchedule {
     closeAllDay: Boolean!
     createdAt: Datetime!
@@ -919,6 +983,7 @@ type PermissionsPayload {
 "Products."
 type Product {
     barcode: String!
+    bestSeller: GlobalStatusType
     brand: ExternalBrand_Vendors
     brandId: ID!
     category: ProductCategory
@@ -932,12 +997,12 @@ type Product {
     images: [String!]
     inventory: [ProductStock!]
     lastUpdatedBy: ID!
-    listPrice: Int!
+    listPrice: Float!
     name: String!
     returnPolicy: Boolean!
     returnPolicyDescription: String
     returnPolicyPeriod: Int
-    salePrice: Int!
+    salePrice: Float!
     sku: String!
     status: GlobalStatusType!
     updatedAt: Datetime!
@@ -1024,8 +1089,11 @@ type Query {
     customerByAuth: Customer
     customerByEmail(email: String!): Customer
     customerMembership(id: ID!): CustomerMembership!
-    customerMembershipSechedule(customerMembershipId: ID!): [CustomerMembershipWeeklySchedule!]
+    customerMembershipSchedule(customerMembershipId: ID!): [CustomerMembershipWeeklySchedule!]
     customerMemberships(paging: PaginatorInput, params: CustomerMembershipsFilter): CustomerMembershipsPayload!
+    customerPass(id: ID!): CustomerPass!
+    customerPassSchedule(customerPassId: ID!): [CustomerPassWeeklySchedule!]
+    customerPasses(paging: PaginatorInput, params: CustomerPassesFilter): CustomerPassesPayload!
     customers(paging: PaginatorInput!, params: CustomersFilter): CustomersPayload!
     favouriteGymClasses(paging: PaginatorInput, params: GymClassesFilter): FavouriteGymClassesPayload!
     getMedicalForm: [ContentGroup!]!
@@ -1059,6 +1127,7 @@ type Query {
     pass(id: ID!): Pass!
     passCategories(paging: PaginatorInput, params: PassCategoryFilter): PassCategoryPayload!
     passCategory(id: ID!): PassCategory!
+    passInvoice(input: PassInvoiceInput!): PassInvoice!
     passSechedule(membershipId: ID!): [PassWeeklySchedule!]
     passes(paging: PaginatorInput, params: PassesFilter): PassesPayload!
     permission(id: ID!): Permission
@@ -1074,6 +1143,10 @@ type Query {
     rolePermission(id: ID!): RolePermission
     rolePermissions(paging: PaginatorInput!, params: RolePermissionsFilter): RolePermissionsPayload!
     roles(paging: PaginatorInput!, params: RolesFilter): RolesPayload!
+    storeHome(input: StoreHomeInput): StoreHomePayload!
+    storeImage(id: ID!): StoreImage!
+    storeImages(paging: PaginatorInput!, params: StoreImagesFilter): StoreImagesPayload!
+    stores(paging: PaginatorInput!, params: ExternalBrand_VendorsFiler): ExternalBrand_VendorsPayload!
 }
 
 type RegisterCustomerPayload {
@@ -1315,6 +1388,35 @@ type SaveRolePayload {
     role: Role
 }
 
+type SaveStoreImagePayload {
+    StoreImage: StoreImage
+    error: StoreImageError
+    errors: [StoreImageError!]
+}
+
+type StoreHomePayload {
+    bestSellers: [Product!]
+    categories: [ProductCategory!]
+    storeImages: [StoreImage!]
+    stores: [ExternalBrand_Vendors!]
+}
+
+"Store Image."
+type StoreImage {
+    createdAt: Datetime!
+    createdBy: ID!
+    id: ID!
+    image: String!
+    lastUpdatedBy: ID!
+    status: GlobalStatusType!
+    updatedAt: Datetime!
+}
+
+type StoreImagesPayload {
+    list: [StoreImage]
+    paging: PaginatorOutput
+}
+
 type TimeRange {
     begin: Datetime!
     end: Datetime!
@@ -1518,6 +1620,27 @@ enum CustomerMembershipError {
     SECHEDULE_REQUIRED
 }
 
+enum CustomerPassAccessType {
+    BRANCH
+    BRAND
+}
+
+enum CustomerPassError {
+    CHECKINS_REQUIRED
+    DUPLICATE_NAME
+    DURATION_REQUIRED
+    GRACE_PERIOD_REQUIRED
+    INVALID_CATEGORY_ID
+    INVALID_CUSTOMER_PASSID
+    INVALID_ID
+    INVALID_SCHEDULE
+    INVALID_SUB_CATEGORY_ID
+    OPEN_TIME_REQUIRED
+    PASS_NOT_ACTIVE
+    PERIOD_REQUIRED
+    SECHEDULE_REQUIRED
+}
+
 enum DifficultyLevel {
     ADVANCE
     BEGINNER
@@ -1637,10 +1760,12 @@ enum MembershipError {
     INVALID_CATEGORY_ID
     INVALID_ID
     INVALID_MEMBERSHIP_ID
+    INVALID_PASS_ID
     INVALID_SCHEDULE
     INVALID_SUB_CATEGORY_ID
     MEMBERSHIP_NOT_ACTIVE
     OPEN_TIME_REQUIRED
+    PASS_NOT_ACTIVE
     PERIOD_REQUIRED
     SECHEDULE_REQUIRED
 }
@@ -1664,6 +1789,7 @@ enum OrderMembershipError {
 
 enum OrderPassError {
     INVALID_PASS_ID
+    PASS_NOT_ACTIVE
 }
 
 enum OrderType {
@@ -1744,6 +1870,10 @@ enum StatusType {
     INACTIVE
 }
 
+enum StoreImageError {
+    INVALID_ID
+}
+
 input AdminsFilter {
     adminType: AdminType
     searchText: String
@@ -1783,7 +1913,6 @@ input BuyAMembershipInput {
 }
 
 input BuyAPassInput {
-    customerId: ID!
     passId: ID!
 }
 
@@ -1884,6 +2013,17 @@ input CustomerMembershipsFilter {
     status: GlobalStatusType
 }
 
+input CustomerPassesFilter {
+    accessType: CustomerPassAccessType
+    countryId: ID
+    isWeekelyScheduled: Boolean
+    passCategoryId: ID
+    referenceTypeId: ID
+    searchText: String
+    status: GlobalStatusType
+    type: PassType
+}
+
 input CustomerPhotoInput {
     id: ID!
     photo: String!
@@ -1891,6 +2031,12 @@ input CustomerPhotoInput {
 
 input CustomersFilter {
     gender: GlobalGenderType
+    searchText: String
+    status: GlobalStatusType
+}
+
+input ExternalBrand_VendorsFiler {
+    countryId: ID
     searchText: String
     status: GlobalStatusType
 }
@@ -2026,6 +2172,10 @@ input PassCategoryFilter {
     status: GlobalStatusType
 }
 
+input PassInvoiceInput {
+    passId: ID!
+}
+
 input PassScheduleInput {
     closeAllDay: Boolean
     day: Int!
@@ -2064,6 +2214,7 @@ input ProductStocksFilter {
 }
 
 input ProductsFilter {
+    bestSeller: GlobalStatusType
     brandId: ID
     categoryId: ID
     countryId: ID
@@ -2381,6 +2532,7 @@ input SaveProductCategoryInput {
 
 input SaveProductInput {
     barcode: String!
+    bestSeller: GlobalStatusType
     brandId: ID!
     categoryId: ID!
     countryId: ID!
@@ -2389,12 +2541,12 @@ input SaveProductInput {
     id: ID
     images: [String!]
     inventory: [SaveProductStockInProductInput!]
-    listPrice: Int!
+    listPrice: Float!
     name: String!
     returnPolicy: Boolean!
     returnPolicyDescription: String
     returnPolicyPeriod: Int
-    salePrice: Int!
+    salePrice: Float!
     sku: String!
     status: GlobalStatusType!
     warranty: Boolean!
@@ -2423,6 +2575,23 @@ input SaveRoleInput {
     status: StatusType!
 }
 
+input SaveStoreImageInput {
+    id: ID
+    image: String!
+    status: GlobalStatusType!
+}
+
+input StoreHomeInput {
+    bestSellers: Int!
+    categories: Int!
+    storeImages: Int!
+    stores: Int!
+}
+
+input StoreImagesFilter {
+    status: String
+}
+
 input addressInput {
     building: String
     city: String!
@@ -2441,14 +2610,14 @@ input addressInput {
 }
 
 
+"A day in format 'yyyy-mm-dd'"
+scalar Date
+
+"An iso 8601 date-time string"
+scalar Datetime
+
 "Scalar used to describe currency amounts. Serialized as a string to retain decimal precision."
 scalar CurrencyValue
 
 "An 24-hour time expressed as an hour/minute pair in local time, i.e. '18:00'"
 scalar LocalTime
-
-"An iso 8601 date-time string"
-scalar Datetime
-
-"A day in format 'yyyy-mm-dd'"
-scalar Date

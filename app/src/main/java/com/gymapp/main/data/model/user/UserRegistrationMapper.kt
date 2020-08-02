@@ -15,10 +15,12 @@ class UserRegistrationMapper :
             input.fragments.customerFields.countryId,
             input.fragments.customerFields.photo
         )
-
     }
 
-    override fun mapToDtoList(input: List<RegisterUserMutation.Customer?>): List<User> {
+    override fun mapToDtoList(input: List<RegisterUserMutation.Customer?>?): List<User> {
+
+        if (input.isNullOrEmpty()) return emptyList()
+
         return input.map {
             mapToDto(it!!)
         }

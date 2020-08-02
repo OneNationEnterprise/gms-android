@@ -11,6 +11,7 @@ import com.gymapp.features.homepage.presentation.adapter.HomepageGymClickListene
 import com.gymapp.features.mapview.presentation.MapViewActivity
 import com.gymapp.features.onboarding.OnBoardingActivity
 import com.gymapp.features.profile.main.presentation.ProfileActivity
+import com.gymapp.features.store.presentation.homepage.StoreActivity
 import com.gymapp.helper.Constants
 import com.gymapp.helper.view.CustomPagerTransformer
 import kotlinx.android.synthetic.main.activity_homepage.*
@@ -36,6 +37,9 @@ class HomepageActivity : BaseActivity(R.layout.activity_homepage), HomepageGymCl
         loggedOutHeaderImageProfile.setOnClickListener {
             startActivity(Intent(this, OnBoardingActivity::class.java))
             finish()
+        }
+        storeContainerImage.setOnClickListener {
+            startActivity(Intent(this, StoreActivity::class.java))
         }
     }
 
