@@ -22,7 +22,6 @@ class MedicalFormViewModel(
 ) : BaseViewModel() {
 
     val itemsForInMedicalFormAdapterList = MutableLiveData<ArrayList<MedicalFormListObject>>()
-    val notifyAdapterToSaveFields = MutableLiveData<Int>() // number of items in list to be notified
     val dismissLoadingState = MutableLiveData<Boolean>()
     val showErrorBanner = MutableLiveData<String>()
     val showSuccessBanner = MutableLiveData<Boolean>()
@@ -118,7 +117,7 @@ class MedicalFormViewModel(
     }
 
     suspend fun saveMedicalFormData(input: CustomerMedicalForm) {
-        
+
         val apiResponse = apiManagerInterface.saveMedicalFormAsync(input).await()
 
         clearContentElementsList()
