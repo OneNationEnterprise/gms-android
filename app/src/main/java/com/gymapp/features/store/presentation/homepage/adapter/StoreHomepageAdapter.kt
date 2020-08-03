@@ -11,7 +11,6 @@ import com.gymapp.features.store.data.model.Store
 import com.gymapp.features.store.data.model.StoreImage
 import com.gymapp.helper.HomepageSectionType
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_homepage_brand.view.brandLogoIv
 import kotlinx.android.synthetic.main.item_store_brand.view.*
 import kotlinx.android.synthetic.main.item_store_homepage_category.view.*
 import kotlinx.android.synthetic.main.item_store_homepage_header.view.*
@@ -60,6 +59,10 @@ class StoreHomepageAdapter(var items: List<HomepageSection>) :
 
     override fun getItemCount(): Int {
         return items.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return items[position].getType().ordinal
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

@@ -31,10 +31,10 @@
             app:destination="@id/allproducts_fragment" />
     </fragment>
 
-    <activity
-        android:id="@+id/storeProductDetailActivity"
-        android:name="com.cofedistrict.ui.features.store.products.detail.StoreProductDetailActivity"
-        android:label="StoreProductDetailActivity" />
+<!--    <activity-->
+<!--        android:id="@+id/storeProductDetailActivity"-->
+<!--        android:name="com.cofedistrict.ui.features.store.products.detail.StoreProductDetailActivity"-->
+<!--        android:label="StoreProductDetailActivity" />-->
 
 
 </navigation>

@@ -177,6 +177,8 @@
     <string name="store_cart_subtotal">Subtotal</string>
     <string name="store_out_stock">Out of stock</string>
 
+    <!--Products-->
+    <string name="add_product_sold_out">Sold out</string>
 
     <!--ERRORS-->
     <!--Auth-->

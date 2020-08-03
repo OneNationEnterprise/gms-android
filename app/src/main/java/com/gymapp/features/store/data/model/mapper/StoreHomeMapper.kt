@@ -1,11 +1,8 @@
-package com.gymapp.features.store.data.model
+package com.gymapp.features.store.data.model.mapper
 
 import com.apollographql.apollo.gym.StoreHomeQuery
 import com.gymapp.base.data.BaseDataMapperInterface
-import com.gymapp.features.store.data.model.mapper.CategoryMapper
-import com.gymapp.features.store.data.model.mapper.ProductMapper
-import com.gymapp.features.store.data.model.mapper.StoreImageMapper
-import com.gymapp.features.store.data.model.mapper.StoreMapper
+import com.gymapp.features.store.data.model.StoreHome
 
 class StoreHomeMapper : BaseDataMapperInterface<StoreHomeQuery.StoreHome, StoreHome> {
 
@@ -19,13 +16,13 @@ class StoreHomeMapper : BaseDataMapperInterface<StoreHomeQuery.StoreHome, StoreH
             images = storeImageMapper.mapToDtoList(input.storeImages),
             stores = storeMapper.mapToDtoList(input.stores),
             categories = categoriesMapper.mapToDtoList(input.categories),
-            bestSeller = productMapper.mapToDtoList(input.bestSellers)
+            bestSeller = productMapper.mapToDtoCustomList(input.bestSellers)
         )
     }
 
     override fun mapToDtoList(input: List<StoreHomeQuery.StoreHome?>?): List<StoreHome> {
 
-        if (input.isNullOrEmpty()) return emptyList()
+        if (input.isNullOrEmpty()) return ArrayList()
 
         return input.map {
             mapToDto(it!!)

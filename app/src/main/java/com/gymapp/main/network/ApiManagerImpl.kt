@@ -64,4 +64,8 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
     override suspend fun getStoreHomeAsync(input: StoreHomeInput?): Deferred<Response<StoreHomeQuery.Data>> {
         return graphQlNoAuthClient.query(StoreHomeQuery(Input.fromNullable(input))).toDeferred()
     }
+
+    override suspend fun getProductsAsync(input: ProductsFilter): Deferred<Response<ProductsQuery.Data>> {
+        return graphQlNoAuthClient.query(ProductsQuery(Input.fromNullable(input))).toDeferred()
+    }
 }

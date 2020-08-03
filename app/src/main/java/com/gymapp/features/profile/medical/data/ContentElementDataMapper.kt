@@ -18,7 +18,7 @@ class ContentElementDataMapper :
 
     override fun mapToDtoList(input: List<GetMedicalFormQuery.ContentElement?>?): List<ContentElementData> {
 
-        if (input.isNullOrEmpty()) return emptyList()
+        if (input.isNullOrEmpty()) return ArrayList()
 
         return input.map {
             mapToDto(it!!)

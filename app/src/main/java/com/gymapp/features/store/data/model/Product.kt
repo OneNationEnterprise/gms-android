@@ -12,5 +12,6 @@ data class Product(
     val warranty: Boolean,
     val returnPolicy: Boolean,
     val express: Boolean,
-    val images: List<String>?
+    val images: List<String>?,
+    val categoryName: String?
 )

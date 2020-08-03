@@ -22,6 +22,7 @@ import com.gymapp.features.profile.payment.domain.SaveCardViewModel
 import com.gymapp.features.profile.settings.domain.SettingsViewModel
 import com.gymapp.features.store.data.StoreRepository
 import com.gymapp.features.store.data.StoreRepositoryInterface
+import com.gymapp.features.store.domain.products.StoreBrandListViewModel
 import com.gymapp.features.store.domain.products.StoreProductsViewModel
 import com.gymapp.features.subscriptions.domain.SubscriptionViewModel
 import com.gymapp.main.data.repository.config.ConfigRepository
@@ -162,6 +163,10 @@ object ApplicationModule {
 
         viewModel {
             StoreProductsViewModel(get())
+        }
+
+        viewModel {
+            StoreBrandListViewModel(get())
         }
     }
 

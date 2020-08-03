@@ -1,17 +1,23 @@
 package com.gymapp.features.store.data
 
+import com.apollographql.apollo.gym.type.ProductsFilter
 import com.apollographql.apollo.gym.type.StoreHomeInput
 import com.gymapp.base.data.BaseRepository
+import com.gymapp.features.store.data.model.Product
+import com.gymapp.features.store.data.model.Store
 import com.gymapp.features.store.data.model.StoreHome
-import com.gymapp.features.store.data.model.StoreHomeMapper
+import com.gymapp.features.store.data.model.mapper.ProductMapper
+import com.gymapp.features.store.data.model.mapper.StoreHomeMapper
 import com.gymapp.main.network.ApiManagerInterface
 
 class StoreRepository(private val apiManagerInterface: ApiManagerInterface) :
     BaseRepository(apiManagerInterface), StoreRepositoryInterface {
 
     private val storeHomeMapper = StoreHomeMapper()
+    private val productsMapper = ProductMapper()
 
     private var storeHome: StoreHome? = null
+    private var productsList = ArrayList<Product>()
 
     override suspend fun getStoreHomepageData(input: StoreHomeInput?): StoreHome? {
 
@@ -24,10 +30,42 @@ class StoreRepository(private val apiManagerInterface: ApiManagerInterface) :
         if (apiResponse.data?.storeHome != null) {
             val storeHomeData = apiResponse.data!!.storeHome
 
-            return storeHomeMapper.mapToDto(storeHomeData)
+            storeHome = storeHomeMapper.mapToDto(storeHomeData)
+            return storeHome
         }
 
         return null
+    }
+
+    override fun getCachedStores(): List<Store>? {
+        return storeHome?.stores
+    }
+
+    override suspend fun getProducts(input: ProductsFilter): ArrayList<Product> {
+
+        val apiResponse = apiManagerInterface.getProductsAsync(input).await()
+
+        if (apiResponse.data?.products != null) {
+            val products = apiResponse.data!!.products.list
+
+            productsList.clear()
+
+            for (product in products!!) {
+                if (product?.fragments?.storeProductFields != null) {
+                    productsList.add(productsMapper.mapToDto(product.fragments.storeProductFields))
+                }
+            }
+
+            return productsList
+        }
+
+        return ArrayList()
+    }
+
+    override fun getProductDetail(productId: String): Product {
+        return productsList.first {
+            it.id == productId
+        }
     }
 
 

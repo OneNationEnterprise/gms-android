@@ -1,0 +1,7 @@
+query Products($input : ProductsFilter){
+    products(params: $input){
+        list{
+            ...StoreProductFields
+        }
+    }
+}

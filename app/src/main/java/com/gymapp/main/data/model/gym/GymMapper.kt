@@ -28,7 +28,7 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
 
     override fun mapToDtoList(input: List<GymsInRadiusQuery.List?>?): List<Gym> {
 
-        if (input.isNullOrEmpty()) return emptyList()
+        if (input.isNullOrEmpty()) return ArrayList()
 
         return input.map {
             mapToDto(it!!)

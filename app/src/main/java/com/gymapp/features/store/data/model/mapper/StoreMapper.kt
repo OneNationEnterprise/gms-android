@@ -17,7 +17,7 @@ class StoreMapper : BaseDataMapperInterface<StoreHomeQuery.Store, Store> {
 
     override fun mapToDtoList(input: List<StoreHomeQuery.Store?>?): List<Store> {
 
-        if (input.isNullOrEmpty()) return emptyList()
+        if (input.isNullOrEmpty()) return ArrayList()
 
         return input.map {
             mapToDto(it!!)

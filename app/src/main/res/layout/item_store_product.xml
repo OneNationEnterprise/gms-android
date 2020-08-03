@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view_outer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewInnerProductContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/productImageIv"
+                android:layout_width="match_parent"
+                android:layout_height="174dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/productName"
+                style="@style/FontLocalizedMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="19dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:paddingStart="17dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/productImageIv"
+                tools:text="Black Cappucino " />
+
+
+            <LinearLayout
+                android:id="@+id/otherInfoContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/productName">
+
+                <TextView
+                    android:id="@+id/productDiscountValue"
+                    style="@style/FontLocalizedBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@color/green001"
+                    android:paddingStart="3dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="3dp"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/green003"
+                    android:textSize="10sp"
+                    android:visibility="gone"
+                    tools:text="20% OFF"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/productPrice"
+                style="@style/FontLocalizedBold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="19dp"
+                android:layout_marginBottom="8dp"
+                android:drawablePadding="4dp"
+                android:paddingStart="17dp"
+                android:textColor="@color/colorBrown"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/otherInfoContainer"
+                app:layout_constraintWidth_percent=".5"
+                tools:text="1.250KD" />
+
+
+            <TextView
+                android:id="@+id/oldProductPrice"
+                style="@style/FontLocalizedMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="19dp"
+                android:layout_marginBottom="8dp"
+                android:drawablePadding="4dp"
+                android:gravity="end"
+                android:paddingStart="17dp"
+                android:textColor="@color/colorBrown"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/otherInfoContainer"
+                app:layout_constraintWidth_percent=".5"
+                tools:text="1.250KD" />
+
+
+            <ImageView
+                android:id="@+id/overlaySoldOutIv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/sold_out_overlay"
+                android:visibility="gone" />
+
+
+            <TextView
+                android:id="@+id/soldOutTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/sold_out_background"
+                android:paddingStart="16dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="6dp"
+                android:text="@string/add_product_sold_out"
+                android:textAllCaps="true"
+                android:textColor="@color/md_white_1000"
+                android:textSize="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.cardview.widget.CardView>
+

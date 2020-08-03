@@ -17,7 +17,7 @@ class BrandMapper : BaseDataMapperInterface<BrandFields, Brand> {
 
     override fun mapToDtoList(input: List<BrandFields?>?): List<Brand> {
 
-        if (input.isNullOrEmpty()) return emptyList()
+        if (input.isNullOrEmpty()) return ArrayList()
 
         return input.map {
             mapToDto(it!!)

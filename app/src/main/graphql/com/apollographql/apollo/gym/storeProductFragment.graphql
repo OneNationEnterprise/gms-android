@@ -9,4 +9,7 @@ fragment StoreProductFields on Product{
     returnPolicy
     express
     images
+    category{
+        name
+    }
 }

@@ -17,7 +17,7 @@ class CategoryMapper : BaseDataMapperInterface<StoreHomeQuery.Category, Category
 
     override fun mapToDtoList(input: List<StoreHomeQuery.Category?>?): List<Category> {
 
-        if (input.isNullOrEmpty()) return emptyList()
+        if (input.isNullOrEmpty()) return ArrayList()
 
         return input.map {
             mapToDto(it!!)

@@ -64,4 +64,9 @@
         <item name="android:fontFamily">@font/nunito_bold</item>
     </style>
 
+    <style name="Tab.TextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
+    </style>
+
 </resources>

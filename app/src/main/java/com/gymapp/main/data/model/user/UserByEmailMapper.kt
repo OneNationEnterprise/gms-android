@@ -20,7 +20,7 @@ class UserByEmailMapper :
 
     override fun mapToDtoList(input: List<CustomerByEmailQuery.CustomerByEmail?>?): List<User> {
 
-        if (input.isNullOrEmpty()) return emptyList()
+        if (input.isNullOrEmpty()) return ArrayList()
 
         return input.map {
             mapToDto(it!!)

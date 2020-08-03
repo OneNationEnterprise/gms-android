@@ -19,7 +19,7 @@ class UserRegistrationMapper :
 
     override fun mapToDtoList(input: List<RegisterUserMutation.Customer?>?): List<User> {
 
-        if (input.isNullOrEmpty()) return emptyList()
+        if (input.isNullOrEmpty()) return ArrayList()
 
         return input.map {
             mapToDto(it!!)

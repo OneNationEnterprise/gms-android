@@ -15,7 +15,7 @@ class StoreImageMapper : BaseDataMapperInterface<StoreHomeQuery.StoreImage, Stor
 
     override fun mapToDtoList(input: List<StoreHomeQuery.StoreImage?>?): List<StoreImage> {
 
-        if(input.isNullOrEmpty()) return emptyList()
+        if(input.isNullOrEmpty()) return ArrayList()
 
         return input.map {
             mapToDto(it!!)

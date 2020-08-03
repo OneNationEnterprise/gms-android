@@ -10,6 +10,19 @@
 
     <include layout="@layout/item_toolbar" />
 
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/categoriesTabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="scrollable"
+        app:tabRippleColor="@color/colorAccent"
+        app:tabSelectedTextColor="@color/accent"
+        app:tabTextAppearance="@style/Tab.TextAppearance"
+        app:tabTextColor="@color/brown004">
+
+    </com.google.android.material.tabs.TabLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productsRv"
         android:layout_width="match_parent"

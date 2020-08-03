@@ -35,8 +35,10 @@
     <!--yellow-->
     <color name="yellow005">#E0C016</color>
 
-    <!--todo-->
+    <!--By name-->
     <color name="loading_background">#5FA7AEAC</color>
+    <color name="sold_out_overlay">#78B2B2B2</color>
+    <color name="colorBrown">#594a42</color>
 
 
 </resources>

@@ -52,15 +52,15 @@ class StoreFragment : BaseFragment() {
             }
 
             if (!it.images.isNullOrEmpty()) {
-                val storeHomePageView = StoreHomepageSectionView(requireContext(), it.images)
+                val storeHomePageView = StoreHomepageSectionView(requireContext(), it.images, activity as StoreActivity)
                 homepageContainer.addView(storeHomePageView)
             }
             if (!it.stores.isNullOrEmpty()) {
-                val storeHomePageView = StoreHomepageSectionView(requireContext(), it.stores)
+                val storeHomePageView = StoreHomepageSectionView(requireContext(), it.stores, activity as StoreActivity)
                 homepageContainer.addView(storeHomePageView)
             }
             if (!it.categories.isNullOrEmpty()) {
-                val storeHomePageView = StoreHomepageSectionView(requireContext(), it.categories)
+                val storeHomePageView = StoreHomepageSectionView(requireContext(), it.categories,activity as StoreActivity)
                 homepageContainer.addView(storeHomePageView)
             }
 

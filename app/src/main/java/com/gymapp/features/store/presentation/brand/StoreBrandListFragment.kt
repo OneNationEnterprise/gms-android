@@ -1,13 +1,27 @@
 package com.gymapp.features.store.presentation.brand
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseFragment
+import com.gymapp.features.store.data.model.Store
+import com.gymapp.features.store.domain.products.StoreBrandListViewModel
+import com.gymapp.features.store.presentation.homepage.StoreActivity
+import com.gymapp.helper.rv.GridItemSpacingDecoration
+import kotlinx.android.synthetic.main.fragment_store_brand_list.*
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+
 
 class StoreBrandListFragment : BaseFragment() {
+
+    private lateinit var storeBrandListAdapter: StoreBrandListAdapter
+    private lateinit var storeBrandListVM: StoreBrandListViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,32 +35,34 @@ class StoreBrandListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setTitle(getString(R.string.store_title_name))
-    }
 
-/*
-*     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        storeBrandListVM.attachNavigator(this)
-
-        val brandsList = Gson().fromJson<MutableList<StoreFeed.AsBrand>>(arguments?.getString(Constants.brandsList),
-                object : TypeToken<MutableList<StoreFeed.AsBrand>>() {}.type)
-
-        storeBrandListVM.setBrandsList(brandsList)
-
-        initToolbar(getString(R.string.store_title), false)
+        storeBrandListVM = getViewModel()
 
         brandsSearchEt.addTextChangedListener(
-                object : TextWatcher {
-                    override fun afterTextChanged(s: Editable?) {
-                        storeBrandListVM.filterBrandsList(s.toString())
-                    }
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                    storeBrandListVM.filterBrandsList(s.toString())
+                }
 
-                    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-                })
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            })
+
+        initAdapter()
+
+        bindViewModelObserver()
+
+        storeBrandListVM.fetchData()
     }
 
-    override fun updateUI(brandsList: MutableList<StoreFeed.AsBrand>) {
+    private fun bindViewModelObserver() {
+        storeBrandListVM.filteredBrandsList.observe(viewLifecycleOwner, Observer {
+            storeBrandListAdapter.updateList(it)
+        })
+    }
+
+
+    private fun initAdapter() {
         val spanCount = resources.getInteger(R.integer.brand_list_grid_span_size)
         val gridSpacing = resources.getDimensionPixelSize(R.dimen.grid_spacing)
 
@@ -59,15 +75,12 @@ class StoreBrandListFragment : BaseFragment() {
 
         brandsRv.addItemDecoration(GridItemSpacingDecoration(spanCount, gridSpacing, true))
 
-        storeBrandListAdapter = StoreBrandsListAdapter(brandsList, storeActivityListener)
+        storeBrandListAdapter = StoreBrandListAdapter(ArrayList(), activity as StoreActivity)
 
         brandsRv.adapter = storeBrandListAdapter
         brandsRv.layoutManager = gridLayoutManager
     }
 
-    override fun updateBrandsList(brandsList: MutableList<StoreFeed.AsBrand>) {
-        storeBrandListAdapter.updateList(brandsList)
-    }
-*/
+
 
 }
