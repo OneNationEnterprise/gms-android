@@ -35,7 +35,7 @@ class StoreHomepageSectionView(
             }
         }
 
-        val optionSetAdapter = StoreHomepageAdapter(section)
+        val optionSetAdapter = StoreHomepageAdapter(section, listener)
 
         val linearLayoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

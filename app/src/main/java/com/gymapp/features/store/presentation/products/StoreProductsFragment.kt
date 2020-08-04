@@ -13,6 +13,7 @@ import com.gymapp.base.presentation.BaseFragment
 import com.gymapp.features.store.domain.products.StoreProductsViewModel
 import com.gymapp.helper.Constants
 import kotlinx.android.synthetic.main.fragment_store.*
+import kotlinx.android.synthetic.main.fragment_store.progressBar
 import kotlinx.android.synthetic.main.fragment_store_products.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -79,11 +80,11 @@ class StoreProductsFragment : BaseFragment() {
     }
 
     fun showLoading() {
-        wvProgressIndicator.visibility = View.VISIBLE
+        progressBar.visibility = View.VISIBLE
     }
 
     fun hideLoading() {
-        wvProgressIndicator.visibility = View.GONE
+        progressBar.visibility = View.GONE
     }
 
     private fun setupRecycleViewTabLayoutSync(pairList: MutableList<Pair<Int, Int>>) {

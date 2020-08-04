@@ -1,5 +1,7 @@
 package com.gymapp.features.store.data
 
+import com.apollographql.apollo.exception.ApolloHttpException
+import com.apollographql.apollo.gym.type.PaginatorInput
 import com.apollographql.apollo.gym.type.ProductsFilter
 import com.apollographql.apollo.gym.type.StoreHomeInput
 import com.gymapp.base.data.BaseRepository
@@ -43,20 +45,25 @@ class StoreRepository(private val apiManagerInterface: ApiManagerInterface) :
 
     override suspend fun getProducts(input: ProductsFilter): ArrayList<Product> {
 
-        val apiResponse = apiManagerInterface.getProductsAsync(input).await()
+        try {
+            val apiResponse = apiManagerInterface.getProductsAsync(input, PaginatorInput(0,100)).await()
 
-        if (apiResponse.data?.products != null) {
-            val products = apiResponse.data!!.products.list
+            if (apiResponse.data?.products != null) {
+                val products = apiResponse.data!!.products.list
 
-            productsList.clear()
+                productsList.clear()
 
-            for (product in products!!) {
-                if (product?.fragments?.storeProductFields != null) {
-                    productsList.add(productsMapper.mapToDto(product.fragments.storeProductFields))
+                for (product in products!!) {
+                    if (product?.fragments?.storeProductFields != null) {
+                        productsList.add(productsMapper.mapToDto(product.fragments.storeProductFields))
+                    }
                 }
+
+                return productsList
             }
 
-            return productsList
+        }catch (e : ApolloHttpException){
+
         }
 
         return ArrayList()

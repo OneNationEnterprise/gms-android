@@ -70,7 +70,7 @@ class ItemHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
                 val percentage =
                     ((diff * 100) / product.listPrice.toString().toDouble()).roundToInt()
 
-                itemView.productDiscountValue.text = "${percentage.toString()}OFF"
+                itemView.productDiscountValue.text = "${percentage.toString()}% OFF"
 
                 itemView.productDiscountValue.visibility = View.VISIBLE
 

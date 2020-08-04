@@ -46,6 +46,8 @@ class StoreFragment : BaseFragment() {
     private fun bindViewModelObserver() {
         storeProductsViewModel.homeData.observe(viewLifecycleOwner, Observer {
 
+            homepageContainer.removeAllViews()
+
             if (it == null) {
                 //todo show error
                 return@Observer
@@ -63,11 +65,14 @@ class StoreFragment : BaseFragment() {
                 val storeHomePageView = StoreHomepageSectionView(requireContext(), it.categories,activity as StoreActivity)
                 homepageContainer.addView(storeHomePageView)
             }
+            if (!it.bestSeller.isNullOrEmpty()) {
+                val storeHomePageView = StoreHomepageSectionView(requireContext(), it.bestSeller, activity as StoreActivity)
+                homepageContainer.addView(storeHomePageView)
+            }
 
             homepageContainer.addView(StoreHomepageEmptyView(requireContext()))
 
             hideLoading()
-
         })
     }
 

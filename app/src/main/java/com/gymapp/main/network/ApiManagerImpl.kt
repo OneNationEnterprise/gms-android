@@ -65,7 +65,10 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
         return graphQlNoAuthClient.query(StoreHomeQuery(Input.fromNullable(input))).toDeferred()
     }
 
-    override suspend fun getProductsAsync(input: ProductsFilter): Deferred<Response<ProductsQuery.Data>> {
-        return graphQlNoAuthClient.query(ProductsQuery(Input.fromNullable(input))).toDeferred()
+    override suspend fun getProductsAsync(
+        input: ProductsFilter,
+        pagingInput: PaginatorInput
+    ): Deferred<Response<ProductsQuery.Data>> {
+        return graphQlNoAuthClient.query(ProductsQuery(Input.fromNullable(input), pagingInput)).toDeferred()
     }
 }

@@ -14,9 +14,6 @@
         <action
             android:id="@+id/action_store_fragment_to_brands_list_fragment"
             app:destination="@id/brands_list_fragment" />
-        <action
-            android:id="@+id/action_store_fragment_to_storeBrandProductsFragment"
-            app:destination="@id/allproducts_fragment" />
     </fragment>
 
     <fragment

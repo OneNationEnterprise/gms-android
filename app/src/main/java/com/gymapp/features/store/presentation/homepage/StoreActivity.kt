@@ -21,12 +21,41 @@ class StoreActivity : BaseActivity(R.layout.activity_store), StoreItemSelectedLi
         )
     }
 
-    override fun hasSelectedSpecificStore(storeId: String, pageTitle:String) {
+    override fun hasSelectedSpecificStore(storeId: String, pageTitle: String) {
         val bundle = Bundle()
         bundle.putString(Constants.brandId, storeId)
         bundle.putString(Constants.pageTitle, pageTitle)
 
-        findNavController(R.id.fragmentContainer).navigate(R.id.action_brands_list_fragment_to_storeProductsFragment, bundle, null)
+        findNavController(R.id.fragmentContainer).navigate(
+            R.id.action_brands_list_fragment_to_storeProductsFragment,
+            bundle,
+            null
+        )
+    }
+
+    override fun hasSelectedStore(storeId: String, pageTitle: String) {
+        val bundle = Bundle()
+        bundle.putString(Constants.brandId, storeId)
+        bundle.putString(Constants.pageTitle, pageTitle)
+
+        findNavController(R.id.fragmentContainer).navigate(
+            R.id.action_store_fragment_to_allproducts_fragment,
+            bundle,
+            null
+        )
+    }
+
+    override fun hasSelectedCategory(categoryId: String, categoryName: String) {
+        val bundle = Bundle()
+        bundle.putString(Constants.categoryId, categoryId)
+        bundle.putString(Constants.pageTitle, categoryName)
+
+        findNavController(R.id.fragmentContainer).navigate(
+            R.id.action_store_fragment_to_allproducts_fragment,
+            bundle,
+            null
+        )
+
     }
 
 

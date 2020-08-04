@@ -1,5 +1,5 @@
-query Products($input : ProductsFilter){
-    products(params: $input){
+query Products($input : ProductsFilter, $paging: PaginatorInput!){
+    products(params: $input, paging: $paging){
         list{
             ...StoreProductFields
         }

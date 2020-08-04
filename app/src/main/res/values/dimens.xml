@@ -36,5 +36,8 @@
     <dimen name="margin_end_last_item">8dp</dimen>
     <dimen name="thumbnail_size">108dp</dimen>
 
+    <!--Store-->
+    <dimen name="product_card_width">156dp</dimen>
+
 
 </resources>

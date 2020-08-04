@@ -6,4 +6,7 @@ interface StoreItemSelectedListener {
 
     fun hasSelectedSpecificStore(storeId: String, pageTitle: String)
 
+    fun hasSelectedStore(storeId: String, pageTitle: String)
+
+    fun hasSelectedCategory(categoryId: String, categoryName: String)
 }
