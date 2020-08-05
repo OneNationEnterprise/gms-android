@@ -5,7 +5,7 @@
     android:id="@+id/itemContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffff"
+    android:background="@color/blue005"
     android:paddingTop="8dp"
     android:paddingBottom="8dp">
 
@@ -14,7 +14,7 @@
         android:layout_width="52dp"
         android:layout_height="52dp"
         android:layout_marginStart="16dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="2dp"
         app:cardElevation="2dp"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -61,6 +61,7 @@
         android:layout_marginStart="8dp"
         android:textColor="@color/white"
         android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/productMinus"
         app:layout_constraintEnd_toEndOf="@+id/productAdd"
         app:layout_constraintTop_toBottomOf="@id/productName"
         app:layout_constraintTop_toTopOf="@id/productName"

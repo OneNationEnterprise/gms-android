@@ -23,6 +23,10 @@ class ProfileActivity : BaseActivity(R.layout.activity_profile) {
 
         setCustomToolbarTitle(getString(R.string.profile))
 
+        editTv.setOnClickListener {
+
+        }
+
         medicalContainer.setOnClickListener {
             startActivity(Intent(this, MedicalFormActivity::class.java))
         }

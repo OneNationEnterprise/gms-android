@@ -179,6 +179,7 @@
 
     <!--Products-->
     <string name="add_product_sold_out">Sold out</string>
+    <string name="proceed_to_checkout">Proceed to Checkout</string>
 
     <!--ERRORS-->
     <!--Auth-->

@@ -12,6 +12,7 @@ import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.store.data.model.Product
 import com.gymapp.features.store.domain.products.products.StoreProductsViewModel
+import com.gymapp.features.store.presentation.cart.StoreCartActivity
 import com.gymapp.features.store.presentation.detail.StoreProductDetailActivity
 import com.gymapp.helper.Constants
 import kotlinx.android.synthetic.main.bottomsheet_store_cart_layout.*
@@ -24,6 +25,10 @@ class StoreActivity : BaseActivity(R.layout.activity_store), StoreItemSelectedLi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        cartLayout.setOnClickListener {
+            startActivity(Intent(this, StoreCartActivity::class.java))
+        }
     }
 
     override fun hasSelectedSeeAllStores() {
@@ -96,21 +101,6 @@ class StoreActivity : BaseActivity(R.layout.activity_store), StoreItemSelectedLi
             storeProductsViewModel.addProductToCart(product)
         }
     }
-
-    private fun showCart(items: Int, value: Double) {
-        TransitionManager.beginDelayedTransition(cartContainer)
-        cartContainer.visibility = View.VISIBLE
-
-        itemsTv.text = getString(R.string.store_items_in_cart, items.toString())
-
-        valueTv.text = value.toString()
-    }
-
-    private fun hideCart() {
-        TransitionManager.beginDelayedTransition(cartContainer)
-        cartContainer.visibility = View.GONE
-    }
-
 
     override fun onResume() {
         super.onResume()

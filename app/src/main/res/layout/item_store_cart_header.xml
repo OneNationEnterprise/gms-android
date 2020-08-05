@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp"
-    android:background="#ffffff"
+    android:background="@color/blue005"
     android:gravity="center_vertical"
     android:orientation="horizontal"
     app:layout_constraintStart_toStartOf="parent">
@@ -21,7 +21,7 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:textAllCaps="true"
-        android:textColor="@color/green003"
+        android:textColor="@color/blue001"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

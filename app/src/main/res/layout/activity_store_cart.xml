@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <include layout="@layout/item_toolbar" />
@@ -24,7 +25,7 @@
         android:layout_gravity="bottom"
         android:layout_margin="16dp"
         android:padding="14dp"
-        android:text="@string/save_cc"
+        android:text="@string/proceed_to_checkout"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent" />
 
