@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addressOptionContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:gravity="center_vertical"
+    android:background="#ffffff"
+    android:orientation="horizontal"
+
+    app:layout_constraintStart_toStartOf="parent">
+
+    <ImageView
+        android:id="@+id/deliverIcon"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/deliverName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="1dp"
+        style="@style/FontLocalizedBold"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@id/deliverIcon"
+        app:layout_constraintBottom_toBottomOf="@+id/deliverIcon"
+        app:layout_constraintTop_toTopOf="@+id/deliverIcon"
+        tools:text="@string/services_legend_at_the_counter" />
+
+    <TextView
+        android:id="@+id/deliverTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/gray003"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/deliverRadioButton"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="ETA: 16:79" />
+
+    <ImageView
+        android:id="@+id/deliverRadioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_radiobutton_iconoff"
+        app:layout_constraintBottom_toBottomOf="@+id/deliverIcon"
+        app:layout_constraintTop_toTopOf="@+id/deliverIcon"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/gray001"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseFragment
-import com.gymapp.features.store.domain.products.StoreProductsViewModel
+import com.gymapp.features.store.domain.products.products.StoreProductsViewModel
 import com.gymapp.features.store.helper.view.StoreHomepageEmptyView
 import com.gymapp.features.store.helper.view.StoreHomepageSectionView
 import kotlinx.android.synthetic.main.fragment_store.*

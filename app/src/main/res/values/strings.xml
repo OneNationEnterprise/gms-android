@@ -186,5 +186,6 @@
     <string name="new_account_creation_invalid_otp">Error OTP validation</string>
 
     <string name="medical_form_info_text">A medical ID provides medical information about you that may be important in an emergency, like allergies and medical conditions.</string>
+    <string name="store_product_details_no_return">No return</string>
 
 </resources>

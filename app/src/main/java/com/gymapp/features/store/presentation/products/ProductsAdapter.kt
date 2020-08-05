@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.gymapp.R
 import com.gymapp.features.store.data.model.Product
+import com.gymapp.features.store.presentation.homepage.StoreItemSelectedListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_store_product.view.*
 import kotlin.math.roundToInt
 
-class ProductsAdapter(var products: MutableList<Product>) :
+class ProductsAdapter(var products: MutableList<Product>, val listener: StoreItemSelectedListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -29,15 +30,17 @@ class ProductsAdapter(var products: MutableList<Product>) :
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder = holder as ItemHolder
-        viewHolder.bindView(products[position])
-
+        viewHolder.bindView(products[position], listener)
     }
 }
 
 
 class ItemHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
 
-    fun bindView(product: Product) {
+    fun bindView(
+        product: Product,
+        listener: StoreItemSelectedListener
+    ) {
 
         val imagesList = product?.images
 
@@ -80,12 +83,11 @@ class ItemHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
 
         } else {
             itemView.productDiscountValue.visibility = View.INVISIBLE
-
             itemView.productPrice.text = product.listPrice.toString()
         }
 
         itemView.cardViewInnerProductContainer.setOnClickListener {
-//            storeActivityListener.openProductDetail(product)
+            listener.openProductDetail(product)
         }
     }
 }

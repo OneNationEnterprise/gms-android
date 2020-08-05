@@ -10,8 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseFragment
-import com.gymapp.features.store.data.model.Store
-import com.gymapp.features.store.domain.products.StoreBrandListViewModel
+import com.gymapp.features.store.domain.products.brandList.StoreBrandListViewModel
 import com.gymapp.features.store.presentation.homepage.StoreActivity
 import com.gymapp.helper.rv.GridItemSpacingDecoration
 import kotlinx.android.synthetic.main.fragment_store_brand_list.*

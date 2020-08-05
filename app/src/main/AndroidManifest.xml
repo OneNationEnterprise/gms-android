@@ -85,6 +85,14 @@
             android:name=".features.store.presentation.homepage.StoreActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".features.store.presentation.detail.StoreProductDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.store.presentation.cart.StoreCartActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBT0Oty_zje_wZHO9TtRBfyDJnWZDPZiYI" />

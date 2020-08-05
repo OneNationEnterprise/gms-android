@@ -12,7 +12,10 @@ data class Product(
     val salePrice: Double,
     val description: String,
     val warranty: Boolean,
+    val warrantyDescription: String?,
     val returnPolicy: Boolean,
+    val returnPolicyDescription: String?,
+    val brand: ProductBrand?,
     val express: Boolean,
     val images: List<String>?,
     val categoryName: String?
@@ -24,4 +27,14 @@ data class Product(
     override fun getHeaderTitle(): String {
         return "Best Sellers"
     }
+
+    fun getProductActualPrice(): Double {
+        return if (salePrice > 0) {
+            salePrice
+        } else {
+            listPrice
+        }
+    }
 }
+
+data class ProductBrand(val id: String, val name: String)

@@ -5,6 +5,7 @@ import com.apollographql.apollo.gym.fragment.StoreProductFields
 import com.gymapp.base.data.BaseDataMapperInterface
 import com.gymapp.features.store.data.model.Category
 import com.gymapp.features.store.data.model.Product
+import com.gymapp.features.store.data.model.ProductBrand
 
 class ProductMapper : BaseDataMapperInterface<StoreProductFields, Product> {
 
@@ -18,7 +19,10 @@ class ProductMapper : BaseDataMapperInterface<StoreProductFields, Product> {
             listPrice = fields.listPrice,
             salePrice = fields.salePrice,
             warranty = fields.warranty,
+            warrantyDescription = fields.warrantyDescription,
             returnPolicy = fields.returnPolicy,
+            returnPolicyDescription = fields.returnPolicyDescription,
+            brand = productBrandMapper(fields.brand),
             express = fields.express,
             images = fields.images,
             categoryName = fields.category?.name
@@ -40,6 +44,14 @@ class ProductMapper : BaseDataMapperInterface<StoreProductFields, Product> {
 
         return input.map {
             mapToDto(it!!.fragments.storeProductFields)
+        }
+    }
+
+    fun productBrandMapper(brand: StoreProductFields.Brand?): ProductBrand? {
+        return if (brand != null) {
+            ProductBrand(brand.id, brand.name)
+        } else {
+            null
         }
     }
 }

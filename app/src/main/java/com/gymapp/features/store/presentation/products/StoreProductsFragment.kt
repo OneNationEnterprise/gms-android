@@ -6,13 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.tabs.TabLayout
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseFragment
-import com.gymapp.features.store.domain.products.StoreProductsViewModel
+import com.gymapp.features.store.domain.products.products.StoreProductsViewModel
+import com.gymapp.features.store.presentation.homepage.StoreActivity
 import com.gymapp.helper.Constants
-import kotlinx.android.synthetic.main.fragment_store.*
 import kotlinx.android.synthetic.main.fragment_store.progressBar
 import kotlinx.android.synthetic.main.fragment_store_products.*
 import kotlinx.coroutines.GlobalScope
@@ -60,7 +58,7 @@ class StoreProductsFragment : BaseFragment() {
 
             hideLoading()
 
-            val productAdapterItem = ProductsAdapter(it)
+            val productAdapterItem = ProductsAdapter(it, activity as StoreActivity)
 
             gridLayoutManager = GridLayoutManager(context, 4)
 

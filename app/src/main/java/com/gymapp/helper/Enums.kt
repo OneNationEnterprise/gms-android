@@ -20,3 +20,18 @@ enum class HomepageSectionType {
     CATEGORY,
     PRODUCT
 }
+
+/**
+ * enum class for menu items adapter [StoreCartActivity] class
+ */
+enum class STORE_CART_ITEMS {
+    SECTION_HEADER,
+    SELECTED_PRODUCT,
+    SECTION_SUBTOTAL
+}
+
+enum class STORE_CART_PRODUCTS {
+    BRAND_HEADER,
+    PRODUCT_ROW,
+    SUBTOTAL
+}

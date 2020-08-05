@@ -1,10 +1,9 @@
-package com.gymapp.features.store.domain.products
+package com.gymapp.features.store.domain.products.brandList
 
 import androidx.lifecycle.MutableLiveData
 import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.features.store.data.StoreRepositoryInterface
 import com.gymapp.features.store.data.model.Store
-import java.util.Locale.filter
 
 class StoreBrandListViewModel(private val storeRepositoryInterface: StoreRepositoryInterface) :
     BaseViewModel() {

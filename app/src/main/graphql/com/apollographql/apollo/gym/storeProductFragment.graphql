@@ -6,9 +6,17 @@ fragment StoreProductFields on Product{
     salePrice
     description
     warranty
+    warrantyPeriod
+    warrantyDescription
     returnPolicy
+    returnPolicyPeriod
+    returnPolicyDescription
     express
     images
+    brand{
+        id
+        name
+    }
     category{
         name
     }

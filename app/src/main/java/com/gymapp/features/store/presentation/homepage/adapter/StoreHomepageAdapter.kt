@@ -115,7 +115,8 @@ class StoreHomepageAdapter(
                 (holder as StoreProductViewHolder).bindView(
                     items[position] as Product,
                     position,
-                    position == items.size - 1
+                    position == items.size - 1,
+                    listener
                 )
             }
             else -> {
@@ -230,7 +231,8 @@ class StoreProductViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView
     fun bindView(
         product: Product,
         position: Int,
-        lastItem: Boolean
+        lastItem: Boolean,
+        listener: StoreItemSelectedListener
     ) {
         val containerLayaoutParams =
             itemView.card_view_outer.layoutParams as (RecyclerView.LayoutParams)
@@ -294,7 +296,7 @@ class StoreProductViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView
         }
 
         itemView.cardViewInnerProductContainer.setOnClickListener {
-//            storeActivityListener.openProductDetail(product)
+            listener.openProductDetail(product)
         }
     }
 }

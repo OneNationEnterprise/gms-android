@@ -22,8 +22,9 @@ import com.gymapp.features.profile.payment.domain.SaveCardViewModel
 import com.gymapp.features.profile.settings.domain.SettingsViewModel
 import com.gymapp.features.store.data.StoreRepository
 import com.gymapp.features.store.data.StoreRepositoryInterface
-import com.gymapp.features.store.domain.products.StoreBrandListViewModel
-import com.gymapp.features.store.domain.products.StoreProductsViewModel
+import com.gymapp.features.store.domain.products.brandList.StoreBrandListViewModel
+import com.gymapp.features.store.domain.products.cart.StoreCartViewModel
+import com.gymapp.features.store.domain.products.products.StoreProductsViewModel
 import com.gymapp.features.subscriptions.domain.SubscriptionViewModel
 import com.gymapp.main.data.repository.config.ConfigRepository
 import com.gymapp.main.data.repository.config.ConfigRepositoryInterface
@@ -162,11 +163,22 @@ object ApplicationModule {
         }
 
         viewModel {
-            StoreProductsViewModel(get())
+            StoreProductsViewModel(
+                get(),
+                get()
+            )
         }
 
         viewModel {
-            StoreBrandListViewModel(get())
+            StoreBrandListViewModel(
+                get()
+            )
+        }
+
+        viewModel {
+            StoreCartViewModel(
+                get()
+            )
         }
     }
 

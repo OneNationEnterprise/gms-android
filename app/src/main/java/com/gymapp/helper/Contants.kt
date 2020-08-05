@@ -13,6 +13,7 @@ object Constants {
     const val subscriptionType = "subscription.type"
     const val classesListPageName = "classes.list.page.name"
     const val pageTitle = "page.title"
+    const val product = "product.json"
 
     const val BASE_SERVER_URL =
         "http://ad82ca9ee5fa74f8b8bf78963b2c735d-586376887.eu-west-1.elb.amazonaws.com/graphql"

@@ -9,6 +9,7 @@
     app:behavior_peekHeight="0dp"
     android:visibility="gone"
     android:layout_gravity="bottom"
+    android:backgroundTint="@color/blue005"
     android:background="@drawable/bg_white_gradient"
     tools:visibility="visible">
 

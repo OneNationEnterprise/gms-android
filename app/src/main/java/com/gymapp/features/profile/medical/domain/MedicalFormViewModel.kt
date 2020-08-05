@@ -100,7 +100,6 @@ class MedicalFormViewModel(
         if (contentElementsFieldList.size == numberOfFormFields) {
 
             val input = CustomerMedicalForm(
-                authRepositoryInterface.getCurrentUser()!!.id,
                 Input.fromNullable(
                     contentElementsFieldList
                 )
