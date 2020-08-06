@@ -93,9 +93,24 @@
             android:name=".features.store.presentation.cart.StoreCartActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".features.profile.edit.presentation.changename.ChangeCustomerNameActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBT0Oty_zje_wZHO9TtRBfyDJnWZDPZiYI" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="gym.file.provider.authority"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
 
     </application>
 

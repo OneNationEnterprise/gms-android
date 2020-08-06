@@ -39,6 +39,19 @@
     <color name="loading_background">#5FA7AEAC</color>
     <color name="sold_out_overlay">#78B2B2B2</color>
     <color name="colorBrown">#594a42</color>
+    <color name="circleTextViewBg">#7E7367</color>
+    <color name="circleStroke">#C3B49B</color>
+    <color name="colorEggShell">#e7e1d6</color>
+    <color name="colorNavy">#001232</color>
+    <color name="colorNavyLight">#e6001232</color>
+    <color name="colorBorder">#c3b49b</color>
+    <color name="colorDivider">#c8c7cc</color>
+    <color name="colorDividerLight">#5FA7AEAC</color>
+    <color name="brownBackground">#EAE6E3</color>
+    <color name="rewardProgressBackground">#F2F6F8</color>
+    <color name="verified_green">#89CA00</color>
+    <color name="verified_red">#FF5C00</color>
+
 
 
 </resources>

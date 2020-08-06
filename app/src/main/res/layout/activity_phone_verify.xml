@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/verifyPhoneContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue005">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbarContainer">
+
+        <include
+            android:id="@+id/phoneView"
+            layout="@layout/verify_phone"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/otpViewLayout"
+            layout="@layout/verify_otp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/dialog_infinite_progressbar"
+        android:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

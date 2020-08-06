@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="FontLocalizedBold">
         <item name="android:fontFamily">@font/nunito_bold</item>
     </style>
@@ -7,8 +8,42 @@
     <style name="FontLocalizedMedium">
         <item name="android:fontFamily">@font/nunito_regular</item>
     </style>
+
     <style name="NotificationAnimationTop" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/top_enter</item>
         <item name="android:windowExitAnimation">@anim/top_exit</item>
     </style>
+
+    <style name="NumberPickerStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/nunito_regular</item>
+        <item name="android:textColorPrimary">@color/colorAccent</item>
+        <item name="android:colorControlNormal">@color/gray001</item>
+    </style>
+
+    <style name="bottomSheetStyleWrapper" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="behavior_peekHeight">@dimen/bottom_sheet_dialog_peek_height</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/bottomSheetStyleWrapper</item>
+    </style>
+
+    <style name="ButtonTextView" parent="android:Widget.TextView">
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:background">@drawable/bg_round_red</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:fontFamily">@font/nunito_bold</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
 </resources>

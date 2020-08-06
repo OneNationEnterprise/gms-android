@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/imageCropContainer"
+    android:background="@color/black">
+
+    <com.theartofdev.edmodo.cropper.CropImageView
+        android:id="@+id/cropImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cropAspectRatioX="5"
+        app:cropAspectRatioY="5"
+        app:cropBackgroundColor="@android:color/transparent"
+        app:cropBorderCornerThickness="0dp"
+        app:cropShape="oval" />
+
+    <TextView
+        android:id="@+id/saveBtn"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:padding="25dp"
+        android:text="Save"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/cancelBtn"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:padding="25dp"
+        android:text="@string/cancel"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <include
+        android:id="@+id/imageCropProgressBar"
+        layout="@layout/dialog_infinite_progressbar"
+        android:visibility="gone" />
+
+</RelativeLayout>

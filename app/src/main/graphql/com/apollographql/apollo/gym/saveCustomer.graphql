@@ -1,0 +1,8 @@
+mutation SaveCustomer($input: SaveCustomerInput!){
+    saveCustomer(input: $input){
+        customer{
+            ...customerFields
+        }
+        errorMessage
+    }
+}

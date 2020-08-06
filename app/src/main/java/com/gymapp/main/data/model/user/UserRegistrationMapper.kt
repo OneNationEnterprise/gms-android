@@ -9,11 +9,14 @@ class UserRegistrationMapper :
     override fun mapToDto(input: RegisterUserMutation.Customer): User {
         return User(
             input.fragments.customerFields.id,
+            input.fragments.customerFields.firstName,
+            input.fragments.customerFields.lastName,
             input.fragments.customerFields.fullName,
             input.fragments.customerFields.email,
             input.fragments.customerFields.contactNumber,
-            input.fragments.customerFields.countryId,
-            input.fragments.customerFields.photo
+            mapUserCountry(input.fragments.customerFields.country.id),
+            input.fragments.customerFields.photo,
+            input.fragments.customerFields.dob.toString()
         )
     }
 
@@ -24,5 +27,9 @@ class UserRegistrationMapper :
         return input.map {
             mapToDto(it!!)
         }
+    }
+
+    fun mapUserCountry(countryId: String): UserCountry {
+        return UserCountry(countryId)
     }
 }

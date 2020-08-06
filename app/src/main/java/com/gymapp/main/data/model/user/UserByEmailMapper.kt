@@ -9,11 +9,14 @@ class UserByEmailMapper :
     override fun mapToDto(customer: CustomerByEmailQuery.CustomerByEmail): User {
         return User(
             customer.fragments.customerFields.id,
+            customer.fragments.customerFields.firstName,
+            customer.fragments.customerFields.lastName,
             customer.fragments.customerFields.fullName,
             customer.fragments.customerFields.email,
             customer.fragments.customerFields.contactNumber,
-            customer.fragments.customerFields.countryId,
-            customer.fragments.customerFields.photo
+            mapUserCountry(customer.fragments.customerFields.country.id),
+            customer.fragments.customerFields.photo,
+            customer.fragments.customerFields.dob.toString()
         )
 
     }
@@ -25,5 +28,9 @@ class UserByEmailMapper :
         return input.map {
             mapToDto(it!!)
         }
+    }
+
+    fun mapUserCountry(countryId: String): UserCountry {
+        return UserCountry(countryId)
     }
 }

@@ -1,8 +1,13 @@
 fragment customerFields on Customer{
     id
     fullName
+    firstName
+    lastName
     email
     contactNumber
-    countryId
+    country{
+        id
+    }
     photo
+    dob
 }

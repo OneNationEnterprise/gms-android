@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/changeNameContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blue005">
+
+    <include layout="@layout/toolbar_layout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputValue"
+        style="@style/EditText.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="visible"
+        app:boxStrokeColor="@color/red001"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarContainer">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:hint="@string/edt_hint_first_name"
+            android:inputType="textPersonName"
+            android:textAlignment="viewStart" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/saveValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_round_red"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Save"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/inputValue" />
+
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/dialog_infinite_progressbar"
+        android:visibility="gone" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,5 +39,15 @@
     <!--Store-->
     <dimen name="product_card_width">156dp</dimen>
 
+    <!--Bottom sheet dialog-->
+    <dimen name="bottom_sheet_dialog_peek_height">500dp</dimen>
+    <dimen name="bottom_sheet_dialog_marginStart">20dp</dimen>
+    <dimen name="bottom_sheet_dialog_marginEnd">20dp</dimen>
+    <dimen name="cart_peek_height_collapsed">74dp</dimen>
+    <dimen name="search_location_peek_height_collapsed">220dp</dimen>
+    <dimen name="brand_location_peek_height_collapsed">180dp</dimen>
+    <dimen name="select_branch_peek_height_collapsed">320dp</dimen>
+    <dimen name="order_peek_height_collapsed">105dp</dimen>
+    <dimen name="cart_peek_height_half_collapsed">200dp</dimen>
 
 </resources>

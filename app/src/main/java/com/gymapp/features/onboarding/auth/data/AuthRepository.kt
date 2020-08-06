@@ -1,9 +1,11 @@
 package com.gymapp.features.onboarding.auth.data
 
 import com.apollographql.apollo.gym.type.RegisterCustomerInput
+import com.apollographql.apollo.gym.type.SaveCustomerInput
 import com.gymapp.base.data.BaseRepository
 import com.gymapp.main.data.model.user.User
 import com.gymapp.main.data.model.user.UserByEmailMapper
+import com.gymapp.main.data.model.user.UserBySaveCustomerMapper
 //import com.gymapp.main.data.db.GymDao
 import com.gymapp.main.data.model.user.UserRegistrationMapper
 import com.gymapp.main.network.ApiManagerInterface
@@ -58,6 +60,21 @@ class AuthRepository(private val apiManager: ApiManagerInterface/*, private val 
 
     override fun invalidateUserDataOnLogout() {
         user = null
+    }
+
+    override suspend fun saveCustomer(input: SaveCustomerInput): String? {
+        val apiResponse = apiManager.saveCustomerAsync(input).await()
+
+        if (!apiResponse.data?.saveCustomer?.errorMessage.isNullOrEmpty()) return apiResponse.data?.saveCustomer?.errorMessage
+
+
+        val user1 = apiResponse.data!!.saveCustomer!!.customer
+
+        val mapper = UserBySaveCustomerMapper()
+
+        user = mapper.mapToDto(user1!!)
+
+        return null
     }
 }
 

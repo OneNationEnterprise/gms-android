@@ -8,6 +8,8 @@ import java.util.*
 
 object DateHelper {
 
+    const val ISO8601_DATE = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+
     val dateTimeFormatter = DateTimeFormatterBuilder()
         .appendPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
         .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)

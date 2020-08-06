@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="16dp">
+
+    <LinearLayout
+        android:id="@+id/otpViewContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/otpPhoneNumberTv"
+            style="@style/FontLocalizedBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            tools:text="+982 92039302" />
+
+        <TextView
+            android:id="@+id/editPhoneTv"
+            style="@style/FontLocalizedBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Edit phone"
+            android:textColor="@color/accent"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/otpEditPhoneTv"
+            style="@style/FontLocalizedBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Phone"
+            android:textColor="@color/accent"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/otpEnterSmsTv"
+            style="@style/FontLocalizedMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Enter the SMS code you received"
+            android:textSize="16sp" />
+
+        <com.gymapp.helper.view.otp.OtpView
+            android:id="@+id/otpView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:itemBackground="@color/colorPrimary"
+            android:textColor="@color/white"
+            app:itemCount="6"
+            app:lineColor="@color/accent"
+            app:viewType="line" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/invalidOTPCode"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/new_account_creation_invalid_otp"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otpViewContainer" />
+
+    <TextView
+        android:id="@+id/otpNotSupported"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="SMS code did not show up?"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invalidOTPCode" />
+
+    <!--  <TextView
+          android:id="@+id/otpCounter"
+          style="@style/FontLocalizedBold"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:text="0:30"
+          android:textSize="14sp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/otpNotSupported" />-->
+
+    <!--    <Chronometer-->
+    <!--        style="@style/FontLocalizedMedium"-->
+    <!--        android:id="@+id/otpCounter"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:inputType="number"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/otpResendTv"-->
+    <!--        tools:targetApi="24" />-->
+
+    <TextView
+        android:id="@+id/otpCounter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text = "00:59"
+        app:layout_constraintTop_toBottomOf="@+id/otpResendTv"/>
+
+    <TextView
+        android:id="@+id/otpResendTv"
+        style="@style/FontLocalizedBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:text="Resend SMS code"
+        android:textColor="@color/gray001"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otpNotSupported" />
+
+
+    <LinearLayout
+        android:id="@+id/skipContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/otpCounter"
+        tools:visibility="visible">
+
+
+        <TextView
+            android:id="@+id/skipOtpTitleTv"
+            style="@style/FontLocalizedBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Trouble receiving SMS code?"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/skipOtpBtn"
+            style="@style/FontLocalizedBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:text="Use Email Address"
+            android:textColor="@color/accent"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/skipOtpTitleTv" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

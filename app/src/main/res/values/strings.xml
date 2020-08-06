@@ -181,12 +181,39 @@
     <string name="add_product_sold_out">Sold out</string>
     <string name="proceed_to_checkout">Proceed to Checkout</string>
 
+    <!--Edit profile-->
+    <string name="edit_user_profile">Edit Profile</string>
+    <string name="edit_user_profile_first_name">First Name</string>
+    <string name="edit_user_profile_last_name">Last Name</string>
+    <string name="edit_user_profile_email">Email Address</string>
+    <string name="edit_user_profile_phone">Phone</string>
+    <string name="edit_user_profile_birthday">Birthday</string>
+    <string name="edit_user_profile_password">Password</string>
+    <string name="user_profile_verified">Verified</string>
+    <string name="user_profile_terms">Terms and Conditions</string>
+    <string name="user_profile_not_verified">Not verified</string>
+    <string name="user_profile_credits">You have %1$s %2$s in COFE Credits</string>
+    <string name="update_photo">Update photo</string>
+    <string name="edt_hint_last_name">Last name</string>
     <!--ERRORS-->
     <!--Auth-->
     <string name="error_phone_wrong_validation">Error phone validation</string>
     <string name="new_account_creation_invalid_otp">Error OTP validation</string>
-
+    <string name="error_unknown">An Error Occurred</string>
     <string name="medical_form_info_text">A medical ID provides medical information about you that may be important in an emergency, like allergies and medical conditions.</string>
     <string name="store_product_details_no_return">No return</string>
+    <!--  error messages-->
+    <string name="error_firstname_wrong_validation">Provide First Name</string>
+    <string name="error_lastname_wrong_validation">Provide Last Name</string>
+    <string name="error_email_wrong_validation">Invalid Email</string>
+    <string name="error_password_wrong_validation">Invalid Password Use Min 6 Characters</string>
+    <string name="error_invalid_voucher_code">Invalid coupon code</string>
+    <string name="error_invalid_voucher_code_redemption_limit">Coupon code is no longer valid</string>
+    <string name="error_invalid_subtotal_order_value">Subtotal order value must be at least %1$s</string>
+    <string name="error_invalid_for_customer">This code does not exist or is no longer valid</string>
+    <string name="error_invalid_verify_email">Please verify your email to use this coupon</string>
+    <string name="error_required_field">This field is required</string>
 
+    <!--TODO-->
+    <string name="file_provider_authority">gym.file.provider.authority</string>
 </resources>

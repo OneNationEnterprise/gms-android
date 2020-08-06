@@ -15,6 +15,19 @@ union OrderPayload = CustomerGymClass | CustomerMembership | CustomerPass
 
 union PassRefTypePayload = ExternalBrand_VP | ExternalGym_VP
 
+type AddressField {
+    "the id of the field"
+    id: ID!
+    "if the field is required"
+    isRequired: Boolean!
+    "The order of the field"
+    order: Int!
+    "the name of the field"
+    title: String!
+    "the type of the field"
+    type: AddressFieldType!
+}
+
 "Admins to manage brand, branches, admin platform.."
 type Admin {
     adminType: AdminType!
@@ -243,11 +256,12 @@ type CountriesPayload {
 }
 
 type Country {
+    addressFields: [AddressField!]
     currency: CurrencyDetails!
     dialCode: String
     flagPhoto: String
     id: ID!
-    isoCode: String
+    isoCode: String!
     languages: [Language]!
     name: String!
     servicePhoneNumber: String
@@ -271,8 +285,7 @@ type Customer {
     addresses: [CustomerAddress!]
     authId: String!
     contactNumber: String
-    country: Country!
-    countryId: ID!
+    country: CustomerCountry!
     createdAt: Datetime!
     defaultAddress: CustomerAddress
     dob: Date
@@ -291,27 +304,16 @@ type Customer {
 
 "CustomerAddress.."
 type CustomerAddress {
-    avenue: String
-    block: String
-    building: String
-    city: String
     countryId: ID!
     createdAt: Datetime!
     customer: Customer!
-    floorNo: String
-    friendlyName: String!
+    "Dynamic fields"
+    dynamicData: [DynamicAddressFieldsData!]
     "The longitude component of the geo coordinates for this address, in degrees"
     geoLocation: CustomerAddressGeoLocation
     id: ID!
     isDefault: Boolean!
-    note: String
-    shortAddress: String
-    state: String
-    street: String
-    type: CustomerAddressType
-    unitNumber: String
     updatedAt: Datetime!
-    zipCode: String
 }
 
 type CustomerAddressGeoLocation {
@@ -322,6 +324,29 @@ type CustomerAddressGeoLocation {
 type CustomerAddressPayload {
     list: [CustomerAddress]
     paging: PaginatorOutput
+}
+
+type CustomerCountry {
+    currency: CustomerCurrency!
+    dialCode: String
+    flagPhoto: String
+    id: ID!
+    isoCode: String!
+    name: String!
+    servicePhoneNumber: String
+    status: GlobalStatusType
+    timeZoneIdentifier: String
+    vat: Float!
+    vatId: String
+}
+
+type CustomerCurrency {
+    code: String!
+    decimalPlace: Int!
+    lowestDenomination: Float!
+    name: String!
+    subUnitName: String!
+    symbol: String
 }
 
 "CustomerGymClass.."
@@ -485,6 +510,19 @@ type CustomerPaymentMethod {
 type CustomersPayload {
     list: [Customer]
     paging: PaginatorOutput
+}
+
+type DynamicAddressFieldsData {
+    "the id of the field"
+    id: ID!
+    "is the field required"
+    isRequired: Boolean!
+    "the name of the field"
+    name: String!
+    "the type of the field"
+    type: AddressFieldType!
+    "value set by the customer"
+    value: String!
 }
 
 type DynamicPropertyPair {
@@ -906,6 +944,8 @@ type Mutation {
     saveProductStock(input: SaveProductStockInput!): SaveProductStockPayload
     saveRole(input: SaveRoleInput!): SaveRolePayload
     saveStoreImage(input: SaveStoreImageInput!): SaveStoreImagePayload
+    saveVideo(input: SaveVideoInput!): SaveVideoPayload
+    saveVideoType(input: SaveVideoTypeInput!): SaveVideoTypePayload
     sortContentElement(contentGroupId: ID!, ids: [ID!]!): Boolean
     sortContentGroup(contentTypeId: ID!, ids: [ID!]!): Boolean
     syncAdminsWithFirebase: Boolean
@@ -946,7 +986,7 @@ type OrderHistoryCountry {
     dialCode: String
     flagPhoto: String
     id: ID!
-    isoCode: String
+    isoCode: String!
     name: String!
     servicePhoneNumber: String
     status: GlobalStatusType
@@ -1327,6 +1367,10 @@ type Query {
     storeImage(id: ID!): StoreImage!
     storeImages(paging: PaginatorInput!, params: StoreImagesFilter): StoreImagesPayload!
     stores(paging: PaginatorInput!, params: ExternalBrand_VendorsFiler): ExternalBrand_VendorsPayload!
+    video(id: ID!): Video!
+    videoType(id: ID!): VideoType!
+    videoTypes(paging: PaginatorInput!, params: VideoTypesFilter): VideoTypesPayload!
+    videos(paging: PaginatorInput!, params: VideosFilter): VideosPayload!
 }
 
 type RegisterCustomerPayload {
@@ -1587,6 +1631,18 @@ type SaveStoreImagePayload {
     errors: [StoreImageError!]
 }
 
+type SaveVideoPayload {
+    error: VideoError
+    errors: [VideoError!]
+    video: Video
+}
+
+type SaveVideoTypePayload {
+    error: VideoTypeError
+    errors: [VideoTypeError!]
+    videoType: VideoType
+}
+
 type StoreHomePayload {
     bestSellers: [Product!]
     categories: [ProductCategory!]
@@ -1621,7 +1677,7 @@ type VendorCountry_Common {
     dialCode: String
     flagPhoto: String
     id: ID!
-    isoCode: String
+    isoCode: String!
     name: String!
     servicePhoneNumber: String
     status: GlobalStatusType
@@ -1650,7 +1706,7 @@ type VendorPlanCountry_Common {
     dialCode: String
     flagPhoto: String
     id: ID!
-    isoCode: String
+    isoCode: String!
     name: String!
     servicePhoneNumber: String
     status: GlobalStatusType
@@ -1680,7 +1736,7 @@ type VendorsShopCountry_Common {
     dialCode: String
     flagPhoto: String
     id: ID!
-    isoCode: String
+    isoCode: String!
     name: String!
     servicePhoneNumber: String
     status: GlobalStatusType
@@ -1696,6 +1752,63 @@ type VendorsShopCurrency_Common {
     name: String!
     subUnitName: String!
     symbol: String
+}
+
+"Product Categories."
+type Video {
+    brand: Brand
+    brandId: ID!
+    caloriesBurned: Int!
+    createdAt: Datetime!
+    description: String!
+    difficulty: VideoDifficulty!
+    duration: Int!
+    equipment: String!
+    hero: String!
+    id: ID!
+    instructor: Instructor
+    instructorId: ID!
+    status: GlobalStatusType!
+    title: String!
+    updatedAt: Datetime!
+    url: String!
+    videoType: VideoType
+    videoTypeId: ID!
+}
+
+"Product Categories."
+type VideoType {
+    createdAt: Datetime!
+    id: ID!
+    label: String!
+    status: GlobalStatusType!
+    updatedAt: Datetime!
+}
+
+type VideoTypesPayload {
+    list: [VideoType]
+    paging: PaginatorOutput
+}
+
+type VideosPayload {
+    list: [Video]
+    paging: PaginatorOutput
+}
+
+enum AddressFieldType {
+    AVENUE
+    BLOCK
+    CITY
+    COUNTRY
+    EMAIL
+    NEIGHBOURHOOD
+    NICKNAME
+    NOTE
+    OTHER
+    POSTAL_CODE
+    STREET
+    SULOCALITY
+    TELEPHONE
 }
 
 enum AdminError {
@@ -1908,6 +2021,7 @@ enum GymClassError {
     INVALID_DATE_RANGE
     INVALID_GYM_ID
     INVALID_ID
+    INVALID_IMAGE_URL
     INVALID_INSTRUCTOR_AUTH_ID
     INVALID_INSTRUCTOR_ID
     INVALID_SCHEDULE
@@ -2119,6 +2233,22 @@ enum StoreImageError {
     INVALID_ID
 }
 
+enum VideoDifficulty {
+    ADVANCED
+    BEGINNER
+    INTERMEDIATE
+}
+
+enum VideoError {
+    DUPLICATE_NAME
+    INVALID_ID
+}
+
+enum VideoTypeError {
+    DUPLICATE_NAME
+    INVALID_ID
+}
+
 input AdminsFilter {
     adminType: AdminType
     searchText: String
@@ -2252,7 +2382,6 @@ input CurrencyDetailsInput {
 
 input CustomerAddressFilter {
     countryId: ID
-    searchText: String
 }
 
 input CustomerGymClassFilter {
@@ -2311,6 +2440,11 @@ input CustomersFilter {
 input DateRange {
     from: Date!
     to: Date!
+}
+
+input DynamicAddressFieldsInput {
+    id: ID!
+    value: String
 }
 
 input ExternalBrand_VendorsFiler {
@@ -2626,26 +2760,14 @@ input SaveContentTypeInput {
 }
 
 input SaveCustomerAddressInput {
-    avenue: String
-    block: String
-    building: String
-    city: String
     countryId: ID!
-    floorNo: String
-    friendlyName: String!
+    dynamicData: [DynamicAddressFieldsInput!]
     id: ID
     isDefault: Boolean!
     "The longitude component of the geo coordinates for this address, in degrees"
     latitude: Float!
     "The longitude component of the geo coordinates for this address, in degrees"
     longitude: Float!
-    note: String
-    shortAddress: String
-    state: String
-    street: String
-    type: CustomerAddressType
-    unitNumber: String
-    zipCode: String
 }
 
 input SaveCustomerInput {
@@ -2892,6 +3014,29 @@ input SaveStoreImageInput {
     status: GlobalStatusType!
 }
 
+input SaveVideoInput {
+    brandId: ID!
+    caloriesBurned: Int!
+    description: String!
+    difficulty: VideoDifficulty!
+    duration: Int!
+    equipment: String!
+    hero: String!
+    id: ID
+    instructorId: ID!
+    status: GlobalStatusType!
+    title: String!
+    url: String!
+    videoTypeId: ID!
+}
+
+input SaveVideoTypeInput {
+    createdBy: ID
+    id: ID
+    label: String!
+    status: GlobalStatusType!
+}
+
 input StoreHomeInput {
     countryId: String!
 }
@@ -2899,6 +3044,17 @@ input StoreHomeInput {
 input StoreImagesFilter {
     countryId: String
     status: String
+}
+
+input VideoTypesFilter {
+    searchText: String
+}
+
+input VideosFilter {
+    brandId: ID
+    searchText: String
+    status: GlobalStatusType
+    videoTypeId: ID
 }
 
 input addressInput {

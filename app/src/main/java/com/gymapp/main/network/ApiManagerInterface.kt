@@ -33,4 +33,6 @@ interface ApiManagerInterface {
     suspend fun getStoreHomeAsync(input: StoreHomeInput?): Deferred<Response<StoreHomeQuery.Data>>
 
     suspend fun getProductsAsync(input: ProductsFilter, pagingInput: PaginatorInput): Deferred<Response<ProductsQuery.Data>>
+
+    suspend fun saveCustomerAsync(input: SaveCustomerInput): Deferred<Response<SaveCustomerMutation.Data>>
 }
