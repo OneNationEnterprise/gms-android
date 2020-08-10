@@ -94,8 +94,17 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".features.profile.edit.presentation.profile.EditProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".features.profile.edit.presentation.changename.ChangeCustomerNameActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".features.profile.edit.presentation.password.UpdatePasswordActivity"
+            android:screenOrientation="portrait" />
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -74,6 +74,6 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
     }
 
     override suspend fun saveCustomerAsync(input: SaveCustomerInput): Deferred<Response<SaveCustomerMutation.Data>> {
-        return graphQlNoAuthClient.mutate(SaveCustomerMutation(input)).toDeferred()
+        return graphQlClient.mutate(SaveCustomerMutation(input)).toDeferred()
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
+import com.gymapp.features.profile.edit.presentation.profile.EditProfileActivity
 import com.gymapp.features.profile.main.domain.ProfileViewModel
 import com.gymapp.features.profile.medical.domain.MedicalFormViewModel
 import com.gymapp.features.profile.medical.presentation.MedicalFormActivity
@@ -24,7 +25,7 @@ class ProfileActivity : BaseActivity(R.layout.activity_profile) {
         setCustomToolbarTitle(getString(R.string.profile))
 
         editTv.setOnClickListener {
-
+            startActivity(Intent(this, EditProfileActivity::class.java))
         }
 
         medicalContainer.setOnClickListener {

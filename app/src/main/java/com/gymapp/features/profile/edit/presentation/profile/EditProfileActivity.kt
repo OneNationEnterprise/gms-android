@@ -12,6 +12,7 @@ import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.profile.edit.domain.EditProfileViewModel
 import com.gymapp.features.profile.edit.presentation.changename.ChangeCustomerNameActivity
 import com.gymapp.features.profile.edit.presentation.image.ImageCropActivity
+import com.gymapp.features.profile.edit.presentation.password.UpdatePasswordActivity
 import com.gymapp.helper.Constants
 import com.gymapp.helper.DateHelper
 import com.gymapp.helper.ImageHelper
@@ -21,7 +22,8 @@ import com.tsongkha.spinnerdatepicker.DatePicker
 import com.tsongkha.spinnerdatepicker.DatePickerDialog
 import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder
 import kotlinx.android.synthetic.main.activity_edit_profile.*
-import kotlinx.android.synthetic.main.bottomsheet_email_validation.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.textColor
@@ -34,6 +36,7 @@ class EditProfileActivity : BaseActivity(R.layout.activity_edit_profile),
     EditProfileViewInterface {
 
     private lateinit var editProfileViewModel: EditProfileViewModel
+    lateinit var activity: BaseActivity
     private var birthdayDate: Date? = null
     val REQUEST_CODE_PICK_IMAGE = 0x1
     val REQUEST_CODE_CROP_IMAGE = 0x2
@@ -46,6 +49,8 @@ class EditProfileActivity : BaseActivity(R.layout.activity_edit_profile),
         super.onCreate(savedInstanceState)
 
         setTitle(getString(R.string.edit_user_profile))
+
+        activity = this
 
         editProfileViewModel.fetchData()
 
@@ -125,7 +130,7 @@ class EditProfileActivity : BaseActivity(R.layout.activity_edit_profile),
 
     override fun setPasswordOnClickListener(email: String?) {
         passwordEt.setOnClickListener {
-//            val intent = Intent(this, UpdatePasswordActivity::class.java)
+            val intent = Intent(this, UpdatePasswordActivity::class.java)
             val args = Bundle()
             args.putString(Constants.email, email)
             intent.putExtra(Constants.arguments, args)
@@ -144,7 +149,7 @@ class EditProfileActivity : BaseActivity(R.layout.activity_edit_profile),
 
 
     override fun setBirthday(birthday: String) {
-        if (birthday.isNotEmpty()) {
+        if (!birthday.isNullOrEmpty() && birthday != "null") {
             val spf = SimpleDateFormat(DateHelper.ISO8601_DATE, Locale.ENGLISH)
             birthdayDate = spf.parse(birthday)
 
@@ -194,9 +199,7 @@ class EditProfileActivity : BaseActivity(R.layout.activity_edit_profile),
     }
 
     override fun changesSavedSuccesfully() {
-        runOnUiThread {
-            hideLoading()
-        }
+        hideLoading()
     }
 
     override fun setFirstName(firstName: String) {
@@ -223,7 +226,7 @@ class EditProfileActivity : BaseActivity(R.layout.activity_edit_profile),
     }
 
     override fun setInitials(initials: String) {
-        editProfileInitialsTextView.setText(initials)
+        editProfileInitialsTextView.setText(initials[0].toString())
         editProfileInitialsTextView.visibility = View.VISIBLE
     }
 
@@ -232,12 +235,17 @@ class EditProfileActivity : BaseActivity(R.layout.activity_edit_profile),
     }
 
     override fun hideLoading() {
-        progressBar.visibility = View.GONE
+        CoroutineScope(Dispatchers.Main).launch {
+            progressBar.visibility = View.GONE
+        }
+
     }
 
     override fun showErrorBanner(textMessage: String?) {
-        hideLoading()
-        InAppBannerNotification.showErrorNotification(editProfileContainer, this, textMessage)
+        CoroutineScope(Dispatchers.Main).launch {
+            hideLoading()
+            InAppBannerNotification.showErrorNotification(editProfileContainer, activity, textMessage)
+        }
     }
 
 }

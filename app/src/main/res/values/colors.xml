@@ -36,6 +36,7 @@
     <color name="yellow005">#E0C016</color>
 
     <!--By name-->
+    <color name="colorBrownGray">#979797</color>
     <color name="loading_background">#5FA7AEAC</color>
     <color name="sold_out_overlay">#78B2B2B2</color>
     <color name="colorBrown">#594a42</color>
@@ -51,6 +52,9 @@
     <color name="rewardProgressBackground">#F2F6F8</color>
     <color name="verified_green">#89CA00</color>
     <color name="verified_red">#FF5C00</color>
+    <color name="colorTextPrimary">#594a42</color>
+    <color name="colorTextInvalid">#979797</color>
+    <color name="colorTextSecondary">@color/colorBrownGray</color>
 
 
 

@@ -41,10 +41,9 @@ class ChangeCustomerNameVIewModel(val authRepositoryInterface: AuthRepositoryInt
 
         var birthdayDate: Date? = null
         val spf = SimpleDateFormat(DateHelper.ISO8601_DATE, Locale.ENGLISH)
-        if (profileDetails.dob != null) {
+        if (profileDetails.dob != null && profileDetails.dob != "null") {
             birthdayDate = spf.parse(profileDetails.dob.toString())
         }
-
 
         val error = authRepositoryInterface.saveCustomer(
             SaveCustomerInput(
@@ -80,7 +79,7 @@ class ChangeCustomerNameVIewModel(val authRepositoryInterface: AuthRepositoryInt
 
         var birthdayDate: Date? = null
         val spf = SimpleDateFormat(DateHelper.ISO8601_DATE, Locale.ENGLISH)
-        if (profileDetails.dob != null) {
+        if (profileDetails.dob != null && profileDetails.dob != "null") {
             birthdayDate = spf.parse(profileDetails.dob.toString())
         }
 

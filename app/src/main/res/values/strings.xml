@@ -153,11 +153,11 @@
     <string name="input_field_error_msg">This field is mandatory</string>
     <string name="form_saved">Form saved successfully</string>
 
-
     <!--GYM Store-->
     <string name="store_title_name">Gym Store</string>
     <string name="store_description">Description</string>
     <string name="store_customer_also_viewed">Customers Also Viewed</string>
+
     <!--Store-Cart-->
     <string name="store_add_to_cart">Add to cart </string>
     <string name="store_proceed_checkout">Proceed to Checkout</string>
@@ -195,6 +195,9 @@
     <string name="user_profile_credits">You have %1$s %2$s in COFE Credits</string>
     <string name="update_photo">Update photo</string>
     <string name="edt_hint_last_name">Last name</string>
+    <string name="user_profile_update_password_old">Old Password</string>
+    <string name="user_profile_update_password_new">New Password</string>
+    <string name="user_profile_update_password_update">Update Password</string>
     <!--ERRORS-->
     <!--Auth-->
     <string name="error_phone_wrong_validation">Error phone validation</string>
