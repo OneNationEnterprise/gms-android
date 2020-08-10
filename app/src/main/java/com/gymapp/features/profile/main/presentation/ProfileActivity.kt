@@ -32,6 +32,10 @@ class ProfileActivity : BaseActivity(R.layout.activity_profile) {
             startActivity(Intent(this, MedicalFormActivity::class.java))
         }
 
+        addressesContainer.setOnClickListener {
+//            startActivity(Intent(this, MedicalFormActivity::class.java))
+        }
+
         paymentContainer.setOnClickListener {
             startActivity(Intent(this, CardsListActivity::class.java))
         }

@@ -1,8 +1,8 @@
 # This file was generated based on ".graphqlconfig". Do not edit manually.
 
 schema {
-    query: Query
-    mutation: Mutation
+  query: Query
+  mutation: Mutation
 }
 
 union CustomerMembershipRefTypePayload = OrderHistoryBrand | OrderHistoryGym
@@ -16,3062 +16,3280 @@ union OrderPayload = CustomerGymClass | CustomerMembership | CustomerPass
 union PassRefTypePayload = ExternalBrand_VP | ExternalGym_VP
 
 type AddressField {
-    "the id of the field"
-    id: ID!
-    "if the field is required"
-    isRequired: Boolean!
-    "The order of the field"
-    order: Int!
-    "the name of the field"
-    title: String!
-    "the type of the field"
-    type: AddressFieldType!
+  countryId: ID!
+  "the id of the field"
+  id: ID!
+  "if the field is required"
+  isRequired: Boolean!
+  "The order of the field"
+  orderNo: Int!
+  status: StatusType!
+  "the name of the field"
+  title: String!
+  "the type of the field"
+  type: AddressFieldType!
+}
+
+type AddressFieldPayload {
+  list: [AddressField]
+  paging: PaginatorOutput
 }
 
 "Admins to manage brand, branches, admin platform.."
 type Admin {
-    adminType: AdminType!
-    authId: String!
-    brand: Brand
-    contactNumber: String
-    createdAt: Datetime!
-    createdBy: Admin
-    email: String!
-    firstName: String!
-    fullName: String!
-    gender: GlobalGenderType
-    gym: Gym
-    id: ID!
-    lastName: String
-    lastUpdatedBy: Admin
-    permissions: [String!]
-    roles: [VendorRole_Common!]
-    status: GlobalStatusType!
-    updatedAt: Datetime!
+  adminType: AdminType!
+  authId: String!
+  brand: Brand
+  contactNumber: String
+  createdAt: Datetime!
+  createdBy: Admin
+  email: String!
+  firstName: String!
+  fullName: String!
+  gender: GlobalGenderType
+  gym: Gym
+  id: ID!
+  lastName: String
+  lastUpdatedBy: Admin
+  permissions: [String!]
+  roles: [VendorRole_Common!]
+  status: GlobalStatusType!
+  updatedAt: Datetime!
 }
 
 "Admins to roles"
 type AdminRole {
-    admin: Admin!
-    createdAt: Datetime!
-    createdById: ID
-    id: ID!
-    lastUpdatedById: ID
-    role: VendorRole_Common!
-    updatedAt: Datetime!
+  admin: Admin!
+  createdAt: Datetime!
+  createdById: ID
+  id: ID!
+  lastUpdatedById: ID
+  role: VendorRole_Common!
+  updatedAt: Datetime!
 }
 
 type AdminsPayload {
-    list: [Admin!]
-    paging: PaginatorOutput
+  list: [Admin!]
+  paging: PaginatorOutput
 }
 
 type Age {
-    from: Int!
-    to: Int!
+  from: Int!
+  to: Int!
 }
 
 type Amenity {
-    icon: String
-    id: ID!
-    name: String!
-    status: GlobalStatusType!
+  icon: String
+  id: ID!
+  name: String!
+  status: GlobalStatusType!
 }
 
 "Brands/Gyms"
 type Brand {
-    admins: [Admin!]
-    city: String!
-    country: VendorCountry_Common!
-    createdAt: Datetime!
-    createdBy: Admin!
-    email: String!
-    gymCount: Int!
-    id: ID!
-    image: String
-    lastUpdatedBy: Admin!
-    legalName: String!
-    logo: String!
-    name: String!
-    phone: String!
-    state: String!
-    status: BrandStatus!
-    street: String!
-    unitNumber: String!
-    updatedAt: Datetime!
-    zipCode: String!
+  admins: [Admin!]
+  city: String!
+  country: VendorCountry_Common!
+  createdAt: Datetime!
+  createdBy: Admin!
+  email: String!
+  gymCount: Int!
+  id: ID!
+  image: String
+  lastUpdatedBy: Admin!
+  legalName: String!
+  logo: String!
+  name: String!
+  phone: String!
+  state: String!
+  status: BrandStatus!
+  street: String!
+  unitNumber: String!
+  updatedAt: Datetime!
+  zipCode: String!
 }
 
 "BrandAdmin"
 type BrandAdmin {
-    admin: Admin!
-    brand: Brand!
-    createdAt: Datetime!
-    createdBy: Admin!
-    id: ID!
-    lastUpdatedBy: Admin!
-    updatedAt: Datetime!
+  admin: Admin!
+  brand: Brand!
+  createdAt: Datetime!
+  createdBy: Admin!
+  id: ID!
+  lastUpdatedBy: Admin!
+  updatedAt: Datetime!
 }
 
 type BrandAdminsPayload {
-    list: [BrandAdmin]
-    paging: PaginatorOutput
+  list: [BrandAdmin]
+  paging: PaginatorOutput
 }
 
 type BrandsPayload {
-    list: [Brand]
-    paging: PaginatorOutput
+  list: [Brand]
+  paging: PaginatorOutput
 }
 
 type BuyAGymClassPayload {
-    error: OrderGymClassError
-    errorMessage: String
-    errors: [OrderGymClassError!]
-    orderGymClass: OrderGymClass
+  error: OrderGymClassError
+  errorMessage: String
+  errors: [OrderGymClassError!]
+  orderGymClass: OrderGymClass
 }
 
 type BuyAMembershipPayload {
-    error: OrderMembershipError
-    errorMessage: String
-    errors: [OrderMembershipError!]
-    orderMembership: OrderMembership
+  error: OrderMembershipError
+  errorMessage: String
+  errors: [OrderMembershipError!]
+  orderMembership: OrderMembership
 }
 
 type BuyAPassPayload {
-    error: OrderPassError
-    errorMessage: String
-    errors: [OrderPassError!]
-    orderPass: OrderPass
+  error: OrderPassError
+  errorMessage: String
+  errors: [OrderPassError!]
+  orderPass: OrderPass
+}
+
+type CheckoutComConfig {
+  publicKey: String!
 }
 
 type Configuration {
-    createdAt: Datetime!
-    id: ID!
-    key: String!
-    updatedAt: Datetime!
-    value: String!
+  createdAt: Datetime!
+  id: ID!
+  key: String!
+  updatedAt: Datetime!
+  value: String!
 }
 
 type ConfigurationPayload {
-    list: [Configuration]
-    paging: PaginatorOutput
+  list: [Configuration]
+  paging: PaginatorOutput
 }
 
 type ContentElement {
-    contentGroup: ContentGroup!
-    contentType: ContentType!
-    createdAt: Datetime!
-    createdById: ID!
-    data: ContentElementData
-    id: ID!
-    lastUpdatedById: ID!
-    orderNo: Int!
-    reference: String!
-    status: GlobalStatusType!
-    type: ContentElementType!
-    updatedAt: Datetime!
+  contentGroup: ContentGroup!
+  contentType: ContentType!
+  createdAt: Datetime!
+  createdById: ID!
+  data: ContentElementData
+  id: ID!
+  lastUpdatedById: ID!
+  orderNo: Int!
+  reference: String!
+  status: GlobalStatusType!
+  type: ContentElementType!
+  updatedAt: Datetime!
 }
 
 type ContentElementData {
-    description: String
-    name: String!
-    options: [ContentElementDataOption]
-    placeHolder: String
-    required: Boolean!
-    value: String
+  description: String
+  name: String!
+  options: [ContentElementDataOption]
+  placeHolder: String
+  required: Boolean!
+  value: String
 }
 
 type ContentElementDataOption {
-    id: String!
-    label: String!
+  id: String!
+  label: String!
 }
 
 type ContentElementValue {
-    contentElement: ContentElement
-    contentGroup: ContentGroup
-    contentType: ContentType
-    createdAt: Datetime!
-    createdById: ID
-    customer: Customer!
-    data: ContentElementData
-    fieldValue: String!
-    id: ID!
-    lastUpdatedById: ID
-    orderNo: Int!
-    reference: String!
-    status: GlobalStatusType!
-    type: ContentElementType!
-    updatedAt: Datetime!
+  contentElement: ContentElement
+  contentGroup: ContentGroup
+  contentType: ContentType
+  createdAt: Datetime!
+  createdById: ID
+  customer: Customer!
+  data: ContentElementData
+  fieldValue: String!
+  id: ID!
+  lastUpdatedById: ID
+  orderNo: Int!
+  reference: String!
+  status: GlobalStatusType!
+  type: ContentElementType!
+  updatedAt: Datetime!
 }
 
 type ContentElementValuesPayload {
-    list: [ContentElementValue]
-    paging: PaginatorOutput
+  list: [ContentElementValue]
+  paging: PaginatorOutput
 }
 
 type ContentElementsPayload {
-    list: [ContentElement]
-    paging: PaginatorOutput
+  list: [ContentElement]
+  paging: PaginatorOutput
 }
 
 type ContentGroup {
-    contentElements: [ContentElement]
-    contentType: ContentType!
-    createdAt: Datetime!
-    createdById: ID!
-    description: String
-    id: ID!
-    lastUpdatedById: ID!
-    name: String!
-    orderNo: Int!
-    status: GlobalStatusType!
-    updatedAt: Datetime!
+  contentElements: [ContentElement]
+  contentType: ContentType!
+  createdAt: Datetime!
+  createdById: ID!
+  description: String
+  id: ID!
+  lastUpdatedById: ID!
+  name: String!
+  orderNo: Int!
+  status: GlobalStatusType!
+  updatedAt: Datetime!
 }
 
 type ContentGroupsPayload {
-    list: [ContentGroup]
-    paging: PaginatorOutput
+  list: [ContentGroup]
+  paging: PaginatorOutput
 }
 
 type ContentType {
-    contentElements: [ContentElement]
-    contentGroups: [ContentGroup]
-    createdAt: Datetime!
-    createdById: ID!
-    id: ID!
-    lastUpdatedById: ID!
-    status: GlobalStatusType!
-    type: ContentTypes!
-    updatedAt: Datetime!
+  contentElements: [ContentElement]
+  contentGroups: [ContentGroup]
+  createdAt: Datetime!
+  createdById: ID!
+  id: ID!
+  lastUpdatedById: ID!
+  status: GlobalStatusType!
+  type: ContentTypes!
+  updatedAt: Datetime!
 }
 
 type ContentTypesPayload {
-    list: [ContentType]
-    paging: PaginatorOutput
+  list: [ContentType]
+  paging: PaginatorOutput
 }
 
 type CountriesPayload {
-    list: [Country]
-    paging: PaginatorOutput
+  list: [Country]
+  paging: PaginatorOutput
 }
 
 type Country {
-    addressFields: [AddressField!]
-    currency: CurrencyDetails!
-    dialCode: String
-    flagPhoto: String
-    id: ID!
-    isoCode: String!
-    languages: [Language]!
-    name: String!
-    servicePhoneNumber: String
-    status: StatusType
-    timeZoneIdentifier: String
-    vat: Float!
-    vatId: String
+  addressFields: [AddressField!]
+  currency: CurrencyDetails!
+  dialCode: String
+  flagPhoto: String
+  id: ID!
+  isoCode: String!
+  languages: [Language]!
+  name: String!
+  servicePhoneNumber: String
+  status: StatusType
+  timeZoneIdentifier: String
+  vat: Float!
+  vatId: String
 }
 
 type CurrencyDetails {
-    code: String!
-    decimalPlace: Int!
-    lowestDenomination: Float!
-    name: String!
-    subUnitName: String!
-    symbol: String
+  code: String!
+  decimalPlace: Int!
+  lowestDenomination: Float!
+  name: String!
+  subUnitName: String!
+  symbol: String
 }
 
 "Customer/Users..."
 type Customer {
-    addresses: [CustomerAddress!]
-    authId: String!
-    contactNumber: String
-    country: CustomerCountry!
-    createdAt: Datetime!
-    defaultAddress: CustomerAddress
-    dob: Date
-    email: String!
-    firstName: String!
-    fullName: String!
-    gender: GlobalGenderType
-    id: ID!
-    isEmailVerified: Boolean!
-    isPhoneVerified: Boolean!
-    lastName: String!
-    photo: String
-    status: GlobalStatusType!
-    updatedAt: Datetime!
+  addresses: [CustomerAddress!]
+  authId: String!
+  contactNumber: String
+  country: CustomerCountry!
+  createdAt: Datetime!
+  defaultAddress: CustomerAddress
+  dob: Date
+  email: String!
+  firstName: String!
+  fullName: String!
+  gender: GlobalGenderType
+  id: ID!
+  isEmailVerified: Boolean!
+  isPhoneVerified: Boolean!
+  lastName: String!
+  photo: String
+  status: GlobalStatusType!
+  updatedAt: Datetime!
 }
 
 "CustomerAddress.."
 type CustomerAddress {
-    countryId: ID!
-    createdAt: Datetime!
-    customer: Customer!
-    "Dynamic fields"
-    dynamicData: [DynamicAddressFieldsData!]
-    "The longitude component of the geo coordinates for this address, in degrees"
-    geoLocation: CustomerAddressGeoLocation
-    id: ID!
-    isDefault: Boolean!
-    updatedAt: Datetime!
+  countryId: ID!
+  createdAt: Datetime!
+  customer: Customer!
+  "Dynamic fields"
+  dynamicData: [DynamicAddressFieldsData!]
+  "The longitude component of the geo coordinates for this address, in degrees"
+  geoLocation: CustomerAddressGeoLocation
+  id: ID!
+  isDefault: Boolean!
+  updatedAt: Datetime!
 }
 
 type CustomerAddressGeoLocation {
-    coordinates: [Float]
-    type: String
+  coordinates: [Float]
+  type: String
 }
 
 type CustomerAddressPayload {
-    list: [CustomerAddress]
-    paging: PaginatorOutput
+  list: [CustomerAddress]
+  paging: PaginatorOutput
+}
+
+"A saved customer card token"
+type CustomerCardToken {
+  "the card issuer BIN usually card no. first 6 digits"
+  bin: String
+  "consumer / commercial"
+  cardCategory: String
+  "debit / credit ..."
+  cardType: String
+  "card expiry month"
+  expiryMonth: Int!
+  "card expiry year"
+  expiryYear: Int!
+  id: ID!
+  "mark the card token as default to use"
+  isDefault: Boolean!
+  "bank who issued the card"
+  issuer: String
+  "issuer country ISO-2 code"
+  issuerCountry: String
+  "card no. last 4 digits"
+  last4: String!
+  "name on the card"
+  name: String
+  "what payment provider issued this card token"
+  paymentProvider: PaymentProvider!
+  "the issuer/card scheme product identifier"
+  productId: String
+  "the issuer/card scheme product type"
+  productType: String
+  "Visa, Mastercard"
+  scheme: String!
+  "card token status. e.g."
+  status: CustomerCardTokenStatus!
+  "token type: e.g. card"
+  type: String
+}
+
+type CustomerCardTokenSavePayload {
+  "The Customer card token which was saved/updated"
+  customerCardToken: CustomerCardToken
+  "The first validation error that occured"
+  error: CustomerCardTokenSaveError
+  "All validation errors"
+  errors: [CustomerCardTokenSaveError!]
 }
 
 type CustomerCountry {
-    currency: CustomerCurrency!
-    dialCode: String
-    flagPhoto: String
-    id: ID!
-    isoCode: String!
-    name: String!
-    servicePhoneNumber: String
-    status: GlobalStatusType
-    timeZoneIdentifier: String
-    vat: Float!
-    vatId: String
+  currency: CustomerCurrency!
+  dialCode: String
+  flagPhoto: String
+  id: ID!
+  isoCode: String!
+  name: String!
+  servicePhoneNumber: String
+  status: GlobalStatusType
+  timeZoneIdentifier: String
+  vat: Float!
+  vatId: String
 }
 
 type CustomerCurrency {
-    code: String!
-    decimalPlace: Int!
-    lowestDenomination: Float!
-    name: String!
-    subUnitName: String!
-    symbol: String
+  code: String!
+  decimalPlace: Int!
+  lowestDenomination: Float!
+  name: String!
+  subUnitName: String!
+  symbol: String
 }
 
 "CustomerGymClass.."
 type CustomerGymClass {
-    age: Age
-    amount: CurrencyValue!
-    amountLabel: String!
-    brand: OrderHistoryBrand!
-    country: OrderHistoryCountry!
-    createdAt: Datetime!
-    customer: OrderHistoryCustomer!
-    description: String
-    difficultyLevel: DifficultyLevel!
-    duration: Float
-    endDate: Date
-    estimatedCaloriesBurnt: String!
-    gender: GlobalGenderType!
-    gym: OrderHistoryGym!
-    gymClassCategoryId: ID
-    gymClassId: ID!
-    id: ID!
-    images: [String!]
-    instructor: OrderHistoryInstructor
-    isWeekelyScheduled: Boolean!
-    name: String!
-    openTime: LocalTime
-    paymentMethod: CustomerPaymentMethod!
-    paymentStatus: String!
-    schedule: [CustomerGymClassWeeklySchedule!]
-    shortCode: String!
-    startDate: Date!
-    status: GlobalStatusType
-    updatedAt: Datetime!
+  age: Age
+  amount: CurrencyValue!
+  amountLabel: String!
+  brand: OrderHistoryBrand!
+  country: OrderHistoryCountry!
+  createdAt: Datetime!
+  customer: OrderHistoryCustomer!
+  description: String
+  difficultyLevel: DifficultyLevel!
+  duration: Float
+  endDate: Date
+  estimatedCaloriesBurnt: String!
+  gender: GlobalGenderType!
+  gym: OrderHistoryGym!
+  gymClassCategoryId: ID
+  gymClassId: ID!
+  id: ID!
+  images: [String!]
+  instructor: OrderHistoryInstructor
+  isWeekelyScheduled: Boolean!
+  name: String!
+  openTime: LocalTime
+  opening(forDate: Date): CustomerGymClassOpening
+  paymentMethod: CustomerPaymentMethod!
+  paymentStatus: String!
+  schedule: [CustomerGymClassWeeklySchedule!]
+  shortCode: String!
+  startDate: Date!
+  status: String!
+  updatedAt: Datetime!
+}
+
+type CustomerGymClassOpening {
+  endTime: String
+  instructor: OrderHistoryInstructor
+  isOpen: Boolean!
+  openDuration: Int
+  operatingTime: TimeRange
+  operatingTimeStr: String
+  startTime: String
 }
 
 type CustomerGymClassPayload {
-    list: [CustomerGymClass]
-    paging: PaginatorOutput
+  list: [CustomerGymClass]
+  paging: PaginatorOutput
 }
 
 type CustomerGymClassWeeklySchedule {
-    closeAllDay: Boolean!
-    createdAt: Datetime!
-    customerGymClass: CustomerGymClass!
-    day: Int!
-    duration: Float
-    id: ID!
-    instructor: OrderHistoryInstructor
-    openTime: LocalTime
-    updatedAt: Datetime!
+  closeAllDay: Boolean!
+  createdAt: Datetime!
+  customerGymClass: CustomerGymClass!
+  day: Int!
+  duration: Float
+  id: ID!
+  instructor: OrderHistoryInstructor
+  openTime: LocalTime
+  updatedAt: Datetime!
 }
 
 type CustomerMedicalFormPayload {
-    error: CustomerError
-    errorMessage: String
-    errors: [CustomerError!]
-    medicalForm: [ContentElementValue]
+  error: CustomerError
+  errorMessage: String
+  errors: [CustomerError!]
+  medicalForm: [ContentElementValue]
 }
 
 "CustomerMembership.."
 type CustomerMembership {
-    accessType: CustomerMembershipAccessType!
-    age: Age
-    allowedCheckins: Int
-    amount: CurrencyValue!
-    amountLabel: String!
-    colorCode: String
-    country: OrderHistoryCountry!
-    createdAt: Datetime!
-    customer: OrderHistoryCustomer!
-    description: String
-    gender: GlobalGenderType!
-    gracePeriod: Int
-    id: ID!
-    image: String
-    isWeekelyScheduled: Boolean!
-    lifetime: Boolean
-    membershipId: ID!
-    name: String!
-    paymentMethod: CustomerPaymentMethod!
-    paymentStatus: String!
-    period: Int
-    referenceType: CustomerMembershipRefTypePayload
-    schedule: [CustomerMembershipWeeklySchedule!]
-    shortCode: String!
-    status: MembershipStatus!
-    updatedAt: Datetime!
+  accessType: String!
+  age: Age
+  allowedCheckins: Int
+  amount: CurrencyValue!
+  amountLabel: String!
+  colorCode: String
+  country: OrderHistoryCountry!
+  createdAt: Datetime!
+  customer: OrderHistoryCustomer!
+  description: String
+  gender: GlobalGenderType!
+  gracePeriod: Int
+  id: ID!
+  image: String
+  isWeekelyScheduled: Boolean!
+  lifetime: Boolean
+  membershipId: ID!
+  name: String!
+  paymentMethod: CustomerPaymentMethod!
+  paymentStatus: String!
+  period: Int
+  referenceType: CustomerMembershipRefTypePayload
+  schedule: [CustomerMembershipWeeklySchedule!]
+  shortCode: String!
+  status: String!
+  updatedAt: Datetime!
+  validity: CustomerMembershipValidity!
+}
+
+type CustomerMembershipValidity {
+  daysLeft: Int!
+  expireOn: Datetime!
+  isExpired: Boolean!
 }
 
 type CustomerMembershipWeeklySchedule {
-    closeAllDay: Boolean!
-    createdAt: Datetime!
-    customerMembership: CustomerMembership!
-    day: Int!
-    duration: Float
-    id: ID!
-    openTime: LocalTime
-    updatedAt: Datetime!
+  closeAllDay: Boolean!
+  createdAt: Datetime!
+  customerMembership: CustomerMembership!
+  day: Int!
+  duration: Float
+  id: ID!
+  openTime: LocalTime
+  updatedAt: Datetime!
 }
 
 type CustomerMembershipsPayload {
-    list: [CustomerMembership]
-    paging: PaginatorOutput
+  list: [CustomerMembership]
+  paging: PaginatorOutput
 }
 
 "CustomerPass.."
 type CustomerPass {
-    accessType: CustomerPassAccessType!
-    age: Age
-    allowedCheckins: Int
-    amount: CurrencyValue!
-    amountLabel: String!
-    colorCode: String
-    country: OrderHistoryCountry!
-    createdAt: Datetime!
-    customer: OrderHistoryCustomer!
-    description: String
-    gender: GlobalGenderType!
-    gracePeriod: Int
-    id: ID!
-    image: String
-    isWeekelyScheduled: Boolean!
-    name: String!
-    passCategoryId: ID
-    passId: ID!
-    paymentMethod: CustomerPaymentMethod!
-    paymentStatus: String!
-    period: Int
-    referenceType: CustomerPassRefTypePayload
-    schedule: [CustomerPassWeeklySchedule!]
-    shortCode: String!
-    status: PassStatus!
-    type: PassType!
-    updatedAt: Datetime!
+  accessType: String!
+  age: Age
+  allowedCheckins: Int
+  amount: CurrencyValue!
+  amountLabel: String!
+  colorCode: String
+  country: OrderHistoryCountry!
+  createdAt: Datetime!
+  customer: OrderHistoryCustomer!
+  description: String
+  gender: GlobalGenderType!
+  gracePeriod: Int
+  id: ID!
+  image: String
+  isWeekelyScheduled: Boolean!
+  name: String!
+  passCategoryId: ID
+  passId: ID!
+  paymentMethod: CustomerPaymentMethod!
+  paymentStatus: String!
+  period: Int
+  referenceType: CustomerPassRefTypePayload
+  schedule: [CustomerPassWeeklySchedule!]
+  shortCode: String!
+  status: String!
+  type: PassType!
+  updatedAt: Datetime!
+  validity: CustomerPassValidity!
+}
+
+type CustomerPassValidity {
+  daysLeft: Int!
+  expireOn: Datetime!
+  isExpired: Boolean!
 }
 
 type CustomerPassWeeklySchedule {
-    closeAllDay: Boolean!
-    createdAt: Datetime!
-    customerPass: CustomerPass!
-    day: Int!
-    duration: Float
-    id: ID!
-    openTime: LocalTime
-    updatedAt: Datetime!
+  closeAllDay: Boolean!
+  createdAt: Datetime!
+  customerPass: CustomerPass!
+  day: Int!
+  duration: Float
+  id: ID!
+  openTime: LocalTime
+  updatedAt: Datetime!
 }
 
 type CustomerPassesPayload {
-    list: [CustomerPass]
-    paging: PaginatorOutput
+  list: [CustomerPass]
+  paging: PaginatorOutput
 }
 
 type CustomerPaymentMethod {
-    id: ID!
-    orderType: String!
-    paymentMethod: FormatterPaymentMethod
-    provider: String
-    type: String
+  id: ID!
+  orderType: String!
+  paymentMethod: FormatterPaymentMethod
+  provider: String
+  type: String
+}
+
+type CustomerSignInPayload {
+  authorization: String
+  error: CustomerError
+  errorMessage: String
+  errors: [CustomerError!]
 }
 
 type CustomersPayload {
-    list: [Customer]
-    paging: PaginatorOutput
+  list: [Customer]
+  paging: PaginatorOutput
 }
 
 type DynamicAddressFieldsData {
-    "the id of the field"
-    id: ID!
-    "is the field required"
-    isRequired: Boolean!
-    "the name of the field"
-    name: String!
-    "the type of the field"
-    type: AddressFieldType!
-    "value set by the customer"
-    value: String!
+  "the id of the field"
+  id: ID!
+  "is the field required"
+  isRequired: Boolean!
+  "the name of the field"
+  name: String!
+  "the type of the field"
+  type: AddressFieldType!
+  "value set by the customer"
+  value: String!
 }
 
 type DynamicPropertyPair {
-    key: String!
-    value: String!
+  key: String!
+  value: String!
 }
 
 type ExternalBrand_VP {
-    countryId: ID!
-    email: String!
-    id: ID!
-    legalName: String
-    logo: String!
-    name: String!
-    phone: String!
-    status: GlobalStatusType!
+  countryId: ID!
+  email: String!
+  id: ID!
+  legalName: String
+  logo: String!
+  name: String!
+  phone: String!
+  status: GlobalStatusType!
 }
 
 "Brands"
 type ExternalBrand_Vendors {
-    country: VendorsShopCountry_Common!
-    email: String!
-    id: ID!
-    legalName: String
-    logo: String!
-    name: String!
-    phone: String!
-    status: GlobalStatusType!
+  country: VendorsShopCountry_Common!
+  email: String!
+  id: ID!
+  legalName: String
+  logo: String!
+  name: String!
+  phone: String!
+  status: GlobalStatusType!
 }
 
 type ExternalBrand_VendorsPayload {
-    list: [ExternalBrand_Vendors]
-    paging: PaginatorOutput
+  list: [ExternalBrand_Vendors]
+  paging: PaginatorOutput
 }
 
 type ExternalGym_VP {
-    brandId: ID!
-    email: String!
-    id: ID!
-    legalName: String
-    logo: String!
-    name: String!
-    phone: String!
-    status: GlobalStatusType!
+  brandId: ID!
+  email: String!
+  id: ID!
+  legalName: String
+  logo: String!
+  name: String!
+  phone: String!
+  status: GlobalStatusType!
 }
 
 "Gyms."
 type ExternalGym_Vendors {
-    brand: ExternalBrand_Vendors!
-    email: String!
-    id: ID!
-    legalName: String
-    logo: String!
-    name: String!
-    phone: String
-    status: GlobalStatusType!
+  brand: ExternalBrand_Vendors!
+  email: String!
+  id: ID!
+  legalName: String
+  logo: String!
+  name: String!
+  phone: String
+  status: GlobalStatusType!
 }
 
 type ExternalInstructor_VP {
-    authId: String
-    contactNumber: String!
-    email: String!
-    firstName: String!
-    id: ID!
-    lastName: String
-    photo: String
-    status: GlobalStatusType!
+  authId: String
+  contactNumber: String!
+  email: String!
+  firstName: String!
+  id: ID!
+  lastName: String
+  photo: String
+  status: GlobalStatusType!
 }
 
 type FavouriteGymClassPayload {
-    error: GymClassError
-    errorMessage: String
-    errors: [GymClassError!]
-    favourite: Boolean
+  error: GymClassError
+  errorMessage: String
+  errors: [GymClassError!]
+  favourite: Boolean
 }
 
 type FavouriteGymClassesPayload {
-    list: [GymClass!]
-    paging: PaginatorOutput
+  list: [GymClass!]
+  paging: PaginatorOutput
 }
 
 type FormatterPaymentMethod {
-    referenceId: String
+  referenceId: String
 }
 
 "Gyms"
 type Gym {
-    address: GymAddress!
-    admins: [Admin!]
-    amenities: [String!]
-    amenityList: [Amenity!]
-    brand: Brand!
-    createdAt: Datetime!
-    createdBy: Admin!
-    description: String
-    distance: Float
-    email: String!
-    id: ID!
-    images: [String!]!
-    lastUpdatedBy: Admin!
-    legalName: String!
-    name: String!
-    opening: GymOpening
-    operatingHours: [GymOperatingHours]
-    phone: String!
-    status: GymStatus!
-    updatedAt: Datetime!
+  address: GymAddress!
+  admins: [Admin!]
+  amenities: [String!]
+  amenityList: [Amenity!]
+  brand: Brand!
+  createdAt: Datetime!
+  createdBy: Admin!
+  description: String
+  distance: Float
+  email: String!
+  id: ID!
+  images: [String!]!
+  lastUpdatedBy: Admin!
+  legalName: String!
+  name: String!
+  opening: GymOpening
+  operatingHours: [GymOperatingHours]
+  phone: String!
+  status: GymStatus!
+  updatedAt: Datetime!
 }
 
 "Gym Address"
 type GymAddress {
-    building: String
-    city: String!
-    country: VendorCountry_Common!
-    createdAt: Datetime!
-    floorNo: String
-    "The longitude component of the geo coordinates for this address, in degrees"
-    geoLocation: GymAddressGeoLocation!
-    gym: Gym!
-    id: ID!
-    shortAddress: String
-    state: String
-    street: String
-    unitNumber: String
-    updatedAt: Datetime!
-    zipCode: String
+  building: String
+  city: String!
+  country: VendorCountry_Common!
+  createdAt: Datetime!
+  floorNo: String
+  "The longitude component of the geo coordinates for this address, in degrees"
+  geoLocation: GymAddressGeoLocation!
+  gym: Gym!
+  id: ID!
+  shortAddress: String
+  state: String
+  street: String
+  unitNumber: String
+  updatedAt: Datetime!
+  zipCode: String
 }
 
 type GymAddressGeoLocation {
-    coordinates: [Float]
-    type: String
+  coordinates: [Float]
+  type: String
 }
 
 "GymAdmin"
 type GymAdmin {
-    admin: Admin!
-    createdAt: Datetime!
-    createdBy: Admin!
-    gym: Gym!
-    id: ID!
-    lastUpdatedBy: Admin!
-    updatedAt: Datetime!
+  admin: Admin!
+  createdAt: Datetime!
+  createdBy: Admin!
+  gym: Gym!
+  id: ID!
+  lastUpdatedBy: Admin!
+  updatedAt: Datetime!
 }
 
 type GymAdminsPayload {
-    list: [GymAdmin]
-    paging: PaginatorOutput
+  list: [GymAdmin]
+  paging: PaginatorOutput
 }
 
 type GymClass {
-    age: Age
-    amount: CurrencyValue!
-    amountLabel: String!
-    brand: ExternalBrand_VP!
-    countryId: ID!
-    createdAt: Datetime!
-    createdById: ID!
-    description: String
-    difficultyLevel: DifficultyLevel!
-    duration: Float
-    endDate: Date
-    estimatedCaloriesBurnt: String!
-    gender: GlobalGenderType!
-    gym: ExternalGym_VP!
-    gymClassCategory: GymClassCategory!
-    id: ID!
-    images: [String!]
-    instructor: ExternalInstructor_VP
-    isWeekelyScheduled: Boolean!
-    lastUpdatedById: ID!
-    name: String!
-    openTime: LocalTime
-    schedule: [GymClassWeeklySchedule!]
-    spots: Int!
-    spotsAlotted: Int
-    startDate: Date!
-    status: GlobalStatusType
-    updatedAt: Datetime!
+  age: Age
+  amount: CurrencyValue!
+  amountLabel: String!
+  brand: ExternalBrand_VP!
+  countryId: ID!
+  createdAt: Datetime!
+  createdById: ID!
+  description: String
+  difficultyLevel: DifficultyLevel!
+  duration: Float
+  endDate: Date
+  estimatedCaloriesBurnt: String!
+  gender: GlobalGenderType!
+  gym: ExternalGym_VP!
+  gymClassCategory: GymClassCategory!
+  id: ID!
+  images: [String!]
+  instructor: ExternalInstructor_VP
+  isWeekelyScheduled: Boolean!
+  lastUpdatedById: ID!
+  name: String!
+  openTime: LocalTime
+  opening(forDate: Date): GymClassOpening
+  schedule: [GymClassWeeklySchedule!]
+  spots: Int!
+  spotsAlotted: Int
+  startDate: Date!
+  status: GlobalStatusType
+  updatedAt: Datetime!
 }
 
 type GymClassCategory {
-    createdAt: Datetime!
-    description: String
-    gymClasses: [GymClass!]
-    id: ID!
-    image: String
-    name: String!
-    status: GlobalStatusType
-    subtitle: String
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  description: String
+  gymClasses: [GymClass!]
+  id: ID!
+  image: String
+  name: String!
+  status: GlobalStatusType
+  subtitle: String
+  updatedAt: Datetime!
 }
 
 type GymClassCategoryPayload {
-    list: [GymClassCategory]
-    paging: PaginatorOutput
+  list: [GymClassCategory]
+  paging: PaginatorOutput
+}
+
+type GymClassInvoice {
+  components: [InvoiceComponent!]
+  currency: VendorPlanCurrency_Common
+  error: GymClassError
+  errorMessage: String
+  errors: [GymClassError]
+}
+
+type GymClassOpening {
+  endTime: String
+  instructor: ExternalInstructor_VP
+  isOpen: Boolean!
+  openDuration: Int
+  operatingTime: TimeRange
+  operatingTimeStr: String
+  startTime: String
 }
 
 type GymClassWeeklySchedule {
-    closeAllDay: Boolean!
-    createdAt: Datetime!
-    day: Int!
-    duration: Float
-    id: ID!
-    instructor: ExternalInstructor_VP
-    openTime: LocalTime
-    updatedAt: Datetime!
+  closeAllDay: Boolean!
+  createdAt: Datetime!
+  day: Int!
+  duration: Float
+  id: ID!
+  instructor: ExternalInstructor_VP
+  openTime: LocalTime
+  updatedAt: Datetime!
 }
 
 type GymClassesPayload {
-    list: [GymClass]
-    paging: PaginatorOutput
+  list: [GymClass]
+  paging: PaginatorOutput
 }
 
 type GymOpening {
-    isOpen: Boolean!
-    operatingTime: TimeRange
+  endTime: String
+  isOpen: Boolean!
+  openDuration: Int
+  operatingTime: TimeRange
+  operatingTimeStr: String
+  startTime: String
 }
 
 "Gym Operating Hours"
 type GymOperatingHours {
-    closeAllDay: Boolean!
-    createdAt: Datetime!
-    createdBy: Admin!
-    day: Int!
-    id: ID!
-    lastUpdatedBy: Admin!
-    openAllDay: Boolean!
-    openDuration: Int
-    openTime: LocalTime
-    updatedAt: Datetime!
+  closeAllDay: Boolean!
+  createdAt: Datetime!
+  createdBy: Admin!
+  day: Int!
+  id: ID!
+  lastUpdatedBy: Admin!
+  openAllDay: Boolean!
+  openDuration: Int
+  openTime: LocalTime
+  updatedAt: Datetime!
 }
 
 type GymsPayload {
-    list: [Gym!]
-    paging: PaginatorOutput
+  list: [Gym!]
+  paging: PaginatorOutput
 }
 
 "Instructor/Users"
 type Instructor {
-    authId: String!
-    brand: Brand!
-    contactNumber: String
-    createdAt: Datetime!
-    email: String!
-    firstName: String!
-    gender: GlobalGenderType!
-    gym: Gym!
-    id: ID
-    lastName: String
-    photo: String
-    status: GlobalStatusType!
-    updatedAt: Datetime!
+  authId: String!
+  brand: Brand!
+  contactNumber: String
+  createdAt: Datetime!
+  email: String!
+  firstName: String!
+  gender: GlobalGenderType!
+  gym: Gym!
+  id: ID
+  lastName: String
+  photo: String
+  status: GlobalStatusType!
+  updatedAt: Datetime!
 }
 
 type InstructorsPayload {
-    list: [Instructor]
-    paging: PaginatorOutput
+  list: [Instructor]
+  paging: PaginatorOutput
 }
 
 type InvoiceComponent {
-    label: String
-    type: InvoiceComponentType!
-    value: CurrencyValue
+  label: String
+  type: InvoiceComponentType!
+  value: CurrencyValue
 }
 
 type Language {
-    code: String!
-    countries: [Country]!
-    id: ID!
-    name: String!
-    status: StatusType!
+  code: String!
+  countries: [Country]!
+  id: ID!
+  name: String!
+  status: StatusType!
 }
 
 type LanguageCountriessPayload {
-    list: [LanguageCountry]
-    paging: PaginatorOutput
+  list: [LanguageCountry]
+  paging: PaginatorOutput
 }
 
 type LanguageCountry {
-    country: Country!
-    createdAt: Datetime!
-    id: ID!
-    language: Language!
-    updatedAt: Datetime!
+  country: Country!
+  createdAt: Datetime!
+  id: ID!
+  language: Language!
+  updatedAt: Datetime!
 }
 
 type LanguagesPayload {
-    list: [Language]
-    paging: PaginatorOutput
+  list: [Language]
+  paging: PaginatorOutput
 }
 
 "Membership.."
 type Membership {
-    accessType: MembershipAccessType!
-    age: Age
-    allowedCheckins: Int
-    amount: CurrencyValue!
-    amountLabel: String!
-    colorCode: String
-    countryId: ID!
-    createdAt: Datetime!
-    createdById: ID!
-    description: String
-    gender: GlobalGenderType!
-    gracePeriod: Int
-    id: ID!
-    image: String
-    isWeekelyScheduled: Boolean!
-    lastUpdatedById: ID!
-    lifetime: Boolean
-    membershipCategory: MembershipCategory!
-    membershipSubCategory: MembershipSubCategory
-    name: String!
-    period: Int
-    referenceType: MembershipRefTypePayload
-    schedule: [MembershipWeeklySchedule!]
-    status: GlobalStatusType!
-    updatedAt: Datetime!
+  accessType: MembershipAccessType!
+  age: Age
+  allowedCheckins: Int
+  amount: CurrencyValue!
+  amountLabel: String!
+  colorCode: String
+  countryId: ID!
+  createdAt: Datetime!
+  createdById: ID!
+  description: String
+  gender: GlobalGenderType!
+  gracePeriod: Int
+  id: ID!
+  image: String
+  isWeekelyScheduled: Boolean!
+  lastUpdatedById: ID!
+  lifetime: Boolean
+  membershipCategory: MembershipCategory!
+  membershipSubCategory: MembershipSubCategory
+  name: String!
+  period: Int
+  referenceType: MembershipRefTypePayload
+  schedule: [MembershipWeeklySchedule!]
+  status: GlobalStatusType!
+  updatedAt: Datetime!
 }
 
 type MembershipCategory {
-    createdAt: Datetime!
-    description: String
-    id: ID!
-    image: String
-    name: String!
-    status: GlobalStatusType
-    subCategories: [MembershipSubCategory!]
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  description: String
+  id: ID!
+  image: String
+  name: String!
+  status: GlobalStatusType
+  subCategories: [MembershipSubCategory!]
+  updatedAt: Datetime!
 }
 
 type MembershipCategoryPayload {
-    list: [MembershipCategory]
-    paging: PaginatorOutput
+  list: [MembershipCategory]
+  paging: PaginatorOutput
 }
 
 type MembershipInvoice {
-    components: [InvoiceComponent!]
-    currency: VendorPlanCurrency_Common
-    error: MembershipError
-    errorMessage: String
-    errors: [MembershipError]
+  components: [InvoiceComponent!]
+  currency: VendorPlanCurrency_Common
+  error: MembershipError
+  errorMessage: String
+  errors: [MembershipError]
 }
 
 type MembershipSubCategory {
-    createdAt: Datetime!
-    description: String
-    id: ID!
-    image: String
-    membershipCategory: MembershipCategory!
-    name: String!
-    status: GlobalStatusType
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  description: String
+  id: ID!
+  image: String
+  membershipCategory: MembershipCategory!
+  name: String!
+  status: GlobalStatusType
+  updatedAt: Datetime!
 }
 
 type MembershipSubCategoryPayload {
-    list: [MembershipSubCategory]
-    paging: PaginatorOutput
+  list: [MembershipSubCategory]
+  paging: PaginatorOutput
 }
 
 type MembershipWeeklySchedule {
-    closeAllDay: Boolean!
-    createdAt: Datetime!
-    day: Int!
-    duration: Float
-    id: ID!
-    membership: Membership!
-    openTime: LocalTime
-    updatedAt: Datetime!
+  closeAllDay: Boolean!
+  createdAt: Datetime!
+  day: Int!
+  duration: Float
+  id: ID!
+  membership: Membership!
+  openTime: LocalTime
+  updatedAt: Datetime!
 }
 
 type MembershipsPayload {
-    list: [Membership]
-    paging: PaginatorOutput
+  list: [Membership]
+  paging: PaginatorOutput
 }
 
 type Mutation {
-    amenityUpsert(input: AmenityInput!): SaveAmenityPayload
-    buyAGymClass(input: BuyAGymClassInput!): BuyAGymClassPayload
-    buyAMembership(input: BuyAMembershipInput!): BuyAMembershipPayload
-    buyAPass(input: BuyAPassInput!): BuyAPassPayload
-    configurationUpsert(input: ConfigurationInput!): SaveConfigurationPayload
-    countryUpsert(input: CountryInput!): SaveCountryPayload
-    favouriteGymClass(input: FavouriteGymClassInput!): FavouriteGymClassPayload
-    languageUpsert(input: LanguageInput!): SaveLanguagePayload
-    registerCustomer(input: RegisterCustomerInput!): RegisterCustomerPayload
-    registerInstructor(input: RegisterInstructorInput!): RegisterInstructorPayload
-    saveAdmin(input: SaveAdminInput!): SaveAdminPayload
-    saveBrand(input: SaveBrandInput!): SaveBrandPayload
-    saveBrandAdmin(input: SaveBrandAdminInput!): SaveBrandAdminPayload
-    saveBrandStatusUpdate(input: SaveBrandStatusInput!): SaveBrandPayload
-    saveBrandsAdminsTable(brandId: ID!, input: [SaveBrandsAdminsTableInput]): SaveBrandAdminTablePayload
-    saveContentElement(input: SaveContentElementInput!): SaveContentElementPayload
-    saveContentElementValue(input: SaveContentElementValueInput!): SaveContentElementValuePayload
-    saveContentGroup(input: SaveContentGroupInput!): SaveContentGroupPayload
-    saveContentType(input: SaveContentTypeInput!): SaveContentTypePayload
-    saveCustomer(input: SaveCustomerInput!): SaveCustomerPayload
-    saveCustomerAddress(input: SaveCustomerAddressInput!): SaveCustomerAddressPayload
-    saveCustomerMedicalForm(input: CustomerMedicalForm!): CustomerMedicalFormPayload
-    saveCustomerPhoto(input: CustomerPhotoInput!): RegisterCustomerPayload
-    saveGym(input: SaveGymInput!): SaveGymPayload
-    saveGymAdmin(input: SaveGymAdminInput!): SaveGymAdminPayload
-    saveGymClass(input: SaveGymClassInput!): SaveGymClassPayload
-    saveGymClassCategory(input: SaveGymClassCategoryInput!): SaveGymClassCategoryPayload
-    saveGymOperatingHours(gymId: ID!, input: [SaveGymOperatingHoursInput!]!): SaveGymOperatingHoursPayload
-    saveGymStatusUpdate(input: SaveGymStatusInput!): SaveGymPayload
-    saveGymsAdminsTable(gymId: ID!, input: [SaveGymsAdminsTableInput]): SaveGymAdminTablePayload
-    saveInstructor(input: SaveInstructorInput!): SaveInstructorPayload
-    saveInstructorStatusUpdate(input: SaveInstructorStatusInput!): SaveInstructorPayload
-    saveLanguageCountry(input: SaveLanguageCountryInput!): SaveLanguageCountryPayload
-    saveMembership(input: SaveMembershipInput!): SaveMembershipPayload
-    saveMembershipCategory(input: SaveMembershipCategoryInput!): SaveMembershipCategoryPayload
-    saveMembershipSubCategory(input: SaveMembershipSubCategoryInput!): SaveMembershipSubCategoryPayload
-    savePass(input: SavePassInput!): SavePassPayload
-    savePassCategory(input: SavePassCategoryInput!): SavePassCategoryPayload
-    savePermission(input: SavePermissionInput!): SavePermissionPayload
-    saveProduct(input: SaveProductInput!): SaveProductPayload
-    saveProductCategory(input: SaveProductCategoryInput!): SaveProductCategoryPayload
-    saveProductStock(input: SaveProductStockInput!): SaveProductStockPayload
-    saveRole(input: SaveRoleInput!): SaveRolePayload
-    saveStoreImage(input: SaveStoreImageInput!): SaveStoreImagePayload
-    saveVideo(input: SaveVideoInput!): SaveVideoPayload
-    saveVideoType(input: SaveVideoTypeInput!): SaveVideoTypePayload
-    sortContentElement(contentGroupId: ID!, ids: [ID!]!): Boolean
-    sortContentGroup(contentTypeId: ID!, ids: [ID!]!): Boolean
-    syncAdminsWithFirebase: Boolean
-    syncCustomerKafka: Boolean
-    syncCustomersWithFirebase: Boolean
-    syncInstructorsWithFirebase: Boolean
-    unFavouriteGymClass(input: FavouriteGymClassInput!): FavouriteGymClassPayload
+  addressFieldUpsert(input: AddressFieldInput!): SaveAddressFieldPayload
+  amenityUpsert(input: AmenityInput!): SaveAmenityPayload
+  buyAGymClass(input: BuyAGymClassInput!): BuyAGymClassPayload
+  buyAMembership(input: BuyAMembershipInput!): BuyAMembershipPayload
+  buyAPass(input: BuyAPassInput!): BuyAPassPayload
+  configurationUpsert(input: ConfigurationInput!): SaveConfigurationPayload
+  countryUpsert(input: CountryInput!): SaveCountryPayload
+  "delete a customer card token as default"
+  customerCardTokenDelete(id: ID!): Boolean!
+  "Save a customer card token"
+  customerCardTokenSave(customerCardTokenInput: CustomerCardTokenInput!): CustomerCardTokenSavePayload!
+  "Set a customer card token as default"
+  customerCardTokenSetDefault(id: ID!, isDefault: Boolean!): CustomerCardToken!
+  favouriteGymClass(input: FavouriteGymClassInput!): FavouriteGymClassPayload
+  languageUpsert(input: LanguageInput!): SaveLanguagePayload
+  registerCustomer(input: RegisterCustomerInput!): RegisterCustomerPayload
+  registerInstructor(input: RegisterInstructorInput!): RegisterInstructorPayload
+  saveAdmin(input: SaveAdminInput!): SaveAdminPayload
+  saveBrand(input: SaveBrandInput!): SaveBrandPayload
+  saveBrandAdmin(input: SaveBrandAdminInput!): SaveBrandAdminPayload
+  saveBrandStatusUpdate(input: SaveBrandStatusInput!): SaveBrandPayload
+  saveBrandsAdminsTable(brandId: ID!, input: [SaveBrandsAdminsTableInput]): SaveBrandAdminTablePayload
+  saveContentElement(input: SaveContentElementInput!): SaveContentElementPayload
+  saveContentElementValue(input: SaveContentElementValueInput!): SaveContentElementValuePayload
+  saveContentGroup(input: SaveContentGroupInput!): SaveContentGroupPayload
+  saveContentType(input: SaveContentTypeInput!): SaveContentTypePayload
+  saveCustomer(input: SaveCustomerInput!): SaveCustomerPayload
+  saveCustomerAddress(input: SaveCustomerAddressInput!): SaveCustomerAddressPayload
+  saveCustomerMedicalForm(input: CustomerMedicalForm!): CustomerMedicalFormPayload
+  saveCustomerPhoto(input: CustomerPhotoInput!): RegisterCustomerPayload
+  saveGym(input: SaveGymInput!): SaveGymPayload
+  saveGymAdmin(input: SaveGymAdminInput!): SaveGymAdminPayload
+  saveGymClass(input: SaveGymClassInput!): SaveGymClassPayload
+  saveGymClassCategory(input: SaveGymClassCategoryInput!): SaveGymClassCategoryPayload
+  saveGymOperatingHours(gymId: ID!, input: [SaveGymOperatingHoursInput!]!): SaveGymOperatingHoursPayload
+  saveGymStatusUpdate(input: SaveGymStatusInput!): SaveGymPayload
+  saveGymsAdminsTable(gymId: ID!, input: [SaveGymsAdminsTableInput]): SaveGymAdminTablePayload
+  saveInstructor(input: SaveInstructorInput!): SaveInstructorPayload
+  saveInstructorStatusUpdate(input: SaveInstructorStatusInput!): SaveInstructorPayload
+  saveLanguageCountry(input: SaveLanguageCountryInput!): SaveLanguageCountryPayload
+  saveMembership(input: SaveMembershipInput!): SaveMembershipPayload
+  saveMembershipCategory(input: SaveMembershipCategoryInput!): SaveMembershipCategoryPayload
+  saveMembershipSubCategory(input: SaveMembershipSubCategoryInput!): SaveMembershipSubCategoryPayload
+  savePass(input: SavePassInput!): SavePassPayload
+  savePassCategory(input: SavePassCategoryInput!): SavePassCategoryPayload
+  savePermission(input: SavePermissionInput!): SavePermissionPayload
+  saveProduct(input: SaveProductInput!): SaveProductPayload
+  saveProductCategory(input: SaveProductCategoryInput!): SaveProductCategoryPayload
+  saveProductStock(input: SaveProductStockInput!): SaveProductStockPayload
+  saveRole(input: SaveRoleInput!): SaveRolePayload
+  saveStoreImage(input: SaveStoreImageInput!): SaveStoreImagePayload
+  saveVideo(input: SaveVideoInput!): SaveVideoPayload
+  saveVideoType(input: SaveVideoTypeInput!): SaveVideoTypePayload
+  signInWithEmailAndPassword(email: String!, password: String!): CustomerSignInPayload!
+  sortAddressFields(countryId: ID!, ids: [ID!]!): Boolean
+  sortContentElement(contentGroupId: ID!, ids: [ID!]!): Boolean
+  sortContentGroup(contentTypeId: ID!, ids: [ID!]!): Boolean
+  syncAdminsWithFirebase: Boolean
+  syncCustomerKafka: Boolean
+  syncCustomersWithFirebase: Boolean
+  syncInstructorsWithFirebase: Boolean
+  unFavouriteGymClass(input: FavouriteGymClassInput!): FavouriteGymClassPayload
 }
 
 "gym classes bought by customers"
 type OrderGymClass {
-    createdAt: Datetime!
-    customerId: ID!
-    endDate: Date
-    gymClassId: ID!
-    id: ID!
-    paymentMethod: PaymentMethod!
-    paymentStatus: PaymentStatus!
-    shortCode: String!
-    startDate: Date
-    status: GymClassStatus!
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  customerId: ID!
+  endDate: Date
+  gymClassId: ID!
+  id: ID!
+  paymentMethod: PaymentMethod!
+  paymentStatus: PaymentStatus!
+  shortCode: String!
+  startDate: Date
+  status: GymClassStatus!
+  updatedAt: Datetime!
 }
 
 type OrderHistoryBrand {
-    countryId: ID!
-    email: String!
-    id: ID!
-    legalName: String
-    logo: String!
-    name: String!
-    phone: String!
-    status: GlobalStatusType!
+  countryId: ID!
+  email: String!
+  id: ID!
+  legalName: String
+  logo: String!
+  name: String!
+  phone: String!
+  status: GlobalStatusType!
 }
 
 type OrderHistoryCountry {
-    currency: OrderHistoryCurrency!
-    dialCode: String
-    flagPhoto: String
-    id: ID!
-    isoCode: String!
-    name: String!
-    servicePhoneNumber: String
-    status: GlobalStatusType
-    timeZoneIdentifier: String
-    vat: Float!
-    vatId: String
+  currency: OrderHistoryCurrency!
+  dialCode: String
+  flagPhoto: String
+  id: ID!
+  isoCode: String!
+  name: String!
+  servicePhoneNumber: String
+  status: GlobalStatusType
+  timeZoneIdentifier: String
+  vat: Float!
+  vatId: String
 }
 
 type OrderHistoryCurrency {
-    code: String!
-    decimalPlace: Int!
-    lowestDenomination: Float!
-    name: String!
-    subUnitName: String!
-    symbol: String
+  code: String!
+  decimalPlace: Int!
+  lowestDenomination: Float!
+  name: String!
+  subUnitName: String!
+  symbol: String
 }
 
 type OrderHistoryCustomer {
-    authId: String!
-    contactNumber: String
-    country: OrderHistoryCountry!
-    createdAt: Datetime!
-    dob: Date
-    email: String!
-    firstName: String!
-    fullName: String!
-    gender: GlobalGenderType
-    id: ID!
-    isEmailVerified: Boolean!
-    isPhoneVerified: Boolean!
-    lastName: String!
-    photo: String
-    status: GlobalStatusType!
-    updatedAt: Datetime!
+  authId: String!
+  contactNumber: String
+  country: OrderHistoryCountry!
+  createdAt: Datetime!
+  dob: Date
+  email: String!
+  firstName: String!
+  fullName: String!
+  gender: GlobalGenderType
+  id: ID!
+  isEmailVerified: Boolean!
+  isPhoneVerified: Boolean!
+  lastName: String!
+  photo: String
+  status: GlobalStatusType!
+  updatedAt: Datetime!
 }
 
 type OrderHistoryGym {
-    brandId: ID!
-    email: String!
-    id: ID!
-    legalName: String
-    logo: String!
-    name: String!
-    phone: String!
-    status: GlobalStatusType!
+  brand: OrderHistoryBrand!
+  email: String!
+  id: ID!
+  legalName: String
+  logo: String!
+  name: String!
+  phone: String!
+  status: GlobalStatusType!
 }
 
 type OrderHistoryInstructor {
-    authId: String
-    contactNumber: String!
-    email: String!
-    firstName: String!
-    id: ID!
-    lastName: String
-    photo: String
-    status: GlobalStatusType!
+  authId: String
+  contactNumber: String!
+  email: String!
+  firstName: String!
+  id: ID!
+  lastName: String
+  photo: String
+  status: GlobalStatusType!
 }
 
 "Memberships bought by customers"
 type OrderMembership {
-    createdAt: Datetime!
-    customerId: ID!
-    id: ID!
-    membershipId: ID!
-    paymentMethod: PaymentMethod!
-    paymentStatus: PaymentStatus!
-    shortCode: String!
-    status: MembershipStatus!
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  customerId: ID!
+  id: ID!
+  membershipId: ID!
+  paymentMethod: PaymentMethod!
+  paymentStatus: PaymentStatus!
+  shortCode: String!
+  status: MembershipStatus!
+  updatedAt: Datetime!
 }
 
 "Passes bought by customers"
 type OrderPass {
-    createdAt: Datetime!
-    customerId: ID!
-    id: ID!
-    passId: ID!
-    paymentMethod: PaymentMethod!
-    paymentStatus: PaymentStatus!
-    shortCode: String!
-    status: PassStatus!
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  customerId: ID!
+  id: ID!
+  passId: ID!
+  paymentMethod: PaymentMethod!
+  paymentStatus: PaymentStatus!
+  shortCode: String!
+  status: PassStatus!
+  updatedAt: Datetime!
 }
 
 type OrderSet {
-    amount: CurrencyValue!
-    brandName: String!
-    createdAt: Datetime!
-    currencyCode: String!
-    customerName: String!
-    gymName: String
-    id: ID!
-    orderStatus: String!
-    orderType: OrderType!
-    paymentStatus: PaymentStatus!
-    shortCode: String!
+  amount: CurrencyValue!
+  brandName: String!
+  createdAt: Datetime!
+  currencyCode: String!
+  customerName: String!
+  gymName: String
+  id: ID!
+  orderStatus: String!
+  orderType: OrderType!
+  paymentStatus: PaymentStatus!
+  shortCode: String!
 }
 
 type OrdersFilterPayload {
-    list: [OrderSet]
-    paging: PaginatorOutput
+  list: [OrderSet]
+  paging: PaginatorOutput
 }
 
 type PaginatorOutput {
-    limit: Int!
-    page: Int!
-    totalPages: Int!
+  limit: Int!
+  page: Int!
+  totalPages: Int!
 }
 
 type Pass {
-    accessType: PassAccessType!
-    age: Age
-    allowedCheckins: Int!
-    amount: CurrencyValue!
-    colorCode: String
-    countryId: ID!
-    createdAt: Datetime!
-    createdById: ID!
-    description: String
-    gender: GlobalGenderType!
-    gracePeriod: Int!
-    id: ID!
-    image: String!
-    isWeekelyScheduled: Boolean!
-    lastUpdatedById: ID!
-    name: String!
-    passCategory: PassCategory
-    period: Int!
-    referenceType: PassRefTypePayload
-    schedule: [PassWeeklySchedule!]
-    status: GlobalStatusType
-    type: PassType!
-    updatedAt: Datetime!
+  accessType: PassAccessType!
+  age: Age
+  allowedCheckins: Int!
+  amount: CurrencyValue!
+  colorCode: String
+  countryId: ID!
+  createdAt: Datetime!
+  createdById: ID!
+  description: String
+  gender: GlobalGenderType!
+  gracePeriod: Int!
+  id: ID!
+  image: String!
+  isWeekelyScheduled: Boolean!
+  lastUpdatedById: ID!
+  name: String!
+  passCategory: PassCategory
+  period: Int!
+  referenceType: PassRefTypePayload
+  schedule: [PassWeeklySchedule!]
+  status: GlobalStatusType
+  type: PassType!
+  updatedAt: Datetime!
 }
 
 type PassCategory {
-    createdAt: Datetime!
-    description: String
-    id: ID!
-    image: String
-    name: String!
-    status: GlobalStatusType
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  description: String
+  id: ID!
+  image: String
+  name: String!
+  status: GlobalStatusType
+  updatedAt: Datetime!
 }
 
 type PassCategoryPayload {
-    list: [PassCategory]
-    paging: PaginatorOutput
+  list: [PassCategory]
+  paging: PaginatorOutput
 }
 
 type PassInvoice {
-    components: [InvoiceComponent!]
-    currency: VendorPlanCurrency_Common
-    error: MembershipError
-    errorMessage: String
-    errors: [MembershipError]
+  components: [InvoiceComponent!]
+  currency: VendorPlanCurrency_Common
+  error: MembershipError
+  errorMessage: String
+  errors: [MembershipError]
 }
 
 type PassWeeklySchedule {
-    closeAllDay: Boolean!
-    createdAt: Datetime!
-    day: Int!
-    duration: Float
-    id: ID!
-    openTime: LocalTime
-    pass: Pass!
-    updatedAt: Datetime!
+  closeAllDay: Boolean!
+  createdAt: Datetime!
+  day: Int!
+  duration: Float
+  id: ID!
+  openTime: LocalTime
+  pass: Pass!
+  updatedAt: Datetime!
 }
 
 type PassesPayload {
-    list: [Pass]
-    paging: PaginatorOutput
+  list: [Pass]
+  paging: PaginatorOutput
 }
 
 type PaymentMethod {
-    id: ID!
-    orderType: OrderType!
-    paymentMethod: FormatterPaymentMethod
-    provider: String
-    type: String
+  imageUrl: String
+  name: String!
+  paymentScheme: PaymentScheme!
+  sourceId: String
+  subText: String
 }
 
 "Permission"
 type Permission {
-    createdAt: Datetime!
-    createdById: ID
-    description: String
-    id: ID!
-    lastUpdatedById: ID
-    name: String!
-    roles: [Role]
-    status: StatusType!
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  createdById: ID
+  description: String
+  id: ID!
+  lastUpdatedById: ID
+  name: String!
+  roles: [Role]
+  status: StatusType!
+  updatedAt: Datetime!
 }
 
 type PermissionsPayload {
-    list: [Permission]
-    paging: PaginatorOutput
+  list: [Permission]
+  paging: PaginatorOutput
 }
 
 "Products."
 type Product {
-    barcode: String!
-    bestSeller: GlobalStatusType
-    brand: ExternalBrand_Vendors
-    brandId: ID!
-    category: ProductCategory
-    categoryId: ID!
-    countryId: ID!
-    createdAt: Datetime!
-    createdBy: ID!
-    description: String!
-    express: Boolean!
-    id: ID!
-    images: [String!]
-    inventory: [ProductStock!]
-    lastUpdatedBy: ID!
-    listPrice: Float!
-    name: String!
-    returnPolicy: Boolean!
-    returnPolicyDescription: String
-    returnPolicyPeriod: Int
-    salePrice: Float!
-    sku: String!
-    status: GlobalStatusType!
-    updatedAt: Datetime!
-    warranty: Boolean!
-    warrantyDescription: String
-    warrantyPeriod: Int
+  barcode: String!
+  bestSeller: GlobalStatusType
+  brand: ExternalBrand_Vendors
+  brandId: ID!
+  category: ProductCategory
+  categoryId: ID!
+  country: VendorsShopCountry_Common!
+  countryId: ID!
+  createdAt: Datetime!
+  createdBy: ID!
+  description: String!
+  express: Boolean!
+  id: ID!
+  images: [String!]
+  inventory: [ProductStock!]
+  lastUpdatedBy: ID!
+  listPrice: CurrencyValue!
+  listPriceLabel: String!
+  name: String!
+  returnPolicy: Boolean!
+  returnPolicyDescription: String
+  returnPolicyPeriod: Int
+  salePrice: CurrencyValue
+  salePriceLabel: String
+  sku: String!
+  status: GlobalStatusType!
+  updatedAt: Datetime!
+  warranty: Boolean!
+  warrantyDescription: String
+  warrantyPeriod: Int
 }
 
 type ProductCategoriesPayload {
-    list: [ProductCategory]
-    paging: PaginatorOutput
+  list: [ProductCategory]
+  paging: PaginatorOutput
 }
 
 "Product Categories."
 type ProductCategory {
-    countryId: ID!
-    createdAt: Datetime!
-    createdBy: ID!
-    id: ID!
-    image: String
-    lastUpdatedBy: ID!
-    name: String!
-    status: GlobalStatusType!
-    updatedAt: Datetime!
+  countryId: ID!
+  createdAt: Datetime!
+  createdBy: ID!
+  id: ID!
+  image: String
+  lastUpdatedBy: ID!
+  name: String!
+  products(brandId: ID): [Product!]
+  status: GlobalStatusType!
+  updatedAt: Datetime!
 }
 
 type ProductInvoice {
-    components: [ProductInvoiceComponent!]
-    currency: VendorsShopCurrency_Common
-    error: ProductError
-    errorMessage: String
-    errors: [ProductError]
+  components: [ProductInvoiceComponent!]
+  currency: VendorsShopCurrency_Common
+  error: ProductError
+  errorMessage: String
+  errors: [ProductError]
 }
 
 type ProductInvoiceComponent {
-    label: String
-    type: InvoiceComponentType!
-    value: CurrencyValue
+  label: String
+  type: InvoiceComponentType!
+  value: CurrencyValue
 }
 
 "Product Stocks."
 type ProductStock {
-    createdAt: Datetime!
-    createdBy: ID!
-    gymId: ID!
-    id: ID!
-    lastUpdatedBy: ID!
-    productId: ID!
-    quantity: Int!
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  createdBy: ID!
+  gymId: ID!
+  id: ID!
+  lastUpdatedBy: ID!
+  productId: ID!
+  quantity: Int!
+  updatedAt: Datetime!
 }
 
 type ProductStocksPayload {
-    list: [ProductStock]
-    paging: PaginatorOutput
+  list: [ProductStock]
+  paging: PaginatorOutput
 }
 
 type ProductsPayload {
-    list: [Product]
-    paging: PaginatorOutput
+  list: [Product]
+  paging: PaginatorOutput
 }
 
 type Query {
-    admin(id: ID!): Admin
-    adminByEmail(email: String!): Admin
-    admins(paging: PaginatorInput!, params: AdminsFilter): AdminsPayload!
-    amenities(filter: AmenityFilter): [Amenity]
-    brand(id: ID!): Brand!
-    brandAdmin(id: ID!): BrandAdmin
-    brandAdmins(paging: PaginatorInput!, params: BrandAdminsFilter): BrandAdminsPayload!
-    brands(paging: PaginatorInput, params: BrandsFilter): BrandsPayload!
-    configuration(id: ID!): Configuration!
-    configurationByKey(key: String!): Configuration
-    configurations(filter: ConfigurationFilter, paging: PaginatorInput): ConfigurationPayload!
-    contentElement(id: ID!): ContentElement
-    contentElementValue(id: ID!): ContentElementValue
-    contentElementValues(paging: PaginatorInput!, params: ContentElementValuesFilter): ContentElementValuesPayload
-    contentElements(paging: PaginatorInput!, params: ContentElementsFilter): ContentElementsPayload
-    contentGroup(id: ID!): ContentGroup
-    contentGroups(paging: PaginatorInput!, params: ContentGroupsFilter): ContentGroupsPayload
-    contentType(id: ID!): ContentType
-    contentTypes(paging: PaginatorInput!, params: ContentTypesFilter): ContentTypesPayload
-    countries(filter: CountryFilter, paging: PaginatorInput): CountriesPayload!
-    countriesById(ids: [ID!]!): [Country!]!
-    country(id: ID!): Country!
-    customer(id: ID!): Customer
-    customerAddress(id: ID!): CustomerAddress
-    customerAddresses(paging: PaginatorInput!, params: CustomerAddressFilter): CustomerAddressPayload!
-    "Lookup a customer by the currently logged in user id"
-    customerByAuth: Customer
-    customerByEmail(email: String!): Customer
-    customerDefaultAddress: CustomerAddress
-    customerGymClass(id: ID!): CustomerGymClass!
-    customerGymClassSchedule(customerGymClassId: ID!): [CustomerGymClassWeeklySchedule!]
-    customerGymClasses(paging: PaginatorInput, params: CustomerGymClassFilter): CustomerGymClassPayload!
-    customerMembership(id: ID!): CustomerMembership!
-    customerMembershipSchedule(customerMembershipId: ID!): [CustomerMembershipWeeklySchedule!]
-    customerMemberships(paging: PaginatorInput, params: CustomerMembershipsFilter): CustomerMembershipsPayload!
-    customerPass(id: ID!): CustomerPass!
-    customerPassSchedule(customerPassId: ID!): [CustomerPassWeeklySchedule!]
-    customerPasses(paging: PaginatorInput, params: CustomerPassesFilter): CustomerPassesPayload!
-    customers(paging: PaginatorInput!, params: CustomersFilter): CustomersPayload!
-    dynamicProperties: [DynamicPropertyPair!]
-    favouriteGymClasses(paging: PaginatorInput, params: GymClassesFilter): FavouriteGymClassesPayload!
-    getMedicalForm: [ContentGroup!]!
-    gym(id: ID!): Gym!
-    gymAddress(gymId: ID!): GymAddress
-    gymAdmin(id: ID!): GymAdmin
-    gymAdmins(paging: PaginatorInput!, params: GymAdminsFilter): GymAdminsPayload!
-    gymClass(id: ID!): GymClass!
-    gymClassCategories(paging: PaginatorInput, params: GymClassCategoryFilter): GymClassCategoryPayload!
-    gymClassCategory(id: ID!): GymClassCategory!
-    gymClassSechedule(gymClassId: ID!): [GymClassWeeklySchedule!]
-    gymClasses(paging: PaginatorInput, params: GymClassesFilter): GymClassesPayload!
-    gymOperatingHours(gymId: ID!): [GymOperatingHours]
-    gyms(paging: PaginatorInput!, params: GymsFilter): GymsPayload!
-    gymsInRadius(paging: PaginatorInput!, params: GymsInRadiusFilter): GymsPayload!
-    instructor(id: ID!): Instructor
-    instructorByEmail(email: String!): Instructor
-    instructors(paging: PaginatorInput, params: InstructorsFilter): InstructorsPayload!
-    language(id: ID!): Language!
-    languageCountries(filter: LanguageCountriessFilter, paging: PaginatorInput!): LanguageCountriessPayload!
-    languageCountry(id: ID!): LanguageCountry
-    languages(filter: LanguageFilter, paging: PaginatorInput!): LanguagesPayload!
-    membership(id: ID!): Membership!
-    membershipCategories(paging: PaginatorInput, params: MembershipCategoryFilter): MembershipCategoryPayload!
-    membershipCategory(id: ID!): MembershipCategory!
-    membershipInvoice(input: MembershipInvoiceInput!): MembershipInvoice!
-    membershipSechedule(membershipId: ID!): [MembershipWeeklySchedule!]
-    membershipSubCategories(paging: PaginatorInput, params: MembershipSubCategoryFilter): MembershipSubCategoryPayload!
-    membershipSubCategory(id: ID!): MembershipSubCategory!
-    memberships(paging: PaginatorInput, params: MembershipsFilter): MembershipsPayload!
-    order(id: ID!, orderType: OrderType!): OrderPayload!
-    orders(paging: PaginatorInput, params: OrdersFilter): OrdersFilterPayload!
-    pass(id: ID!): Pass!
-    passCategories(paging: PaginatorInput, params: PassCategoryFilter): PassCategoryPayload!
-    passCategory(id: ID!): PassCategory!
-    passInvoice(input: PassInvoiceInput!): PassInvoice!
-    passSechedule(membershipId: ID!): [PassWeeklySchedule!]
-    passes(paging: PaginatorInput, params: PassesFilter): PassesPayload!
-    permission(id: ID!): Permission
-    permissions(paging: PaginatorInput!, params: PermissionsFilter): PermissionsPayload!
-    product(id: ID!): Product!
-    productCategories(paging: PaginatorInput!, params: ProductCategoriesFilter): ProductCategoriesPayload!
-    productCategory(id: ID!): ProductCategory!
-    productInvoice(input: ProductInvoiceInput!): ProductInvoice!
-    productStock(id: ID!): ProductStock!
-    productStocks(paging: PaginatorInput!, params: ProductStocksFilter): ProductStocksPayload!
-    products(paging: PaginatorInput!, params: ProductsFilter): ProductsPayload!
-    role(id: ID!): Role
-    rolePermission(id: ID!): RolePermission
-    rolePermissions(paging: PaginatorInput!, params: RolePermissionsFilter): RolePermissionsPayload!
-    roles(paging: PaginatorInput!, params: RolesFilter): RolesPayload!
-    storeHome(input: StoreHomeInput): StoreHomePayload!
-    storeImage(id: ID!): StoreImage!
-    storeImages(paging: PaginatorInput!, params: StoreImagesFilter): StoreImagesPayload!
-    stores(paging: PaginatorInput!, params: ExternalBrand_VendorsFiler): ExternalBrand_VendorsPayload!
-    video(id: ID!): Video!
-    videoType(id: ID!): VideoType!
-    videoTypes(paging: PaginatorInput!, params: VideoTypesFilter): VideoTypesPayload!
-    videos(paging: PaginatorInput!, params: VideosFilter): VideosPayload!
+  activeGymClasses(paging: PaginatorInput, params: GymClassesFilter): GymClassesPayload!
+  addressField(id: ID!): AddressField!
+  addressFields(filter: AddressFieldFilter, paging: PaginatorInput): AddressFieldPayload!
+  admin(id: ID!): Admin
+  adminByEmail(email: String!): Admin
+  admins(paging: PaginatorInput!, params: AdminsFilter): AdminsPayload!
+  amenities(filter: AmenityFilter): [Amenity]
+  brand(id: ID!): Brand!
+  brandAdmin(id: ID!): BrandAdmin
+  brandAdmins(paging: PaginatorInput!, params: BrandAdminsFilter): BrandAdminsPayload!
+  brands(paging: PaginatorInput, params: BrandsFilter): BrandsPayload!
+  configuration(id: ID!): Configuration!
+  configurationByKey(key: String!): Configuration
+  configurations(filter: ConfigurationFilter, paging: PaginatorInput): ConfigurationPayload!
+  contentElement(id: ID!): ContentElement
+  contentElementValue(id: ID!): ContentElementValue
+  contentElementValues(paging: PaginatorInput!, params: ContentElementValuesFilter): ContentElementValuesPayload
+  contentElements(paging: PaginatorInput!, params: ContentElementsFilter): ContentElementsPayload
+  contentGroup(id: ID!): ContentGroup
+  contentGroups(paging: PaginatorInput!, params: ContentGroupsFilter): ContentGroupsPayload
+  contentType(id: ID!): ContentType
+  contentTypes(paging: PaginatorInput!, params: ContentTypesFilter): ContentTypesPayload
+  countries(filter: CountryFilter, paging: PaginatorInput): CountriesPayload!
+  countriesById(ids: [ID!]!): [Country!]!
+  country(id: ID!): Country!
+  customer(id: ID!): Customer
+  customerAddress(id: ID!): CustomerAddress
+  customerAddresses(paging: PaginatorInput!, params: CustomerAddressFilter): CustomerAddressPayload!
+  "Lookup a customer by the currently logged in user id"
+  customerByAuth: Customer
+  customerByEmail(email: String!): Customer
+  customerCardToken(id: ID!): CustomerCardToken
+  customerDefaultAddress: CustomerAddress
+  customerGymClass(id: ID!): CustomerGymClass!
+  customerGymClassSchedule(customerGymClassId: ID!): [CustomerGymClassWeeklySchedule!]
+  customerGymClasses(paging: PaginatorInput, params: CustomerGymClassFilter): CustomerGymClassPayload!
+  customerGymClassesByAuth(paging: PaginatorInput, params: CustomerGymClassFilter): CustomerGymClassPayload!
+  customerMembership(id: ID!): CustomerMembership!
+  customerMembershipSchedule(customerMembershipId: ID!): [CustomerMembershipWeeklySchedule!]
+  customerMemberships(paging: PaginatorInput, params: CustomerMembershipsFilter): CustomerMembershipsPayload!
+  customerMembershipsByAuth(paging: PaginatorInput, params: CustomerMembershipsFilter): CustomerMembershipsPayload!
+  customerPass(id: ID!): CustomerPass!
+  customerPassSchedule(customerPassId: ID!): [CustomerPassWeeklySchedule!]
+  customerPasses(paging: PaginatorInput, params: CustomerPassesFilter): CustomerPassesPayload!
+  customerPassesByAuth(paging: PaginatorInput, params: CustomerPassesFilter): CustomerPassesPayload!
+  customers(paging: PaginatorInput!, params: CustomersFilter): CustomersPayload!
+  dynamicProperties: [DynamicPropertyPair!]
+  favouriteGymClasses(paging: PaginatorInput, params: GymClassesFilter): FavouriteGymClassesPayload!
+  getCheckoutComConfig: CheckoutComConfig!
+  getCustomerCardTokens: [CustomerCardToken]!
+  getMedicalForm: [ContentGroup!]!
+  getPaymentMethods: [PaymentMethod]
+  gym(id: ID!): Gym!
+  gymAddress(gymId: ID!): GymAddress
+  gymAdmin(id: ID!): GymAdmin
+  gymAdmins(paging: PaginatorInput!, params: GymAdminsFilter): GymAdminsPayload!
+  gymClass(id: ID!): GymClass!
+  gymClassCategories(paging: PaginatorInput, params: GymClassCategoryFilter): GymClassCategoryPayload!
+  gymClassCategory(id: ID!): GymClassCategory!
+  gymClassInvoice(input: GymClassInvoiceInput!): GymClassInvoice!
+  gymClassSechedule(gymClassId: ID!): [GymClassWeeklySchedule!]
+  gymClasses(paging: PaginatorInput, params: GymClassesFilter): GymClassesPayload!
+  gymOperatingHours(gymId: ID!): [GymOperatingHours]
+  gyms(paging: PaginatorInput!, params: GymsFilter): GymsPayload!
+  gymsInRadius(paging: PaginatorInput!, params: GymsInRadiusFilter): GymsPayload!
+  instructor(id: ID!): Instructor
+  instructorByEmail(email: String!): Instructor
+  instructors(paging: PaginatorInput, params: InstructorsFilter): InstructorsPayload!
+  language(id: ID!): Language!
+  languageCountries(filter: LanguageCountriessFilter, paging: PaginatorInput!): LanguageCountriessPayload!
+  languageCountry(id: ID!): LanguageCountry
+  languages(filter: LanguageFilter, paging: PaginatorInput!): LanguagesPayload!
+  membership(id: ID!): Membership!
+  membershipCategories(paging: PaginatorInput, params: MembershipCategoryFilter): MembershipCategoryPayload!
+  membershipCategory(id: ID!): MembershipCategory!
+  membershipInvoice(input: MembershipInvoiceInput!): MembershipInvoice!
+  membershipSechedule(membershipId: ID!): [MembershipWeeklySchedule!]
+  membershipSubCategories(paging: PaginatorInput, params: MembershipSubCategoryFilter): MembershipSubCategoryPayload!
+  membershipSubCategory(id: ID!): MembershipSubCategory!
+  memberships(paging: PaginatorInput, params: MembershipsFilter): MembershipsPayload!
+  order(id: ID!, orderType: OrderType!): OrderPayload!
+  orders(paging: PaginatorInput, params: OrdersFilter): OrdersFilterPayload!
+  pass(id: ID!): Pass!
+  passCategories(paging: PaginatorInput, params: PassCategoryFilter): PassCategoryPayload!
+  passCategory(id: ID!): PassCategory!
+  passInvoice(input: PassInvoiceInput!): PassInvoice!
+  passSechedule(membershipId: ID!): [PassWeeklySchedule!]
+  passes(paging: PaginatorInput, params: PassesFilter): PassesPayload!
+  permission(id: ID!): Permission
+  permissions(paging: PaginatorInput!, params: PermissionsFilter): PermissionsPayload!
+  product(id: ID!): Product!
+  productCategories(paging: PaginatorInput!, params: ProductCategoriesFilter): ProductCategoriesPayload!
+  productCategory(id: ID!): ProductCategory!
+  productInvoice(input: ProductInvoiceInput!): ProductInvoice!
+  productStock(id: ID!): ProductStock!
+  productStocks(paging: PaginatorInput!, params: ProductStocksFilter): ProductStocksPayload!
+  products(paging: PaginatorInput!, params: ProductsFilter): ProductsPayload!
+  role(id: ID!): Role
+  rolePermission(id: ID!): RolePermission
+  rolePermissions(paging: PaginatorInput!, params: RolePermissionsFilter): RolePermissionsPayload!
+  roles(paging: PaginatorInput!, params: RolesFilter): RolesPayload!
+  storeHome(input: StoreHomeInput): StoreHomePayload!
+  storeImage(id: ID!): StoreImage!
+  storeImages(paging: PaginatorInput!, params: StoreImagesFilter): StoreImagesPayload!
+  stores(paging: PaginatorInput!, params: ExternalBrand_VendorsFiler): ExternalBrand_VendorsPayload!
+  video(id: ID!): Video!
+  videoType(id: ID!): VideoType!
+  videoTypes(paging: PaginatorInput!, params: VideoTypesFilter): VideoTypesPayload!
+  videos(paging: PaginatorInput!, params: VideosFilter): VideosPayload!
 }
 
 type RegisterCustomerPayload {
-    customer: Customer
-    error: CustomerError
-    errorMessage: String
-    errors: [CustomerError!]
+  customer: Customer
+  error: CustomerError
+  errorMessage: String
+  errors: [CustomerError!]
 }
 
 type RegisterInstructorPayload {
-    error: InstructorError
-    errorMessage: String
-    errors: [InstructorError!]
-    instructor: Instructor
-    password: String
+  error: InstructorError
+  errorMessage: String
+  errors: [InstructorError!]
+  instructor: Instructor
+  password: String
 }
 
 "Role"
 type Role {
-    createdAt: Datetime!
-    createdById: ID
-    description: String
-    id: ID!
-    lastUpdatedById: ID
-    name: String!
-    permissions: [Permission]
-    status: StatusType!
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  createdById: ID
+  description: String
+  id: ID!
+  lastUpdatedById: ID
+  name: String!
+  permissions: [Permission]
+  status: StatusType!
+  updatedAt: Datetime!
 }
 
 "RolePermission"
 type RolePermission {
-    createdAt: Datetime!
-    createdById: ID
-    id: ID!
-    lastUpdatedById: ID
-    permission: Permission!
-    role: Role!
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  createdById: ID
+  id: ID!
+  lastUpdatedById: ID
+  permission: Permission!
+  role: Role!
+  updatedAt: Datetime!
 }
 
 type RolePermissionsPayload {
-    list: [RolePermission]
-    paging: PaginatorOutput
+  list: [RolePermission]
+  paging: PaginatorOutput
 }
 
 type RolesPayload {
-    list: [Role]
-    paging: PaginatorOutput
+  list: [Role]
+  paging: PaginatorOutput
+}
+
+type SaveAddressFieldPayload {
+  addressField: AddressField
+  error: AddressFieldError
+  errors: [AddressFieldError!]
 }
 
 type SaveAdminPayload {
-    admin: Admin
-    error: AdminError
-    errorMessage: String
-    errors: [AdminError!]
-    password: String
+  admin: Admin
+  error: AdminError
+  errorMessage: String
+  errors: [AdminError!]
+  password: String
 }
 
 type SaveAmenityPayload {
-    amenity: Amenity
-    error: AmenityError
-    errors: [AmenityError!]
+  amenity: Amenity
+  error: AmenityError
+  errors: [AmenityError!]
 }
 
 type SaveBrandAdminPayload {
-    brandAdmin: BrandAdmin
-    error: BrandAdminError
-    errors: [BrandAdminError!]
+  brandAdmin: BrandAdmin
+  error: BrandAdminError
+  errors: [BrandAdminError!]
 }
 
 type SaveBrandAdminTablePayload {
-    error: BrandAdminError
-    errors: [BrandAdminError!]
-    updated: Boolean
+  error: BrandAdminError
+  errors: [BrandAdminError!]
+  updated: Boolean
 }
 
 type SaveBrandPayload {
-    brand: Brand
-    error: BrandError
-    errorMessage: String
-    errors: [BrandError!]
+  brand: Brand
+  error: BrandError
+  errorMessage: String
+  errors: [BrandError!]
 }
 
 type SaveConfigurationPayload {
-    configuration: Configuration
-    error: ConfigurationError
-    errors: [ConfigurationError!]
+  configuration: Configuration
+  error: ConfigurationError
+  errors: [ConfigurationError!]
 }
 
 type SaveContentElementPayload {
-    contentElement: ContentElement
-    error: ContentElementError
-    errors: [ContentElementError!]
+  contentElement: ContentElement
+  error: ContentElementError
+  errors: [ContentElementError!]
 }
 
 type SaveContentElementValuePayload {
-    contentElementValue: ContentElementValue
-    error: ContentElementValueError
-    errors: [ContentElementValueError!]
+  contentElementValue: ContentElementValue
+  error: ContentElementValueError
+  errors: [ContentElementValueError!]
 }
 
 type SaveContentGroupPayload {
-    contentGroup: ContentGroup
-    error: ContentGroupError
-    errors: [ContentGroupError!]
+  contentGroup: ContentGroup
+  error: ContentGroupError
+  errors: [ContentGroupError!]
 }
 
 type SaveContentTypePayload {
-    contentType: ContentType
-    error: ContentTypeError
-    errors: [ContentTypeError!]
+  contentType: ContentType
+  error: ContentTypeError
+  errors: [ContentTypeError!]
 }
 
 type SaveCountryPayload {
-    country: Country
-    error: CountryError
-    errors: [CountryError!]
+  country: Country
+  error: CountryError
+  errors: [CountryError!]
 }
 
 type SaveCustomerAddressPayload {
-    customerAddress: CustomerAddress
-    error: CustomerAddressError
-    errorMessage: String
-    errors: [CustomerAddressError!]
+  customerAddress: CustomerAddress
+  error: CustomerAddressError
+  errorMessage: String
+  errors: [CustomerAddressError!]
 }
 
 type SaveCustomerPayload {
-    customer: Customer
-    error: CustomerError
-    errorMessage: String
-    errors: [CustomerError!]
+  customer: Customer
+  error: CustomerError
+  errorMessage: String
+  errors: [CustomerError!]
 }
 
 type SaveGymAdminPayload {
-    error: GymAdminError
-    errors: [GymAdminError!]
-    gymAdmin: GymAdmin
+  error: GymAdminError
+  errors: [GymAdminError!]
+  gymAdmin: GymAdmin
 }
 
 type SaveGymAdminTablePayload {
-    error: GymAdminError
-    errors: [GymAdminError!]
-    updated: Boolean
+  error: GymAdminError
+  errors: [GymAdminError!]
+  updated: Boolean
 }
 
 type SaveGymClassCategoryPayload {
-    error: GymClassCategoryError
-    errorMessage: String
-    errors: [GymClassCategoryError!]
-    gymClassCategory: GymClassCategory
+  error: GymClassCategoryError
+  errorMessage: String
+  errors: [GymClassCategoryError!]
+  gymClassCategory: GymClassCategory
 }
 
 type SaveGymClassPayload {
-    error: GymClassError
-    errors: [GymClassError!]
-    gymClass: GymClass
+  error: GymClassError
+  errors: [GymClassError!]
+  gymClass: GymClass
 }
 
 type SaveGymOperatingHoursPayload {
-    error: GymOperatingHoursError
-    errors: [GymOperatingHoursError!]
-    updated: Boolean
+  error: GymOperatingHoursError
+  errors: [GymOperatingHoursError!]
+  updated: Boolean
 }
 
 type SaveGymPayload {
-    error: GymError
-    errorMessage: String
-    errors: [GymError!]
-    gym: Gym
+  error: GymError
+  errorMessage: String
+  errors: [GymError!]
+  gym: Gym
 }
 
 type SaveInstructorPayload {
-    error: InstructorError
-    errorMessage: String
-    errors: [InstructorError!]
-    instructor: Instructor
+  error: InstructorError
+  errorMessage: String
+  errors: [InstructorError!]
+  instructor: Instructor
 }
 
 type SaveLanguageCountryPayload {
-    error: LanguageCountryError
-    errors: [LanguageCountryError!]
-    languageCountry: LanguageCountry
+  error: LanguageCountryError
+  errors: [LanguageCountryError!]
+  languageCountry: LanguageCountry
 }
 
 type SaveLanguagePayload {
-    error: LanguageError
-    errors: [LanguageError!]
-    language: Language
+  error: LanguageError
+  errors: [LanguageError!]
+  language: Language
 }
 
 type SaveMembershipCategoryPayload {
-    error: MembershipCategoryError
-    errorMessage: String
-    errors: [MembershipCategoryError!]
-    membershipCategory: MembershipCategory
+  error: MembershipCategoryError
+  errorMessage: String
+  errors: [MembershipCategoryError!]
+  membershipCategory: MembershipCategory
 }
 
 type SaveMembershipPayload {
-    error: MembershipError
-    errors: [MembershipError!]
-    membership: Membership
+  error: MembershipError
+  errors: [MembershipError!]
+  membership: Membership
 }
 
 type SaveMembershipSubCategoryPayload {
-    error: MembershipSubCategoryError
-    errorMessage: String
-    errors: [MembershipSubCategoryError!]
-    membershipSubCategory: MembershipSubCategory
+  error: MembershipSubCategoryError
+  errorMessage: String
+  errors: [MembershipSubCategoryError!]
+  membershipSubCategory: MembershipSubCategory
 }
 
 type SavePassCategoryPayload {
-    error: PassCategoryError
-    errorMessage: String
-    errors: [PassCategoryError!]
-    passCategory: PassCategory
+  error: PassCategoryError
+  errorMessage: String
+  errors: [PassCategoryError!]
+  passCategory: PassCategory
 }
 
 type SavePassPayload {
-    error: MembershipError
-    errors: [MembershipError!]
-    pass: Pass
+  error: MembershipError
+  errors: [MembershipError!]
+  pass: Pass
 }
 
 type SavePermissionPayload {
-    error: PermissionError
-    errors: [PermissionError!]
-    permission: Permission
+  error: PermissionError
+  errors: [PermissionError!]
+  permission: Permission
 }
 
 type SaveProductCategoryPayload {
-    error: ProductCategoryError
-    errors: [ProductCategoryError!]
-    productCategory: ProductCategory
+  error: ProductCategoryError
+  errors: [ProductCategoryError!]
+  productCategory: ProductCategory
 }
 
 type SaveProductPayload {
-    error: ProductError
-    errors: [ProductError!]
-    product: Product
+  error: ProductError
+  errors: [ProductError!]
+  product: Product
 }
 
 type SaveProductStockPayload {
-    error: ProductStockError
-    errors: [ProductStockError!]
-    productStock: ProductStock
+  error: ProductStockError
+  errors: [ProductStockError!]
+  productStock: ProductStock
 }
 
 type SaveRolePayload {
-    error: RoleError
-    errors: [RoleError!]
-    role: Role
+  error: RoleError
+  errors: [RoleError!]
+  role: Role
 }
 
 type SaveStoreImagePayload {
-    StoreImage: StoreImage
-    error: StoreImageError
-    errors: [StoreImageError!]
+  StoreImage: StoreImage
+  error: StoreImageError
+  errors: [StoreImageError!]
 }
 
 type SaveVideoPayload {
-    error: VideoError
-    errors: [VideoError!]
-    video: Video
+  error: VideoError
+  errors: [VideoError!]
+  video: Video
 }
 
 type SaveVideoTypePayload {
-    error: VideoTypeError
-    errors: [VideoTypeError!]
-    videoType: VideoType
+  error: VideoTypeError
+  errors: [VideoTypeError!]
+  videoType: VideoType
 }
 
 type StoreHomePayload {
-    bestSellers: [Product!]
-    categories: [ProductCategory!]
-    storeImages: [StoreImage!]
-    stores: [ExternalBrand_Vendors!]
+  bestSellers: [Product!]
+  categories: [ProductCategory!]
+  storeImages: [StoreImage!]
+  stores: [ExternalBrand_Vendors!]
 }
 
 "Store Image."
 type StoreImage {
-    countryId: ID!
-    createdAt: Datetime!
-    createdBy: ID!
-    id: ID!
-    image: String!
-    lastUpdatedBy: ID!
-    status: GlobalStatusType!
-    updatedAt: Datetime!
+  countryId: ID!
+  createdAt: Datetime!
+  createdBy: ID!
+  id: ID!
+  image: String!
+  lastUpdatedBy: ID!
+  status: GlobalStatusType!
+  updatedAt: Datetime!
 }
 
 type StoreImagesPayload {
-    list: [StoreImage]
-    paging: PaginatorOutput
+  list: [StoreImage]
+  paging: PaginatorOutput
 }
 
 type TimeRange {
-    begin: Datetime!
-    end: Datetime!
+  begin: Datetime!
+  end: Datetime!
 }
 
 type VendorCountry_Common {
-    currency: VendorCurrency_Common!
-    dialCode: String
-    flagPhoto: String
-    id: ID!
-    isoCode: String!
-    name: String!
-    servicePhoneNumber: String
-    status: GlobalStatusType
-    timeZoneIdentifier: String
-    vat: Float!
-    vatId: String
+  currency: VendorCurrency_Common!
+  dialCode: String
+  flagPhoto: String
+  id: ID!
+  isoCode: String!
+  name: String!
+  servicePhoneNumber: String
+  status: GlobalStatusType
+  timeZoneIdentifier: String
+  vat: Float!
+  vatId: String
 }
 
 type VendorCurrency_Common {
-    code: String!
-    decimalPlace: Int!
-    lowestDenomination: Float!
-    name: String!
-    subUnitName: String!
-    symbol: String
+  code: String!
+  decimalPlace: Int!
+  lowestDenomination: Float!
+  name: String!
+  subUnitName: String!
+  symbol: String
 }
 
 type VendorPermission_Common {
-    id: ID!
-    name: String
-    status: GlobalStatusType!
+  id: ID!
+  name: String
+  status: GlobalStatusType!
 }
 
 type VendorPlanCountry_Common {
-    currency: VendorPlanCurrency_Common!
-    dialCode: String
-    flagPhoto: String
-    id: ID!
-    isoCode: String!
-    name: String!
-    servicePhoneNumber: String
-    status: GlobalStatusType
-    timeZoneIdentifier: String
-    vat: Float!
-    vatId: String
+  currency: VendorPlanCurrency_Common!
+  dialCode: String
+  flagPhoto: String
+  id: ID!
+  isoCode: String!
+  name: String!
+  servicePhoneNumber: String
+  status: GlobalStatusType
+  timeZoneIdentifier: String
+  vat: Float!
+  vatId: String
 }
 
 type VendorPlanCurrency_Common {
-    code: String!
-    decimalPlace: Int!
-    lowestDenomination: Float!
-    name: String!
-    subUnitName: String!
-    symbol: String
+  code: String!
+  decimalPlace: Int!
+  lowestDenomination: Float!
+  name: String!
+  subUnitName: String!
+  symbol: String
 }
 
 type VendorRole_Common {
-    id: ID!
-    name: String
-    permissions: [VendorPermission_Common!]
-    status: GlobalStatusType!
+  id: ID!
+  name: String
+  permissions: [VendorPermission_Common!]
+  status: GlobalStatusType!
 }
 
 type VendorsShopCountry_Common {
-    currency: VendorsShopCurrency_Common!
-    dialCode: String
-    flagPhoto: String
-    id: ID!
-    isoCode: String!
-    name: String!
-    servicePhoneNumber: String
-    status: GlobalStatusType
-    timeZoneIdentifier: String
-    vat: Float!
-    vatId: String
+  currency: VendorsShopCurrency_Common!
+  dialCode: String
+  flagPhoto: String
+  id: ID!
+  isoCode: String!
+  name: String!
+  servicePhoneNumber: String
+  status: GlobalStatusType
+  timeZoneIdentifier: String
+  vat: Float!
+  vatId: String
 }
 
 type VendorsShopCurrency_Common {
-    code: String!
-    decimalPlace: Int!
-    lowestDenomination: Float!
-    name: String!
-    subUnitName: String!
-    symbol: String
+  code: String!
+  decimalPlace: Int!
+  lowestDenomination: Float!
+  name: String!
+  subUnitName: String!
+  symbol: String
 }
 
 "Product Categories."
 type Video {
-    brand: Brand
-    brandId: ID!
-    caloriesBurned: Int!
-    createdAt: Datetime!
-    description: String!
-    difficulty: VideoDifficulty!
-    duration: Int!
-    equipment: String!
-    hero: String!
-    id: ID!
-    instructor: Instructor
-    instructorId: ID!
-    status: GlobalStatusType!
-    title: String!
-    updatedAt: Datetime!
-    url: String!
-    videoType: VideoType
-    videoTypeId: ID!
+  brand: Brand
+  brandId: ID!
+  caloriesBurned: Int!
+  createdAt: Datetime!
+  description: String!
+  difficulty: VideoDifficulty!
+  duration: Int!
+  equipment: String!
+  hero: String!
+  id: ID!
+  instructor: Instructor
+  instructorId: ID!
+  status: GlobalStatusType!
+  title: String!
+  updatedAt: Datetime!
+  url: String!
+  videoType: VideoType
+  videoTypeId: ID!
 }
 
 "Product Categories."
 type VideoType {
-    createdAt: Datetime!
-    id: ID!
-    label: String!
-    status: GlobalStatusType!
-    updatedAt: Datetime!
+  createdAt: Datetime!
+  id: ID!
+  label: String!
+  status: GlobalStatusType!
+  updatedAt: Datetime!
 }
 
 type VideoTypesPayload {
-    list: [VideoType]
-    paging: PaginatorOutput
+  list: [VideoType]
+  paging: PaginatorOutput
 }
 
 type VideosPayload {
-    list: [Video]
-    paging: PaginatorOutput
+  list: [Video]
+  paging: PaginatorOutput
+}
+
+enum AddressFieldError {
+  DUPLICATE_TITLE
+  INVALID_DATA
+  INVALID_ID
 }
 
 enum AddressFieldType {
-    AVENUE
-    BLOCK
-    CITY
-    COUNTRY
-    EMAIL
-    NEIGHBOURHOOD
-    NICKNAME
-    NOTE
-    OTHER
-    POSTAL_CODE
-    STREET
-    SULOCALITY
-    TELEPHONE
+  AVENUE
+  BLOCK
+  CITY
+  COUNTRY
+  EMAIL
+  NEIGHBOURHOOD
+  NICKNAME
+  NOTE
+  OTHER
+  POSTAL_CODE
+  STREET
+  SULOCALITY
+  TELEPHONE
 }
 
 enum AdminError {
-    DUPLICATE_CONTACT_NUMBER
-    DUPLICATE_EMAIL
-    FIREBASE
-    INVALID_BRAND_ID
-    INVALID_GYM_ID
-    INVALID_ID
-    ROLES_REQUIRED
+  DUPLICATE_CONTACT_NUMBER
+  DUPLICATE_EMAIL
+  FIREBASE
+  INVALID_BRAND_ID
+  INVALID_GYM_ID
+  INVALID_ID
+  ROLES_REQUIRED
 }
 
 enum AdminRoleError {
-    DUPLICATE_EMAIL
-    INVALID_ID
+  DUPLICATE_EMAIL
+  INVALID_ID
 }
 
 enum AdminType {
-    BRANCH
-    BRAND
-    GLOBAL
+  BRANCH
+  BRAND
+  GLOBAL
 }
 
 enum AmenityError {
-    DUPLICATE_NAME
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_ID
 }
 
 enum BrandAdminError {
-    DUPLICATE_ADMIN
-    INVALID_BRAND
-    INVALID_ID
+  DUPLICATE_ADMIN
+  INVALID_BRAND
+  INVALID_ID
 }
 
 enum BrandError {
-    ADMIN_ALREADY_EXISTS
-    DUPLICATE_NAME
-    INVALID_ID
+  ADMIN_ALREADY_EXISTS
+  DUPLICATE_NAME
+  INVALID_ID
 }
 
 enum BrandStatus {
-    ACTIVE
-    INACTIVE
+  ACTIVE
+  INACTIVE
 }
 
 enum ConfigurationError {
-    DUPLICATE_NAME
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_ID
 }
 
 enum ContentElementError {
-    DUPLICATE_REFERENCE
-    INVALID_DATA
-    INVALID_ID
+  DUPLICATE_REFERENCE
+  INVALID_DATA
+  INVALID_ID
 }
 
 enum ContentElementType {
-    BUTTON
-    CHECKBOX
-    DATE
-    DROPDOWN
-    RADIO
-    TEXTAREA
-    TEXTBOX
+  BUTTON
+  CHECKBOX
+  DATE
+  DROPDOWN
+  RADIO
+  TEXTAREA
+  TEXTBOX
 }
 
 enum ContentElementValueError {
-    DUPLICATE_FIELD
-    INVALID_CONTENT_ELEMENT_ID
-    INVALID_ID
+  DUPLICATE_FIELD
+  INVALID_CONTENT_ELEMENT_ID
+  INVALID_ID
 }
 
 enum ContentGroupError {
-    DUPLICATE_NAME
-    INVALID_DATA
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_DATA
+  INVALID_ID
 }
 
 enum ContentTypeError {
-    DUPLICATE_TYPE
-    INVALID_ID
+  DUPLICATE_TYPE
+  INVALID_ID
 }
 
 enum ContentTypes {
-    MEDICAL_ID
+  MEDICAL_ID
 }
 
 enum CountryError {
-    DUPLICATE_NAME
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_ID
 }
 
 enum CustomerAddressError {
-    INVALID_CUSTOMER
-    INVALID_ID
+  INVALID_CUSTOMER
+  INVALID_ID
 }
 
 enum CustomerAddressType {
-    AIRPORT
-    APARTMENT
-    HOUSE
-    OFFICE_BUILDING
+  AIRPORT
+  APARTMENT
+  HOUSE
+  OFFICE_BUILDING
+}
+
+enum CustomerCardTokenSaveError {
+  "This token is already saved"
+  DUPLICATE_TOKEN
+  "Customer must exist"
+  INVALID_CUSTOMER
+}
+
+enum CustomerCardTokenStatus {
+  ACTIVE
+  INACTIVE
 }
 
 enum CustomerError {
-    DUPLICATE_CONTACT_NUMBER
-    DUPLICATE_EMAIL
-    FIELD_REQUIRED
-    FIREBASE
-    INVALID_CUSTOMER
-    INVALID_FIELD_DATA
-    INVALID_ID
+  DUPLICATE_CONTACT_NUMBER
+  DUPLICATE_EMAIL
+  FIELD_REQUIRED
+  FIREBASE
+  INVALID_CURRENT_PASSWORD
+  INVALID_CUSTOMER
+  INVALID_FIELD_DATA
+  INVALID_ID
+  NEW_PASSWORD_REQUIRED
 }
 
 enum CustomerGymClassError {
-    CHECKINS_REQUIRED
-    DUPLICATE_NAME
-    DURATION_REQUIRED
-    GRACE_PERIOD_REQUIRED
-    GYM_CLASS_NOT_ACTIVE
-    INVALID_CATEGORY_ID
-    INVALID_CUSTOMER_GYM_CLASS_ID
-    INVALID_ID
-    INVALID_SCHEDULE
-    OPEN_TIME_REQUIRED
-    PERIOD_REQUIRED
-    SECHEDULE_REQUIRED
+  CHECKINS_REQUIRED
+  DUPLICATE_NAME
+  DURATION_REQUIRED
+  GRACE_PERIOD_REQUIRED
+  GYM_CLASS_NOT_ACTIVE
+  INVALID_CATEGORY_ID
+  INVALID_CUSTOMER_GYM_CLASS_ID
+  INVALID_ID
+  INVALID_SCHEDULE
+  OPEN_TIME_REQUIRED
+  PERIOD_REQUIRED
+  SECHEDULE_REQUIRED
 }
 
 enum CustomerMembershipAccessType {
-    BRANCH
-    BRAND
+  BRANCH
+  BRAND
 }
 
 enum CustomerMembershipError {
-    CHECKINS_REQUIRED
-    DUPLICATE_NAME
-    DURATION_REQUIRED
-    GRACE_PERIOD_REQUIRED
-    INVALID_CATEGORY_ID
-    INVALID_CUSTOMER_MEMBERSHIP_ID
-    INVALID_ID
-    INVALID_SCHEDULE
-    INVALID_SUB_CATEGORY_ID
-    MEMBERSHIP_NOT_ACTIVE
-    OPEN_TIME_REQUIRED
-    PERIOD_REQUIRED
-    SECHEDULE_REQUIRED
+  CHECKINS_REQUIRED
+  DUPLICATE_NAME
+  DURATION_REQUIRED
+  GRACE_PERIOD_REQUIRED
+  INVALID_CATEGORY_ID
+  INVALID_CUSTOMER_MEMBERSHIP_ID
+  INVALID_ID
+  INVALID_SCHEDULE
+  INVALID_SUB_CATEGORY_ID
+  MEMBERSHIP_NOT_ACTIVE
+  OPEN_TIME_REQUIRED
+  PERIOD_REQUIRED
+  SECHEDULE_REQUIRED
 }
 
 enum CustomerPassAccessType {
-    BRANCH
-    BRAND
+  BRANCH
+  BRAND
 }
 
 enum CustomerPassError {
-    CHECKINS_REQUIRED
-    DUPLICATE_NAME
-    DURATION_REQUIRED
-    GRACE_PERIOD_REQUIRED
-    INVALID_CATEGORY_ID
-    INVALID_CUSTOMER_PASSID
-    INVALID_ID
-    INVALID_SCHEDULE
-    INVALID_SUB_CATEGORY_ID
-    OPEN_TIME_REQUIRED
-    PASS_NOT_ACTIVE
-    PERIOD_REQUIRED
-    SECHEDULE_REQUIRED
+  CHECKINS_REQUIRED
+  DUPLICATE_NAME
+  DURATION_REQUIRED
+  GRACE_PERIOD_REQUIRED
+  INVALID_CATEGORY_ID
+  INVALID_CUSTOMER_PASSID
+  INVALID_ID
+  INVALID_SCHEDULE
+  INVALID_SUB_CATEGORY_ID
+  OPEN_TIME_REQUIRED
+  PASS_NOT_ACTIVE
+  PERIOD_REQUIRED
+  SECHEDULE_REQUIRED
 }
 
 enum DifficultyLevel {
-    ADVANCE
-    BEGINNER
-    INTERMEDIATE
+  ADVANCE
+  BEGINNER
+  INTERMEDIATE
 }
 
 enum GlobalGenderType {
-    ANY
-    FEMALE
-    MALE
+  ANY
+  FEMALE
+  MALE
 }
 
 enum GlobalStatusType {
-    ACTIVE
-    INACTIVE
+  ACTIVE
+  INACTIVE
 }
 
 enum GymAdminError {
-    DUPLICATE_ADMIN
-    INVALID_GYM
-    INVALID_ID
+  DUPLICATE_ADMIN
+  INVALID_GYM
+  INVALID_ID
 }
 
 enum GymClassCategoryError {
-    DUPLICATE_NAME
-    INVALID_GYM_ID
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_GYM_ID
+  INVALID_ID
 }
 
 enum GymClassError {
-    ALREADY_FAVOURITE
-    DUPLICATE_NAME
-    DURATION_REQUIRED
-    INSTRUCTOR_REQUIRED
-    INVALID_BRAND_ID
-    INVALID_CATEGORY_ID
-    INVALID_CLASS_ID
-    INVALID_CUSTOMER
-    INVALID_DATE_RANGE
-    INVALID_GYM_ID
-    INVALID_ID
-    INVALID_IMAGE_URL
-    INVALID_INSTRUCTOR_AUTH_ID
-    INVALID_INSTRUCTOR_ID
-    INVALID_SCHEDULE
-    OPEN_TIME_REQUIRED
-    SECHEDULE_REQUIRED
+  ALREADY_FAVOURITE
+  DUPLICATE_NAME
+  DURATION_REQUIRED
+  GYM_CLASS_NOT_ACTIVE
+  INSTRUCTOR_REQUIRED
+  INVALID_BRAND_ID
+  INVALID_CATEGORY_ID
+  INVALID_CLASS_ID
+  INVALID_CUSTOMER
+  INVALID_DATE_RANGE
+  INVALID_GYM_CLASS_ID
+  INVALID_GYM_ID
+  INVALID_ID
+  INVALID_IMAGE_URL
+  INVALID_INSTRUCTOR_AUTH_ID
+  INVALID_INSTRUCTOR_ID
+  INVALID_SCHEDULE
+  OPEN_TIME_REQUIRED
+  SECHEDULE_REQUIRED
 }
 
 enum GymClassStatus {
-    ACTIVE
-    CANCELED
-    INACTIVE
+  ACTIVE
+  CANCELED
+  INACTIVE
 }
 
 enum GymError {
-    ADMIN_ALREADY_EXISTS
-    DUPLICATE_NAME
-    INVALID_ID
+  ADMIN_ALREADY_EXISTS
+  DUPLICATE_NAME
+  INVALID_ID
 }
 
 enum GymOperatingHoursError {
-    DUPLICATE_DAY
-    INVALID_DAY
-    INVALID_GYM
-    INVALID_ID
+  DUPLICATE_DAY
+  INVALID_DAY
+  INVALID_GYM
+  INVALID_ID
 }
 
 enum GymStatus {
-    ACTIVE
-    INACTIVE
+  ACTIVE
+  INACTIVE
 }
 
 enum InstructorError {
-    DUPLICATE_CONTACT_NUMBER
-    DUPLICATE_EMAIL
-    FIELD_REQUIRED
-    FIREBASE
-    INVALID_FIELD_DATA
-    INVALID_ID
-    INVALID_INSTRUCTOR
+  DUPLICATE_CONTACT_NUMBER
+  DUPLICATE_EMAIL
+  FIELD_REQUIRED
+  FIREBASE
+  INVALID_FIELD_DATA
+  INVALID_ID
+  INVALID_INSTRUCTOR
 }
 
 enum InvoiceComponentType {
-    "Same as total which is due on customer to pay minus the credits the customer have if payment method is credits"
-    AMOUNT_DUE
-    "Any service fee"
-    SERVICE_FEE
-    "Subtotal without discounts but after reduction the cost of items which are free"
-    SUBTOTAL
-    "The total cost of the order after all the discounts and perks"
-    TOTAL
-    "VOUCHER (amount)"
-    VOUCHER
+  "Same as total which is due on customer to pay minus the credits the customer have if payment method is credits"
+  AMOUNT_DUE
+  "Any service fee"
+  SERVICE_FEE
+  "Subtotal without discounts but after reduction the cost of items which are free"
+  SUBTOTAL
+  "The total cost of the order after all the discounts and perks"
+  TOTAL
+  "VOUCHER (amount)"
+  VOUCHER
 }
 
 enum LanguageCountryError {
-    DUPLICATE_PERMISSION
-    INVALID_ID
+  DUPLICATE_PERMISSION
+  INVALID_ID
 }
 
 enum LanguageError {
-    DUPLICATE_NAME
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_ID
 }
 
 enum MembershipAccessType {
-    BRANCH
-    BRAND
+  BRANCH
+  BRAND
 }
 
 enum MembershipCategoryError {
-    DUPLICATE_NAME
-    INVALID_BRAND_ID
-    INVALID_GYM_ID
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_BRAND_ID
+  INVALID_GYM_ID
+  INVALID_ID
 }
 
 enum MembershipError {
-    CHECKINS_REQUIRED
-    DUPLICATE_NAME
-    DURATION_REQUIRED
-    GRACE_PERIOD_REQUIRED
-    INVALID_CATEGORY_ID
-    INVALID_ID
-    INVALID_MEMBERSHIP_ID
-    INVALID_PASS_ID
-    INVALID_SCHEDULE
-    INVALID_SUB_CATEGORY_ID
-    MEMBERSHIP_NOT_ACTIVE
-    OPEN_TIME_REQUIRED
-    PASS_NOT_ACTIVE
-    PERIOD_REQUIRED
-    SECHEDULE_REQUIRED
+  CHECKINS_REQUIRED
+  DUPLICATE_NAME
+  DURATION_REQUIRED
+  GRACE_PERIOD_REQUIRED
+  INVALID_CATEGORY_ID
+  INVALID_ID
+  INVALID_MEMBERSHIP_ID
+  INVALID_PASS_ID
+  INVALID_SCHEDULE
+  INVALID_SUB_CATEGORY_ID
+  MEMBERSHIP_NOT_ACTIVE
+  OPEN_TIME_REQUIRED
+  PASS_NOT_ACTIVE
+  PERIOD_REQUIRED
+  SECHEDULE_REQUIRED
 }
 
 enum MembershipStatus {
-    ACTIVE
-    CANCELED
-    INACTIVE
+  ACTIVE
+  CANCELED
+  INACTIVE
 }
 
 enum MembershipSubCategoryError {
-    DUPLICATE_NAME
-    INVALID_CATEGORY_ID
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_CATEGORY_ID
+  INVALID_ID
 }
 
 enum OrderGymClassError {
-    ALEADY_ALLOTED
-    GYM_CLASS_NOT_ACTIVE
-    INVALID_GYM_CLASS_ID
-    SLOT_NOT_AVAILABLE
+  ALEADY_ALLOTED
+  GYM_CLASS_NOT_ACTIVE
+  INVALID_GYM_CLASS_ID
+  SLOT_NOT_AVAILABLE
 }
 
 enum OrderMembershipError {
-    INVALID_MEMBERSHIP_ID
-    MEMBERSHIP_NOT_ACTIVE
+  ALREADY_MEMBER
+  INVALID_MEMBERSHIP_ID
+  MEMBERSHIP_NOT_ACTIVE
 }
 
 enum OrderPassError {
-    INVALID_PASS_ID
-    PASS_NOT_ACTIVE
+  INVALID_PASS_ID
+  PASS_NOT_ACTIVE
 }
 
 enum OrderStatus {
-    ACTIVE
-    CANCEL
-    INACTIVE
+  ACTIVE
+  CANCEL
+  INACTIVE
 }
 
 enum OrderType {
-    GYM_CLASS
-    MEMBERSHIP
-    PASS
-    STORE
+  GYM_CLASS
+  MEMBERSHIP
+  PASS
+  STORE
 }
 
 enum PassAccessType {
-    BRANCH
-    BRAND
+  BRANCH
+  BRAND
 }
 
 enum PassCategoryError {
-    DUPLICATE_NAME
-    INVALID_GYM_ID
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_GYM_ID
+  INVALID_ID
 }
 
 enum PassStatus {
-    ACTIVE
-    CANCELED
-    INACTIVE
+  ACTIVE
+  CANCELED
+  INACTIVE
 }
 
 enum PassType {
-    ALL
-    EVENING
-    MORNING
-    RUSH
+  ALL
+  EVENING
+  MORNING
+  RUSH
+}
+
+enum PaymentProvider {
+  CHECKOUT
+}
+
+enum PaymentScheme {
+  ADD_CARD
+  AMEX
+  APPLE_PAY
+  CARD
+  GOOGLE_PAY
+  KNET
+  MADA
+  SAVED_CARD
+  STC_PAY
 }
 
 enum PaymentStatus {
-    FAILURE
-    PENDING
-    SUCCESS
+  FAILURE
+  PENDING
+  SUCCESS
 }
 
 enum PermissionError {
-    DUPLICATE_NAME
-    INVALID_ID
-    INVALID_ROLE
-    NOT_EDITABLE
+  DUPLICATE_NAME
+  INVALID_ID
+  INVALID_ROLE
+  NOT_EDITABLE
 }
 
 enum ProductCategoryError {
-    DUPLICATE_NAME
-    INVALID_BRAND
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_BRAND
+  INVALID_ID
 }
 
 enum ProductError {
-    DUPLICATE_NAME
-    INVALID_ID
-    INVALID_MEMBERSHIP_ID
-    MEMBERSHIP_NOT_ACTIVE
+  DUPLICATE_NAME
+  INVALID_ID
+  INVALID_MEMBERSHIP_ID
+  MEMBERSHIP_NOT_ACTIVE
 }
 
 enum ProductStockError {
-    INVALID_ID
+  INVALID_ID
 }
 
 enum RoleError {
-    DUPLICATE_NAME
-    INVALID_ID
-    NOT_EDITABLE
+  DUPLICATE_NAME
+  INVALID_ID
+  NOT_EDITABLE
 }
 
 enum RolePermissionError {
-    DUPLICATE_PERMISSION
-    INVALID_ID
+  DUPLICATE_PERMISSION
+  INVALID_ID
 }
 
 enum StatusType {
-    ACTIVE
-    DELETED
-    INACTIVE
+  ACTIVE
+  DELETED
+  INACTIVE
 }
 
 enum StoreImageError {
-    INVALID_ID
+  INVALID_ID
 }
 
 enum VideoDifficulty {
-    ADVANCED
-    BEGINNER
-    INTERMEDIATE
+  ADVANCED
+  BEGINNER
+  INTERMEDIATE
 }
 
 enum VideoError {
-    DUPLICATE_NAME
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_ID
 }
 
 enum VideoTypeError {
-    DUPLICATE_NAME
-    INVALID_ID
+  DUPLICATE_NAME
+  INVALID_ID
+}
+
+input AddressFieldFilter {
+  countryId: ID
+  isRequired: Boolean
+  searchText: String
+  status: StatusType
+  type: AddressFieldType
+}
+
+input AddressFieldInput {
+  countryId: ID!
+  id: ID
+  isRequired: Boolean!
+  status: StatusType!
+  title: String!
+  type: AddressFieldType!
 }
 
 input AdminsFilter {
-    adminType: AdminType
-    searchText: String
-    status: GlobalStatusType
+  adminType: AdminType
+  searchText: String
+  status: GlobalStatusType
 }
 
 input AgeInput {
-    from: Int!
-    to: Int!
+  from: Int!
+  to: Int!
 }
 
 input AmenityFilter {
-    status: String
+  status: String
 }
 
 input AmenityInput {
-    icon: String
-    id: ID
-    name: String!
-    status: GlobalStatusType!
+  icon: String
+  id: ID
+  name: String!
+  status: GlobalStatusType!
 }
 
 input BrandAdminsFilter {
-    adminId: ID
-    brandId: ID
-    searchText: String
+  adminId: ID
+  brandId: ID
+  searchText: String
 }
 
 input BrandsFilter {
-    countryId: ID
-    searchText: String
-    status: BrandStatus
+  countryId: ID
+  searchText: String
+  status: BrandStatus
 }
 
 input BuyAGymClassInput {
-    gymClassId: ID!
+  gymClassId: ID!
 }
 
 input BuyAMembershipInput {
-    membershipId: ID!
+  membershipId: ID!
 }
 
 input BuyAPassInput {
-    passId: ID!
+  passId: ID!
 }
 
 input ConfigurationFilter {
-    searchText: String
+  searchText: String
 }
 
 input ConfigurationInput {
-    id: ID
-    key: String!
-    value: String!
+  id: ID
+  key: String!
+  value: String!
 }
 
 input ContentElementDataInput {
-    description: String
-    name: String!
-    options: [ContentElementDataOptionInput]
-    placeHolder: String
-    required: Boolean!
-    value: String
+  description: String
+  name: String!
+  options: [ContentElementDataOptionInput]
+  placeHolder: String
+  required: Boolean!
+  value: String
 }
 
 input ContentElementDataOptionInput {
-    id: String!
-    label: String!
+  id: String!
+  label: String!
 }
 
 input ContentElementValuesFilter {
-    contentElementId: ID
-    contentGroupId: ID
-    contentTypeId: ID
-    customerId: ID
-    fieldValue: String
-    reference: String
-    searchText: String
-    status: GlobalStatusType
-    type: ContentElementType
+  contentElementId: ID
+  contentGroupId: ID
+  contentTypeId: ID
+  customerId: ID
+  fieldValue: String
+  reference: String
+  searchText: String
+  status: GlobalStatusType
+  type: ContentElementType
 }
 
 input ContentElementsFilter {
-    contentGroupId: ID
-    contentTypeId: ID
-    reference: String
-    searchText: String
-    status: GlobalStatusType
-    type: ContentElementType
+  contentGroupId: ID
+  contentTypeId: ID
+  reference: String
+  searchText: String
+  status: GlobalStatusType
+  type: ContentElementType
 }
 
 input ContentGroupsFilter {
-    contentTypeId: ID
-    searchText: String
-    status: GlobalStatusType
+  contentTypeId: ID
+  searchText: String
+  status: GlobalStatusType
 }
 
 input ContentTypesFilter {
-    searchText: String
-    status: GlobalStatusType
-    type: ContentTypes
+  searchText: String
+  status: GlobalStatusType
+  type: ContentTypes
 }
 
 input CountryFilter {
-    searchText: String
-    status: String
+  searchText: String
+  status: String
 }
 
 input CountryInput {
-    currency: CurrencyDetailsInput
-    dialCode: String!
-    flagPhoto: String
-    id: ID
-    isoCode: String!
-    name: String!
-    servicePhoneNumber: String!
-    status: StatusType!
-    timeZoneIdentifier: String!
-    vat: Float!
-    vatId: String
+  currency: CurrencyDetailsInput
+  dialCode: String!
+  flagPhoto: String
+  id: ID
+  isoCode: String!
+  name: String!
+  servicePhoneNumber: String!
+  status: StatusType!
+  timeZoneIdentifier: String!
+  vat: Float!
+  vatId: String
 }
 
 input CurrencyDetailsInput {
-    code: String!
-    decimalPlace: Int!
-    lowestDenomination: Float!
-    name: String!
-    subUnitName: String!
-    symbol: String!
+  code: String!
+  decimalPlace: Int!
+  lowestDenomination: Float!
+  name: String!
+  subUnitName: String!
+  symbol: String!
 }
 
 input CustomerAddressFilter {
-    countryId: ID
+  countryId: ID
+}
+
+input CustomerCardTokenInput {
+  token: String!
 }
 
 input CustomerGymClassFilter {
-    brandId: ID
-    countryId: ID
-    difficultyLevel: DifficultyLevel
-    forDate: Date
-    gymClassCategoryId: ID
-    gymId: ID
-    searchText: String
-    status: GlobalStatusType
+  brandId: ID
+  countryId: ID
+  customerId: ID
+  difficultyLevel: DifficultyLevel
+  forDate: Date
+  gymClassCategoryId: ID
+  gymId: ID
+  searchText: String
+  status: GlobalStatusType
 }
 
 input CustomerMedicalForm {
-    contentElements: [CustomerMedicalFormField]
+  contentElements: [CustomerMedicalFormField]
 }
 
 input CustomerMedicalFormField {
-    contentElementId: ID!
-    fieldValue: String!
+  contentElementId: ID!
+  fieldValue: String!
 }
 
 input CustomerMembershipsFilter {
-    accessType: CustomerMembershipAccessType
-    countryId: ID
-    isWeekelyScheduled: Boolean
-    lifetime: Boolean
-    membershipCategoryId: ID
-    membershipSubCategoryId: ID
-    referenceTypeId: ID
-    searchText: String
-    status: GlobalStatusType
+  accessType: CustomerMembershipAccessType
+  countryId: ID
+  customerId: ID
+  isWeekelyScheduled: Boolean
+  lifetime: Boolean
+  membershipCategoryId: ID
+  membershipSubCategoryId: ID
+  referenceTypeId: ID
+  searchText: String
+  status: GlobalStatusType
 }
 
 input CustomerPassesFilter {
-    accessType: CustomerPassAccessType
-    countryId: ID
-    isWeekelyScheduled: Boolean
-    passCategoryId: ID
-    referenceTypeId: ID
-    searchText: String
-    status: GlobalStatusType
-    type: PassType
+  accessType: CustomerPassAccessType
+  countryId: ID
+  customerId: ID
+  isWeekelyScheduled: Boolean
+  passCategoryId: ID
+  referenceTypeId: ID
+  searchText: String
+  status: GlobalStatusType
+  type: PassType
 }
 
 input CustomerPhotoInput {
-    photo: String!
+  photo: String!
 }
 
 input CustomersFilter {
-    gender: GlobalGenderType
-    searchText: String
-    status: GlobalStatusType
+  gender: GlobalGenderType
+  searchText: String
+  status: GlobalStatusType
 }
 
 input DateRange {
-    from: Date!
-    to: Date!
+  from: Date!
+  to: Date!
 }
 
 input DynamicAddressFieldsInput {
-    id: ID!
-    value: String
+  id: ID!
+  value: String
 }
 
 input ExternalBrand_VendorsFiler {
-    countryId: ID
-    searchText: String
-    status: GlobalStatusType
+  countryId: ID
+  searchText: String
+  status: GlobalStatusType
 }
 
 input FavouriteGymClassInput {
-    gymClassId: ID!
+  gymClassId: ID!
 }
 
 "A set of GIS co-ordinates"
 input GISLocationInput {
-    "Latitude, in degrees"
-    latitude: Float!
-    "Longitude, in degrees"
-    longitude: Float!
+  "Latitude, in degrees"
+  latitude: Float!
+  "Longitude, in degrees"
+  longitude: Float!
 }
 
 input GymAdminsFilter {
-    adminId: ID
-    gymId: ID
-    searchText: String
+  adminId: ID
+  gymId: ID
+  searchText: String
 }
 
 input GymClassCategoryFilter {
-    gymId: ID
-    searchText: String
-    status: GlobalStatusType
+  gymId: ID
+  searchText: String
+  status: GlobalStatusType
+}
+
+input GymClassInvoiceInput {
+  gymClassId: ID!
 }
 
 input GymClassScheduleInput {
-    closeAllDay: Boolean
-    day: Int!
-    duration: Float
-    instructorAuthId: String
-    instructorId: ID
-    openTime: LocalTime
+  closeAllDay: Boolean
+  day: Int!
+  duration: Float
+  instructorAuthId: String
+  instructorId: ID
+  openTime: LocalTime
 }
 
 input GymClassesFilter {
-    available: Boolean
-    brandId: ID
-    countryId: ID
-    difficultyLevel: DifficultyLevel
-    forDate: Date
-    gymClassCategoryId: ID
-    gymId: ID
-    searchText: String
-    status: GlobalStatusType
+  available: Boolean
+  brandId: ID
+  countryId: ID
+  difficultyLevel: DifficultyLevel
+  forDate: Date
+  gymClassCategoryId: ID
+  gymId: ID
+  searchText: String
+  status: GlobalStatusType
 }
 
 input GymsFilter {
-    brandId: ID
-    countryId: ID
-    searchText: String
-    status: GymStatus
+  brandId: ID
+  countryId: ID
+  searchText: String
+  status: GymStatus
 }
 
 input GymsInRadiusFilter {
-    brandIds: [ID!]
-    "User's current location"
-    location: GISLocationInput!
-    "Search Radius"
-    radius: Float!
+  brandIds: [ID!]
+  "User's current location"
+  location: GISLocationInput!
+  "Search Radius"
+  radius: Float!
 }
 
 input InstructorsFilter {
-    brandId: ID
-    gender: GlobalGenderType
-    gymId: ID
-    searchText: String
-    status: GlobalStatusType
+  brandId: ID
+  gender: GlobalGenderType
+  gymId: ID
+  searchText: String
+  status: GlobalStatusType
 }
 
 input LanguageCountriessFilter {
-    countryId: ID
-    languageId: ID
-    searchText: String
+  countryId: ID
+  languageId: ID
+  searchText: String
 }
 
 input LanguageFilter {
-    searchText: String
-    status: String
+  searchText: String
+  status: String
 }
 
 input LanguageInput {
-    code: String!
-    id: ID
-    name: String!
-    status: StatusType!
+  code: String!
+  id: ID
+  name: String!
+  status: StatusType!
 }
 
 input MembershipCategoryFilter {
-    searchText: String
-    status: GlobalStatusType
+  searchText: String
+  status: GlobalStatusType
 }
 
 input MembershipInvoiceInput {
-    membershipId: ID!
+  membershipId: ID!
 }
 
 input MembershipScheduleInput {
-    closeAllDay: Boolean
-    day: Int!
-    duration: Float
-    openTime: LocalTime
+  closeAllDay: Boolean
+  day: Int!
+  duration: Float
+  openTime: LocalTime
 }
 
 input MembershipSubCategoryFilter {
-    membershipCategoryId: ID
-    searchText: String
-    status: GlobalStatusType
+  membershipCategoryId: ID
+  searchText: String
+  status: GlobalStatusType
 }
 
 input MembershipsFilter {
-    accessType: MembershipAccessType
-    countryId: ID
-    isWeekelyScheduled: Boolean
-    lifetime: Boolean
-    membershipCategoryId: ID
-    membershipSubCategoryId: ID
-    referenceTypeId: ID
-    searchText: String
-    status: GlobalStatusType
+  accessType: MembershipAccessType
+  countryId: ID
+  isWeekelyScheduled: Boolean
+  lifetime: Boolean
+  membershipCategoryId: ID
+  membershipSubCategoryId: ID
+  referenceTypeId: ID
+  searchText: String
+  status: GlobalStatusType
 }
 
 input OrdersFilter {
-    dateRange: DateRange
-    orderStatus: OrderStatus
-    orderType: OrderType
-    paymentStatus: PaymentStatus
-    searchText: String
+  dateRange: DateRange
+  orderStatus: OrderStatus
+  orderType: OrderType
+  paymentStatus: PaymentStatus
+  searchText: String
 }
 
 "Paginator"
 input PaginatorInput {
-    limit: Int!
-    page: Int!
+  limit: Int!
+  page: Int!
 }
 
 input PassCategoryFilter {
-    searchText: String
-    status: GlobalStatusType
+  searchText: String
+  status: GlobalStatusType
 }
 
 input PassInvoiceInput {
-    passId: ID!
+  passId: ID!
 }
 
 input PassScheduleInput {
-    closeAllDay: Boolean
-    day: Int!
-    duration: Float
-    openTime: LocalTime
+  closeAllDay: Boolean
+  day: Int!
+  duration: Float
+  openTime: LocalTime
 }
 
 input PassesFilter {
-    accessType: PassAccessType
-    countryId: ID
-    passCategoryId: ID
-    referenceTypeId: ID
-    searchText: String
-    status: GlobalStatusType
-    type: PassType
+  accessType: PassAccessType
+  countryId: ID
+  passCategoryId: ID
+  referenceTypeId: ID
+  searchText: String
+  status: GlobalStatusType
+  type: PassType
+}
+
+input PaymentMethodInput {
+  imageUrl: String
+  name: String!
+  paymentScheme: PaymentScheme!
+  sourceId: String
+  subText: String
 }
 
 input PermissionsFilter {
-    searchText: String
-    status: StatusType
+  searchText: String
+  status: StatusType
 }
 
 input ProductCategoriesFilter {
-    countryId: String
-    searchText: String
-    status: GlobalStatusType
+  countryId: String
+  searchText: String
+  status: GlobalStatusType
 }
 
 input ProductInvoiceInput {
-    productId: ID!
+  productId: ID!
 }
 
 input ProductStocksFilter {
-    gymId: ID
-    productId: ID
-    searchText: String
+  gymId: ID
+  productId: ID
+  searchText: String
 }
 
 input ProductsFilter {
-    bestSeller: GlobalStatusType
-    brandId: ID
-    categoryId: ID
-    countryId: ID
-    searchText: String
-    status: GlobalStatusType
+  bestSeller: GlobalStatusType
+  brandId: ID
+  categoryId: ID
+  countryId: ID
+  searchText: String
+  status: GlobalStatusType
 }
 
 input RegisterCustomerInput {
-    authId: String
-    contactNumber: String!
-    countryId: ID!
-    email: String!
-    firstName: String!
-    gender: GlobalGenderType
-    isEmailVerified: Boolean
-    isPhoneVerified: Boolean!
-    lastName: String
-    password: String!
-    photo: String
+  authId: String
+  contactNumber: String!
+  countryId: ID!
+  email: String!
+  firstName: String!
+  gender: GlobalGenderType
+  isEmailVerified: Boolean
+  isPhoneVerified: Boolean!
+  lastName: String!
+  password: String!
+  photo: String
 }
 
 input RegisterInstructorInput {
-    brandId: ID!
-    contactNumber: String!
-    email: String!
-    firstName: String!
-    gender: GlobalGenderType!
-    gymId: ID!
-    lastName: String
-    photo: String
-    status: GlobalStatusType!
+  brandId: ID!
+  contactNumber: String!
+  email: String!
+  firstName: String!
+  gender: GlobalGenderType!
+  gymId: ID!
+  lastName: String
+  photo: String
+  status: GlobalStatusType!
 }
 
 input RolePermissionsFilter {
-    permissionId: ID
-    roleId: ID
-    searchText: String
+  permissionId: ID
+  roleId: ID
+  searchText: String
 }
 
 input RolesFilter {
-    searchText: String
-    status: StatusType
+  searchText: String
+  status: StatusType
 }
 
 input SaveAdminInput {
-    adminType: AdminType!
-    contactNumber: String
-    email: String!
-    firstName: String!
-    gender: GlobalGenderType
-    id: ID
-    lastName: String!
-    overwrite: Boolean
-    referenceTypeId: ID
-    roles: [String!]
-    status: GlobalStatusType!
+  adminType: AdminType!
+  contactNumber: String
+  email: String!
+  firstName: String!
+  gender: GlobalGenderType
+  id: ID
+  lastName: String!
+  overwrite: Boolean
+  referenceTypeId: ID
+  roles: [String!]
+  status: GlobalStatusType!
 }
 
 input SaveBrandAdminInput {
-    adminId: ID!
-    brandId: ID!
-    id: ID
+  adminId: ID!
+  brandId: ID!
+  id: ID
 }
 
 input SaveBrandInput {
-    adminIds: [ID!]
-    city: String!
-    countryId: ID!
-    email: String!
-    id: ID
-    image: String
-    legalName: String!
-    logo: String!
-    name: String!
-    phone: String!
-    state: String!
-    status: BrandStatus!
-    street: String!
-    unitNumber: String!
-    zipCode: String!
+  adminIds: [ID!]
+  city: String!
+  countryId: ID!
+  email: String!
+  id: ID
+  image: String
+  legalName: String!
+  logo: String!
+  name: String!
+  phone: String!
+  state: String!
+  status: BrandStatus!
+  street: String!
+  unitNumber: String!
+  zipCode: String!
 }
 
 input SaveBrandStatusInput {
-    id: ID!
-    status: BrandStatus!
+  id: ID!
+  status: BrandStatus!
 }
 
 input SaveBrandsAdminsTableInput {
-    adminId: ID!
+  adminId: ID!
 }
 
 input SaveContentElementInput {
-    contentGroupId: ID!
-    contentTypeId: ID!
-    data: ContentElementDataInput
-    id: ID
-    options: [ContentElementDataOptionInput]
-    reference: String!
-    status: GlobalStatusType!
-    type: ContentElementType!
+  contentGroupId: ID!
+  contentTypeId: ID!
+  data: ContentElementDataInput
+  id: ID
+  options: [ContentElementDataOptionInput]
+  reference: String!
+  status: GlobalStatusType!
+  type: ContentElementType!
 }
 
 input SaveContentElementValueInput {
-    contentElementId: ID!
-    customerId: ID!
-    fieldValue: String!
-    id: ID
+  contentElementId: ID!
+  customerId: ID!
+  fieldValue: String!
+  id: ID
 }
 
 input SaveContentGroupInput {
-    contentTypeId: ID!
-    description: String
-    id: ID
-    name: String!
-    status: GlobalStatusType!
+  contentTypeId: ID!
+  description: String
+  id: ID
+  name: String!
+  status: GlobalStatusType!
 }
 
 input SaveContentTypeInput {
-    id: ID
-    status: GlobalStatusType!
-    type: ContentTypes!
+  id: ID
+  status: GlobalStatusType!
+  type: ContentTypes!
 }
 
 input SaveCustomerAddressInput {
-    countryId: ID!
-    dynamicData: [DynamicAddressFieldsInput!]
-    id: ID
-    isDefault: Boolean!
-    "The longitude component of the geo coordinates for this address, in degrees"
-    latitude: Float!
-    "The longitude component of the geo coordinates for this address, in degrees"
-    longitude: Float!
+  countryId: ID!
+  dynamicData: [DynamicAddressFieldsInput!]
+  id: ID
+  isDefault: Boolean!
+  "The longitude component of the geo coordinates for this address, in degrees"
+  latitude: Float!
+  "The longitude component of the geo coordinates for this address, in degrees"
+  longitude: Float!
 }
 
 input SaveCustomerInput {
-    contactNumber: String!
-    dob: Date
-    email: String!
-    firstName: String!
-    gender: GlobalGenderType
-    lastName: String!
-    photo: String
+  contactNumber: String!
+  dob: Date
+  email: String!
+  firstName: String!
+  gender: GlobalGenderType
+  lastName: String!
+  newPassword: String
+  photo: String
 }
 
 input SaveGymAdminInput {
-    adminId: ID!
-    gymId: ID!
-    id: ID
+  adminId: ID!
+  gymId: ID!
+  id: ID
 }
 
 input SaveGymClassCategoryInput {
-    description: String
-    id: ID
-    image: String
-    name: String!
-    status: GlobalStatusType!
+  description: String
+  id: ID
+  image: String
+  name: String!
+  status: GlobalStatusType!
 }
 
 input SaveGymClassInput {
-    age: AgeInput!
-    amount: CurrencyValue!
-    countryId: ID!
-    description: String
-    difficultyLevel: DifficultyLevel!
-    duration: Float
-    endDate: Date!
-    estimatedCaloriesBurnt: String!
-    gender: GlobalGenderType!
-    gymClassCategoryId: ID!
-    gymId: ID!
-    id: ID
-    images: [String!]
-    instructorAuthId: ID
-    instructorId: String
-    isWeekelyScheduled: Boolean!
-    name: String!
-    openTime: LocalTime
-    schedule: [GymClassScheduleInput!]
-    spots: Int!
-    spotsAlotted: Int
-    startDate: Date!
-    status: GlobalStatusType!
+  age: AgeInput!
+  amount: CurrencyValue!
+  countryId: ID!
+  description: String
+  difficultyLevel: DifficultyLevel!
+  duration: Float
+  endDate: Date!
+  estimatedCaloriesBurnt: String!
+  gender: GlobalGenderType!
+  gymClassCategoryId: ID!
+  gymId: ID!
+  id: ID
+  images: [String!]
+  instructorAuthId: ID
+  instructorId: String
+  isWeekelyScheduled: Boolean!
+  name: String!
+  openTime: LocalTime
+  schedule: [GymClassScheduleInput!]
+  spots: Int!
+  spotsAlotted: Int
+  startDate: Date!
+  status: GlobalStatusType!
 }
 
 input SaveGymInput {
-    address: addressInput!
-    adminIds: [ID!]
-    amenities: [String!]
-    brandId: ID!
-    description: String
-    email: String!
-    id: ID
-    images: [String!]!
-    legalName: String!
-    name: String!
-    phone: String!
-    status: GymStatus!
+  address: addressInput!
+  adminIds: [ID!]
+  amenities: [String!]
+  brandId: ID!
+  description: String
+  email: String!
+  id: ID
+  images: [String!]!
+  legalName: String!
+  name: String!
+  phone: String!
+  status: GymStatus!
 }
 
 input SaveGymOperatingHoursInput {
-    closeAllDay: Boolean
-    day: Int!
-    openAllDay: Boolean
-    openDuration: Int
-    openTime: LocalTime
+  closeAllDay: Boolean
+  day: Int!
+  openAllDay: Boolean
+  openDuration: Int
+  openTime: LocalTime
 }
 
 input SaveGymStatusInput {
-    id: ID!
-    status: GymStatus!
+  id: ID!
+  status: GymStatus!
 }
 
 input SaveGymsAdminsTableInput {
-    adminId: ID!
+  adminId: ID!
 }
 
 input SaveInstructorInput {
-    brandId: ID!
-    contactNumber: String!
-    email: String!
-    firstName: String!
-    gender: GlobalGenderType
-    gymId: ID!
-    id: ID!
-    lastName: String
-    photo: String
-    status: GlobalStatusType!
+  brandId: ID!
+  contactNumber: String!
+  email: String!
+  firstName: String!
+  gender: GlobalGenderType
+  gymId: ID!
+  id: ID!
+  lastName: String
+  photo: String
+  status: GlobalStatusType!
 }
 
 input SaveInstructorStatusInput {
-    id: ID!
-    status: GlobalStatusType!
+  id: ID!
+  status: GlobalStatusType!
 }
 
 input SaveLanguageCountryInput {
-    countryId: ID!
-    id: ID
-    languageId: ID!
+  countryId: ID!
+  id: ID
+  languageId: ID!
 }
 
 input SaveMembershipCategoryInput {
-    description: String
-    id: ID
-    image: String
-    name: String!
-    status: GlobalStatusType!
+  description: String
+  id: ID
+  image: String
+  name: String!
+  status: GlobalStatusType!
 }
 
 input SaveMembershipInput {
-    accessType: MembershipAccessType!
-    age: AgeInput!
-    allowedCheckins: Int
-    amount: CurrencyValue!
-    colorCode: String
-    countryId: ID!
-    description: String
-    gender: GlobalGenderType!
-    gracePeriod: Int
-    id: ID
-    image: String!
-    isWeekelyScheduled: Boolean!
-    lifetime: Boolean
-    membershipCategoryId: ID!
-    membershipSubCategoryId: ID
-    name: String!
-    period: Int
-    referenceTypeId: ID!
-    schedule: [MembershipScheduleInput!]
-    status: GlobalStatusType!
+  accessType: MembershipAccessType!
+  age: AgeInput!
+  allowedCheckins: Int
+  amount: CurrencyValue!
+  colorCode: String
+  countryId: ID!
+  description: String
+  gender: GlobalGenderType!
+  gracePeriod: Int
+  id: ID
+  image: String!
+  isWeekelyScheduled: Boolean!
+  lifetime: Boolean
+  membershipCategoryId: ID!
+  membershipSubCategoryId: ID
+  name: String!
+  period: Int
+  referenceTypeId: ID!
+  schedule: [MembershipScheduleInput!]
+  status: GlobalStatusType!
 }
 
 input SaveMembershipSubCategoryInput {
-    description: String
-    id: ID
-    image: String
-    membershipCategoryId: ID!
-    name: String!
-    status: GlobalStatusType!
+  description: String
+  id: ID
+  image: String
+  membershipCategoryId: ID!
+  name: String!
+  status: GlobalStatusType!
 }
 
 input SavePassCategoryInput {
-    description: String
-    id: ID
-    image: String
-    name: String!
-    status: GlobalStatusType!
+  description: String
+  id: ID
+  image: String
+  name: String!
+  status: GlobalStatusType!
 }
 
 input SavePassInput {
-    accessType: PassAccessType!
-    age: AgeInput!
-    allowedCheckins: Int!
-    amount: Int!
-    colorCode: String
-    countryId: ID!
-    description: String
-    gender: GlobalGenderType!
-    gracePeriod: Int!
-    id: ID
-    image: String!
-    isWeekelyScheduled: Boolean!
-    name: String!
-    passCategoryId: ID
-    period: Int!
-    referenceTypeId: ID!
-    schedule: [PassScheduleInput!]
-    status: GlobalStatusType!
-    type: PassType!
+  accessType: PassAccessType!
+  age: AgeInput!
+  allowedCheckins: Int!
+  amount: Int!
+  colorCode: String
+  countryId: ID!
+  description: String
+  gender: GlobalGenderType!
+  gracePeriod: Int!
+  id: ID
+  image: String!
+  isWeekelyScheduled: Boolean!
+  name: String!
+  passCategoryId: ID
+  period: Int!
+  referenceTypeId: ID!
+  schedule: [PassScheduleInput!]
+  status: GlobalStatusType!
+  type: PassType!
 }
 
 input SavePermissionInput {
-    description: String
-    id: ID
-    name: String!
-    status: StatusType!
+  description: String
+  id: ID
+  name: String!
+  status: StatusType!
 }
 
 input SaveProductCategoryInput {
-    countryId: ID!
-    createdBy: ID
-    id: ID
-    image: String
-    name: String!
-    status: GlobalStatusType!
+  countryId: ID!
+  createdBy: ID
+  id: ID
+  image: String
+  name: String!
+  status: GlobalStatusType!
 }
 
 input SaveProductInput {
-    barcode: String!
-    bestSeller: GlobalStatusType
-    brandId: ID!
-    categoryId: ID!
-    countryId: ID!
-    description: String!
-    express: Boolean!
-    id: ID
-    images: [String!]
-    inventory: [SaveProductStockInProductInput!]
-    listPrice: Float!
-    name: String!
-    returnPolicy: Boolean!
-    returnPolicyDescription: String
-    returnPolicyPeriod: Int
-    salePrice: Float!
-    sku: String!
-    status: GlobalStatusType!
-    warranty: Boolean!
-    warrantyDescription: String
-    warrantyPeriod: Int
+  barcode: String!
+  bestSeller: GlobalStatusType
+  brandId: ID!
+  categoryId: ID!
+  countryId: ID!
+  description: String!
+  express: Boolean!
+  id: ID
+  images: [String!]
+  inventory: [SaveProductStockInProductInput!]
+  listPrice: CurrencyValue!
+  name: String!
+  returnPolicy: Boolean!
+  returnPolicyDescription: String
+  returnPolicyPeriod: Int
+  salePrice: CurrencyValue
+  sku: String!
+  status: GlobalStatusType!
+  warranty: Boolean!
+  warrantyDescription: String
+  warrantyPeriod: Int
 }
 
 input SaveProductStockInProductInput {
-    gymId: ID!
-    id: ID
-    quantity: Int!
+  gymId: ID!
+  id: ID
+  quantity: Int!
 }
 
 input SaveProductStockInput {
-    gymId: ID!
-    id: ID
-    productId: ID!
-    quantity: Int!
+  gymId: ID!
+  id: ID
+  productId: ID!
+  quantity: Int!
 }
 
 input SaveRoleInput {
-    description: String
-    id: ID
-    name: String!
-    permissions: [ID]
-    status: StatusType!
+  description: String
+  id: ID
+  name: String!
+  permissions: [ID]
+  status: StatusType!
 }
 
 input SaveStoreImageInput {
-    countryId: ID!
-    id: ID
-    image: String!
-    status: GlobalStatusType!
+  countryId: ID!
+  id: ID
+  image: String!
+  status: GlobalStatusType!
 }
 
 input SaveVideoInput {
-    brandId: ID!
-    caloriesBurned: Int!
-    description: String!
-    difficulty: VideoDifficulty!
-    duration: Int!
-    equipment: String!
-    hero: String!
-    id: ID
-    instructorId: ID!
-    status: GlobalStatusType!
-    title: String!
-    url: String!
-    videoTypeId: ID!
+  brandId: ID!
+  caloriesBurned: Int!
+  description: String!
+  difficulty: VideoDifficulty!
+  duration: Int!
+  equipment: String!
+  hero: String!
+  id: ID
+  instructorId: ID!
+  status: GlobalStatusType!
+  title: String!
+  url: String!
+  videoTypeId: ID!
 }
 
 input SaveVideoTypeInput {
-    createdBy: ID
-    id: ID
-    label: String!
-    status: GlobalStatusType!
+  createdBy: ID
+  id: ID
+  label: String!
+  status: GlobalStatusType!
 }
 
 input StoreHomeInput {
-    countryId: String!
+  countryId: String!
 }
 
 input StoreImagesFilter {
-    countryId: String
-    status: String
+  countryId: String
+  status: String
 }
 
 input VideoTypesFilter {
-    searchText: String
+  searchText: String
 }
 
 input VideosFilter {
-    brandId: ID
-    searchText: String
-    status: GlobalStatusType
-    videoTypeId: ID
+  brandId: ID
+  searchText: String
+  status: GlobalStatusType
+  videoTypeId: ID
 }
 
 input addressInput {
-    building: String
-    city: String!
-    countryId: ID!
-    floorNo: String
-    id: ID
-    "The longitude component of the geo coordinates for this address, in degrees"
-    latitude: Float!
-    "The longitude component of the geo coordinates for this address, in degrees"
-    longitude: Float!
-    shortAddress: String
-    state: String
-    street: String
-    unitNumber: String!
-    zipCode: String!
+  building: String
+  city: String!
+  countryId: ID!
+  floorNo: String
+  id: ID
+  "The longitude component of the geo coordinates for this address, in degrees"
+  latitude: Float!
+  "The longitude component of the geo coordinates for this address, in degrees"
+  longitude: Float!
+  shortAddress: String
+  state: String
+  street: String
+  unitNumber: String!
+  zipCode: String!
 }
 
 

@@ -93,7 +93,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/favouriteContainer"
+                android:id="@+id/addressesContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -101,6 +101,47 @@
                 android:gravity="center_vertical"
                 android:padding="6dp"
                 app:layout_constraintTop_toBottomOf="@id/medicalContainer">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_addresses" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Addresses"
+                    android:textColor="@color/white" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
+                    android:rotation="180"
+                    android:src="@drawable/ic_back"
+                    android:tint="@color/red001" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/favouriteContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_darkblue_round_corners"
+                android:gravity="center_vertical"
+                android:padding="6dp"
+                app:layout_constraintTop_toBottomOf="@id/addressesContainer">
 
 
                 <ImageView

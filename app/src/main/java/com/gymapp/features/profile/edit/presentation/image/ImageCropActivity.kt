@@ -10,14 +10,16 @@ import com.gymapp.features.profile.edit.domain.ImageCropViewModel
 import com.gymapp.helper.ImageHelper
 import com.gymapp.helper.ui.InAppBannerNotification
 import kotlinx.android.synthetic.main.activity_image_crop.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.io.IOException
 
 class ImageCropActivity : BaseActivity(R.layout.activity_image_crop), ImageCropView {
 
-
     lateinit var imageCropViewModel: ImageCropViewModel
-
+    lateinit var activity: BaseActivity
 
     companion object {
         val EXTRA_PROFILE_PIC_URI = "profile_pic_uri"
@@ -38,6 +40,9 @@ class ImageCropActivity : BaseActivity(R.layout.activity_image_crop), ImageCropV
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
 
+        activity = this
+
+        imageCropViewModel.setListener(this)
 
         val bitmapUri = intent.getParcelableExtra<Uri?>(EXTRA_PROFILE_PIC_URI)
 
@@ -75,23 +80,28 @@ class ImageCropActivity : BaseActivity(R.layout.activity_image_crop), ImageCropV
         cropImageView.getCroppedImageAsync(MAX_IMAGE_DIMENSION, MAX_IMAGE_DIMENSION)
     }
 
-    override fun errorUpdatingPicture() {
-        imageCropProgressBar.visibility = View.GONE
-        InAppBannerNotification.showErrorNotification(
-            imageCropContainer,
-            this,
-            getString(R.string.error_unknown)
-        )
+    override fun errorUpdatingPicture(error: String) {
+        CoroutineScope(Dispatchers.Main).launch {
+            imageCropProgressBar.visibility = View.GONE
+            InAppBannerNotification.showErrorNotification(
+                imageCropContainer,
+                activity,
+                getString(R.string.error_unknown)
+            )
+        }
     }
 
     override fun pictureUploadedSuccessfully() {
-        imageCropProgressBar.visibility = View.GONE
-        setResult(RESULT_OK)
-        /**
-         * post profile photo change to [HomeActivity.kt]
-         */
+
+        CoroutineScope(Dispatchers.Main).launch {
+            imageCropProgressBar.visibility = View.GONE
+            setResult(RESULT_OK)
+            /**
+             * post profile photo change to [HomeActivity.kt]
+             */
 //        EventBus.getDefault().post(EventBusMessage.HasChangedProfilePhoto(true))
-        finish()
+            finish()
+        }
     }
 
 }

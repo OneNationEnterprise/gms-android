@@ -14,8 +14,10 @@ import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
 import com.gymapp.features.onboarding.auth.domain.AuthInteractor
 import com.gymapp.features.onboarding.auth.domain.AuthInteractorInterface
 import com.gymapp.features.onboarding.auth.domain.AuthViewModel
+import com.gymapp.features.profile.addresses.domain.AddressesListViewModel
 import com.gymapp.features.profile.edit.domain.ChangeCustomerNameVIewModel
 import com.gymapp.features.profile.edit.domain.EditProfileViewModel
+import com.gymapp.features.profile.edit.domain.ImageCropViewModel
 import com.gymapp.features.profile.edit.domain.UpdatePasswordViewModel
 import com.gymapp.features.profile.main.data.ProfileRepository
 import com.gymapp.features.profile.main.data.ProfileRepositoryInterface
@@ -198,6 +200,19 @@ object ApplicationModule {
 
         viewModel {
             EditProfileViewModel(
+                get()
+            )
+        }
+
+
+        viewModel {
+            ImageCropViewModel(
+                get()
+            )
+        }
+
+        viewModel {
+            AddressesListViewModel(
                 get()
             )
         }
