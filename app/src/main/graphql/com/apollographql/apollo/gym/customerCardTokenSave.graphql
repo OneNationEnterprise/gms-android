@@ -1,0 +1,9 @@
+mutation customerCardTokenSave($cardTokenInput: CustomerCardTokenInput!) {
+    customerCardTokenSave(customerCardTokenInput: $cardTokenInput) {
+        customerCardToken{
+          ...customerCardTokenFields
+        }
+        error
+        errors
+    }
+}

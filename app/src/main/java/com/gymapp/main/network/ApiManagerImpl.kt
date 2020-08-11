@@ -80,4 +80,20 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
     override suspend fun saveCustomerAddressAsync(input: SaveCustomerAddressInput): Deferred<Response<SaveAddressMutation.Data>> {
         return graphQlClient.mutate(SaveAddressMutation(input)).toDeferred()
     }
+
+    override suspend fun getCheckoutComConfigAsync(): Deferred<Response<GetCheckoutComConfigQuery.Data>> {
+        return graphQlClient.query(GetCheckoutComConfigQuery()).toDeferred()
+    }
+
+    override suspend fun customerCardTokenSaveAsync(cardTokenInput: CustomerCardTokenInput): Deferred<Response<CustomerCardTokenSaveMutation.Data>> {
+        return graphQlClient.mutate(CustomerCardTokenSaveMutation(cardTokenInput)).toDeferred()
+    }
+
+    override suspend fun getCheckoutComSavedCardTokensAsync(): Deferred<Response<GetCustomerCardTokensQuery.Data>> {
+        return graphQlClient.query(GetCustomerCardTokensQuery()).toDeferred()
+    }
+
+    override suspend fun customerCardTokenDeleteAsync(cardId: String): Deferred<Response<CustomerCardTokenDeleteMutation.Data>> {
+        return graphQlClient.mutate(CustomerCardTokenDeleteMutation(cardId)).toDeferred()
+    }
 }

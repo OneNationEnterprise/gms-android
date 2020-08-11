@@ -1,0 +1,3 @@
+mutation customerCardTokenDelete($id: ID!){
+    customerCardTokenDelete(id: $id)
+}

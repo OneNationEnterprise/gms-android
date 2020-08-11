@@ -1,0 +1,14 @@
+query getCustomerCardTokens{
+    getCustomerCardTokens{
+        id
+        expiryMonth
+        expiryYear
+        issuer
+        last4
+        scheme
+        paymentProvider
+        type
+        cardType
+        productType
+    }
+}

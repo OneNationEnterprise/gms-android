@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheetLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_top_round_corner">
+
+    <ImageView
+        android:id="@+id/closeIv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:src="@drawable/ic_close"
+        android:tint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/deleteTitleTv"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="Are you sure?"
+        android:textColor="@color/colorTextPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/closeIv" />
+
+    <TextView
+        android:id="@+id/deleteCardNumberTv"
+        style="@style/FontLocalizedBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:text="Card ending 4563"
+        android:textColor="@color/colorTextPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deleteTitleTv" />
+
+
+    <TextView
+        android:id="@+id/deleteCardTv"
+        style="@style/ButtonTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_round_red"
+        android:text="Delete"
+        app:layout_constraintTop_toBottomOf="@+id/deleteCardNumberTv" />
+
+
+    <TextView
+        android:id="@+id/cancelTv"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:paddingBottom="15dp"
+        android:text="Cancel"
+        android:textAllCaps="true"
+        android:textSize="16sp"
+        android:textColor="@color/colorTextPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deleteCardTv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

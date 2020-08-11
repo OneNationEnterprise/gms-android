@@ -1,5 +1,6 @@
 package com.gymapp.base.presentation
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
@@ -8,10 +9,13 @@ import kotlinx.android.synthetic.main.toolbar_layout.*
 
 abstract class BaseActivity(@LayoutRes contentLayoutId: Int) : AppCompatActivity(contentLayoutId) {
 
+    lateinit var useThisAsContext: Activity
+
     abstract fun setupViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        useThisAsContext = this
         setupViewModel()
 
         setupCustomBackBtn()

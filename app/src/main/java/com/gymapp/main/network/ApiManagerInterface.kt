@@ -40,4 +40,12 @@ interface ApiManagerInterface {
     suspend fun saveCustomerAsync(input: SaveCustomerInput): Deferred<Response<SaveCustomerMutation.Data>>
 
     suspend fun saveCustomerAddressAsync(input: SaveCustomerAddressInput): Deferred<Response<SaveAddressMutation.Data>>
+
+    suspend fun getCheckoutComConfigAsync(): Deferred<Response<GetCheckoutComConfigQuery.Data>>
+
+    suspend fun customerCardTokenSaveAsync(cardTokenInput: CustomerCardTokenInput): Deferred<Response<CustomerCardTokenSaveMutation.Data>>
+
+    suspend fun getCheckoutComSavedCardTokensAsync(): Deferred<Response<GetCustomerCardTokensQuery.Data>>
+
+    suspend fun customerCardTokenDeleteAsync(cardId:String): Deferred<Response<CustomerCardTokenDeleteMutation.Data>>
 }

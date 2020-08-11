@@ -1,0 +1,8 @@
+fragment customerCardTokenFields on CustomerCardToken{
+    id
+    expiryMonth
+    expiryYear
+    issuer
+    scheme
+    last4
+}

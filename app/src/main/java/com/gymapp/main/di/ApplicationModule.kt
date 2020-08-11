@@ -27,6 +27,7 @@ import com.gymapp.features.profile.main.data.ProfileRepository
 import com.gymapp.features.profile.main.data.ProfileRepositoryInterface
 import com.gymapp.features.profile.main.domain.ProfileViewModel
 import com.gymapp.features.profile.medical.domain.MedicalFormViewModel
+import com.gymapp.features.profile.payment.domain.CardsListViewModel
 import com.gymapp.features.profile.payment.domain.SaveCardViewModel
 import com.gymapp.features.profile.settings.domain.SettingsViewModel
 import com.gymapp.features.store.data.StoreRepository
@@ -164,7 +165,7 @@ object ApplicationModule {
         }
 
         viewModel {
-            SaveCardViewModel()
+            SaveCardViewModel(get())
         }
 
         viewModel {
@@ -230,6 +231,12 @@ object ApplicationModule {
 
         viewModel {
             SelectAddressViewModel(
+                get()
+            )
+        }
+
+        viewModel {
+            CardsListViewModel(
                 get()
             )
         }

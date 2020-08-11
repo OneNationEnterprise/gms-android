@@ -1,30 +1,45 @@
 package com.gymapp.features.profile.payment.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import com.apollographql.apollo.gym.CustomerCardTokenSaveMutation
 import com.checkout.android_sdk.CheckoutAPIClient
 import com.checkout.android_sdk.Utils.CardUtils
 import com.checkout.android_sdk.Utils.Environment
+import com.google.gson.Gson
 import com.gymapp.BuildConfig
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.profile.payment.domain.SaveCardViewModel
+import com.gymapp.helper.Constants
 import com.gymapp.helper.ui.InAppBannerNotification
 import kotlinx.android.synthetic.main.activity_save_card.*
 import kotlinx.android.synthetic.main.item_save_card_details.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.jetbrains.anko.act
+import org.jetbrains.annotations.NotNull
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SaveCardActivity : BaseActivity(R.layout.activity_save_card) {
+class SaveCardActivity : BaseActivity(R.layout.activity_save_card), CardViewInterface {
 
     lateinit var saveCardViewModel: SaveCardViewModel
+    lateinit var activity: SaveCardActivity
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        saveCardViewModel.viewInterface = this
+        activity = this
 
         setTitle(getString(R.string.add_credit_card))
 
@@ -32,6 +47,10 @@ class SaveCardActivity : BaseActivity(R.layout.activity_save_card) {
 
         saveCreditCard.setOnClickListener {
             checkInputDataAndTokenizeCard()
+        }
+
+        GlobalScope.launch {
+            saveCardViewModel.initCheckoutApi()
         }
 
     }
@@ -233,31 +252,86 @@ class SaveCardActivity : BaseActivity(R.layout.activity_save_card) {
         saveCardViewModel.tokenizeCard(mCheckoutAPIClient, cardNumberFormatted, expiryDate, cvv)
     }
 
-    fun setInvalidCardNumber() {
+    override fun setInvalidCardNumber() {
         cardTypeIconIv.visibility = View.INVISIBLE
         cardNumberEt.error = getString(R.string.invalid_card_number)
     }
 
-    fun setInvalidCVV() {
+    override fun setInvalidCVV() {
         CVVEt.error = getString(R.string.invalid_cvv)
     }
 
-    fun setInvalidDate() {
+    override fun setInvalidNameOnCard() {
+
+    }
+
+    override fun setInvalidDate() {
         expiryDateEt.error = getString(R.string.card_date_error)
     }
 
 
-    fun showLoading() {
-        progressBar.visibility = View.VISIBLE
+    override fun showLoading() {
+        CoroutineScope(Dispatchers.Main).launch {
+            progressBar.visibility = View.VISIBLE
+        }
     }
 
-    fun hideLoading() {
-        progressBar.visibility = View.GONE
+    override fun hideLoading() {
+        CoroutineScope(Dispatchers.Main).launch {
+            progressBar.visibility = View.GONE
+        }
     }
 
-    fun showErrorMessage(message: String?) {
-        hideLoading()
-        InAppBannerNotification.showErrorNotification(saveCardLayout, this, message)
+    override fun showErrorMessage(message: String?) {
+        CoroutineScope(Dispatchers.Main).launch {
+            hideLoading()
+            InAppBannerNotification.showErrorNotification(
+                saveCardLayout,
+                activity,
+                message
+            )
+        }
+    }
+
+    override fun onCardSavedSuccess(data: CustomerCardTokenSaveMutation.CustomerCardToken) {
+        CoroutineScope(Dispatchers.Main).launch {
+            val intent = Intent()
+            val args = Bundle()
+            args.putString(Constants.customerSavedCardData, Gson().toJson(data))
+            intent.putExtra(Constants.arguments, args)
+
+            setResult(RESULT_OK, intent)
+            finish()
+        }
+    }
+
+
+    override fun initCheckoutApi(publicKey: String) {
+        val checkoutEnvironment = if (BuildConfig.DEBUG) {
+            Environment.SANDBOX
+        } else {
+            Environment.LIVE
+        }
+        val mCheckoutAPIClient = CheckoutAPIClient(
+            this,  // context
+            publicKey,  // your public key
+            checkoutEnvironment // the environment
+        )
+        mCheckoutAPIClient.setTokenListener(saveCardViewModel) // pass the callback
+
+        setSaveCardClickListener(mCheckoutAPIClient)
+    }
+
+    private fun setSaveCardClickListener(mCheckoutAPIClient: CheckoutAPIClient) {
+        saveCreditCard.setOnClickListener {
+
+            saveCardViewModel.tokenizeCard(
+                mCheckoutAPIClient,
+                cardNumberEt.text.toString(),
+                expiryDateEt.text.toString(),
+                CVVEt.text.toString()
+            )
+        }
     }
 
 
