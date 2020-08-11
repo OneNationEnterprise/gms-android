@@ -2,6 +2,7 @@ package com.gymapp.main.data.model.user
 
 import com.apollographql.apollo.gym.CustomerByEmailQuery
 import com.apollographql.apollo.gym.SaveCustomerMutation
+import com.apollographql.apollo.gym.fragment.CustomerFields
 import com.gymapp.base.data.BaseDataMapperInterface
 
 class UserBySaveCustomerMapper :
@@ -17,7 +18,8 @@ class UserBySaveCustomerMapper :
             customer.fragments.customerFields.contactNumber,
             mapUserCountry(customer.fragments.customerFields.country.id),
             customer.fragments.customerFields.photo,
-            customer.fragments.customerFields.dob.toString()
+            customer.fragments.customerFields.dob.toString(),
+            mapUserAddress(customer.fragments.customerFields.addresses)
         )
 
     }
@@ -33,5 +35,41 @@ class UserBySaveCustomerMapper :
 
     fun mapUserCountry(countryId: String): UserCountry {
         return UserCountry(countryId)
+    }
+
+    fun mapUserAddress(addressesList: List<CustomerFields.Address>?): List<AddressUser> {
+
+        val addresses = ArrayList<AddressUser>()
+        val dynamicFields = ArrayList<DynamicAddressData>()
+
+        if (addressesList == null) addresses
+
+        for (address in addressesList!!) {
+
+            dynamicFields.clear()
+
+            if (address.dynamicFullData != null) {
+                for (dynamicField in address.dynamicFullData) {
+                    val dynamicField = DynamicAddressData(
+                        id = dynamicField.id,
+                        isRequired = dynamicField.isRequired,
+                        name = dynamicField.title,
+                        value = dynamicField.value
+                    )
+                    dynamicFields.add(dynamicField)
+                }
+            }
+
+            addresses.add(
+                AddressUser(
+                    id = address.id,
+                    dynamicData = dynamicFields,
+                    countryId = address.country.id,
+                    geolocation = Geolocation(address.geoLocation?.coordinates)
+                )
+            )
+        }
+
+        return addresses
     }
 }

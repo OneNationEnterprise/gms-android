@@ -16,6 +16,9 @@ object Constants {
     const val pageTitle = "page.title"
     const val product = "product.json"
     const val email = "email"
+    const val addressId = "address.id"
+    const val locationAddressDetails = "locationAddress.Details.id"
+    const val latLng = "lat.lng"
 
     const val BASE_SERVER_URL =
         "http://ad82ca9ee5fa74f8b8bf78963b2c735d-586376887.eu-west-1.elb.amazonaws.com/graphql"

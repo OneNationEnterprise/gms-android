@@ -4,14 +4,14 @@ import android.annotation.SuppressLint
 import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.gym.type.SaveCustomerInput
 import com.gymapp.base.domain.BaseViewModel
-import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
+import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.features.profile.edit.presentation.changename.ChangeCustomerNameView
 import com.gymapp.helper.DateHelper
 import com.gymapp.helper.extensions.isValidName
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ChangeCustomerNameVIewModel(val authRepositoryInterface: AuthRepositoryInterface) :
+class ChangeCustomerNameVIewModel(val userRepositoryInterface: UserRepositoryInterface) :
     BaseViewModel() {
 
 
@@ -19,7 +19,7 @@ class ChangeCustomerNameVIewModel(val authRepositoryInterface: AuthRepositoryInt
 
 
     fun fetchData(isFirstName: Boolean) {
-        val customer = authRepositoryInterface.getCurrentUser() ?: return
+        val customer = userRepositoryInterface.getCurrentUser() ?: return
         if (isFirstName) {
             listener.setValue(customer.firstName)
         } else {
@@ -37,7 +37,7 @@ class ChangeCustomerNameVIewModel(val authRepositoryInterface: AuthRepositoryInt
 
         listener?.showLoading()
 
-        val profileDetails = authRepositoryInterface.getCurrentUser() ?: return
+        val profileDetails = userRepositoryInterface.getCurrentUser() ?: return
 
         var birthdayDate: Date? = null
         val spf = SimpleDateFormat(DateHelper.ISO8601_DATE, Locale.ENGLISH)
@@ -45,7 +45,7 @@ class ChangeCustomerNameVIewModel(val authRepositoryInterface: AuthRepositoryInt
             birthdayDate = spf.parse(profileDetails.dob.toString())
         }
 
-        val error = authRepositoryInterface.saveCustomer(
+        val error = userRepositoryInterface.saveCustomer(
             SaveCustomerInput(
                 firstName,
                 profileDetails.lastName,
@@ -75,7 +75,7 @@ class ChangeCustomerNameVIewModel(val authRepositoryInterface: AuthRepositoryInt
 
         listener?.showLoading()
 
-        val profileDetails = authRepositoryInterface.getCurrentUser() ?: return
+        val profileDetails = userRepositoryInterface.getCurrentUser() ?: return
 
         var birthdayDate: Date? = null
         val spf = SimpleDateFormat(DateHelper.ISO8601_DATE, Locale.ENGLISH)
@@ -84,7 +84,7 @@ class ChangeCustomerNameVIewModel(val authRepositoryInterface: AuthRepositoryInt
         }
 
 
-        val error = authRepositoryInterface.saveCustomer(
+        val error = userRepositoryInterface.saveCustomer(
             SaveCustomerInput(
                 profileDetails.firstName,
                 lastName,

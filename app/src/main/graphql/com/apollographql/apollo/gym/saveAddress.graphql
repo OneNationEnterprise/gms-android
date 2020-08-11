@@ -1,0 +1,6 @@
+mutation saveAddress($input: SaveCustomerAddressInput!){
+    saveCustomerAddress(input: $input){
+        error
+    }
+
+}

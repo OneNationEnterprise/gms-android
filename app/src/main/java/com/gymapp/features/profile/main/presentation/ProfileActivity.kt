@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
+import com.gymapp.features.profile.addresses.presentation.list.AddressesListActivity
 import com.gymapp.features.profile.edit.presentation.profile.EditProfileActivity
 import com.gymapp.features.profile.main.domain.ProfileViewModel
 import com.gymapp.features.profile.medical.domain.MedicalFormViewModel
@@ -33,7 +34,7 @@ class ProfileActivity : BaseActivity(R.layout.activity_profile) {
         }
 
         addressesContainer.setOnClickListener {
-//            startActivity(Intent(this, MedicalFormActivity::class.java))
+            startActivity(Intent(this, AddressesListActivity::class.java))
         }
 
         paymentContainer.setOnClickListener {

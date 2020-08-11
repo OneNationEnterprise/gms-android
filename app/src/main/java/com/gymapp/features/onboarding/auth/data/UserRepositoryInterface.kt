@@ -1,11 +1,12 @@
 package com.gymapp.features.onboarding.auth.data
 
 import com.apollographql.apollo.gym.type.RegisterCustomerInput
+import com.apollographql.apollo.gym.type.SaveCustomerAddressInput
 import com.apollographql.apollo.gym.type.SaveCustomerInput
 import com.gymapp.base.data.BaseRepositoryInterface
 import com.gymapp.main.data.model.user.User
 
-interface AuthRepositoryInterface : BaseRepositoryInterface {
+interface UserRepositoryInterface : BaseRepositoryInterface {
 
     /**
      * returns error message (null if successful)
@@ -26,6 +27,9 @@ interface AuthRepositoryInterface : BaseRepositoryInterface {
 
     fun invalidateUserDataOnLogout()
 
-    suspend fun saveCustomer(input: SaveCustomerInput) : String?
+    suspend fun saveCustomer(input: SaveCustomerInput): String?
+
+    //return error
+    suspend fun saveAddress(input: SaveCustomerAddressInput): String?
 
 }

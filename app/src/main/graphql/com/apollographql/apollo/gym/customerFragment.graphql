@@ -10,4 +10,19 @@ fragment customerFields on Customer{
     }
     photo
     dob
+    addresses{
+        id
+        dynamicFullData{
+            id
+            isRequired
+            title
+            value
+        }
+        country{
+            id
+        }
+        geoLocation{
+            coordinates
+        }
+    }
 }

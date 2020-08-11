@@ -9,7 +9,24 @@ data class User(
     val contactNumber: String?,
     val country: UserCountry?,
     val photo: String?,
-    val dob: String?
+    val dob: String?,
+    val address: List<AddressUser>
 )
 
 data class UserCountry(val id: String)
+
+data class AddressUser(
+    val id: String,
+    val countryId: String,
+    val geolocation: Geolocation,
+    val dynamicData: List<DynamicAddressData>
+)
+
+data class DynamicAddressData(
+    val id: String,
+    val isRequired: Boolean,
+    val name: String,
+    val value: String?
+)
+
+data class Geolocation(val coordinates: List<Double?>?)

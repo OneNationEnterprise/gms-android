@@ -1,16 +1,14 @@
 package com.gymapp.features.profile.edit.domain
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.net.Uri
 import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.gym.type.SaveCustomerInput
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
 import com.cloudinary.android.callback.UploadCallback
-import com.gymapp.BuildConfig
 import com.gymapp.base.domain.BaseViewModel
-import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
+import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.features.profile.edit.presentation.image.ImageCropView
 import com.gymapp.helper.Constants
 import com.gymapp.helper.DateHelper
@@ -20,7 +18,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ImageCropViewModel(val authRepositoryInterface: AuthRepositoryInterface) : BaseViewModel() {
+class ImageCropViewModel(val userRepositoryInterface: UserRepositoryInterface) : BaseViewModel() {
 
     lateinit var imageCropView: ImageCropView
 
@@ -34,7 +32,7 @@ class ImageCropViewModel(val authRepositoryInterface: AuthRepositoryInterface) :
         val paramsToSign = HashMap<String, Any>()
         paramsToSign["folder"] = "user-dp"
         paramsToSign["overwrite"] = true
-        paramsToSign["public_id"] = authRepositoryInterface.getCurrentUser()!!.id
+        paramsToSign["public_id"] = userRepositoryInterface.getCurrentUser()!!.id
         paramsToSign["tags"] = "android,customer,display-photo,${Constants.BASE_SERVER_URL}"
         paramsToSign["timestamp"] = Date().time / 1000
         paramsToSign["upload_preset"] = "square_image"
@@ -53,7 +51,7 @@ class ImageCropViewModel(val authRepositoryInterface: AuthRepositoryInterface) :
                 @SuppressLint("CheckResult")
                 override fun onSuccess(requestId: String, resultData: Map<*, *>) {
 
-                    val customer = authRepositoryInterface.getCurrentUser() ?: return
+                    val customer = userRepositoryInterface.getCurrentUser() ?: return
 
                     var birthdaDate: Date? = null
 
@@ -66,11 +64,11 @@ class ImageCropViewModel(val authRepositoryInterface: AuthRepositoryInterface) :
                     }
 
 
-                    val profileDetails = authRepositoryInterface.getCurrentUser() ?: return
+                    val profileDetails = userRepositoryInterface.getCurrentUser() ?: return
 
 
                     GlobalScope.launch {
-                        val error = authRepositoryInterface.saveCustomer(
+                        val error = userRepositoryInterface.saveCustomer(
                             SaveCustomerInput(
                                 profileDetails.firstName,
                                 profileDetails.lastName,
@@ -87,7 +85,7 @@ class ImageCropViewModel(val authRepositoryInterface: AuthRepositoryInterface) :
                             return@launch
                         }
 
-                        authRepositoryInterface.saveUserDetailsByEmail(customer.email)
+                        userRepositoryInterface.saveUserDetailsByEmail(customer.email)
 
                         imageCropView.pictureUploadedSuccessfully()
                     }

@@ -2,10 +2,11 @@ package com.gymapp.features.homepage.domain
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
+import com.apollographql.apollo.exception.ApolloHttpException
 import com.apollographql.apollo.gym.type.GISLocationInput
 import com.apollographql.apollo.gym.type.GymsInRadiusFilter
 import com.gymapp.base.domain.BaseViewModel
-import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
+import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.main.data.repository.gyms.GymsRepositoryInterface
 import com.gymapp.helper.UserCurrentLocalization
 import com.gymapp.main.data.model.brand.Brand
@@ -13,7 +14,7 @@ import com.gymapp.main.data.model.brand.HomepageBrandListItem
 import com.gymapp.main.data.model.gym.Gym
 import com.gymapp.main.data.model.user.User
 
-class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInterface, private val authRepositoryInterface: AuthRepositoryInterface) :
+class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInterface, private val userRepositoryInterface: UserRepositoryInterface) :
     BaseViewModel() {
 
     var user = MutableLiveData<User?>()
@@ -25,7 +26,7 @@ class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInter
 
         gymsRepositoryInterface.setContextTemp(context)
 
-        user.value = authRepositoryInterface.getCurrentUser()
+        user.value = userRepositoryInterface.getCurrentUser()
         val filter = GymsInRadiusFilter(
             GISLocationInput(
                 UserCurrentLocalization.position!!.longitude,
@@ -34,7 +35,12 @@ class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInter
             radius = 15000.0
         )
 
-        errorListingGyms.value = gymsRepositoryInterface.saveGymList(filter)
+        try{
+
+            errorListingGyms.value = gymsRepositoryInterface.saveGymList(filter)
+        }catch (e: ApolloHttpException){
+
+        }
 
         nearByGyms.value = gymsRepositoryInterface.getNearbyGyms()
     }

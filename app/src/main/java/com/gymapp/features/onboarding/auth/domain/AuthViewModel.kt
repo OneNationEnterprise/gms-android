@@ -13,13 +13,13 @@ import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
 import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.base.presentation.BaseActivity
-import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
+import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.main.data.model.country.Country
 import com.gymapp.main.data.repository.config.ConfigRepositoryInterface
 import kotlinx.coroutines.launch
 
 class AuthViewModel(
-    private val authRepository: AuthRepositoryInterface,
+    private val userRepository: UserRepositoryInterface,
     private val configRepository: ConfigRepositoryInterface,
     private val authInteractorInterface: AuthInteractorInterface
 ) : BaseViewModel() {
@@ -87,7 +87,7 @@ class AuthViewModel(
                     //already registered --> cache customer details from server
                     viewModelScope.launch {
                         authErrorMessage.value =
-                            authRepository.saveUserDetailsByEmail(firebaseUser!!.email!!)
+                            userRepository.saveUserDetailsByEmail(firebaseUser!!.email!!)
                     }
                     return@OnCompleteListener
                 }
@@ -140,9 +140,10 @@ class AuthViewModel(
 
     fun registerUser(name: String, email: String, password: String) {
         viewModelScope.launch {
-            authErrorMessage.value = authRepository.registerUser(
+            authErrorMessage.value = userRepository.registerUser(
                 RegisterCustomerInput(
                     firstName = name,
+                    lastName = "todo",
                     email = email,
                     password = password,
                     contactNumber = "${phoneCountry?.dialCode}$phoneNumber",
@@ -178,7 +179,7 @@ class AuthViewModel(
 
                     viewModelScope.launch {
                         authErrorMessage.value =
-                            authRepository.saveUserDetailsByEmail(firebaseUser!!.email!!)
+                            userRepository.saveUserDetailsByEmail(firebaseUser!!.email!!)
                     }
                 } else {
                     authErrorMessage.value = it.exception?.localizedMessage

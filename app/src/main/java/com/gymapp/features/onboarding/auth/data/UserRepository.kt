@@ -1,6 +1,7 @@
 package com.gymapp.features.onboarding.auth.data
 
 import com.apollographql.apollo.gym.type.RegisterCustomerInput
+import com.apollographql.apollo.gym.type.SaveCustomerAddressInput
 import com.apollographql.apollo.gym.type.SaveCustomerInput
 import com.gymapp.base.data.BaseRepository
 import com.gymapp.main.data.model.user.User
@@ -10,8 +11,8 @@ import com.gymapp.main.data.model.user.UserBySaveCustomerMapper
 import com.gymapp.main.data.model.user.UserRegistrationMapper
 import com.gymapp.main.network.ApiManagerInterface
 
-class AuthRepository(private val apiManager: ApiManagerInterface/*, private val gymDao: GymDao*/) :
-    BaseRepository(apiManager/*, gymDao*/), AuthRepositoryInterface {
+class UserRepository(private val apiManager: ApiManagerInterface/*, private val gymDao: GymDao*/) :
+    BaseRepository(apiManager/*, gymDao*/), UserRepositoryInterface {
 
     private val userMapper = UserByEmailMapper()
     private var user: User? = null
@@ -43,14 +44,14 @@ class AuthRepository(private val apiManager: ApiManagerInterface/*, private val 
 
         if (userDetailsResponse.errors != null && userDetailsResponse.errors!!.isNotEmpty()
             || userDetailsResponse.data == null
-            || (userDetailsResponse.data!!.customerByEmail == null)
+            || (userDetailsResponse.data!!.customerByAuth == null)
         ) {
             return "Error on getting user details"
         }
 
 //        gymDao.insertUser(userMapper.mapToDto(userDetailsResponse.data!!.customerByEmail!!))
 
-        user = userMapper.mapToDto(userDetailsResponse.data!!.customerByEmail!!)
+        user = userMapper.mapToDto(userDetailsResponse.data!!.customerByAuth!!)
         return null
     }
 
@@ -73,6 +74,14 @@ class AuthRepository(private val apiManager: ApiManagerInterface/*, private val 
         val mapper = UserBySaveCustomerMapper()
 
         user = mapper.mapToDto(user1!!)
+
+        return null
+    }
+
+    override suspend fun saveAddress(input: SaveCustomerAddressInput): String? {
+        val apiResponse = apiManager.saveCustomerAddressAsync(input).await()
+
+        if (!apiResponse.data?.saveCustomerAddress?.error?.rawValue.isNullOrEmpty()) return apiResponse.data?.saveCustomerAddress?.error?.rawValue
 
         return null
     }

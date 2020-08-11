@@ -21,7 +21,7 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
     }
 
     override suspend fun getUserDetailsByEmailAsync(email: String): Deferred<Response<CustomerByEmailQuery.Data>> {
-        return graphQlClient.query(CustomerByEmailQuery(email)).toDeferred()
+        return graphQlClient.query(CustomerByEmailQuery()).toDeferred()
     }
 
     override suspend fun getGymsInRadiusAsync(input: GymsInRadiusFilter): Deferred<Response<GymsInRadiusQuery.Data>> {
@@ -75,5 +75,9 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
 
     override suspend fun saveCustomerAsync(input: SaveCustomerInput): Deferred<Response<SaveCustomerMutation.Data>> {
         return graphQlClient.mutate(SaveCustomerMutation(input)).toDeferred()
+    }
+
+    override suspend fun saveCustomerAddressAsync(input: SaveCustomerAddressInput): Deferred<Response<SaveAddressMutation.Data>> {
+        return graphQlClient.mutate(SaveAddressMutation(input)).toDeferred()
     }
 }

@@ -9,12 +9,16 @@ import com.gymapp.main.data.repository.gyms.GymsRepository
 import com.gymapp.main.data.repository.gyms.GymsRepositoryInterface
 import com.gymapp.features.homepage.domain.HomepageViewModel
 import com.gymapp.features.mapview.domain.MapViewViewModel
-import com.gymapp.features.onboarding.auth.data.AuthRepository
-import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
+import com.gymapp.features.onboarding.auth.data.UserRepository
+import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.features.onboarding.auth.domain.AuthInteractor
 import com.gymapp.features.onboarding.auth.domain.AuthInteractorInterface
 import com.gymapp.features.onboarding.auth.domain.AuthViewModel
 import com.gymapp.features.profile.addresses.domain.AddressesListViewModel
+import com.gymapp.features.profile.addresses.domain.SaveEditViewModel
+import com.gymapp.features.profile.addresses.domain.SelectAddressViewModel
+import com.gymapp.features.profile.addresses.presentation.saveedit.SaveEditAddressActivity
+import com.gymapp.features.profile.addresses.presentation.saveedit.SelectAddressActivity
 import com.gymapp.features.profile.edit.domain.ChangeCustomerNameVIewModel
 import com.gymapp.features.profile.edit.domain.EditProfileViewModel
 import com.gymapp.features.profile.edit.domain.ImageCropViewModel
@@ -85,8 +89,8 @@ object ApplicationModule {
             )
         }
 
-        single<AuthRepositoryInterface> {
-            AuthRepository(
+        single<UserRepositoryInterface> {
+            UserRepository(
                 get()
 //                get()
             )
@@ -213,6 +217,19 @@ object ApplicationModule {
 
         viewModel {
             AddressesListViewModel(
+                get()
+            )
+        }
+
+        viewModel {
+            SaveEditViewModel(
+                get(),
+                get()
+            )
+        }
+
+        viewModel {
+            SelectAddressViewModel(
                 get()
             )
         }

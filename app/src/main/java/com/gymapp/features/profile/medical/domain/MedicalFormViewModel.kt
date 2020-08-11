@@ -6,19 +6,18 @@ import com.apollographql.apollo.gym.type.ContentElementType
 import com.apollographql.apollo.gym.type.CustomerMedicalForm
 import com.apollographql.apollo.gym.type.CustomerMedicalFormField
 import com.gymapp.base.domain.BaseViewModel
-import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
+import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.features.profile.medical.data.ContentElementDataMapper
 import com.gymapp.features.profile.medical.data.MedicalFormListObject
 import com.gymapp.features.profile.medical.data.items.CheckBoxItem
 import com.gymapp.features.profile.medical.data.items.GroupTitleItem
 import com.gymapp.features.profile.medical.data.items.SaveButtonItem
 import com.gymapp.features.profile.medical.data.items.TextBoxItem
-import com.gymapp.features.profile.medical.presentation.adapter.MedicalFormItemListener
 import com.gymapp.main.network.ApiManagerInterface
 
 class MedicalFormViewModel(
     private val apiManagerInterface: ApiManagerInterface,
-    private val authRepositoryInterface: AuthRepositoryInterface
+    private val userRepositoryInterface: UserRepositoryInterface
 ) : BaseViewModel() {
 
     val itemsForInMedicalFormAdapterList = MutableLiveData<ArrayList<MedicalFormListObject>>()

@@ -3,18 +3,18 @@ package com.gymapp.features.profile.edit.domain
 import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.gym.type.SaveCustomerInput
 import com.gymapp.base.domain.BaseViewModel
-import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
+import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.features.profile.edit.presentation.password.UpdatePasswordView
 
-class UpdatePasswordViewModel(private val authRepositoryInterface: AuthRepositoryInterface): BaseViewModel() {
+class UpdatePasswordViewModel(private val userRepositoryInterface: UserRepositoryInterface): BaseViewModel() {
 
     lateinit var listener : UpdatePasswordView
 
     suspend  fun updatePassword(newPassword: String) {
 
-        val profileDetails = authRepositoryInterface.getCurrentUser() ?: return
+        val profileDetails = userRepositoryInterface.getCurrentUser() ?: return
 
-        val error = authRepositoryInterface.saveCustomer(
+        val error = userRepositoryInterface.saveCustomer(
             SaveCustomerInput(
                 profileDetails.firstName,
                 profileDetails.lastName,

@@ -86,7 +86,7 @@ class ImageCropActivity : BaseActivity(R.layout.activity_image_crop), ImageCropV
             InAppBannerNotification.showErrorNotification(
                 imageCropContainer,
                 activity,
-                getString(R.string.error_unknown)
+                error
             )
         }
     }

@@ -6,12 +6,12 @@ import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.gym.type.SaveCustomerInput
 import com.google.firebase.auth.FirebaseAuth
 import com.gymapp.base.domain.BaseViewModel
-import com.gymapp.features.onboarding.auth.data.AuthRepositoryInterface
+import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.features.profile.edit.presentation.profile.EditProfileViewInterface
 import com.gymapp.main.data.model.user.User
 import java.util.*
 
-class EditProfileViewModel(private val authRepositoryInterface: AuthRepositoryInterface) :
+class EditProfileViewModel(private val userRepositoryInterface: UserRepositoryInterface) :
     BaseViewModel() {
 
     lateinit var editProfileInterface: EditProfileViewInterface
@@ -22,7 +22,7 @@ class EditProfileViewModel(private val authRepositoryInterface: AuthRepositoryIn
     }
 
     fun fetchData() {
-        profileDetails = authRepositoryInterface.getCurrentUser()!!
+        profileDetails = userRepositoryInterface.getCurrentUser()!!
 
         editProfileInterface.setFirstName(profileDetails.firstName)
         editProfileInterface.setLastName(profileDetails.lastName)
@@ -63,7 +63,7 @@ class EditProfileViewModel(private val authRepositoryInterface: AuthRepositoryIn
 
         if (profileDetails != null) {
 
-            val error = authRepositoryInterface.saveCustomer(
+            val error = userRepositoryInterface.saveCustomer(
                 SaveCustomerInput(
                     profileDetails.firstName,
                     profileDetails.lastName,
