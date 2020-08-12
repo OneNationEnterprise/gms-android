@@ -1,0 +1,12 @@
+query MembershipInvoice($input: MembershipInvoiceInput!){
+    membershipInvoice(input: $input){
+        components{
+            type
+            value
+            label
+        }
+        currency{
+            code
+        }
+    }
+}

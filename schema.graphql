@@ -5,15 +5,15 @@ schema {
     mutation: Mutation
 }
 
-union CustomerMembershipRefTypePayload = OrderHistoryBrand | OrderHistoryGym
-
-union CustomerPassRefTypePayload = OrderHistoryBrand | OrderHistoryGym
+union BrandOrGymUnion = OrderHistoryBrand | OrderHistoryGym
 
 union MembershipRefTypePayload = ExternalBrand_VP | ExternalGym_VP
 
 union OrderPayload = CustomerGymClass | CustomerMembership | CustomerPass
 
 union PassRefTypePayload = ExternalBrand_VP | ExternalGym_VP
+
+union customerMembershipsAndPassesUnion = CustomerMembership | CustomerPass
 
 type AddressField {
     countryId: ID!
@@ -326,6 +326,7 @@ type CustomerAddress {
     geoLocation: CustomerAddressGeoLocation
     id: ID!
     isDefault: Boolean!
+    status: String!
     updatedAt: Datetime!
 }
 
@@ -499,7 +500,7 @@ type CustomerMembership {
     paymentMethod: CustomerPaymentMethod!
     paymentStatus: String!
     period: Int
-    referenceType: CustomerMembershipRefTypePayload
+    referenceType: BrandOrGymUnion
     schedule: [CustomerMembershipWeeklySchedule!]
     shortCode: String!
     status: String!
@@ -522,6 +523,11 @@ type CustomerMembershipWeeklySchedule {
     id: ID!
     openTime: LocalTime
     updatedAt: Datetime!
+}
+
+type CustomerMembershipsAndPassesPayload {
+    list: [OrderPayload]
+    paging: PaginatorOutput
 }
 
 type CustomerMembershipsPayload {
@@ -552,7 +558,7 @@ type CustomerPass {
     paymentMethod: CustomerPaymentMethod!
     paymentStatus: String!
     period: Int
-    referenceType: CustomerPassRefTypePayload
+    referenceType: BrandOrGymUnion
     schedule: [CustomerPassWeeklySchedule!]
     shortCode: String!
     status: String!
@@ -601,6 +607,13 @@ type CustomerSignInPayload {
 type CustomersPayload {
     list: [Customer]
     paging: PaginatorOutput
+}
+
+type DeleteCustomerAddressPayload {
+    customerAddresses: [CustomerAddress!]
+    error: CustomerAddressError
+    errorMessage: String
+    errors: [CustomerAddressError!]
 }
 
 type DynamicAddressFieldsData {
@@ -1034,6 +1047,7 @@ type Mutation {
     customerCardTokenSave(customerCardTokenInput: CustomerCardTokenInput!): CustomerCardTokenSavePayload!
     "Set a customer card token as default"
     customerCardTokenSetDefault(id: ID!, isDefault: Boolean!): CustomerCardToken!
+    deleteCustomerAddress(id: ID!): DeleteCustomerAddressPayload
     favouriteGymClass(input: FavouriteGymClassInput!): FavouriteGymClassPayload
     languageUpsert(input: LanguageInput!): SaveLanguagePayload
     registerCustomer(input: RegisterCustomerInput!): RegisterCustomerPayload
@@ -1213,6 +1227,29 @@ type OrderSet {
     orderType: OrderType!
     paymentStatus: PaymentStatus!
     shortCode: String!
+}
+
+type OrdersCountry {
+    currency: OrdersCurrency!
+    dialCode: String
+    flagPhoto: String
+    id: ID!
+    isoCode: String!
+    name: String!
+    servicePhoneNumber: String
+    status: GlobalStatusType
+    timeZoneIdentifier: String
+    vat: Float!
+    vatId: String
+}
+
+type OrdersCurrency {
+    code: String!
+    decimalPlace: Int!
+    lowestDenomination: Float!
+    name: String!
+    subUnitName: String!
+    symbol: String
 }
 
 type OrdersFilterPayload {
@@ -1447,6 +1484,7 @@ type Query {
     customerMembership(id: ID!): CustomerMembership!
     customerMembershipSchedule(customerMembershipId: ID!): [CustomerMembershipWeeklySchedule!]
     customerMemberships(paging: PaginatorInput, params: CustomerMembershipsFilter): CustomerMembershipsPayload!
+    customerMembershipsAndPasses(paging: PaginatorInput, params: CustomerMembershipsAndPassesFilter!): CustomerMembershipsAndPassesPayload
     customerMembershipsByAuth(paging: PaginatorInput, params: CustomerMembershipsFilter): CustomerMembershipsPayload!
     customerPass(id: ID!): CustomerPass!
     customerPassSchedule(customerPassId: ID!): [CustomerPassWeeklySchedule!]
@@ -1458,7 +1496,7 @@ type Query {
     getCheckoutComConfig: CheckoutComConfig!
     getCustomerCardTokens: [CustomerCardToken]!
     getMedicalForm: [ContentGroup!]!
-    getPaymentMethods: [PaymentMethod]
+    getPaymentMethods(countryCode: String!): [PaymentMethod]
     gym(id: ID!): Gym!
     gymAddress(gymId: ID!): GymAddress
     gymAdmin(id: ID!): GymAdmin
@@ -1512,6 +1550,7 @@ type Query {
     storeImage(id: ID!): StoreImage!
     storeImages(paging: PaginatorInput!, params: StoreImagesFilter): StoreImagesPayload!
     stores(paging: PaginatorInput!, params: ExternalBrand_VendorsFiler): ExternalBrand_VendorsPayload!
+    transactions(paging: PaginatorInput, params: OrdersFilter): OrdersFilterPayload!
     video(id: ID!): Video!
     videoType(id: ID!): VideoType!
     videoTypes(paging: PaginatorInput!, params: VideoTypesFilter): VideoTypesPayload!
@@ -2142,6 +2181,11 @@ enum CustomerMembershipError {
     SECHEDULE_REQUIRED
 }
 
+enum CustomerMembershipsAndPassesListType {
+    ALL
+    EXPIRED
+}
+
 enum CustomerPassAccessType {
     BRANCH
     BRAND
@@ -2323,6 +2367,7 @@ enum OrderGymClassError {
 enum OrderListType {
     ALL
     CLOSED
+    LAST_MONTH
     OPEN
 }
 
@@ -2348,6 +2393,11 @@ enum OrderType {
     MEMBERSHIP
     PASS
     STORE
+}
+
+enum OrderTypePassOrMembership {
+    MEMBERSHIP
+    PASS
 }
 
 enum PassAccessType {
@@ -2634,6 +2684,15 @@ input CustomerMedicalForm {
 input CustomerMedicalFormField {
     contentElementId: ID!
     fieldValue: String!
+}
+
+input CustomerMembershipsAndPassesFilter {
+    brandId: ID
+    customerId: ID
+    listType: CustomerMembershipsAndPassesListType!
+    orderStatus: PassStatus
+    orderType: OrderTypePassOrMembership
+    searchText: String
 }
 
 input CustomerMembershipsFilter {

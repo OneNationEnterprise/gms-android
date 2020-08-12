@@ -35,7 +35,7 @@ class ImageCropViewModel(val userRepositoryInterface: UserRepositoryInterface) :
         paramsToSign["public_id"] = userRepositoryInterface.getCurrentUser()!!.id
         paramsToSign["tags"] = "android,customer,display-photo,${Constants.BASE_SERVER_URL}"
         paramsToSign["timestamp"] = Date().time / 1000
-        paramsToSign["upload_preset"] = "square_image"
+//        paramsToSign["upload_preset"] = "square_image"
 
         MediaManager.get().upload(uri)
             .options(paramsToSign)

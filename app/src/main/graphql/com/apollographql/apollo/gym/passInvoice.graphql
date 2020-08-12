@@ -1,0 +1,12 @@
+query PassInvoice($input: PassInvoiceInput!){
+    passInvoice(input: $input){
+        components{
+            type
+            value
+            label
+        }
+        currency{
+            code
+        }
+    }
+}

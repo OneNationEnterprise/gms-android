@@ -89,8 +89,14 @@ class SubscriptionViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView
 
         itemView.selectorIv.isChecked = isItemSelected
 
-        itemView.amountTv.text = subscription.amountLabel
-        itemView.descriptionTv.text = subscription.description
+        itemView.amountTv.text = subscription.amount
+
+        if (subscription.description.isNullOrEmpty()) {
+            itemView.descriptionTv.visibility = View.GONE
+        } else {
+            itemView.descriptionTv.visibility = View.VISIBLE
+            itemView.descriptionTv.text = subscription.description
+        }
         itemView.titleTv.text = subscription.name
 
         var colorCode = subscription.colorCode

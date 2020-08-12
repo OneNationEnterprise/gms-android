@@ -47,5 +47,13 @@ interface ApiManagerInterface {
 
     suspend fun getCheckoutComSavedCardTokensAsync(): Deferred<Response<GetCustomerCardTokensQuery.Data>>
 
-    suspend fun customerCardTokenDeleteAsync(cardId:String): Deferred<Response<CustomerCardTokenDeleteMutation.Data>>
+    suspend fun customerCardTokenDeleteAsync(cardId: String): Deferred<Response<CustomerCardTokenDeleteMutation.Data>>
+
+    suspend fun getPassInvoiceAsync(invoiceInput: PassInvoiceInput): Deferred<Response<PassInvoiceQuery.Data>>
+
+    suspend fun getMemberInvoiceAsync(invoiceInput: MembershipInvoiceInput): Deferred<Response<MembershipInvoiceQuery.Data>>
+
+    suspend fun getGymCLassInvoiceAsync(invoiceInput: GymClassInvoiceInput): Deferred<Response<GymClassInvoiceQuery.Data>>
+
+    suspend fun getPaymentMethodsAsync(countryCode: String): Deferred<Response<GetPaymentMethodsQuery.Data>>
 }

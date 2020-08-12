@@ -18,7 +18,7 @@ class SubscriptionViewModel(val repository: SubscriptionRepositoryInterface) : B
 
     val subscriptionAdapterData = MutableLiveData<AdapterInfoData>()
 
-    val selectedSubscriptionId = MutableLiveData<String>()
+    val selectedSubscriptionId = MutableLiveData<Subscription>()
     private lateinit var gymId: String
     private lateinit var subscriptionList: List<Subscription>
 
@@ -115,7 +115,7 @@ class SubscriptionViewModel(val repository: SubscriptionRepositoryInterface) : B
 
     override fun onSubscriptionSelected(subscription: Subscription) {
 
-        selectedSubscriptionId.value = subscription.id
+        selectedSubscriptionId.value = subscription
     }
 
 

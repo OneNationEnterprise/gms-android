@@ -1,0 +1,7 @@
+fragment paymentMethodFields on PaymentMethod{
+    paymentScheme
+    name
+    imageUrl
+    subText
+    sourceId
+}

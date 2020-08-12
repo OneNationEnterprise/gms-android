@@ -50,6 +50,12 @@ class SubscriptionActivity : BaseActivity(R.layout.activity_subscription) {
         backArrowIv.setOnClickListener {
             onBackPressed()
         }
+
+        buySubscriptionBtn.setOnClickListener {
+            if (subscriptionViewModel.selectedSubscriptionId.value != null) {
+
+            }
+        }
     }
 
     override fun setupViewModel() {
@@ -92,7 +98,7 @@ class SubscriptionActivity : BaseActivity(R.layout.activity_subscription) {
 
             buySubscriptionBtn.textColor = resources.getColor(R.color.white)
 
-            subscriptionAdapter.updateSelectedItemId(it)
+            subscriptionAdapter.updateSelectedItemId(it.id)
         })
     }
 

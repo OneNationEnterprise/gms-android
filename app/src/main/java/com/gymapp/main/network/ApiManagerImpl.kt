@@ -96,4 +96,20 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
     override suspend fun customerCardTokenDeleteAsync(cardId: String): Deferred<Response<CustomerCardTokenDeleteMutation.Data>> {
         return graphQlClient.mutate(CustomerCardTokenDeleteMutation(cardId)).toDeferred()
     }
+
+    override suspend fun getPassInvoiceAsync(invoiceInput: PassInvoiceInput): Deferred<Response<PassInvoiceQuery.Data>> {
+        return graphQlClient.query(PassInvoiceQuery(invoiceInput)).toDeferred()
+    }
+
+    override suspend fun getMemberInvoiceAsync(invoiceInput: MembershipInvoiceInput): Deferred<Response<MembershipInvoiceQuery.Data>> {
+        return graphQlClient.query(MembershipInvoiceQuery(invoiceInput)).toDeferred()
+    }
+
+    override suspend fun getGymCLassInvoiceAsync(invoiceInput: GymClassInvoiceInput): Deferred<Response<GymClassInvoiceQuery.Data>> {
+        return graphQlClient.query(GymClassInvoiceQuery(invoiceInput)).toDeferred()
+    }
+
+    override suspend fun getPaymentMethodsAsync(countryCode: String): Deferred<Response<GetPaymentMethodsQuery.Data>> {
+        return graphQlClient.query(GetPaymentMethodsQuery(countryCode)).toDeferred()
+    }
 }

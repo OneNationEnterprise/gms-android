@@ -1,0 +1,12 @@
+query gymClassInvoice($input: GymClassInvoiceInput!){
+    gymClassInvoice(input: $input){
+        components{
+            type
+            value
+            label
+        }
+        currency{
+            code
+        }
+    }
+}
