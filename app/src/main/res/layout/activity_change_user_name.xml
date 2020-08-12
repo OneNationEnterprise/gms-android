@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:hint="@string/edt_hint_first_name"
+            android:textColor="@color/white"
             android:inputType="textPersonName"
             android:textAlignment="viewStart" />
     </com.google.android.material.textfield.TextInputLayout>

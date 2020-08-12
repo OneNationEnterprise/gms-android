@@ -231,7 +231,9 @@ class EditProfileActivity : BaseActivity(R.layout.activity_edit_profile),
     }
 
     override fun showLoading() {
-        progressBar.visibility = View.VISIBLE
+        CoroutineScope(Dispatchers.Main).launch {
+            progressBar.visibility = View.VISIBLE
+        }
     }
 
     override fun hideLoading() {
@@ -244,7 +246,11 @@ class EditProfileActivity : BaseActivity(R.layout.activity_edit_profile),
     override fun showErrorBanner(textMessage: String?) {
         CoroutineScope(Dispatchers.Main).launch {
             hideLoading()
-            InAppBannerNotification.showErrorNotification(editProfileContainer, activity, textMessage)
+            InAppBannerNotification.showErrorNotification(
+                editProfileContainer,
+                activity,
+                textMessage
+            )
         }
     }
 

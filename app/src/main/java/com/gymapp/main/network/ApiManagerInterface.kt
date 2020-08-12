@@ -12,7 +12,7 @@ interface ApiManagerInterface {
 
     suspend fun registerUserAsync(input: RegisterCustomerInput): Deferred<Response<RegisterUserMutation.Data>>
 
-    suspend fun getUserDetailsByEmailAsync(email: String): Deferred<Response<CustomerByEmailQuery.Data>>
+    suspend fun getUserDetailsByEmailAsync(email: String): Deferred<Response<CustomerByAuthQuery.Data>>
 
     suspend fun getGymsInRadiusAsync(input: GymsInRadiusFilter): Deferred<Response<GymsInRadiusQuery.Data>>
 

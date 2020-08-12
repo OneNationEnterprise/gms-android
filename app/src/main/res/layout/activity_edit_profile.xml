@@ -5,6 +5,7 @@
     android:id="@+id/editProfileContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue005"
     android:fitsSystemWindows="true">
 
     <include layout="@layout/toolbar_layout" />
@@ -41,7 +42,6 @@
         style="@style/FontLocalizedBold"
         android:layout_width="128dp"
         android:layout_height="128dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/textview_circle_background"
@@ -125,7 +125,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/lastNameHolder"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/firstNameHolder">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -169,7 +169,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/emailHolder"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         app:layout_constraintTop_toBottomOf="@+id/lastNameHolder">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -179,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
+
             app:boxStrokeColor="@color/gray001"
             android:textColorHint="@color/gray001"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -228,7 +229,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/phoneHolder"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         app:layout_constraintTop_toBottomOf="@+id/emailHolder">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -289,7 +291,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/birthdayHolder"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@+id/phoneHolder">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -299,6 +302,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+
             android:textColorHint="@color/blue001"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -334,7 +338,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/passwordHolder"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@+id/birthdayHolder">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -344,6 +349,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+
             android:textColorHint="@color/blue001"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">

@@ -44,7 +44,8 @@ class GymMapper : BaseDataMapperInterface<GymsInRadiusQuery.List, Gym> {
             name = brandFields.name,
             phone = brandFields.phone,
             gymCount = brandFields.gymCount,
-            logo = brandFields.logo
+            logo = brandFields.logo,
+            image = brandFields.image
         )
     }
 

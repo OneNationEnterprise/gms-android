@@ -1,6 +1,6 @@
 package com.gymapp.main.data.model.user
 
-import com.apollographql.apollo.gym.CustomerByEmailQuery
+import com.apollographql.apollo.gym.CustomerByAuthQuery
 import com.apollographql.apollo.gym.SaveCustomerMutation
 import com.apollographql.apollo.gym.fragment.CustomerFields
 import com.gymapp.base.data.BaseDataMapperInterface

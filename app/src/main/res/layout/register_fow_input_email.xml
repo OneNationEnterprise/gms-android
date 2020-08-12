@@ -36,6 +36,31 @@
             android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLastName"
+        style="@style/EditText.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        app:boxStrokeColor="@color/blue001"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/inputFirstName">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:hint="@string/edt_hint_last_name"
+            android:inputType="textEmailAddress"
+            android:textAlignment="viewStart"
+            android:textColor="@color/white" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputEmail"
@@ -46,7 +71,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         app:boxStrokeColor="@color/blue001"
-        app:layout_constraintTop_toBottomOf="@+id/inputFirstName">
+        app:layout_constraintTop_toBottomOf="@+id/inputLastName">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextEmail"

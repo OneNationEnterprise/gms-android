@@ -32,8 +32,8 @@ class HomepageGymsItemAdapter(
 
         val gym = gymListItem[position]
 
-        if (gym.gymImage.isNotEmpty()) {
-            Picasso.get().load(gym.gymImage).into(view.gymImageIv)
+        if (!gym.brand.image.isNullOrEmpty()) {
+            Picasso.get().load(gym.brand.image).into(view.gymImageIv)
         }
 
         if (gym.brand.logo.isNotEmpty()) {

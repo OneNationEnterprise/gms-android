@@ -20,8 +20,8 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
         return graphQlNoAuthClient.mutate(RegisterUserMutation(input)).toDeferred()
     }
 
-    override suspend fun getUserDetailsByEmailAsync(email: String): Deferred<Response<CustomerByEmailQuery.Data>> {
-        return graphQlClient.query(CustomerByEmailQuery()).toDeferred()
+    override suspend fun getUserDetailsByEmailAsync(email: String): Deferred<Response<CustomerByAuthQuery.Data>> {
+        return graphQlClient.query(CustomerByAuthQuery()).toDeferred()
     }
 
     override suspend fun getGymsInRadiusAsync(input: GymsInRadiusFilter): Deferred<Response<GymsInRadiusQuery.Data>> {

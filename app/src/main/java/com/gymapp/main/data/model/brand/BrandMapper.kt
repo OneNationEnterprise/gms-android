@@ -11,7 +11,8 @@ class BrandMapper : BaseDataMapperInterface<BrandFields, Brand> {
             name = input.name,
             phone = input.phone,
             gymCount = input.gymCount,
-            logo = input.logo
+            logo = input.logo,
+            image = input.image
         )
     }
 

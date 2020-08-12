@@ -4,6 +4,7 @@ import android.os.CountDownTimer
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.gym.type.RegisterCustomerInput
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseException
@@ -35,6 +36,7 @@ class AuthViewModel(
 
     private var resendAuthToken: PhoneAuthProvider.ForceResendingToken? = null
     private lateinit var phoneVerificationId: String
+    private var authId: String? = null
 
     private var phoneVerifyCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private var resendOtpCallback: PhoneAuthProvider.OnVerificationStateChangedCallbacks
@@ -82,6 +84,8 @@ class AuthViewModel(
 
             if (it.isSuccessful) {
                 val firebaseUser = it.result?.user
+
+                authId = firebaseUser?.uid
 
                 if (!firebaseUser?.email.isNullOrEmpty()) {
                     //already registered --> cache customer details from server
@@ -138,17 +142,18 @@ class AuthViewModel(
         )
     }
 
-    fun registerUser(name: String, email: String, password: String) {
+    fun registerUser(firstname: String, lastname: String, email: String, password: String) {
         viewModelScope.launch {
             authErrorMessage.value = userRepository.registerUser(
                 RegisterCustomerInput(
-                    firstName = name,
-                    lastName = "todo",
+                    firstName = firstname,
+                    lastName = lastname,
                     email = email,
                     password = password,
                     contactNumber = "${phoneCountry?.dialCode}$phoneNumber",
                     countryId = phoneCountry!!.countryId,
-                    isPhoneVerified = true
+                    isPhoneVerified = authId != null,
+                    authId = Input.fromNullable(authId)
                 )
             )
         }
@@ -169,7 +174,7 @@ class AuthViewModel(
     fun loginWithEmailAndPassword(email: String, password: String) {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
-                if(it.isSuccessful){
+                if (it.isSuccessful) {
                     val firebaseUser = it.result?.user
 
                     if (firebaseUser == null || firebaseUser.email == null) {

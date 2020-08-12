@@ -1,4 +1,4 @@
-query customerByEmail{
+query customerByAuth{
     customerByAuth{
         ...customerFields
     }

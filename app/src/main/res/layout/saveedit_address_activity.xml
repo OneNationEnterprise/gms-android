@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true"
+    android:background="@color/blue005"
     android:id="@+id/saveEditAddressContainer"
     android:orientation="vertical">
 

@@ -33,6 +33,11 @@ class AuthRegisterDialogFragment : BaseAuthDialogFragment() {
                 return@setOnClickListener
             }
 
+            if (!editTextLastName.text.toString().isValidName()) {
+                inputLastName.error = "Invalid name"
+                return@setOnClickListener
+            }
+
             if (!editTextEmail.text.toString().isValidEmail()) {
                 inputEmail.error = "Invalid email"
                 return@setOnClickListener
@@ -47,6 +52,7 @@ class AuthRegisterDialogFragment : BaseAuthDialogFragment() {
 
             authViewModel.registerUser(
                 editTextFirstName.text.toString(),
+                editTextLastName.text.toString(),
                 editTextEmail.text.toString(),
                 editTextPassword.text.toString()
             )

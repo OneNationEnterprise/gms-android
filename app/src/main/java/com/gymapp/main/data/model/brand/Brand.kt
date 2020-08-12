@@ -10,5 +10,7 @@ data class Brand(
     val name: String,
     val phone: String,
     val gymCount: Int,
-    val logo: String
+    val logo: String,
+    val image:String?
+
 )

@@ -24,7 +24,6 @@ class UpdatePasswordActivity : BaseActivity(R.layout.activity_update_password), 
     lateinit var updatePasswordViewModel: UpdatePasswordViewModel
     lateinit var activity: BaseActivity
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         updatePasswordViewModel.listener = this
