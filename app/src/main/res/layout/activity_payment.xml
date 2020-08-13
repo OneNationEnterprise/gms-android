@@ -2,6 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blue005">
@@ -39,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:textColor="@color/white"
+            android:textSize="17sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Title gk" />
@@ -67,14 +70,226 @@
             android:id="@+id/locationNameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:paddingBottom="16dp"
             android:textColor="@color/purple001"
-            android:textSize="14sp"
+            android:textSize="15sp"
             app:layout_constraintStart_toStartOf="@+id/locationTv"
             app:layout_constraintTop_toBottomOf="@+id/locationTv"
-            tools:text="Gym map" />
+            tools:text="Mock location" />
 
+
+        <TextView
+            android:id="@+id/startDateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Start Date"
+            android:textColor="@color/blue001"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationNameTv" />
+
+        <TextView
+            android:id="@+id/startDateValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:textColor="@color/purple001"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="@+id/startDateTv"
+            app:layout_constraintTop_toBottomOf="@+id/startDateTv"
+            tools:text="Mock location" />
+
+
+        <TextView
+            android:id="@+id/timeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Time"
+            android:textColor="@color/blue001"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationNameTv" />
+
+        <TextView
+            android:id="@+id/timeValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:textColor="@color/purple001"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/timeTv"
+            app:layout_constraintTop_toBottomOf="@+id/timeTv"
+            tools:text="18:20" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
+        android:id="@+id/subtotalTv"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text="Subtotal"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentCardInfo" />
+
+    <TextView
+        android:id="@+id/serviceFeelTv"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Service Fee"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtotalTv" />
+
+
+    <TextView
+        android:id="@+id/subtotalValueTv"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/paymentCardInfo"
+        tools:text="12000kwd" />
+
+    <TextView
+        android:id="@+id/serviceFeeValueTv"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtotalValueTv"
+        tools:text="12.000kwd" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/blue001"
+        app:layout_constraintTop_toBottomOf="@id/serviceFeelTv" />
+
+
+    <TextView
+        android:id="@+id/amountDueTv"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Amount Due"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+    <TextView
+        android:id="@+id/amountDueValueTv"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider2"
+        tools:text="12.000kwd" />
+
+
+    <TextView
+        android:id="@+id/paymentHeaderTv"
+        style="@style/FontLocalizedBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:text="Payment Method"
+        android:textColor="@color/blue001"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/amountDueTv" />
+
+    <LinearLayout
+        android:id="@+id/paymentHolder"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_round_red_margin_blue_bg"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paymentHeaderTv">
+
+        <ImageView
+            android:id="@+id/paymentMethodImageIv"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_profile_creditcard" />
+
+        <TextView
+            android:id="@+id/paymentMethodNameTv"
+            style="@style/FontLocalizedBold"
+            android:paddingStart="24dp"
+            android:textSize="17sp"
+            android:text="Choose Payment"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_dropdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/payBtn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/edit_text_height"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/continue_"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:backgroundTint="@color/gray003"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

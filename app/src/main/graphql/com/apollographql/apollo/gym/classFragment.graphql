@@ -10,6 +10,9 @@ fragment classFields on GymClass{
     estimatedCaloriesBurnt
     openTime
     duration
+    gym{
+        name
+    }
     instructor{
         firstName
         lastName

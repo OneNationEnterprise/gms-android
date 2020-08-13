@@ -14,6 +14,7 @@ import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.features.onboarding.auth.domain.AuthInteractor
 import com.gymapp.features.onboarding.auth.domain.AuthInteractorInterface
 import com.gymapp.features.onboarding.auth.domain.AuthViewModel
+import com.gymapp.features.payment.subscriptions.domain.PaymentViewModel
 import com.gymapp.features.profile.addresses.domain.AddressesListViewModel
 import com.gymapp.features.profile.addresses.domain.SaveEditViewModel
 import com.gymapp.features.profile.addresses.domain.SelectAddressViewModel
@@ -237,6 +238,12 @@ object ApplicationModule {
 
         viewModel {
             CardsListViewModel(
+                get()
+            )
+        }
+
+        viewModel {
+            PaymentViewModel(
                 get()
             )
         }

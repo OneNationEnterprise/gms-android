@@ -36,7 +36,6 @@ class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInter
         )
 
         try{
-
             errorListingGyms.value = gymsRepositoryInterface.saveGymList(filter)
         }catch (e: ApolloHttpException){
 

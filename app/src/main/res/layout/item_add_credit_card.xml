@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addCreditCardContainer"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <ImageView
+        android:id="@+id/creditIconIv"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="18dp"
+        android:src="@drawable/ic_card"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/creditCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_plussmall"
+        app:layout_constraintBottom_toBottomOf="@id/creditIconIv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/creditIconIv" />
+
+    <TextView
+        android:id="@+id/creditTv"
+        style="@style/FontLocalizedBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@id/creditIconIv"
+        app:layout_constraintStart_toEndOf="@id/creditIconIv"
+        app:layout_constraintTop_toTopOf="@id/creditIconIv"
+        android:text="Add Credit Card" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,25 +1,33 @@
 package com.gymapp.features.classes.presentation.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.apollographql.apollo.gym.type.DifficultyLevel
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
+import com.gymapp.features.classes.data.model.ClassDate
 import com.gymapp.features.classes.domain.ClassesViewModel
 import com.gymapp.features.classes.presentation.detail.adapter.ClassImageAdapter
+import com.gymapp.features.payment.subscriptions.presentation.PaymentActivity
 import com.gymapp.helper.Constants
 import com.gymapp.main.data.model.classes.Class
+import com.gymapp.main.data.model.subscription.Subscription
 import kotlinx.android.synthetic.main.activity_class_detail.*
+import kotlinx.android.synthetic.main.activity_class_detail.descriptionTv
 import kotlinx.android.synthetic.main.activity_class_detail.dotsIndicator
-import kotlinx.android.synthetic.main.activity_gym_detail.*
-import kotlinx.android.synthetic.main.item_classes_list_card.view.*
+import kotlinx.android.synthetic.main.activity_subscription.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 class ClassDetailActivity : BaseActivity(R.layout.activity_class_detail) {
 
     lateinit var classesViewModel: ClassesViewModel
+
+    lateinit var selectedDate: ClassDate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +35,11 @@ class ClassDetailActivity : BaseActivity(R.layout.activity_class_detail) {
         val bundle = intent.getBundleExtra(Constants.arguments) ?: return
 
         classesViewModel.fetchClassData(bundle.getString(Constants.classId))
+
+        selectedDate = Gson().fromJson<ClassDate>(
+            bundle.getString(Constants.classDate),
+            object : TypeToken<ClassDate>() {}.type
+        )
     }
 
     override fun setupViewModel() {
@@ -100,5 +113,27 @@ class ClassDetailActivity : BaseActivity(R.layout.activity_class_detail) {
         imagesViewPager.adapter = imagesAdapter
 
         dotsIndicator.setViewPager2(imagesViewPager)
+
+        buyMembershipBtn.setOnClickListener {
+            val intent = Intent(this, PaymentActivity::class.java)
+
+            val args = Bundle()
+
+            args.putString(
+                Constants.subscriptionData,
+                Gson().toJson(gymClass)
+            )
+
+            args.putString(
+                Constants.classDate,
+                Gson().toJson(selectedDate)
+            )
+
+            args.putString(Constants.gymName, gymClass.gymName)
+
+            intent.putExtra(Constants.arguments, args)
+
+            startActivity(intent)
+        }
     }
 }

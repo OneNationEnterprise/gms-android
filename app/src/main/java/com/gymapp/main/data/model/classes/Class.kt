@@ -15,7 +15,8 @@ data class Class(
     val estimatedCaloriesBurnt: String,
     val openTime: String,
     val duration: String,
-    val instructor: Instructor?
+    val instructor: Instructor?,
+    val gymName: String?
 )
 
 data class Instructor(val firstName: String, val lastName: String?)

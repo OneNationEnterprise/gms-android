@@ -1,22 +1,22 @@
 package com.gymapp.features.subscriptions.presentation
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
-import com.gymapp.features.gymdetail.presentation.adapter.ClassCategoriesAdapter
+import com.gymapp.features.payment.subscriptions.presentation.PaymentActivity
 import com.gymapp.features.subscriptions.domain.SubscriptionViewModel
 import com.gymapp.features.subscriptions.presentation.adapter.SubscriptionAdapter
 import com.gymapp.helper.Constants
 import com.gymapp.helper.SubscriptionType
 import com.gymapp.helper.ui.InAppBannerNotification
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_subscription.*
 import kotlinx.android.synthetic.main.activity_subscription.backArrowIv
-import kotlinx.android.synthetic.main.dialog_auth.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.textColor
@@ -52,11 +52,26 @@ class SubscriptionActivity : BaseActivity(R.layout.activity_subscription) {
         }
 
         buySubscriptionBtn.setOnClickListener {
-            if (subscriptionViewModel.selectedSubscriptionId.value != null) {
+            if (subscriptionViewModel.selectedSubscription.value != null) {
 
+                val intent = Intent(this, PaymentActivity::class.java)
+
+                val args = Bundle()
+
+                args.putString(
+                    Constants.subscriptionData,
+                    Gson().toJson(subscriptionViewModel.selectedSubscription.value)
+                )
+
+                args.putString(Constants.gymName, gymNameTv.text.toString())
+
+                intent.putExtra(Constants.arguments, args)
+
+                startActivity(intent)
             }
         }
     }
+
 
     override fun setupViewModel() {
         subscriptionViewModel = getViewModel()
@@ -89,7 +104,7 @@ class SubscriptionActivity : BaseActivity(R.layout.activity_subscription) {
             }
         })
 
-        subscriptionViewModel.selectedSubscriptionId.observe(this, Observer {
+        subscriptionViewModel.selectedSubscription.observe(this, Observer {
 
             ViewCompat.setBackgroundTintList(
                 buySubscriptionBtn,

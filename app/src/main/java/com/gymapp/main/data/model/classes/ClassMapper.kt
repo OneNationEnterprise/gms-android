@@ -22,8 +22,8 @@ class ClassMapper : BaseDataMapperInterface<ClassesQuery.List, Class> {
             estimatedCaloriesBurnt = classFields.estimatedCaloriesBurnt,
             openTime = classFields.openTime.toString(),
             duration = classFields.duration.toString(),
-            instructor = mapInstructor(classFields.instructor)
-
+            instructor = mapInstructor(classFields.instructor),
+            gymName = classFields.gym.name
         )
     }
 

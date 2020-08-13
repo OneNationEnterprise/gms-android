@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.classes.data.model.ClassDate
@@ -94,6 +95,7 @@ class ClassesActivity : BaseActivity(R.layout.activity_classes_list) {
             val args = Bundle()
 
             args.putString(Constants.classId, it)
+            args.putString(Constants.classDate, Gson().toJson(classesViewModel.selectedClassDate))
 
             intent.putExtra(Constants.arguments, args)
 

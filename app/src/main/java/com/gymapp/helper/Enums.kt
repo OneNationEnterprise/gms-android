@@ -21,6 +21,17 @@ enum class HomepageSectionType {
     PRODUCT
 }
 
+enum class PAYMENT_METHOD_TYPE {
+    CREDITS,
+    GIFTCARD,
+    CASH,
+    SAVED_CARD,
+    MYFATOORAH,
+    CHOOSE_PAYMENT_METHOD,
+    SELECTED_PAYMENT_METHOD,
+    ADD_CREDIT_CARD
+}
+
 /**
  * enum class for menu items adapter [StoreCartActivity] class
  */

@@ -3,6 +3,7 @@ package com.gymapp.features.classes.domain
 import android.icu.text.SimpleDateFormat
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.api.Input
+import com.apollographql.apollo.gym.type.GlobalStatusType
 import com.apollographql.apollo.gym.type.GymClassesFilter
 import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.features.classes.data.ClassesRepositoryInterface
@@ -25,10 +26,13 @@ class ClassesViewModel(private val classesRepositoryInterface: ClassesRepository
 
     val gymClass = MutableLiveData<Class?>()
 
+    lateinit var selectedClassDate: ClassDate
+
     suspend fun fetchClassesList(gymId: String?, date: String, categoryId: String?) {
 
         val filter = Input.fromNullable(
             GymClassesFilter(
+                status = Input.fromNullable(GlobalStatusType.ACTIVE),
                 gymId = Input.fromNullable(gymId),
                 forDate = Input.fromNullable(date),
                 gymClassCategoryId = Input.fromNullable(categoryId)
@@ -43,6 +47,7 @@ class ClassesViewModel(private val classesRepositoryInterface: ClassesRepository
     }
 
     override fun onClassDateSelected(classDate: ClassDate) {
+        selectedClassDate = classDate
         this.classDate.value = classDate
     }
 
@@ -63,6 +68,11 @@ class ClassesViewModel(private val classesRepositoryInterface: ClassesRepository
         c.time = date
 
         date = c.time
+
+        selectedClassDate = ClassDate(
+            SimpleDateFormat("EEE, dd MMM", Locale.getDefault()).format(date),
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(date)
+        )
 
         datesList.add(
             ClassDate(

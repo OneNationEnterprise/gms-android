@@ -2,10 +2,7 @@ package com.gymapp.features.subscriptions.domain
 
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.api.Input
-import com.apollographql.apollo.gym.type.MembershipAccessType
-import com.apollographql.apollo.gym.type.MembershipsFilter
-import com.apollographql.apollo.gym.type.PassAccessType
-import com.apollographql.apollo.gym.type.PassesFilter
+import com.apollographql.apollo.gym.type.*
 import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.features.subscriptions.data.AdapterInfoData
 import com.gymapp.features.subscriptions.presentation.adapter.SubscriptionSelectedListener
@@ -18,7 +15,7 @@ class SubscriptionViewModel(val repository: SubscriptionRepositoryInterface) : B
 
     val subscriptionAdapterData = MutableLiveData<AdapterInfoData>()
 
-    val selectedSubscriptionId = MutableLiveData<Subscription>()
+    val selectedSubscription = MutableLiveData<Subscription>()
     private lateinit var gymId: String
     private lateinit var subscriptionList: List<Subscription>
 
@@ -57,12 +54,12 @@ class SubscriptionViewModel(val repository: SubscriptionRepositoryInterface) : B
         }
     }
 
-
     private suspend fun getMembershipData(gymId: String): List<Subscription> {
 
         val memberships = repository.getMemberships(
             Input.fromNullable(
                 MembershipsFilter(
+                    status = Input.fromNullable(GlobalStatusType.ACTIVE),
                     accessType = Input.fromNullable(MembershipAccessType.BRANCH),
                     referenceTypeId = Input.fromNullable(gymId)
                 )
@@ -90,6 +87,7 @@ class SubscriptionViewModel(val repository: SubscriptionRepositoryInterface) : B
         val passes = repository.getPasses(
             Input.fromNullable(
                 PassesFilter(
+                    status = Input.fromNullable(GlobalStatusType.ACTIVE),
                     accessType = Input.fromNullable(PassAccessType.BRANCH),
                     referenceTypeId = Input.fromNullable(gymId)
                 )
@@ -108,14 +106,14 @@ class SubscriptionViewModel(val repository: SubscriptionRepositoryInterface) : B
                 description = it.description,
                 colorCode = it.colorCode,
                 image = it.image,
-                type = SubscriptionType.MEMBERSHIP
+                type = SubscriptionType.PASS
             )
         }
     }
 
     override fun onSubscriptionSelected(subscription: Subscription) {
 
-        selectedSubscriptionId.value = subscription
+        selectedSubscription.value = subscription
     }
 
 
