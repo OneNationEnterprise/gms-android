@@ -6,13 +6,16 @@ import android.os.Bundle
 import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
+import com.gymapp.features.onboarding.auth.presentation.AuthLoginDialogFragment
 import com.gymapp.features.payment.subscriptions.presentation.PaymentActivity
 import com.gymapp.features.subscriptions.domain.SubscriptionViewModel
 import com.gymapp.features.subscriptions.presentation.adapter.SubscriptionAdapter
 import com.gymapp.helper.Constants
+import com.gymapp.helper.LOGIN_PATH
 import com.gymapp.helper.SubscriptionType
 import com.gymapp.helper.ui.InAppBannerNotification
 import kotlinx.android.synthetic.main.activity_subscription.*
@@ -33,7 +36,6 @@ class SubscriptionActivity : BaseActivity(R.layout.activity_subscription) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         val type = intent.getBundleExtra(Constants.arguments)
             ?.getSerializable(Constants.subscriptionType) as SubscriptionType
         GlobalScope.launch {
@@ -53,6 +55,12 @@ class SubscriptionActivity : BaseActivity(R.layout.activity_subscription) {
 
         buySubscriptionBtn.setOnClickListener {
             if (subscriptionViewModel.selectedSubscription.value != null) {
+
+                if (FirebaseAuth.getInstance().currentUser == null) {
+                    AuthLoginDialogFragment.newInstance(LOGIN_PATH.PAYMENT)
+                        .show(supportFragmentManager, AuthLoginDialogFragment.TAG)
+                    return@setOnClickListener
+                }
 
                 val intent = Intent(this, PaymentActivity::class.java)
 

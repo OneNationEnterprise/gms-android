@@ -46,3 +46,8 @@ enum class STORE_CART_PRODUCTS {
     PRODUCT_ROW,
     SUBTOTAL
 }
+enum class LOGIN_PATH{
+    HOMEPAGE,
+    PAYMENT,
+    STORE_CHECKOUT
+}

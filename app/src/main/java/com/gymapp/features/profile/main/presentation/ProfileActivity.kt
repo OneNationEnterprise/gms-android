@@ -12,6 +12,7 @@ import com.gymapp.features.profile.medical.domain.MedicalFormViewModel
 import com.gymapp.features.profile.medical.presentation.MedicalFormActivity
 import com.gymapp.features.profile.payment.presentation.CardsListActivity
 import com.gymapp.features.profile.settings.presentation.SettingsActivity
+import com.gymapp.features.profile.transaction.presentation.TransactionActivity
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.user_icon.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -45,6 +46,9 @@ class ProfileActivity : BaseActivity(R.layout.activity_profile) {
             startActivity(Intent(this, SettingsActivity::class.java))
         }
 
+        transactionContainer.setOnClickListener {
+            startActivity(Intent(this, TransactionActivity::class.java))
+        }
     }
 
     override fun setupViewModel() {

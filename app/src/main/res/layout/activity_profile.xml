@@ -141,6 +141,7 @@
                 android:background="@drawable/bg_darkblue_round_corners"
                 android:gravity="center_vertical"
                 android:padding="6dp"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/addressesContainer">
 
 

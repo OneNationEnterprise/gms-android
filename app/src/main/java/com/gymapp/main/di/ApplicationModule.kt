@@ -31,6 +31,7 @@ import com.gymapp.features.profile.medical.domain.MedicalFormViewModel
 import com.gymapp.features.profile.payment.domain.CardsListViewModel
 import com.gymapp.features.profile.payment.domain.SaveCardViewModel
 import com.gymapp.features.profile.settings.domain.SettingsViewModel
+import com.gymapp.features.profile.transaction.domain.TransactionViewModel
 import com.gymapp.features.store.data.StoreRepository
 import com.gymapp.features.store.data.StoreRepositoryInterface
 import com.gymapp.features.store.domain.products.brandList.StoreBrandListViewModel
@@ -244,6 +245,12 @@ object ApplicationModule {
 
         viewModel {
             PaymentViewModel(
+                get()
+            )
+        }
+
+        viewModel {
+            TransactionViewModel(
                 get()
             )
         }

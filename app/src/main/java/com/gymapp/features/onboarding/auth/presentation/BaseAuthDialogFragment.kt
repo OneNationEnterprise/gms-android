@@ -11,6 +11,8 @@ import com.gymapp.base.presentation.BaseDialogFragment
 import com.gymapp.features.homepage.presentation.HomepageActivity
 import com.gymapp.features.onboarding.auth.domain.AuthViewModel
 import com.gymapp.features.onboarding.forgotpassw.ForgotPasswordDialogFragment
+import com.gymapp.features.payment.subscriptions.presentation.PaymentActivity
+import com.gymapp.helper.LOGIN_PATH
 import com.gymapp.helper.modal.phoneprefix.PhonePrefixModalBottomsheet
 import com.gymapp.helper.modal.phoneprefix.PhonePrefixSelectedListener
 import com.gymapp.helper.ui.InAppBannerNotification
@@ -24,7 +26,7 @@ import org.koin.androidx.viewmodel.ext.android.getViewModel
 import render.animations.Render
 import render.animations.Slide
 
-open abstract class BaseAuthDialogFragment() :
+open abstract class BaseAuthDialogFragment(val path : LOGIN_PATH? = LOGIN_PATH.HOMEPAGE) :
     BaseDialogFragment(R.layout.dialog_auth), PhonePrefixSelectedListener {
 
     lateinit var render: Render
@@ -114,7 +116,18 @@ open abstract class BaseAuthDialogFragment() :
         authViewModel.authErrorMessage.observe(viewLifecycleOwner, Observer {
             if (it == null) {
                 //registration successful, open next page
-                startActivity(Intent(activity, HomepageActivity::class.java))
+
+                when(path){
+                    LOGIN_PATH.HOMEPAGE->{
+                        startActivity(Intent(activity, HomepageActivity::class.java))
+                    }
+                    LOGIN_PATH.PAYMENT->{
+                        dismiss()
+                    }
+                    LOGIN_PATH.STORE_CHECKOUT->{
+                        dismiss()
+                    }
+                }
             } else {
                 InAppBannerNotification.showErrorNotification(authContainer, context, it)
                 fullScreenLoading(false)

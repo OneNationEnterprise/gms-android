@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.apollographql.apollo.gym.type.DifficultyLevel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.gymapp.R
@@ -13,8 +14,10 @@ import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.classes.data.model.ClassDate
 import com.gymapp.features.classes.domain.ClassesViewModel
 import com.gymapp.features.classes.presentation.detail.adapter.ClassImageAdapter
+import com.gymapp.features.onboarding.auth.presentation.AuthLoginDialogFragment
 import com.gymapp.features.payment.subscriptions.presentation.PaymentActivity
 import com.gymapp.helper.Constants
+import com.gymapp.helper.LOGIN_PATH
 import com.gymapp.main.data.model.classes.Class
 import com.gymapp.main.data.model.subscription.Subscription
 import kotlinx.android.synthetic.main.activity_class_detail.*
@@ -115,6 +118,13 @@ class ClassDetailActivity : BaseActivity(R.layout.activity_class_detail) {
         dotsIndicator.setViewPager2(imagesViewPager)
 
         buyMembershipBtn.setOnClickListener {
+
+            if (FirebaseAuth.getInstance().currentUser == null) {
+                AuthLoginDialogFragment.newInstance(LOGIN_PATH.PAYMENT)
+                    .show(supportFragmentManager, AuthLoginDialogFragment.TAG)
+                return@setOnClickListener
+            }
+
             val intent = Intent(this, PaymentActivity::class.java)
 
             val args = Bundle()

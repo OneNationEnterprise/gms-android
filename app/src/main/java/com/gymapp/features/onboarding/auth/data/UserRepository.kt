@@ -68,7 +68,6 @@ class UserRepository(private val apiManager: ApiManagerInterface/*, private val 
 
         if (!apiResponse.data?.saveCustomer?.errorMessage.isNullOrEmpty()) return apiResponse.data?.saveCustomer?.errorMessage
 
-
         val user1 = apiResponse.data!!.saveCustomer!!.customer
 
         val mapper = UserBySaveCustomerMapper()

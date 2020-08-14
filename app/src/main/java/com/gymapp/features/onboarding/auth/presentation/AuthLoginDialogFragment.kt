@@ -2,17 +2,19 @@ package com.gymapp.features.onboarding.auth.presentation
 
 import android.view.View
 import com.gymapp.R
+import com.gymapp.helper.LOGIN_PATH
 import kotlinx.android.synthetic.main.dialog_auth.*
 import kotlinx.android.synthetic.main.login_flow_with_email.*
 import kotlinx.android.synthetic.main.register_flow_input_phone.*
 
-class AuthLoginDialogFragment : BaseAuthDialogFragment() {
+class AuthLoginDialogFragment(path: LOGIN_PATH? = LOGIN_PATH.HOMEPAGE) :
+    BaseAuthDialogFragment(path) {
 
     companion object {
         const val TAG = "AuthLoginDialogFragment"
 
-        fun newInstance(): AuthLoginDialogFragment {
-            return AuthLoginDialogFragment()
+        fun newInstance(path: LOGIN_PATH? = LOGIN_PATH.HOMEPAGE): AuthLoginDialogFragment {
+            return AuthLoginDialogFragment(path)
         }
     }
 

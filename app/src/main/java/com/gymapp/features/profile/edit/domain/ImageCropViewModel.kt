@@ -51,21 +51,7 @@ class ImageCropViewModel(val userRepositoryInterface: UserRepositoryInterface) :
                 @SuppressLint("CheckResult")
                 override fun onSuccess(requestId: String, resultData: Map<*, *>) {
 
-                    val customer = userRepositoryInterface.getCurrentUser() ?: return
-
-                    var birthdaDate: Date? = null
-
-                    try {
-                        birthdaDate = SimpleDateFormat(
-                            DateHelper.ISO8601_DATE,
-                            Locale.ENGLISH
-                        ).parse(customer.dob.toString())
-                    } catch (e: ParseException) {
-                    }
-
-
                     val profileDetails = userRepositoryInterface.getCurrentUser() ?: return
-
 
                     GlobalScope.launch {
                         val error = userRepositoryInterface.saveCustomer(
@@ -85,11 +71,8 @@ class ImageCropViewModel(val userRepositoryInterface: UserRepositoryInterface) :
                             return@launch
                         }
 
-                        userRepositoryInterface.saveUserDetailsByEmail(customer.email)
-
                         imageCropView.pictureUploadedSuccessfully()
                     }
-
                 }
 
                 override fun onError(requestId: String, error: ErrorInfo) {

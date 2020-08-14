@@ -1,0 +1,15 @@
+query Transactions{
+    transactions{
+        list{
+            orderStatus
+            orderStatus
+            shortCode
+            gymName
+            brandName
+            createdAt
+            amount
+            currencyCode
+            orderType
+        }
+    }
+}

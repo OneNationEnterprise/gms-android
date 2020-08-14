@@ -56,4 +56,6 @@ interface ApiManagerInterface {
     suspend fun getGymCLassInvoiceAsync(invoiceInput: GymClassInvoiceInput): Deferred<Response<GymClassInvoiceQuery.Data>>
 
     suspend fun getPaymentMethodsAsync(countryCode: String): Deferred<Response<GetPaymentMethodsQuery.Data>>
+
+    suspend fun getTransactionsAsync(): Deferred<Response<TransactionsQuery.Data>>
 }

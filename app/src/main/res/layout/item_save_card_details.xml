@@ -38,7 +38,8 @@
             android:inputType="number"
             android:maxLength="19"
             android:maxLines="1"
-            android:textAlignment="viewStart" />
+            android:textAlignment="viewStart"
+            android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -67,7 +68,8 @@
             android:inputType="numberDecimal"
             android:maxLength="5"
             android:maxLines="1"
-            android:textAlignment="viewStart" />
+            android:textAlignment="viewStart"
+            android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -95,7 +97,8 @@
             android:inputType="number"
             android:maxLength="4"
             android:maxLines="1"
-            android:textAlignment="viewStart" />
+            android:textAlignment="viewStart"
+            android:textColor="@color/white" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!--    <com.google.android.material.textfield.TextInputLayout-->

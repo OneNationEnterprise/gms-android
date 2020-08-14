@@ -112,4 +112,8 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
     override suspend fun getPaymentMethodsAsync(countryCode: String): Deferred<Response<GetPaymentMethodsQuery.Data>> {
         return graphQlClient.query(GetPaymentMethodsQuery(countryCode)).toDeferred()
     }
+
+    override suspend fun getTransactionsAsync(): Deferred<Response<TransactionsQuery.Data>> {
+        return graphQlClient.query(TransactionsQuery()).toDeferred()
+    }
 }
