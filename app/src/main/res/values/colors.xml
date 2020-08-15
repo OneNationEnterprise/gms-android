@@ -33,7 +33,7 @@
     <color name="green003">#4089CA00</color>
 
     <!--yellow-->
-    <color name="yellow005">#E0C016</color>
+    <color name="yellow005">#E0C016</color>#A188BF
 
     <!--By name-->
     <color name="colorBrownGray">#979797</color>
@@ -55,7 +55,6 @@
     <color name="colorTextPrimary">#594a42</color>
     <color name="colorTextInvalid">#979797</color>
     <color name="colorTextSecondary">@color/colorBrownGray</color>
-
 
 
 </resources>
