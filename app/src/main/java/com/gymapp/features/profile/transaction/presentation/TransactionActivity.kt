@@ -1,13 +1,13 @@
 package com.gymapp.features.profile.transaction.presentation
 
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
 import com.gymapp.features.profile.transaction.domain.TransactionViewModel
 import com.gymapp.helper.ui.InAppBannerNotification
-import kotlinx.android.synthetic.main.activity_profile_cards_list.*
 import kotlinx.android.synthetic.main.activity_transaction.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,6 +21,7 @@ class TransactionActivity : BaseActivity(R.layout.activity_transaction) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        progressBar.visibility = View.VISIBLE
         GlobalScope.launch {
             transactionViewModel.getData()
         }
@@ -32,10 +33,19 @@ class TransactionActivity : BaseActivity(R.layout.activity_transaction) {
 
     override fun bindViewModelObservers() {
         transactionViewModel.error.observe(this, Observer {
+
+            progressBar.visibility = View.GONE
             InAppBannerNotification.showErrorNotification(transactionContainer, this, it)
         })
 
         transactionViewModel.list.observe(this, Observer {
+
+            progressBar.visibility = View.GONE
+
+            if (it.isNullOrEmpty()) {
+                emptyStateView.visibility = View.VISIBLE
+                return@Observer
+            }
 
             transactionAdapter = TransactionAdapter(it)
 

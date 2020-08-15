@@ -14,15 +14,15 @@ class TransactionViewModel(private val apiManagerInterface: ApiManagerInterface)
         val apiResponse = apiManagerInterface.getTransactionsAsync().await()
 
         if (apiResponse.errors != null && apiResponse.errors?.isNotEmpty()!!) {
-            error.value = apiResponse.errors!![0].message
+            error.postValue(apiResponse.errors!![0].message)
             return
         }
 
         if (apiResponse.data == null) {
-            error.value = "Error getting data"
+            error.postValue("Error getting data")
             return
         }
 
-        list.value = apiResponse.data?.transactions?.list
+        list.postValue(apiResponse.data?.transactions?.list)
     }
 }

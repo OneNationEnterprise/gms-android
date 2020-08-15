@@ -9,10 +9,52 @@
 
     <include layout="@layout/item_toolbar" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/emptyStateView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/bg_round_red_margin_blue_bg"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/toolbarContainer">
+
+        <ImageView
+            android:id="@+id/imageIv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_profile_orders"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            style="@style/FontLocalizedBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:paddingBottom="32dp"
+            android:text="There is no data available."
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageIv" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transactionsRv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/toolbarContainer" />
+
+    <include
+        android:id="@+id/progressBar"
+        layout="@layout/dialog_infinite_progressbar"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
