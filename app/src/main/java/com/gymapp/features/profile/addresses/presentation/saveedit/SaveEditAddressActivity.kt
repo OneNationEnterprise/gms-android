@@ -6,6 +6,7 @@ import android.view.View
 import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.gym.type.DynamicAddressFieldsInput
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
@@ -17,6 +18,7 @@ import com.gymapp.helper.ui.InAppBannerNotification
 import com.gymapp.main.data.model.location.Address
 import com.gymapp.main.data.model.user.AddressUser
 import com.gymapp.main.data.model.user.DynamicAddressData
+import kotlinx.android.synthetic.main.bottomsheet_dialog_delete_address.view.*
 import kotlinx.android.synthetic.main.item_toolbar.*
 import kotlinx.android.synthetic.main.saveedit_address_activity.*
 import kotlinx.coroutines.CoroutineScope
@@ -52,9 +54,29 @@ class SaveEditAddressActivity : BaseActivity(R.layout.saveedit_address_activity)
 
         setTitle("Save Address")
 
-//        toolbarBin.setOnClickListener {
-//            showBottomSheetDialogWithDeleteAddress()
-//        }
+        toolbarBin.visibility = View.VISIBLE
+
+        toolbarBin.setOnClickListener {
+            val view = layoutInflater.inflate(R.layout.bottomsheet_dialog_delete_address, null)
+            val dialog = BottomSheetDialog(this, R.style.BottomSheetDialog)
+            dialog.setContentView(view)
+
+            view.closeBtn.setOnClickListener {
+                dialog.dismiss()
+            }
+            view.addressDeleteBtn.setOnClickListener {
+                showLoading()
+                GlobalScope.launch {
+                    saveEditViewModel.onAddressDeleteClick()
+                }
+                dialog.dismiss()
+            }
+            view.addressNotDeleteTv.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+        }
+
 
         addressSaveTv.setOnClickListener {
 
@@ -138,7 +160,6 @@ class SaveEditAddressActivity : BaseActivity(R.layout.saveedit_address_activity)
     }
 
     override fun onActionSuccess() {
-
 
         CoroutineScope(Dispatchers.Main).launch {
             hideLoading()

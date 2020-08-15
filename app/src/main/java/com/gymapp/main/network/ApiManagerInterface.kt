@@ -58,4 +58,6 @@ interface ApiManagerInterface {
     suspend fun getPaymentMethodsAsync(countryCode: String): Deferred<Response<GetPaymentMethodsQuery.Data>>
 
     suspend fun getTransactionsAsync(): Deferred<Response<TransactionsQuery.Data>>
+
+    suspend fun deleteSavedAddressAsync(id:String): Deferred<Response<DeteleAddressMutation.Data>>
 }

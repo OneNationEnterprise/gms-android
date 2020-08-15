@@ -15,10 +15,12 @@ import com.gymapp.main.data.model.location.Address
 import com.gymapp.main.data.model.user.AddressUser
 import com.gymapp.main.data.model.user.DynamicAddressData
 import com.gymapp.main.data.repository.config.ConfigRepositoryInterface
+import com.gymapp.main.network.ApiManagerInterface
 
 class SaveEditViewModel(
     val userRepositoryInterface: UserRepositoryInterface,
-    val configRepositoryInterface: ConfigRepositoryInterface
+    val configRepositoryInterface: ConfigRepositoryInterface,
+    val apiManagerInterface: ApiManagerInterface
 ) : BaseViewModel() {
 
     private var customerAddress: AddressUser? = null
@@ -74,24 +76,18 @@ class SaveEditViewModel(
     }
 
 
-//    @SuppressLint("CheckResult")
-//    suspend fun onAddressDeleteClick() {
-//
-//        compositeDisposable += dataManager.deleteAddress(customerAddress!!.id())
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .dropBreadcrumb()
-//            .subscribe({
-//                if (it.errors().size == 0) {
-//                    EventBus.getDefault().post(EventBusMessage.AddressHasBeenDeleted(customerAddress!!.id()))
-//                    updateCustomer(null)
-//                } else {
-//                   saveEditVIew.onActionError(it.errors()[0].message())
-//                }
-//            }, {
-//               saveEditVIew.onActionError(it.message)
-//            })
-//    }
+    @SuppressLint("CheckResult")
+    suspend fun onAddressDeleteClick() {
+
+        val apiResponse = apiManagerInterface.deleteSavedAddressAsync(customerAddress!!.id).await()
+
+        if(apiResponse.data== null || (apiResponse.errors!=null && apiResponse.errors!!.isNotEmpty())){
+            saveEditVIew.onActionError("Error")
+            return
+        }
+
+        updateCustomer()
+    }
 
     @SuppressLint("CheckResult")
     private suspend fun updateCustomer() {

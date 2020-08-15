@@ -116,4 +116,8 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
     override suspend fun getTransactionsAsync(): Deferred<Response<TransactionsQuery.Data>> {
         return graphQlClient.query(TransactionsQuery()).toDeferred()
     }
+
+    override suspend fun deleteSavedAddressAsync(id: String): Deferred<Response<DeteleAddressMutation.Data>> {
+        return graphQlClient.mutate(DeteleAddressMutation(id)).toDeferred()
+    }
 }
