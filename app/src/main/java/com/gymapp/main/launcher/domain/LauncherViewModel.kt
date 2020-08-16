@@ -25,7 +25,7 @@ class LauncherViewModel(
         if (FirebaseAuth.getInstance().currentUser?.email != null) {
             try {
                 errorFetchingUser.value =
-                    userRepositoryInterface.saveUserDetailsByEmail(FirebaseAuth.getInstance().currentUser?.email!!)
+                    userRepositoryInterface.saveUserDetails()
             } catch (e: ApolloHttpException) {
             }
         } else {

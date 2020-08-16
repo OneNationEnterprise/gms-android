@@ -12,7 +12,7 @@ interface ApiManagerInterface {
 
     suspend fun registerUserAsync(input: RegisterCustomerInput): Deferred<Response<RegisterUserMutation.Data>>
 
-    suspend fun getUserDetailsByEmailAsync(email: String): Deferred<Response<CustomerByAuthQuery.Data>>
+    suspend fun getUserDetailsAsync(): Deferred<Response<CustomerByAuthQuery.Data>>
 
     suspend fun getGymsInRadiusAsync(input: GymsInRadiusFilter): Deferred<Response<GymsInRadiusQuery.Data>>
 
@@ -59,5 +59,7 @@ interface ApiManagerInterface {
 
     suspend fun getTransactionsAsync(): Deferred<Response<TransactionsQuery.Data>>
 
-    suspend fun deleteSavedAddressAsync(id:String): Deferred<Response<DeteleAddressMutation.Data>>
+    suspend fun deleteSavedAddressAsync(id: String): Deferred<Response<DeteleAddressMutation.Data>>
+
+    suspend fun saveCustomerPhotoAsync(photoUrl: CustomerPhotoInput): Deferred<Response<SaveCustomerPhotoMutation.Data>>
 }

@@ -14,7 +14,9 @@ import com.gymapp.features.profile.main.presentation.ProfileActivity
 import com.gymapp.features.store.presentation.homepage.StoreActivity
 import com.gymapp.helper.Constants
 import com.gymapp.helper.view.CustomPagerTransformer
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_homepage.*
+import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.user_icon.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -29,6 +31,9 @@ class HomepageActivity : BaseActivity(R.layout.activity_homepage), HomepageGymCl
         super.onCreate(savedInstanceState)
 
         loggedInInitialsTextView.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
+        loggedInHeaderImageProfile.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
         viewMapTv.setOnClickListener {
@@ -50,10 +55,26 @@ class HomepageActivity : BaseActivity(R.layout.activity_homepage), HomepageGymCl
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        homepageViewModel.fetchCurrentUser()
+    }
+
     override fun bindViewModelObservers() {
         homepageViewModel.user.observe(this, Observer {
             if (it != null) {
-                loggedInInitialsTextView.text = it.fullName[0].toString()
+
+                if (!it.photo.isNullOrEmpty()) {
+
+                    loggedInHeaderImageProfile.visibility = View.VISIBLE
+                    loggedInInitialsTextView.visibility = View.INVISIBLE
+                    Picasso.get()
+                        .load(it.photo)
+                        .into(loggedInHeaderImageProfile)
+                } else {
+                    loggedInInitialsTextView.text = it.fullName[0].toString()
+                }
+
             } else {
                 loggedOutHeaderImageProfile.visibility = View.VISIBLE
                 loggedInInitialsTextView.visibility = View.GONE

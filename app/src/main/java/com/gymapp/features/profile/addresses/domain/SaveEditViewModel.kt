@@ -6,11 +6,9 @@ import com.apollographql.apollo.gym.type.DynamicAddressFieldsInput
 import com.apollographql.apollo.gym.type.SaveCustomerAddressInput
 import com.cloudinary.utils.StringUtils
 import com.google.android.gms.maps.model.LatLng
-import com.google.firebase.auth.FirebaseAuth
 import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.features.profile.addresses.presentation.saveedit.SaveEditVIew
-import com.gymapp.helper.GoogleMapHelper
 import com.gymapp.main.data.model.location.Address
 import com.gymapp.main.data.model.user.AddressUser
 import com.gymapp.main.data.model.user.DynamicAddressData
@@ -93,7 +91,7 @@ class SaveEditViewModel(
     private suspend fun updateCustomer() {
 
         val error =
-            userRepositoryInterface.saveUserDetailsByEmail(FirebaseAuth.getInstance().currentUser?.email!!)
+            userRepositoryInterface.saveUserDetails()
 
         if (error.isNullOrEmpty()) {
             saveEditVIew.onActionSuccess()

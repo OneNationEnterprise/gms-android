@@ -3,6 +3,7 @@ package com.gymapp.features.profile.edit.domain
 import android.annotation.SuppressLint
 import android.net.Uri
 import com.apollographql.apollo.api.Input
+import com.apollographql.apollo.gym.type.CustomerPhotoInput
 import com.apollographql.apollo.gym.type.SaveCustomerInput
 import com.cloudinary.android.MediaManager
 import com.cloudinary.android.callback.ErrorInfo
@@ -11,14 +12,15 @@ import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.features.profile.edit.presentation.image.ImageCropView
 import com.gymapp.helper.Constants
-import com.gymapp.helper.DateHelper
+import com.gymapp.main.network.ApiManagerInterface
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.util.*
 
-class ImageCropViewModel(val userRepositoryInterface: UserRepositoryInterface) : BaseViewModel() {
+class ImageCropViewModel(
+    val userRepositoryInterface: UserRepositoryInterface,
+    val apiManagerInterface: ApiManagerInterface
+) : BaseViewModel() {
 
     lateinit var imageCropView: ImageCropView
 
@@ -53,18 +55,20 @@ class ImageCropViewModel(val userRepositoryInterface: UserRepositoryInterface) :
 
                     val profileDetails = userRepositoryInterface.getCurrentUser() ?: return
 
+
                     GlobalScope.launch {
-                        val error = userRepositoryInterface.saveCustomer(
-                            SaveCustomerInput(
-                                profileDetails.firstName,
-                                profileDetails.lastName,
-                                profileDetails.email,
-                                profileDetails.contactNumber!!,
-                                Input.fromNullable(null),
-                                Input.fromNullable(resultData["secure_url"] as String),
-                                Input.fromNullable(profileDetails.dob)
+                        val customerData = apiManagerInterface.saveCustomerPhotoAsync(
+                            CustomerPhotoInput(
+                                resultData["secure_url"] as String
                             )
-                        )
+                        ).await()
+
+                        if (!customerData.errors.isNullOrEmpty()) {
+                            imageCropView.errorUpdatingPicture("Error updating picture!")
+                            return@launch
+                        }
+
+                        val error = userRepositoryInterface.saveUserDetails()
 
                         if (!error.isNullOrEmpty()) {
                             imageCropView.errorUpdatingPicture(error)

@@ -175,9 +175,7 @@ class EditProfileActivity : BaseActivity(R.layout.activity_edit_profile),
                 intent.putExtra(ImageCropActivity.EXTRA_PROFILE_PIC_URI, imageUri)
                 startActivityForResult(intent, REQUEST_CODE_CROP_IMAGE)
             }
-        } else if (requestCode == REQUEST_CODE_CROP_IMAGE) {
-            editProfileViewModel.updateUserProfilePhoto()
-        } else /*if (requestCode == REQUEST_CODE_CHANGE_CUSTOMER_NAME) */ {
+        } else{
             editProfileViewModel.fetchData()
         }
     }

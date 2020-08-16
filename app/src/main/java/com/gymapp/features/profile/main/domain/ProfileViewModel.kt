@@ -5,11 +5,11 @@ import com.gymapp.base.domain.BaseViewModel
 import com.gymapp.features.onboarding.auth.data.UserRepositoryInterface
 import com.gymapp.main.data.model.user.User
 
-class ProfileViewModel(userRepositoryInterface: UserRepositoryInterface) : BaseViewModel() {
+class ProfileViewModel(val userRepositoryInterface: UserRepositoryInterface) : BaseViewModel() {
 
     var user = MutableLiveData<User?>()
 
-    init {
+    fun setProfile(){
         user.value = userRepositoryInterface.getCurrentUser()
     }
 

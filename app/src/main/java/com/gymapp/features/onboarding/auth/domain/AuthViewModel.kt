@@ -91,7 +91,7 @@ class AuthViewModel(
                     //already registered --> cache customer details from server
                     viewModelScope.launch {
                         authErrorMessage.value =
-                            userRepository.saveUserDetailsByEmail(firebaseUser!!.email!!)
+                            userRepository.saveUserDetails()
                     }
                     return@OnCompleteListener
                 }
@@ -184,7 +184,7 @@ class AuthViewModel(
 
                     viewModelScope.launch {
                         authErrorMessage.value =
-                            userRepository.saveUserDetailsByEmail(firebaseUser!!.email!!)
+                            userRepository.saveUserDetails()
                     }
                 } else {
                     authErrorMessage.value = it.exception?.localizedMessage

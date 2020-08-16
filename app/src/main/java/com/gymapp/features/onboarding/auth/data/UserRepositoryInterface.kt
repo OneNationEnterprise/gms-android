@@ -17,7 +17,7 @@ interface UserRepositoryInterface : BaseRepositoryInterface {
      * save user details from server to room_db
      * returns error message (null if successful)
      */
-    suspend fun saveUserDetailsByEmail(email: String): String?
+    suspend fun saveUserDetails(): String?
 
     /**
      * returns current session user from Room

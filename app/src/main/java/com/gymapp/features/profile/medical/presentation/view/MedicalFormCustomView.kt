@@ -84,7 +84,7 @@ class MedicalFormCustomView(context: Context, item: MedicalFormListObject, medic
 
         textValueTv.text = item.data.name
 
-        if (item.data.value.isNullOrEmpty()) {
+        if (item.data.value.isNullOrEmpty() || item.data.value.equals("false")) {
             value = "false"
             switchInput.isChecked = false
         } else {

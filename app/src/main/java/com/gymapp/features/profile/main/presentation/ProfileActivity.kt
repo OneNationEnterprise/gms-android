@@ -2,6 +2,7 @@ package com.gymapp.features.profile.main.presentation
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.Observer
 import com.gymapp.R
 import com.gymapp.base.presentation.BaseActivity
@@ -13,6 +14,8 @@ import com.gymapp.features.profile.medical.presentation.MedicalFormActivity
 import com.gymapp.features.profile.payment.presentation.CardsListActivity
 import com.gymapp.features.profile.settings.presentation.SettingsActivity
 import com.gymapp.features.profile.transaction.presentation.TransactionActivity
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_edit_profile.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.user_icon.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -51,6 +54,11 @@ class ProfileActivity : BaseActivity(R.layout.activity_profile) {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        profileViewModel.setProfile()
+    }
+
     override fun setupViewModel() {
         profileViewModel = getViewModel()
     }
@@ -59,7 +67,18 @@ class ProfileActivity : BaseActivity(R.layout.activity_profile) {
         profileViewModel.user.observe(this, Observer {
             if (it != null) {
                 userNameTv.text = it.fullName
-                loggedInInitialsTextView.text = it.fullName[0].toString()
+
+                if (!it.photo.isNullOrEmpty()) {
+
+                    loggedInHeaderImageProfile.visibility = View.VISIBLE
+                    loggedInInitialsTextView.visibility = View.INVISIBLE
+                    Picasso.get()
+                        .load(it.photo)
+                        .into(loggedInHeaderImageProfile)
+                } else {
+                    loggedInInitialsTextView.text = it.fullName[0].toString()
+                }
+
             }
         })
     }

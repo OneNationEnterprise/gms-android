@@ -214,6 +214,7 @@ object ApplicationModule {
 
         viewModel {
             ImageCropViewModel(
+                get(),
                 get()
             )
         }
@@ -226,6 +227,7 @@ object ApplicationModule {
 
         viewModel {
             SaveEditViewModel(
+                get(),
                 get(),
                 get()
             )

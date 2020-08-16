@@ -38,9 +38,9 @@ class UserRepository(private val apiManager: ApiManagerInterface/*, private val 
         return null
     }
 
-    override suspend fun saveUserDetailsByEmail(email: String): String? {
+    override suspend fun saveUserDetails(): String? {
 
-        val userDetailsResponse = apiManager.getUserDetailsByEmailAsync(email).await()
+        val userDetailsResponse = apiManager.getUserDetailsAsync().await()
 
         if (userDetailsResponse.errors != null && userDetailsResponse.errors!!.isNotEmpty()
             || userDetailsResponse.data == null

@@ -20,7 +20,7 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
         return graphQlNoAuthClient.mutate(RegisterUserMutation(input)).toDeferred()
     }
 
-    override suspend fun getUserDetailsByEmailAsync(email: String): Deferred<Response<CustomerByAuthQuery.Data>> {
+    override suspend fun getUserDetailsAsync(): Deferred<Response<CustomerByAuthQuery.Data>> {
         return graphQlClient.query(CustomerByAuthQuery()).toDeferred()
     }
 
@@ -119,5 +119,9 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
 
     override suspend fun deleteSavedAddressAsync(id: String): Deferred<Response<DeteleAddressMutation.Data>> {
         return graphQlClient.mutate(DeteleAddressMutation(id)).toDeferred()
+    }
+
+    override suspend fun saveCustomerPhotoAsync(photoUrl: CustomerPhotoInput): Deferred<Response<SaveCustomerPhotoMutation.Data>> {
+        return graphQlClient.mutate(SaveCustomerPhotoMutation(photoUrl)).toDeferred()
     }
 }

@@ -26,7 +26,6 @@ class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInter
 
         gymsRepositoryInterface.setContextTemp(context)
 
-        user.value = userRepositoryInterface.getCurrentUser()
         val filter = GymsInRadiusFilter(
             GISLocationInput(
                 UserCurrentLocalization.position!!.longitude,
@@ -42,6 +41,11 @@ class HomepageViewModel(private val gymsRepositoryInterface: GymsRepositoryInter
         }
 
         nearByGyms.value = gymsRepositoryInterface.getNearbyGyms()
+    }
+
+
+    fun fetchCurrentUser(){
+        user.value = userRepositoryInterface.getCurrentUser()
     }
 
     fun setupGymBrandsAdapter() {

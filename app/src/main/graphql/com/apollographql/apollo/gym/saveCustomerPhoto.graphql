@@ -1,0 +1,8 @@
+mutation SaveCustomerPhoto($input: CustomerPhotoInput!){
+    saveCustomerPhoto(input: $input){
+        errorMessage
+        customer{
+            ...customerFields
+        }
+    }
+}
