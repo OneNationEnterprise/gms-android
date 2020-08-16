@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:textSize="12sp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/areYouSureTv" />
@@ -91,6 +92,7 @@
         android:paddingBottom="15dp"
         android:text="No, leave it"
         android:textSize="16sp"
+        android:textColor="@color/colorTextPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addressDeleteBtn" />

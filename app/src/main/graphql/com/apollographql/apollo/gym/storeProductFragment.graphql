@@ -20,4 +20,8 @@ fragment StoreProductFields on Product{
     category{
         name
     }
+    inventory{
+        quantity
+        gymId
+    }
 }

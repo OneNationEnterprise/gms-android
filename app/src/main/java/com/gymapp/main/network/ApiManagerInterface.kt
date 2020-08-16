@@ -62,4 +62,6 @@ interface ApiManagerInterface {
     suspend fun deleteSavedAddressAsync(id: String): Deferred<Response<DeteleAddressMutation.Data>>
 
     suspend fun saveCustomerPhotoAsync(photoUrl: CustomerPhotoInput): Deferred<Response<SaveCustomerPhotoMutation.Data>>
+
+    suspend fun getStoreInvoiceAsync(invpiceInput: StoreOrderInvoiceInput): Deferred<Response<StoreInvoiceQuery.Data>>
 }

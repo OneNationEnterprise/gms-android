@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/itemContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blue005"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/productImageContainer"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/productImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:scaleType="fitXY" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/productName"
+        style="@style/FontLocalizedMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/productImageContainer"
+        app:layout_constraintStart_toEndOf="@id/productImageContainer"
+        app:layout_constraintTop_toTopOf="@id/productImageContainer"
+        app:layout_constraintWidth_percent=".5"
+        tools:text="2 x Someproduct nae and some long nameblasdasdas" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="15000 KWD" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

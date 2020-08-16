@@ -124,4 +124,8 @@ class ApiManagerImpl(okHttpClient: OkHttpClient) : BaseApiManager(okHttpClient),
     override suspend fun saveCustomerPhotoAsync(photoUrl: CustomerPhotoInput): Deferred<Response<SaveCustomerPhotoMutation.Data>> {
         return graphQlClient.mutate(SaveCustomerPhotoMutation(photoUrl)).toDeferred()
     }
+
+    override suspend fun getStoreInvoiceAsync(invoiceInput: StoreOrderInvoiceInput): Deferred<Response<StoreInvoiceQuery.Data>> {
+        return graphQlClient.query(StoreInvoiceQuery(invoiceInput)).toDeferred()
+    }
 }

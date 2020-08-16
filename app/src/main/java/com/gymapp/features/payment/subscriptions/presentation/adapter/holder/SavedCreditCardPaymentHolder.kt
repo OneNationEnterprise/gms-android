@@ -23,7 +23,7 @@ class SavedCreditCardPaymentHolder(itemView: View?) : RecyclerView.ViewHolder(it
         }
 
         if (selectedPaymentMethodId == paymentMethodInterface) {
-            itemView.myFatoorahPaymentCheckbox.setImageResource(R.drawable.ic_radiobtn_on)
+            itemView.myFatoorahPaymentCheckbox.setImageResource(R.drawable.ic_radiobutton_iconon)
         } else {
             itemView.myFatoorahPaymentCheckbox.setImageResource(R.drawable.ic_radiobutton_iconoff)
         }

@@ -22,6 +22,8 @@ object Constants {
     const val latLng = "lat.lng"
     const val customerSavedCardData = "customerSavedCardData"
     const val subscriptionData = "subscription.data"
+    const val openSelectAddress = "select.address"
+    const val productsInCart = "products.in.cart"
 
     const val BASE_SERVER_URL =
         "http://ad82ca9ee5fa74f8b8bf78963b2c735d-586376887.eu-west-1.elb.amazonaws.com/graphql"

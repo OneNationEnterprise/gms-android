@@ -18,8 +18,6 @@ import com.gymapp.features.payment.subscriptions.domain.PaymentViewModel
 import com.gymapp.features.profile.addresses.domain.AddressesListViewModel
 import com.gymapp.features.profile.addresses.domain.SaveEditViewModel
 import com.gymapp.features.profile.addresses.domain.SelectAddressViewModel
-import com.gymapp.features.profile.addresses.presentation.saveedit.SaveEditAddressActivity
-import com.gymapp.features.profile.addresses.presentation.saveedit.SelectAddressActivity
 import com.gymapp.features.profile.edit.domain.ChangeCustomerNameVIewModel
 import com.gymapp.features.profile.edit.domain.EditProfileViewModel
 import com.gymapp.features.profile.edit.domain.ImageCropViewModel
@@ -34,8 +32,10 @@ import com.gymapp.features.profile.settings.domain.SettingsViewModel
 import com.gymapp.features.profile.transaction.domain.TransactionViewModel
 import com.gymapp.features.store.data.StoreRepository
 import com.gymapp.features.store.data.StoreRepositoryInterface
-import com.gymapp.features.store.domain.products.brandList.StoreBrandListViewModel
-import com.gymapp.features.store.domain.products.cart.StoreCartViewModel
+import com.gymapp.features.store.domain.address.StoreAddressViewModel
+import com.gymapp.features.store.domain.brandList.StoreBrandListViewModel
+import com.gymapp.features.store.domain.cart.StoreCartViewModel
+import com.gymapp.features.store.domain.payment.StorePaymentViewModel
 import com.gymapp.features.store.domain.products.products.StoreProductsViewModel
 import com.gymapp.features.subscriptions.domain.SubscriptionViewModel
 import com.gymapp.main.data.repository.config.ConfigRepository
@@ -253,6 +253,20 @@ object ApplicationModule {
 
         viewModel {
             TransactionViewModel(
+                get()
+            )
+        }
+
+        viewModel {
+            StoreAddressViewModel(
+                get(),
+                get()
+            )
+        }
+
+        viewModel {
+            StorePaymentViewModel(
+                get(),
                 get()
             )
         }

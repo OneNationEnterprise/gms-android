@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.transition.TransitionManager
 import com.apollographql.apollo.api.Input
 import com.apollographql.apollo.exception.ApolloHttpException
+import com.apollographql.apollo.gym.type.GlobalStatusType
 import com.apollographql.apollo.gym.type.ProductsFilter
 import com.apollographql.apollo.gym.type.StoreHomeInput
 import com.gymapp.base.domain.BaseViewModel
@@ -50,7 +51,8 @@ class StoreProductsViewModel(
 
         val filter = ProductsFilter(
             brandId = Input.fromNullable(storeId),
-            categoryId = Input.fromNullable(categoryId)
+            categoryId = Input.fromNullable(categoryId),
+            status = Input.fromNullable(GlobalStatusType.ACTIVE)
         )
 
         try {

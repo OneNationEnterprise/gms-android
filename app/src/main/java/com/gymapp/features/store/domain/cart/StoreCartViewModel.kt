@@ -1,4 +1,4 @@
-package com.gymapp.features.store.domain.products.cart
+package com.gymapp.features.store.domain.cart
 
 import androidx.lifecycle.MutableLiveData
 import com.gymapp.features.store.presentation.cart.adapter.item.BrandItem
@@ -14,11 +14,15 @@ class StoreCartViewModel(val storeRepositoryInterface: StoreRepositoryInterface)
 
     var cartItemList = MutableLiveData<MutableList<StoreProductItem>>()
     var closeActivity = MutableLiveData<Boolean>()
+    var openSelectAddress = MutableLiveData<MutableList<StoreProductItem>>()
 
+
+    fun openSelectAddress() {
+        openSelectAddress.value = cartItemList.value
+    }
 
     fun fetchData() {
         val products = storeRepositoryInterface.getStoreCartProducts()
-
 
         val brandIds: MutableList<String> = ArrayList()
 
@@ -63,7 +67,6 @@ class StoreCartViewModel(val storeRepositoryInterface: StoreRepositoryInterface)
 
         product.quantity += 1
 
-        //TODO update this
         fetchData()
     }
 
@@ -85,14 +88,5 @@ class StoreCartViewModel(val storeRepositoryInterface: StoreRepositoryInterface)
         }
 
         fetchData()
-    }
-
-    fun openCheckoutScreen() {
-
-//        if (dataManager.getLoggedInCustomer()?.id() != null) {
-//            getNavigator()?.openCheckoutActivity()
-//        } else {
-//            getNavigator()?.showSignDialog(dataManager.getActiveOperatingCountries())
-//        }
     }
 }

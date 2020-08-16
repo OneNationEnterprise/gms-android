@@ -18,7 +18,8 @@ data class Product(
     val brand: ProductBrand?,
     val express: Boolean,
     val images: List<String>?,
-    val categoryName: String?
+    val categoryName: String?,
+    val inventory: List<Inventory?>?
 ) : HomepageSection {
     override fun getType(): HomepageSectionType {
         return HomepageSectionType.PRODUCT
@@ -38,3 +39,5 @@ data class Product(
 }
 
 data class ProductBrand(val id: String, val name: String)
+
+data class Inventory(val gymId: String, val quantity: Int)

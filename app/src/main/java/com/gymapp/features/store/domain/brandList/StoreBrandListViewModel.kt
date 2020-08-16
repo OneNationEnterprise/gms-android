@@ -1,4 +1,4 @@
-package com.gymapp.features.store.domain.products.brandList
+package com.gymapp.features.store.domain.brandList
 
 import androidx.lifecycle.MutableLiveData
 import com.gymapp.base.domain.BaseViewModel

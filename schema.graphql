@@ -135,6 +135,7 @@ type BuyAGymClassPayload {
     errorMessage: String
     errors: [OrderGymClassError!]
     orderGymClass: OrderGymClass
+    paymentUrl: String
 }
 
 type BuyAMembershipPayload {
@@ -142,6 +143,7 @@ type BuyAMembershipPayload {
     errorMessage: String
     errors: [OrderMembershipError!]
     orderMembership: OrderMembership
+    paymentUrl: String
 }
 
 type BuyAPassPayload {
@@ -149,6 +151,7 @@ type BuyAPassPayload {
     errorMessage: String
     errors: [OrderPassError!]
     orderPass: OrderPass
+    paymentUrl: String
 }
 
 type CheckoutComConfig {
@@ -280,6 +283,13 @@ type Country {
     timeZoneIdentifier: String
     vat: Float!
     vatId: String
+}
+
+type CreateStoreOrderPayload {
+    error: StoreOrderError
+    errorMessage: String
+    errors: [StoreOrderError!]
+    storeOrder: StoreOrder
 }
 
 type CurrencyDetails {
@@ -1041,6 +1051,7 @@ type Mutation {
     buyAPass(input: BuyAPassInput!): BuyAPassPayload
     configurationUpsert(input: ConfigurationInput!): SaveConfigurationPayload
     countryUpsert(input: CountryInput!): SaveCountryPayload
+    createStoreOrder(input: CreateStoreOrderInput!): CreateStoreOrderPayload
     "delete a customer card token as default"
     customerCardTokenDelete(id: ID!): Boolean!
     "Save a customer card token"
@@ -1086,6 +1097,7 @@ type Mutation {
     saveProductStock(input: SaveProductStockInput!): SaveProductStockPayload
     saveRole(input: SaveRoleInput!): SaveRolePayload
     saveStoreImage(input: SaveStoreImageInput!): SaveStoreImagePayload
+    saveStoreOrderProduct(input: SaveStoreOrderProductInput!): SaveStoreOrderProductPayload
     saveVideo(input: SaveVideoInput!): SaveVideoPayload
     saveVideoType(input: SaveVideoTypeInput!): SaveVideoTypePayload
     signInWithEmailAndPassword(email: String!, password: String!): CustomerSignInPayload!
@@ -1101,6 +1113,8 @@ type Mutation {
 
 "gym classes bought by customers"
 type OrderGymClass {
+    amount: CurrencyValue!
+    countryId: ID!
     createdAt: Datetime!
     customerId: ID!
     endDate: Date
@@ -1191,6 +1205,8 @@ type OrderHistoryInstructor {
 
 "Memberships bought by customers"
 type OrderMembership {
+    amount: CurrencyValue!
+    countryId: ID!
     createdAt: Datetime!
     customerId: ID!
     id: ID!
@@ -1204,6 +1220,8 @@ type OrderMembership {
 
 "Passes bought by customers"
 type OrderPass {
+    amount: CurrencyValue!
+    countryId: ID!
     createdAt: Datetime!
     customerId: ID!
     id: ID!
@@ -1538,7 +1556,6 @@ type Query {
     product(id: ID!): Product!
     productCategories(paging: PaginatorInput!, params: ProductCategoriesFilter): ProductCategoriesPayload!
     productCategory(id: ID!): ProductCategory!
-    productInvoice(input: ProductInvoiceInput!): ProductInvoice!
     productStock(id: ID!): ProductStock!
     productStocks(paging: PaginatorInput!, params: ProductStocksFilter): ProductStocksPayload!
     products(paging: PaginatorInput!, params: ProductsFilter): ProductsPayload!
@@ -1549,6 +1566,9 @@ type Query {
     storeHome(input: StoreHomeInput): StoreHomePayload!
     storeImage(id: ID!): StoreImage!
     storeImages(paging: PaginatorInput!, params: StoreImagesFilter): StoreImagesPayload!
+    storeOrderInvoice(input: StoreOrderInvoiceInput!): ProductInvoice!
+    storeOrderProduct(id: ID!): StoreOrderProduct!
+    storeOrderProducts(paging: PaginatorInput!, params: StoreOrderProductsFilter): StoreOrderProductsPayload!
     stores(paging: PaginatorInput!, params: ExternalBrand_VendorsFiler): ExternalBrand_VendorsPayload!
     transactions(paging: PaginatorInput, params: OrdersFilter): OrdersFilterPayload!
     video(id: ID!): Video!
@@ -1682,7 +1702,7 @@ type SaveCountryPayload {
 }
 
 type SaveCustomerAddressPayload {
-    customerAddress: CustomerAddress
+    customerAddresses: [CustomerAddress!]
     error: CustomerAddressError
     errorMessage: String
     errors: [CustomerAddressError!]
@@ -1821,6 +1841,12 @@ type SaveStoreImagePayload {
     errors: [StoreImageError!]
 }
 
+type SaveStoreOrderProductPayload {
+    StoreOrderProduct: StoreOrderProduct
+    error: StoreOrderProductError
+    errors: [StoreOrderProductError!]
+}
+
 type SaveVideoPayload {
     error: VideoError
     errors: [VideoError!]
@@ -1854,6 +1880,33 @@ type StoreImage {
 
 type StoreImagesPayload {
     list: [StoreImage]
+    paging: PaginatorOutput
+}
+
+"Orders bought by customers"
+type StoreOrder {
+    createdAt: Datetime!
+    customerId: ID!
+    id: ID!
+    paymentMethod: PaymentMethod!
+    paymentStatus: PaymentStatus!
+    shortCode: String!
+    status: ProductStatus!
+    updatedAt: Datetime!
+}
+
+"Store Order Products."
+type StoreOrderProduct {
+    createdAt: Datetime!
+    id: ID!
+    productId: ID!
+    quantity: Int!
+    storeOrderId: ID!
+    updatedAt: Datetime!
+}
+
+type StoreOrderProductsPayload {
+    list: [StoreOrderProduct]
     paging: PaginatorOutput
 }
 
@@ -2379,7 +2432,9 @@ enum OrderMembershipError {
 
 enum OrderPassError {
     INVALID_PASS_ID
+    INVALID_PAYMENT_METHOD
     PASS_NOT_ACTIVE
+    PAYMENT_PROVIDER_ERROR
 }
 
 enum OrderStatus {
@@ -2460,10 +2515,21 @@ enum ProductCategoryError {
 }
 
 enum ProductError {
+    COUNTRY_CONFLICT
     DUPLICATE_NAME
+    INVALID_COUNTRY_ID
     INVALID_ID
     INVALID_MEMBERSHIP_ID
+    INVALID_PRODUCT_ID
+    INVALID_QUANTITY
     MEMBERSHIP_NOT_ACTIVE
+    OUT_OF_STOCK
+}
+
+enum ProductStatus {
+    ACTIVE
+    CANCELED
+    INACTIVE
 }
 
 enum ProductStockError {
@@ -2488,6 +2554,19 @@ enum StatusType {
 }
 
 enum StoreImageError {
+    INVALID_ID
+}
+
+enum StoreOrderError {
+    COUNTRY_CONFLICT
+    INVALID_COUNTRY_ID
+    INVALID_PRODUCT_ID
+    INVALID_QUANTITY
+    OUT_OF_STOCK
+    PRODUCT_NOT_ACTIVE
+}
+
+enum StoreOrderProductError {
     INVALID_ID
 }
 
@@ -2568,6 +2647,7 @@ input BuyAMembershipInput {
 
 input BuyAPassInput {
     passId: ID!
+    paymentMethod: PaymentMethodInput!
 }
 
 input ConfigurationFilter {
@@ -2644,6 +2724,11 @@ input CountryInput {
     timeZoneIdentifier: String!
     vat: Float!
     vatId: String
+}
+
+input CreateStoreOrderInput {
+    cart: [StoreOrderCart!]!
+    countryId: ID!
 }
 
 input CurrencyDetailsInput {
@@ -2931,10 +3016,6 @@ input ProductCategoriesFilter {
     countryId: String
     searchText: String
     status: GlobalStatusType
-}
-
-input ProductInvoiceInput {
-    productId: ID!
 }
 
 input ProductStocksFilter {
@@ -3324,6 +3405,13 @@ input SaveStoreImageInput {
     status: GlobalStatusType!
 }
 
+input SaveStoreOrderProductInput {
+    id: ID
+    productId: ID!
+    quantity: Int!
+    storeOrderId: ID!
+}
+
 input SaveVideoInput {
     brandId: ID!
     caloriesBurned: Int!
@@ -3354,6 +3442,29 @@ input StoreHomeInput {
 input StoreImagesFilter {
     countryId: String
     status: String
+}
+
+input StoreOrderCart {
+    gymId: ID!
+    productId: ID!
+    quantity: Int!
+}
+
+input StoreOrderInvoiceCart {
+    gymId: ID!
+    productId: ID!
+    quantity: Int!
+}
+
+input StoreOrderInvoiceInput {
+    cart: [StoreOrderInvoiceCart!]!
+    countryId: ID!
+}
+
+input StoreOrderProductsFilter {
+    productId: ID
+    searchText: String
+    storeOrderId: ID
 }
 
 input VideoTypesFilter {

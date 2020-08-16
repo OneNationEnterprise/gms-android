@@ -44,6 +44,29 @@ class SaveEditAddressActivity : BaseActivity(R.layout.saveedit_address_activity)
 
             saveEditViewModel.fetchDataEditAddress(intent.getStringExtra(Constants.addressId))
 
+            toolbarBin.visibility = View.VISIBLE
+
+            toolbarBin.setOnClickListener {
+                val view = layoutInflater.inflate(R.layout.bottomsheet_dialog_delete_address, null)
+                val dialog = BottomSheetDialog(this, R.style.BottomSheetDialog)
+                dialog.setContentView(view)
+
+                view.closeBtn.setOnClickListener {
+                    dialog.dismiss()
+                }
+                view.addressDeleteBtn.setOnClickListener {
+                    showLoading()
+                    GlobalScope.launch {
+                        saveEditViewModel.onAddressDeleteClick()
+                    }
+                    dialog.dismiss()
+                }
+                view.addressNotDeleteTv.setOnClickListener {
+                    dialog.dismiss()
+                }
+                dialog.show()
+            }
+
         } else if (intent.getStringExtra(Constants.locationAddressDetails) != null) {
 
             saveEditViewModel.fetchDataNewAddress(
@@ -53,29 +76,6 @@ class SaveEditAddressActivity : BaseActivity(R.layout.saveedit_address_activity)
         }
 
         setTitle("Save Address")
-
-        toolbarBin.visibility = View.VISIBLE
-
-        toolbarBin.setOnClickListener {
-            val view = layoutInflater.inflate(R.layout.bottomsheet_dialog_delete_address, null)
-            val dialog = BottomSheetDialog(this, R.style.BottomSheetDialog)
-            dialog.setContentView(view)
-
-            view.closeBtn.setOnClickListener {
-                dialog.dismiss()
-            }
-            view.addressDeleteBtn.setOnClickListener {
-                showLoading()
-                GlobalScope.launch {
-                    saveEditViewModel.onAddressDeleteClick()
-                }
-                dialog.dismiss()
-            }
-            view.addressNotDeleteTv.setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.show()
-        }
 
 
         addressSaveTv.setOnClickListener {

@@ -1,0 +1,13 @@
+query StoreInvoice($input: StoreOrderInvoiceInput!){
+    storeOrderInvoice(input: $input){
+        errorMessage
+        components{
+            type
+            value
+            label
+        }
+        currency{
+            code
+        }
+    }
+}
