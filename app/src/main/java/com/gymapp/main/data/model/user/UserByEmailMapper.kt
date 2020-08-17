@@ -38,13 +38,13 @@ class UserByEmailMapper :
     fun mapUserAddress(addressesList: List<CustomerFields.Address>?): List<AddressUser> {
 
         val addresses = ArrayList<AddressUser>()
-        val dynamicFields = ArrayList<DynamicAddressData>()
 
-        if (addressesList == null) addresses
 
-        for (address in addressesList!!) {
+        if (addressesList == null) return addresses
 
-            dynamicFields.clear()
+        for (address in addressesList) {
+
+            val dynamicFields = ArrayList<DynamicAddressData>()
 
             if (address.dynamicFullData != null) {
                 for (dynamicField in address.dynamicFullData) {
