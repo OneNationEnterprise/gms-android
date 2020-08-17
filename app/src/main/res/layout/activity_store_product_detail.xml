@@ -119,7 +119,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="4dp"
             android:textColor="@color/white"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,13 +131,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
             android:textColor="@color/white"
             android:textSize="11sp"
-            app:layout_constraintStart_toEndOf="@+id/productPrice"
             app:layout_constraintBottom_toBottomOf="@id/productPrice"
+            app:layout_constraintStart_toEndOf="@+id/productPrice"
+            app:layout_constraintTop_toTopOf="@id/productPrice"
             tools:text="1.250KD" />
 
         <LinearLayout
@@ -195,6 +193,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/availabilityTitle"
                     tools:text="in stock" />
 
+                <TextView
+                    android:id="@+id/stockTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    tools:text = "15 pieces"
+                    android:textColor="@color/blue001"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
@@ -246,7 +255,7 @@
                     style="@style/FontLocalizedBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/blue003"
+                    android:textColor="@color/white"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="@id/warrantyTitle"
                     app:layout_constraintTop_toBottomOf="@+id/warrantyTitle"
@@ -295,7 +304,7 @@
                     style="@style/FontLocalizedBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/blue003"
+                    android:textColor="@color/white"
                     android:textSize="11sp"
                     app:layout_constraintStart_toStartOf="@id/returnTitle"
                     app:layout_constraintTop_toBottomOf="@+id/returnTitle"

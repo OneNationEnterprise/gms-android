@@ -1,6 +1,7 @@
 package com.gymapp.features.store.domain.payment
 
 import androidx.lifecycle.MutableLiveData
+import com.apollographql.apollo.exception.ApolloHttpException
 import com.apollographql.apollo.gym.CustomerCardTokenSaveMutation
 import com.apollographql.apollo.gym.type.*
 import com.cofedistrict.ui.features.payment.adapter.paymentmethods.item.AddNewCardItem
@@ -30,11 +31,7 @@ class StorePaymentViewModel(
             reqList.add(
                 StoreOrderInvoiceCart(
                     product.productItem.product.id,
-                    product.productItem.quantity,
-                    product.productItem.product.inventory!!.maxBy {
-                        it!!.quantity
-                    }!!.gymId
-
+                    product.productItem.quantity
                 )
             )
         }
@@ -43,33 +40,38 @@ class StorePaymentViewModel(
             it.isoCode == "AE"
         }.countryId)
 
-        val apiResponse =
-            apiManagerInterface.getStoreInvoiceAsync(input).await()
+        try {
+            val apiResponse =
+                apiManagerInterface.getStoreInvoiceAsync(input).await()
 
-        if (apiResponse.errors != null && apiResponse.errors!!.isNotEmpty()) {
-            error.postValue(apiResponse.errors!![0].message)
-            return
-        }
+            if (apiResponse.errors != null && apiResponse.errors!!.isNotEmpty()) {
+                error.postValue(apiResponse.errors!![0].message)
+                return
+            }
 
-        if ((apiResponse.data == null || apiResponse.data?.storeOrderInvoice?.components == null)) {
-            error.postValue("Error on invoice computing")
-            return
-        }
+            if ((apiResponse.data == null || apiResponse.data?.storeOrderInvoice?.components == null)) {
+                error.postValue("Error on invoice computing")
+                return
+            }
 
-        val invoice = ArrayList<Invoice>()
-        for (component in apiResponse.data!!.storeOrderInvoice!!.components!!) {
-            invoice.add(
-                Invoice(
-                    type = component.type,
-                    value = component.value.toString(),
-                    label = component.label
+            val invoice = ArrayList<Invoice>()
+            for (component in apiResponse.data!!.storeOrderInvoice!!.components!!) {
+                invoice.add(
+                    Invoice(
+                        type = component.type,
+                        value = component.value.toString(),
+                        label = component.label
+                    )
                 )
-            )
+            }
+
+            this.invoice.postValue(invoice)
+
+            getPaymentMethods()
+        } catch (e: ApolloHttpException) {
+            e
         }
 
-        this.invoice.postValue(invoice)
-
-        getPaymentMethods()
     }
 
     private suspend fun getPaymentMethods() {

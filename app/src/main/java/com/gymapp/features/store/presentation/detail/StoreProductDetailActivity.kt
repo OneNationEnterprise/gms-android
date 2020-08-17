@@ -74,6 +74,10 @@ class StoreProductDetailActivity : BaseActivity(R.layout.activity_store_product_
                 returnDescription.text = getString(R.string.store_product_details_no_return)
         }
 
+        stockTv.text = "${product.inventory?.sumBy { 
+            it!!.quantity
+        }} items"
+
     }
 
     private fun initViewPager(images: List<String>) {
