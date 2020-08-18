@@ -1,6 +1,7 @@
 package com.gymapp.features.store.presentation.detail
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
@@ -62,7 +63,7 @@ class StoreProductDetailActivity : BaseActivity(R.layout.activity_store_product_
             addProduct.background = getDrawable(R.drawable.save_button_inactive)
         }
 
-        if (product.warrantyDescription != null) {
+        if (!product.warrantyDescription.isNullOrEmpty()) {
             warrantyContainer.visibility = View.VISIBLE
             warranyDescription.text = product.warrantyDescription
             warrantyDivider.visibility = View.VISIBLE
@@ -77,6 +78,15 @@ class StoreProductDetailActivity : BaseActivity(R.layout.activity_store_product_
         stockTv.text = "${product.inventory?.sumBy { 
             it!!.quantity
         }} items"
+
+        val x = product.inventory?.sumBy {
+            it!!.quantity
+        }!!
+
+        if(x<1){
+            availabilityDescription.text = "Out of Stock"
+            availabilityDescription.setTextColor(Color.parseColor("#F95365"));
+        }
 
     }
 

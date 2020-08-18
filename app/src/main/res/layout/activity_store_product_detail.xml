@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/blue005"
     android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -176,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/store_availability"
-                    android:textColor="@color/gray001"
+                    android:textColor="@color/blue001"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/availabilityIv"
@@ -198,11 +199,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    tools:text = "15 pieces"
                     android:textColor="@color/blue001"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="15 pieces" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -245,7 +246,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/store_warranty"
-                    android:textColor="@color/gray001"
+                    android:textColor="@color/blue001"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/warrantyIv"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -294,7 +295,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/store_returns"
-                    android:textColor="@color/gray001"
+                    android:textColor="@color/blue001"
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@id/returnIv"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -344,7 +345,7 @@
             android:layout_marginEnd="16dp"
             android:text="@string/store_description"
             android:textAllCaps="true"
-            android:textColor="@color/gray001"
+            android:textColor="@color/blue001"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/descriptionTopLine" />
@@ -356,6 +357,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/descriptionTitle"
             tools:text="loremIpsum blabalabalaba ab baba baa b baab" />
 
@@ -399,7 +401,7 @@
             android:layout_marginBottom="16dp"
             android:foreground="?android:attr/selectableItemBackground"
             android:padding="14dp"
-            android:text="Save"
+            android:text="Add to Cart"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
